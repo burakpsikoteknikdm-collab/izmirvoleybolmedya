@@ -3,117 +3,153 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>İzmir Voleybol Medya | İzmir voleybol haberleri, canlı yayınlar, maç programı</title>
-<meta name="description" content="İzmir voleybol haberleri, canlı yayınlar, maç programları, ligler, puan durumları, fikstürler ve fotoğraflar.">
+<title>İzmir Voleybol Medya | İzmir Voleybol Haberleri & Canlı Yayınlar</title>
+<meta name="description" content="İzmir voleybol haberleri, canlı yayınlar, maç programları, ligler, puan durumları ve fikstürler.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
+<!-- Google AdSense Entegrasyonu -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9798524131017882" crossorigin="anonymous"></script>
+
 <style>
-:root{
-  --bg:#f4f6f8; --white:#fff; --ink:#111827; --navy:#0b1630;
-  --navy2:#101d3d; --red:#ed1c24; --blue:#1f6fd1; --yellow:#ffc531;
-  --muted:#667085; --line:#dfe4ea; --soft:#eef2f6; --shadow:0 10px 28px rgba(15,23,42,.08);
+:root {
+  --navy: #0a192f;
+  --navy-light: #112240;
+  --turquoise: #38bdf8;
+  --yellow: #f59e0b;
+  --yellow-hover: #d97706;
+  --bg-soft: #f8fafc;
+  --white: #ffffff;
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --shadow: 0 10px 25px -5px rgba(10, 25, 47, 0.1);
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:80px}
-body{font-family:'Barlow',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;font-size:16px}
-a{color:inherit}
-button{font:inherit}
-img{max-width:100%}
-.kap{max-width:1180px;margin:auto;padding:0 20px}
-h1,h2,h3,h4,.logo,.nav a,.eyebrow,.btn,.tab{font-family:'Barlow Condensed',sans-serif}
-h2{font-size:2.45rem;line-height:1;font-weight:800;color:var(--navy)}
-:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
 
-/* TOP BAR + HEADER */
-.topbar{background:#070e20;color:#cbd5e1;font-size:.84rem}
-.topbar .kap{display:flex;justify-content:space-between;gap:16px;padding-top:7px;padding-bottom:7px}
-.header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 12px rgba(0,0,0,.04)}
-.menu{min-height:76px;display:flex;align-items:center;gap:26px}
-.logo{display:flex;align-items:center;gap:9px;text-decoration:none;font-weight:800;font-size:1.65rem;white-space:nowrap;color:var(--navy)}
-.logo-mark{width:40px;height:40px;border:4px solid var(--red);border-radius:50%;display:grid;place-items:center;color:var(--red);font-size:1.15rem;font-weight:800}
-.logo span{color:var(--red)}
-.nav{display:flex;align-items:center;justify-content:flex-end;gap:21px;flex:1}
-.nav a{text-decoration:none;font-size:1.02rem;font-weight:700;color:#202838;white-space:nowrap}
-.nav a:hover{color:var(--red)}
-.mobile-btn{display:none;border:0;background:var(--navy);color:#fff;border-radius:7px;padding:10px 13px;cursor:pointer}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body { font-family: 'Barlow', sans-serif; background: var(--bg-soft); color: var(--text-dark); line-height: 1.6; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4, .btn, .nav a, .badge { font-family: 'Barlow Condensed', sans-serif; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-/* HERO */
-.hero{background:var(--navy);color:#fff;padding:30px 0}
-.hero-grid{display:grid;grid-template-columns:1.75fr .8fr;gap:0;min-height:430px}
-.hero-main{position:relative;min-height:430px;overflow:hidden;background:linear-gradient(135deg,#16386a,#07142d);border-radius:10px 0 0 10px}
-.hero-main .hero-bg{position:absolute;inset:0;background-position:center;background-size:cover;opacity:.82}
-.hero-main::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,8,20,.92),rgba(3,8,20,.08) 65%)}
-.hero-content{position:absolute;left:34px;right:34px;bottom:30px;z-index:2}
-.eyebrow{display:inline-block;background:var(--red);padding:6px 10px;border-radius:4px;color:#fff;font-size:.9rem;letter-spacing:.05em;margin-bottom:12px}
-.hero-content h1{font-size:clamp(2.2rem,4.6vw,4.15rem);line-height:.95;max-width:850px}
-.hero-content p{margin-top:13px;color:#dbe4f1;max-width:720px}
-.hero-side{background:#111b31;border-radius:0 10px 10px 0;padding:22px}
-.side-live{background:var(--red);padding:16px;border-radius:8px;margin-bottom:14px}
-.side-live h3{font-size:1.35rem;margin-bottom:10px}
-.live-status{display:inline-flex;align-items:center;gap:7px;font-family:'Barlow Condensed';font-weight:800;font-size:.9rem;background:#fff;color:var(--red);padding:5px 8px;border-radius:4px;margin-bottom:12px}
-.dot{width:8px;height:8px;background:var(--red);border-radius:50%}
-.side-links{display:grid;gap:8px}
-.side-link{padding:12px;border:1px solid #2c3852;border-radius:6px;text-decoration:none;color:#e7edf7}
-.side-link:hover{border-color:#63718e;background:#18243d}
+/* TOP BAR */
+.topbar { background: #030712; color: #9ca3af; font-size: 0.85rem; border-bottom: 1px solid #1f2937; }
+.topbar .container { display: flex; justify-content: space-between; align-items: center; padding: 8px 20px; }
+.topbar-badge { background: var(--yellow); color: #000; font-weight: 800; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; }
 
-/* COMMON */
-.section{padding:58px 0}
-.section.white{background:#fff}
-.section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:23px}
-.section-head p{color:var(--muted)}
-.more{color:var(--red);text-decoration:none;font-weight:700;font-family:'Barlow Condensed';font-size:1.1rem;white-space:nowrap}
-.reklam{background:#e8edf2;border:1px dashed #aab5c3;color:#718096;text-align:center;padding:22px;border-radius:7px;font-size:.85rem}
-.ad-wrap{padding:20px 0}
+/* HEADER & LOGO */
+.header { position: sticky; top: 0; z-index: 1000; background: var(--navy); border-bottom: 3px solid var(--yellow); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+.header-wrap { display: flex; align-items: center; justify-content: space-between; height: 85px; }
 
-/* NEWS GRID (CMS ENTEGRELİ) */
-.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
-.news-card{background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden;box-shadow:0 4px 14px rgba(15,23,42,.05);display:flex;flex-direction:column}
-.news-img{aspect-ratio:16/9;background:#1f6fd1;background-size:cover;background-position:center}
-.news-body{padding:15px 16px 18px;display:flex;flex-direction:column;flex:1}
-.news-date{font-size:.82rem;color:var(--red);font-weight:700}
-.news-card h3{font-size:1.35rem;line-height:1.1;color:var(--navy);margin:6px 0 8px}
-.news-card .news-text{color:#536174;font-size:.92rem;line-height:1.4}
+.logo-area { display: flex; align-items: center; gap: 14px; }
+.logo-img { height: 68px; width: 68px; border-radius: 50%; object-fit: cover; border: 2px solid var(--turquoise); box-shadow: 0 0 12px rgba(56, 189, 248, 0.3); background: #000; }
+.logo-text { color: var(--white); font-size: 1.8rem; font-weight: 800; line-height: 1; letter-spacing: -0.5px; }
+.logo-text span { color: var(--yellow); }
+.logo-tagline { display: block; font-size: 0.85rem; color: var(--turquoise); font-weight: 600; letter-spacing: 0.5px; margin-top: 2px; }
 
-/* LEAGUES */
-.league-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
-.tab{border:2px solid var(--navy);background:#fff;color:var(--navy);padding:10px 16px;border-radius:6px;font-weight:700;cursor:pointer}
-.tab.active{background:var(--navy);color:#fff}
-.league-panel{display:none}
-.league-panel.active{display:block}
-.league-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:28px;box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center;gap:24px}
-.league-card h3{font-size:2rem;color:var(--navy);margin:8px 0 7px}
-.league-card p{color:var(--muted);max-width:680px}
-.league-badge{display:inline-block;background:#eef2f6;color:var(--red);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.9rem;padding:5px 9px;border-radius:4px}
-.league-actions{display:flex;gap:9px;flex-wrap:wrap;flex-shrink:0}
-.league-source-note{margin-top:14px;background:#f7f9fb;border:1px solid var(--line);border-radius:8px;padding:12px 15px;color:var(--muted);font-size:.88rem}
+/* NAV */
+.nav { display: flex; align-items: center; gap: 22px; }
+.nav a { color: var(--white); font-size: 1.15rem; font-weight: 700; transition: color 0.2s; position: relative; }
+.nav a:hover { color: var(--yellow); }
+.nav a::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 2px; background: var(--yellow); transition: width 0.2s; }
+.nav a:hover::after { width: 100%; }
+.mobile-btn { display: none; background: transparent; border: 0; color: var(--white); font-size: 1.8rem; cursor: pointer; }
 
-/* MATCH PROGRAM */
-.program-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:22px;align-items:start}
-.program-card{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
-.program-card-head{padding:17px 18px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.program-card-head h3{font-size:1.55rem;font-weight:800}
-.program-card-head a{color:#fff;text-decoration:none;font-size:.9rem;font-weight:600;white-space:nowrap}
-.program-card iframe{display:block;width:100%;height:760px;border:0;background:#fff}
-.program-card-footer{padding:12px 15px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}
-.btn{display:inline-block;text-decoration:none;border:0;border-radius:6px;background:var(--red);color:#fff;padding:10px 15px;font-weight:700;cursor:pointer}
-.btn.dark{background:var(--navy)}
+/* HERO SECTION WITH SAAT KULESI SILHOUETTE */
+.hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); color: var(--white); padding: 45px 0; position: relative; overflow: hidden; }
+.hero::before {
+  content: '';
+  position: absolute;
+  right: 5%;
+  bottom: 0;
+  width: 220px;
+  height: 320px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 200' fill='%2338bdf8' opacity='0.08'%3E%3Cpath d='M45 190h10v10H45zM40 170h20v20H40zM35 130h30v40H35zM42 100h16v30H42zM46 70h8v30H46zM48 40h4v30h-4zM50 10l5 30h-10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: contain;
+  pointer-events: none;
+}
+.hero-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; position: relative; z-index: 2; }
+.hero-main { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 35px; backdrop-filter: blur(5px); }
+.hero-title { font-size: 3.2rem; line-height: 1; font-weight: 800; color: var(--white); margin-bottom: 15px; }
+.hero-title span { color: var(--yellow); }
+.hero-desc { color: #94a3b8; font-size: 1.1rem; max-width: 600px; margin-bottom: 25px; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: all 0.2s; }
+.btn-yellow { background: var(--yellow); color: var(--navy); }
+.btn-yellow:hover { background: var(--yellow-hover); transform: translateY(-2px); }
+.btn-outline { border: 2px solid var(--turquoise); color: var(--turquoise); background: transparent; }
+.btn-outline:hover { background: rgba(56, 189, 248, 0.1); }
+
+.hero-side { display: flex; flex-direction: column; gap: 16px; }
+.live-card { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); border-radius: 12px; padding: 22px; color: var(--white); }
+.live-pulse { display: inline-flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.3); padding: 4px 10px; border-radius: 20px; font-size: 0.85rem; font-weight: 800; margin-bottom: 12px; }
+.dot-pulse { width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+/* ADSENSE BANNER CONTAINER */
+.ad-container { margin: 30px auto; text-align: center; background: #ffffff; border: 1px dashed var(--border); border-radius: 8px; padding: 15px; min-height: 100px; display: grid; place-items: center; }
+.ad-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+
+/* NEWS CAROUSEL SECTION */
+.section { padding: 50px 0; }
+.section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 25px; }
+.section-title { font-size: 2.4rem; font-weight: 800; color: var(--navy); border-left: 5px solid var(--yellow); padding-left: 12px; line-height: 1; }
+
+.carousel-wrap { position: relative; }
+.carousel-viewport { overflow: hidden; border-radius: 12px; padding: 5px 0; }
+.carousel-track { display: flex; gap: 20px; transition: transform 0.4s ease-in-out; }
+
+.news-card { flex: 0 0 calc((100% - 60px) / 4); background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border); transition: transform 0.2s; display: flex; flex-direction: column; }
+.news-card:hover { transform: translateY(-4px); }
+.news-img { aspect-ratio: 16/10; background: var(--navy-light) linear-gradient(135deg, var(--navy) 0%, var(--turquoise) 100%); background-size: cover; background-position: center; }
+.news-content { padding: 18px; display: flex; flex-direction: column; flex: 1; }
+.news-date { font-size: 0.8rem; font-weight: 700; color: var(--yellow); text-transform: uppercase; margin-bottom: 6px; }
+.news-title { font-size: 1.3rem; font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.news-excerpt { font-size: 0.92rem; color: var(--text-muted); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+.carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: var(--navy); color: var(--yellow); border: 2px solid var(--yellow); cursor: pointer; z-index: 10; font-size: 1.5rem; display: grid; place-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.carousel-btn:hover { background: var(--yellow); color: var(--navy); }
+.carousel-btn.prev { left: -15px; }
+.carousel-btn.next { right: -15px; }
+
+/* LEAGUES & TABS */
+.tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+.tab-btn { padding: 10px 18px; border-radius: 8px; border: 2px solid var(--navy); background: var(--white); color: var(--navy); font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: all 0.2s; }
+.tab-btn.active { background: var(--navy); color: var(--yellow); border-color: var(--navy); }
+.tab-panel { display: none; background: var(--white); border-radius: 12px; padding: 30px; border: 1px solid var(--border); box-shadow: var(--shadow); }
+.tab-panel.active { display: block; }
+
+/* PROGRAM IFRAMES */
+.program-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.program-box { background: var(--white); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; box-shadow: var(--shadow); }
+.program-box-head { background: var(--navy); color: var(--white); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+.program-box-head h3 { font-size: 1.4rem; color: var(--yellow); }
+.program-box iframe { width: 100%; height: 650px; border: 0; }
 
 /* FOOTER */
-.footer{background:#070e20;color:#cbd5e1;padding:30px 0;margin-top:40px}
-.footer .kap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.footer a{color:#fff;text-decoration:none}
+.footer { background: #030712; color: #9ca3af; padding: 40px 0 20px; border-top: 3px solid var(--yellow); margin-top: 60px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; margin-bottom: 30px; }
+.footer-logo { font-size: 1.8rem; font-weight: 800; color: var(--white); }
+.footer-logo span { color: var(--yellow); }
 
-@media(max-width:800px){
-  .topbar{display:none}
-  .menu{min-height:68px}
-  .mobile-btn{display:block;margin-left:auto}
-  .nav{display:none;position:absolute;left:0;right:0;top:68px;background:#fff;border-top:1px solid var(--line);padding:12px 20px;box-shadow:0 12px 20px rgba(0,0,0,.1);flex-direction:column;align-items:stretch}
-  .nav.open{display:flex}
-  .nav a{padding:9px 0}
-  .hero-grid,.program-grid{grid-template-columns:1fr}
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .news-card { flex: 0 0 calc((100% - 40px) / 3); }
+  .hero-grid, .program-grid, .footer-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .news-card { flex: 0 0 calc((100% - 20px) / 2); }
+  .nav { display: none; }
+  .mobile-btn { display: block; }
+  .hero-title { font-size: 2.3rem; }
+}
+@media (max-width: 480px) {
+  .news-card { flex: 0 0 100%; }
 }
 </style>
 </head>
@@ -121,21 +157,29 @@ h2{font-size:2.45rem;line-height:1;font-weight:800;color:var(--navy)}
 <body>
 
 <div class="topbar">
-  <div class="kap">
-    <span>İZMİR VOLEYBOL MEDYA GRUBU</span>
-    <span>İzmir voleybolunun güncel adresi</span>
+  <div class="container">
+    <div><span class="topbar-badge">İZMİR</span> Voleybolun Güncel Haber & Canlı Yayın Portalı</div>
+    <div>Resmi Yayın Grubu</div>
   </div>
 </div>
 
 <header class="header">
-  <div class="kap menu">
-    <a class="logo" href="#anasayfa"><span class="logo-mark">İV</span>İzmir Voleybol <span>Medya</span></a>
-    <button class="mobile-btn" id="mobileBtn" aria-label="Menüyü aç">☰</button>
-    <nav class="nav" id="nav">
-      <a href="#milli-takim">Milli Takımlar</a>
+  <div class="container header-wrap">
+    <a href="#anasayfa" class="logo-area">
+      <img src="logo.jpeg" alt="İzmir Voleybol Medya Grubu" class="logo-img" onerror="this.style.display='none'">
+      <div>
+        <div class="logo-text">İZMİR VOLEYBOL <span>MEDYA</span></div>
+        <span class="logo-tagline">HABER & CANLI YAYIN PORTALI</span>
+      </div>
+    </a>
+    
+    <button class="mobile-btn" onclick="document.querySelector('.nav').classList.toggle('open')">☰</button>
+    
+    <nav class="nav">
+      <a href="#haberler">Haberler</a>
+      <a href="#canli">Canlı Yayın</a>
       <a href="#ligler">Ligler</a>
       <a href="#program">Maç Programı</a>
-      <a href="#haberler">Haberler</a>
       <a href="#iletisim">İletişim</a>
     </nav>
   </div>
@@ -143,71 +187,138 @@ h2{font-size:2.45rem;line-height:1;font-weight:800;color:var(--navy)}
 
 <main id="anasayfa">
 
+<!-- HERO SECTION -->
 <section class="hero">
-  <div class="kap hero-grid">
-    <article class="hero-main">
-      <div class="hero-bg" id="heroBg"></div>
-      <div class="hero-content">
-        <span class="eyebrow">İZMİR VOLEYBOL MEDYA</span>
-        <h1>İzmir'in voleybolu burada.</h1>
-        <p>İzmir'deki maçlar, turnuvalar, genç ve yıldız takım müsabakaları, canlı yayınlar ve güncel voleybol haberleri.</p>
-        <div style="margin-top:18px">
-          <a class="btn light" href="#program">Maç programı</a>
-        </div>
+  <div class="container hero-grid">
+    <div class="hero-main">
+      <h1 class="hero-title">İzmir Voleybolunun <span>Kalbi Burada Atıyor</span></h1>
+      <p class="hero-desc">Sultanlar Ligi, Efeler Ligi, yerel ligler, altyapı müsabakaları, canlı yayınlar ve en son gelişmeler tek adreste.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="#canli" class="btn btn-yellow">CANLI İZLE</a>
+        <a href="#program" class="btn btn-outline">MAÇ TAKVİMİ</a>
       </div>
-    </article>
-    <aside class="hero-side">
-      <div class="side-links">
-        <a class="side-link" href="#haberler">Son Haberler →</a>
-        <a class="side-link" href="#ligler">Ligler & Puan Durumları →</a>
-        <a class="side-link" href="#program">Bu Hafta Maçları →</a>
+    </div>
+    
+    <div class="hero-side">
+      <div class="live-card" id="canli">
+        <div class="live-pulse"><span class="dot-pulse"></span> CANLI YAYIN</div>
+        <h3 style="font-size:1.6rem; font-weight:800; margin-bottom:8px;">YouTube Canlı Yayın</h3>
+        <p style="font-size:0.95rem; opacity:0.9; margin-bottom:15px;">İzmir bölgesel maçları ve özel yayınlarımız YouTube kanalımızda.</p>
+        <a href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" class="btn btn-yellow" style="width:100%;">KANALA GİT</a>
       </div>
-    </aside>
+    </div>
   </div>
 </section>
 
+<!-- ADSENSE BANNER 1 (HEADER ALTI) -->
+<div class="container">
+  <div class="ad-container">
+    <div class="ad-label">REKLAM</div>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9798524131017882"
+         data-ad-slot="auto"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+<!-- KAYAN HABERLER (CAROUSEL) -->
 <section class="section" id="haberler">
-  <div class="kap">
-    <div class="section-head">
-      <div><h2>Son Haberler</h2><p>CMS Yönetim Paneli'nden yayınlanan güncel gelişmeler.</p></div>
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">GÜNCEL HABERLER</h2>
+      </div>
+      <a href="https://www.instagram.com/izmirvoleybolmedya" target="_blank" style="color:var(--turquoise); font-weight:700;">Instagram'da Takip Et →</a>
     </div>
-    <div class="news-grid" id="newsGrid">
-      <p style="padding:20px; color:var(--muted)">Haberler yükleniyor...</p>
-    </div>
-  </div>
-</section>
 
-<section class="section white" id="ligler">
-  <div class="kap">
-    <div class="section-head">
-      <div><h2>Ligler</h2><p>Güncel puan durumu ve fikstür bilgileri.</p></div>
-      <a class="more" href="https://tvf.org.tr" target="_blank" rel="noopener">TVF resmi sitesi →</a>
-    </div>
-    <div class="league-panel active">
-      <div class="league-card">
-        <div><span class="league-badge">TVF</span><h3>Vodafone Sultanlar Ligi & Efeler Ligi</h3><p>Güncel puan tablosu ve fikstür resmi TVF sisteminden sunulur.</p></div>
-        <div class="league-actions">
-          <a class="btn" href="https://tvf.org.tr/lig/sultanlar-ligi" target="_blank" rel="noopener">Sultanlar Ligi</a>
-          <a class="btn dark" href="https://tvf.org.tr/lig/efeler-ligi" target="_blank" rel="noopener">Efeler Ligi</a>
+    <div class="carousel-wrap">
+      <button class="carousel-btn prev" id="prevBtn">‹</button>
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="newsTrack">
+          <p style="padding:20px;">Haberler yükleniyor...</p>
         </div>
       </div>
+      <button class="carousel-btn next" id="nextBtn">›</button>
     </div>
   </div>
 </section>
 
-<section class="section" id="program">
-  <div class="kap">
-    <div class="section-head">
-      <div><h2>Maç Programı & Puan Durumu</h2><p>İzmir Voleybol İl Temsilciliği maç takvimi.</p></div>
+<!-- LİGLER -->
+<section class="section" id="ligler" style="background:#fff;">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">LİGLER & PUAN DURUMU</h2>
     </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab(event, 'sultanlar')">Sultanlar Ligi</button>
+      <button class="tab-btn" onclick="switchTab(event, 'efeler')">Efeler Ligi</button>
+      <button class="tab-btn" onclick="switchTab(event, 'kadin1')">Kadınlar 1. Lig</button>
+      <button class="tab-btn" onclick="switchTab(event, 'erkek1')">Erkekler 1. Lig</button>
+    </div>
+
+    <div id="sultanlar" class="tab-panel active">
+      <h3 style="font-size:1.8rem; color:var(--navy); margin-bottom:10px;">Vodafone Sultanlar Ligi</h3>
+      <p style="color:var(--text-muted); margin-bottom:20px;">TVF resmi sisteminden anlık puan durumu ve fikstür.</p>
+      <a href="https://tvf.org.tr/lig/sultanlar-ligi" target="_blank" class="btn btn-yellow">TVF PUAN DURUMU</a>
+    </div>
+    <div id="efeler" class="tab-panel">
+      <h3 style="font-size:1.8rem; color:var(--navy); margin-bottom:10px;">SMS Grup Efeler Ligi</h3>
+      <p style="color:var(--text-muted); margin-bottom:20px;">TVF resmi sisteminden anlık puan durumu ve fikstür.</p>
+      <a href="https://tvf.org.tr/lig/efeler-ligi" target="_blank" class="btn btn-yellow">TVF PUAN DURUMU</a>
+    </div>
+    <div id="kadin1" class="tab-panel">
+      <h3 style="font-size:1.8rem; color:var(--navy); margin-bottom:10px;">Kadınlar 1. Ligi</h3>
+      <p style="color:var(--text-muted); margin-bottom:20px;">TVF resmi sisteminden anlık puan durumu ve fikstür.</p>
+      <a href="https://tvf.org.tr/lig/kadinlar-1-ligi" target="_blank" class="btn btn-yellow">TVF PUAN DURUMU</a>
+    </div>
+    <div id="erkek1" class="tab-panel">
+      <h3 style="font-size:1.8rem; color:var(--navy); margin-bottom:10px;">Erkekler 1. Ligi</h3>
+      <p style="color:var(--text-muted); margin-bottom:20px;">TVF resmi sisteminden anlık puan durumu ve fikstür.</p>
+      <a href="https://tvf.org.tr/lig/erkekler-1-ligi" target="_blank" class="btn btn-yellow">TVF PUAN DURUMU</a>
+    </div>
+  </div>
+</section>
+
+<!-- ADSENSE BANNER 2 (İÇERİK ARASI) -->
+<div class="container">
+  <div class="ad-container">
+    <div class="ad-label">REKLAM</div>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9798524131017882"
+         data-ad-slot="auto"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+<!-- MAÇ PROGRAMI & FİKSTÜR -->
+<section class="section" id="program">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">İZMİR İL MAÇ PROGRAMI & FİKSTÜR</h2>
+    </div>
+
     <div class="program-grid">
-      <div class="program-card">
-        <div class="program-card-head"><h3>Maç Programı</h3></div>
-        <iframe src="https://izmir.voleyboliltemsilciligi.com/MacTakvimi#BuHafta" title="Maç Takvimi" loading="lazy"></iframe>
+      <div class="program-box">
+        <div class="program-box-head">
+          <h3>Bu Haftanın Maçları</h3>
+          <a href="https://izmir.voleyboliltemsilciligi.com/MacTakvimi" target="_blank" style="color:var(--yellow); font-size:0.9rem;">Resmi Sayfa →</a>
+        </div>
+        <iframe src="https://izmir.voleyboliltemsilciligi.com/MacTakvimi#BuHafta" loading="lazy"></iframe>
       </div>
-      <div class="program-card">
-        <div class="program-card-head"><h3>Puan Durumu</h3></div>
-        <iframe src="https://izmir.voleyboliltemsilciligi.com/PuanDurumu" title="Puan Durumu" loading="lazy"></iframe>
+
+      <div class="program-box">
+        <div class="program-box-head">
+          <h3>Puan Durumu</h3>
+          <a href="https://izmir.voleyboliltemsilciligi.com/PuanDurumu" target="_blank" style="color:var(--yellow); font-size:0.9rem;">Resmi Sayfa →</a>
+        </div>
+        <iframe src="https://izmir.voleyboliltemsilciligi.com/PuanDurumu" loading="lazy"></iframe>
       </div>
     </div>
   </div>
@@ -215,80 +326,120 @@ h2{font-size:2.45rem;line-height:1;font-weight:800;color:var(--navy)}
 
 </main>
 
-<footer class="footer">
-  <div class="kap">
-    <span>© <span id="year"></span> İzmir Voleybol Medya Grubu</span>
-    <span><a href="#anasayfa">Ana sayfa</a> · <a href="#haberler">Haberler</a></span>
+<footer class="footer" id="iletisim">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">İZMİR VOLEYBOL <span>MEDYA</span></div>
+        <p style="margin-top:10px; max-width:500px;">İzmir voleybolunun sesi, taraftarların buluşma noktası. Haber, fotoğraf, canlı yayın ve iş birlikleri için bize ulaşın.</p>
+      </div>
+      <div>
+        <h4 style="color:var(--white); font-size:1.3rem; margin-bottom:12px;">İletişim</h4>
+        <p>E-posta: info@izmirvoleybolmedya.com</p>
+        <p>İzmir, Türkiye</p>
+      </div>
+    </div>
+    <div style="border-top:1px solid #1f2937; padding-top:20px; font-size:0.85rem; text-align:center;">
+      © <span id="year"></span> İzmir Voleybol Medya Grubu. Tüm hakları saklıdır.
+    </div>
   </div>
 </footer>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
-document.getElementById('mobileBtn').addEventListener('click', () => document.getElementById('nav').classList.toggle('open'));
 
-// DECAP CMS'TEN HABERLERİ DİNAMİK ÇEKME FONKSİYONU
-async function cmsHaberleriGetir() {
-  const grid = document.getElementById('newsGrid');
-  const repoOwner = "burakpsikoteknikdm-collab";
-  const repoName = "izmirvoleybolmedya";
+// TAB SWITCHING
+function switchTab(evt, tabId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  evt.currentTarget.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+}
+
+// CAROUSEL & CMS HABER ÇEKME
+let newsData = [];
+let currentIdx = 0;
+
+function getVisibleCount() {
+  if (window.innerWidth <= 480) return 1;
+  if (window.innerWidth <= 768) return 2;
+  if (window.innerWidth <= 1024) return 3;
+  return 4;
+}
+
+function renderCarousel() {
+  const track = document.getElementById('newsTrack');
+  if (!newsData.length) {
+    track.innerHTML = '<div style="padding:20px;">Henüz yayınlanmış haber bulunmuyor.</div>';
+    return;
+  }
   
-  try {
-    const res = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/content/haberler`);
-    const files = await res.json();
-    
-    if (!Array.isArray(files) || files.length === 0) {
-      grid.innerHTML = '<p style="padding:20px;">Henüz yayınlanmış bir haber bulunmuyor.</p>';
-      return;
-    }
+  track.innerHTML = newsData.map(n => `
+    <article class="news-card">
+      <div class="news-img" ${n.image ? `style="background-image:url('${n.image}')"` : ''}></div>
+      <div class="news-content">
+        <div class="news-date">${n.date}</div>
+        <h3 class="news-title">${n.title}</h3>
+        <p class="news-excerpt">${n.excerpt}</p>
+      </div>
+    </article>
+  `).join('');
+}
 
-    grid.innerHTML = '';
-    
-    for (const file of files) {
-      if (file.name.endsWith('.md')) {
-        const rawRes = await fetch(file.download_url);
-        const text = await rawRes.text();
-        
-        // Frontmatter Ayrıştırma (Başlık, Görsel, Tarih)
-        const parts = text.split('---');
-        let title = file.name;
-        let date = "";
-        let image = "";
-        let body = text;
-
-        if (parts.length >= 3) {
-          const frontmatter = parts[1];
-          body = parts.slice(2).join('---');
-
-          const titleMatch = frontmatter.match(/title:\s*["']?(.*?)["']?$/m);
-          const dateMatch = frontmatter.match(/date:\s*["']?(.*?)["']?$/m);
-          const imageMatch = frontmatter.match(/image:\s*["']?(.*?)["']?$/m);
-
-          if (titleMatch) title = titleMatch[1];
-          if (dateMatch) date = dateMatch[1].split('T')[0];
-          if (imageMatch) image = imageMatch[1];
-        }
-
-        const imgStyle = image ? `style="background-image:url('${image}')"` : '';
-
-        const card = document.createElement('div');
-        card.className = 'news-card';
-        card.innerHTML = `
-          <div class="news-img" ${imgStyle}></div>
-          <div class="news-body">
-            <div class="news-date">${date}</div>
-            <h3>${title}</h3>
-            <div class="news-text">${marked.parse(body)}</div>
-          </div>
-        `;
-        grid.appendChild(card);
-      }
-    }
-  } catch (err) {
-    grid.innerHTML = '<p style="padding:20px; color:var(--red);">Haberler yüklenirken bir sorun oluştu.</p>';
+function moveCarousel(dir) {
+  const visible = getVisibleCount();
+  const maxIdx = Math.max(0, newsData.length - visible);
+  currentIdx = Math.min(Math.max(0, currentIdx + dir), maxIdx);
+  
+  const card = document.querySelector('.news-card');
+  if (card) {
+    const cardWidth = card.offsetWidth + 20;
+    document.getElementById('newsTrack').style.transform = `translateX(-${currentIdx * cardWidth}px)`;
   }
 }
 
-cmsHaberleriGetir();
+document.getElementById('prevBtn').addEventListener('click', () => moveCarousel(-1));
+document.getElementById('nextBtn').addEventListener('click', () => moveCarousel(1));
+
+async function fetchCMSNews() {
+  const owner = "burakpsikoteknikdm-collab";
+  const repo = "izmirvoleybolmedya";
+  
+  try {
+    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/content/haberler`);
+    const files = await res.json();
+    
+    if (Array.isArray(files)) {
+      for (const file of files) {
+        if (file.name.endsWith('.md')) {
+          const raw = await fetch(file.download_url);
+          const text = await raw.text();
+          const parts = text.split('---');
+          if (parts.length >= 3) {
+            const fm = parts[1];
+            const body = parts.slice(2).join('---');
+            
+            const titleMatch = fm.match(/title:\s*["']?(.*?)["']?$/m);
+            const dateMatch = fm.match(/date:\s*["']?(.*?)["']?$/m);
+            const imageMatch = fm.match(/image:\s*["']?(.*?)["']?$/m);
+            
+            newsData.push({
+              title: titleMatch ? titleMatch[1] : file.name,
+              date: dateMatch ? dateMatch[1].split('T')[0] : '',
+              image: imageMatch ? imageMatch[1] : '',
+              excerpt: body.replace(/[#*`_]/g, '').trim().substring(0, 110) + '...'
+            });
+          }
+        }
+      }
+      renderCarousel();
+    }
+  } catch(e) {
+    document.getElementById('newsTrack').innerHTML = '<div style="padding:20px;">Haberler yüklenirken bir hata oluştu.</div>';
+  }
+}
+
+fetchCMSNews();
 </script>
 
 </body>
