@@ -1,0 +1,28 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "haberler"
+    label: "Haberler"
+    folder: "content/haberler"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Haber Başlığı", name: "title", widget: "string" }
+      - { label: "Yayın Tarihi", name: "date", widget: "datetime" }
+      - { label: "Kapak Görseli", name: "image", widget: "image" }
+      - { label: "Haber İçeriği", name: "body", widget: "markdown" }
+
+  - name: "canli_yayin"
+    label: "Canlı Yayın & Skorlar"
+    files:
+      - file: "content/canli.json"
+        label: "Canlı Yayın ve Fikstür Bilgileri"
+        name: "canli_bilgi"
+        fields:
+          - { label: "Canlı Yayın YouTube Linki", name: "youtube_url", widget: "string" }
+          - { label: "Günün Maç Skorları / Duyuru", name: "skor_duyuru", widget: "text" }
