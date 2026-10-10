@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: burakkamil/izmirvoleybolmedya
+  repo: burakpsikoteknikdm-collab/izmirvoleybolmedya
   branch: main
 
 media_folder: "images/uploads"
