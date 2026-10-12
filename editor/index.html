@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>İVM Editör</title>
+<meta name="description" content="İzmir Voleybol Medya haber yayınlama uygulaması">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b1f4d">
+<link rel="manifest" href="/editor/manifest.webmanifest">
+<link rel="icon" href="/editor/ikon-192.png">
+<link rel="apple-touch-icon" href="/editor/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="İVM Editör">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js" defer></script>
+<style>
+:root{--ink:#0b1f4d;--blue:#1e4fd8;--sky:#eaf1ff;--gold:#ffc21a;--muted:#5b6b8c;--line:#d6e0f5;--bg:#f6f9ff;--red:#d92d20;--green:#12805c;--r:14px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Barlow',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;font-size:16px}
+h1,h2,h3,.btn,.bar b{font-family:'Barlow Condensed',sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* Üst çubuk */
+.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:10px;background:var(--ink);color:#fff;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;min-height:58px;box-shadow:0 4px 14px rgba(11,31,77,.25)}
+.bar img{width:36px;height:36px;border-radius:50%}
+.bar b{font-size:1.35rem;font-weight:800;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar b i{font-style:normal;color:var(--gold)}
+.ikon{background:none;border:0;color:#fff;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:1.3rem;cursor:pointer;flex:none}
+.ikon:hover{background:rgba(255,255,255,.12)}
+.kap{max-width:720px;margin:0 auto;padding:16px 14px calc(110px + env(safe-area-inset-bottom))}
+
+/* Butonlar ve alanlar */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:13px 22px;font-size:1.15rem;font-weight:800;cursor:pointer;background:var(--gold);color:var(--ink)}
+.btn:disabled{opacity:.55;cursor:default}
+.btn.mavi{background:var(--blue);color:#fff}
+.btn.cizgi{background:#fff;border:2px solid var(--line)}
+.btn.kirmizi{background:#fff;color:var(--red);border:2px solid #f5c2be}
+.btn.tam{width:100%}
+label.alan{display:block;margin-bottom:16px}
+label.alan>span{display:block;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.girdi{width:100%;border:2px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff;font-size:1rem}
+.girdi:focus{border-color:var(--blue);outline:0}
+textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
+.ipucu{font-size:.85rem;color:var(--muted);margin-top:6px}
+.hata{background:#fdecea;color:var(--red);border-radius:10px;padding:10px 12px;font-weight:600;margin-bottom:14px}
+
+/* Giriş */
+.giris{min-height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:30px 20px;background:linear-gradient(160deg,var(--ink),#123a9c)}
+.giris-kart{width:100%;max-width:380px;background:#fff;border-radius:20px;padding:28px 22px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.giris-kart img{display:block;width:92px;height:92px;margin:-74px auto 10px;border-radius:50%;border:5px solid #fff;background:var(--ink)}
+.giris-kart h1{text-align:center;font-size:1.8rem;line-height:1.1}
+.giris-kart p{text-align:center;color:var(--muted);margin:4px 0 22px}
+
+/* Liste */
+.ust-satir{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.ust-satir h2{font-size:1.7rem}
+.haber{display:flex;gap:12px;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:10px;margin-bottom:10px;cursor:pointer}
+.haber:active{background:var(--sky)}
+.haber img,.haber .bos{width:88px;height:66px;flex:none;border-radius:10px;object-fit:cover;background:var(--sky)}
+.haber .tx{min-width:0;flex:1;display:flex;flex-direction:column;gap:3px}
+.haber b{font-weight:700;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.haber small{color:var(--muted);font-size:.82rem;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.rozet{background:var(--sky);color:var(--blue);border-radius:999px;padding:1px 9px;font-weight:700;font-size:.75rem}
+.bilgi{padding:28px 16px;text-align:center;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:var(--r)}
+.fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:20;box-shadow:0 10px 26px rgba(11,31,77,.35)}
+.kur{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:12px;padding:12px;margin-bottom:14px;font-size:.92rem}
+.kur div{flex:1}
+
+/* Düzenleme */
+.gorsel-kutu{position:relative;border:2px dashed var(--line);border-radius:var(--r);background:#fff;overflow:hidden;aspect-ratio:16/9;display:grid;place-items:center;cursor:pointer;text-align:center;color:var(--muted)}
+.gorsel-kutu img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.gorsel-kutu .yukle{font-weight:700}
+.gorsel-kutu .durum{position:absolute;inset:0;display:grid;place-items:center;background:rgba(11,31,77,.6);color:#fff;font-weight:700}
+.gorsel-islem{display:flex;gap:8px;margin-top:8px}
+.gorsel-islem .btn{padding:8px 14px;font-size:1rem}
+.arac{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.arac button{border:2px solid var(--line);background:#fff;border-radius:10px;min-width:42px;height:40px;padding:0 10px;font-weight:700;cursor:pointer}
+.arac button.aktif{background:var(--ink);color:#fff;border-color:var(--ink)}
+.onizleme{min-height:260px;background:#fff;border:2px solid var(--line);border-radius:12px;padding:14px}
+.onizleme p{margin-bottom:12px}.onizleme h2,.onizleme h3{margin:12px 0 6px}.onizleme a{color:var(--blue)}.onizleme ul,.onizleme ol{padding-left:22px;margin-bottom:12px}
+.alt-cubuk{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--line);padding:12px 14px calc(12px + env(safe-area-inset-bottom));display:flex;gap:10px;justify-content:center}
+.alt-cubuk .btn{flex:1;max-width:340px}
+
+/* Bildirim */
+.bildirim{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:50;background:var(--ink);color:#fff;border-radius:12px;padding:12px 18px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.3);max-width:calc(100% - 28px);text-align:center}
+.bildirim.iyi{background:var(--green)}.bildirim.kotu{background:var(--red)}
+@media(prefers-reduced-motion:no-preference){.bildirim{animation:gir .2s ease-out}@keyframes gir{from{opacity:0;transform:translate(-50%,10px)}}}
+</style>
+</head>
+<body>
+
+<!-- Giriş -->
+<section class="giris" id="girisEkrani" hidden>
+  <form class="giris-kart" id="girisForm" autocomplete="on">
+    <img src="/editor/ikon-192.png" alt="">
+    <h1>İVM Editör</h1>
+    <p>Haber yayınlamak için giriş yapın</p>
+    <div class="hata" id="girisHata" hidden></div>
+    <label class="alan"><span>Kullanıcı Adı</span><input class="girdi" id="kullanici" name="username" autocomplete="username" autocapitalize="none" required></label>
+    <label class="alan"><span>Şifre</span><input class="girdi" id="sifre" name="password" type="password" autocomplete="current-password" required></label>
+    <button class="btn tam" id="girisBtn">Giriş Yap</button>
+  </form>
+</section>
+
+<!-- Haber listesi -->
+<section id="listeEkrani" hidden>
+  <header class="bar">
+    <img src="/editor/ikon-192.png" alt="">
+    <b>İVM <i>Editör</i></b>
+    <button class="ikon" id="yenileBtn" title="Yenile" aria-label="Listeyi yenile">⟳</button>
+    <button class="ikon" id="cikisBtn" title="Çıkış" aria-label="Çıkış yap">⎋</button>
+  </header>
+  <main class="kap">
+    <div class="kur" id="kurKutu" hidden>
+      <div id="kurMetin">Bu uygulamayı telefonunuzun ana ekranına ekleyebilirsiniz.</div>
+      <button class="btn mavi" id="kurBtn" style="padding:8px 14px;font-size:1rem">Yükle</button>
+    </div>
+    <div class="ust-satir"><h2>Haberler</h2><small id="kimText" style="color:var(--muted)"></small></div>
+    <div id="liste"><div class="bilgi">Yükleniyor…</div></div>
+  </main>
+  <button class="btn fab" id="yeniBtn">＋ Yeni Haber</button>
+</section>
+
+<!-- Haber düzenleme -->
+<section id="duzenEkrani" hidden>
+  <header class="bar">
+    <button class="ikon" id="geriBtn" aria-label="Geri">←</button>
+    <b id="duzenBaslik">Yeni Haber</b>
+  </header>
+  <main class="kap">
+    <div class="hata" id="duzenHata" hidden></div>
+    <label class="alan"><span>Haber Başlığı</span><input class="girdi" id="fBaslik" maxlength="200" required></label>
+    <label class="alan"><span>Yayın Tarihi</span><input class="girdi" id="fTarih" type="datetime-local" required></label>
+    <label class="alan"><span>Lig</span>
+      <select class="girdi" id="fLig">
+        <option value="">Yok (sadece ana sayfada)</option>
+        <option value="sultanlar-ligi">Sultanlar Ligi</option>
+        <option value="efeler-ligi">Efeler Ligi</option>
+        <option value="kadinlar-1-ligi">Kadınlar 1. Ligi</option>
+        <option value="erkekler-1-ligi">Erkekler 1. Ligi</option>
+        <option value="kadinlar-2-ligi">Kadınlar 2. Ligi</option>
+        <option value="erkekler-2-ligi">Erkekler 2. Ligi</option>
+      </select>
+      <div class="ipucu">Lig seçerseniz haber, o ligin puan durumu sayfasında da görünür.</div>
+    </label>
+    <div class="alan" style="margin-bottom:16px">
+      <span style="display:block;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Kapak Görseli</span>
+      <div class="gorsel-kutu" id="gorselKutu" role="button" tabindex="0" aria-label="Kapak görseli seç">
+        <span class="yukle">📷 Görsel seçmek için dokunun</span>
+        <img id="gorselOnizleme" alt="" hidden>
+        <div class="durum" id="gorselDurum" hidden>Yükleniyor…</div>
+      </div>
+      <div class="gorsel-islem" id="gorselIslem" hidden>
+        <button type="button" class="btn cizgi" id="gorselDegistir">Değiştir</button>
+        <button type="button" class="btn kirmizi" id="gorselKaldir">Kaldır</button>
+      </div>
+      <input type="file" id="gorselDosya" accept="image/*" hidden>
+    </div>
+    <div class="alan">
+      <span style="display:block;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Haber İçeriği</span>
+      <div class="arac" role="toolbar" aria-label="Biçimlendirme">
+        <button type="button" data-bicim="kalin" title="Kalın"><b>K</b></button>
+        <button type="button" data-bicim="italik" title="İtalik"><i>İ</i></button>
+        <button type="button" data-bicim="baslik" title="Ara başlık">Başlık</button>
+        <button type="button" data-bicim="liste" title="Madde işareti">• Liste</button>
+        <button type="button" data-bicim="baglanti" title="Bağlantı">🔗</button>
+        <button type="button" id="onizleBtn" style="margin-left:auto">Önizle</button>
+      </div>
+      <textarea class="girdi" id="fIcerik" placeholder="Haberi yazın. Paragrafları boş bir satırla ayırın."></textarea>
+      <div class="onizleme" id="onizleme" hidden></div>
+    </div>
+    <button type="button" class="btn kirmizi tam" id="silBtn" hidden>Haberi Sil</button>
+  </main>
+  <div class="alt-cubuk">
+    <button class="btn cizgi" id="vazgecBtn">Vazgeç</button>
+    <button class="btn" id="kaydetBtn">Yayınla</button>
+  </div>
+</section>
+
+<div class="bildirim" id="bildirim" role="status" aria-live="polite" hidden></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const SITE_REPO_RAW = 'https://raw.githubusercontent.com/burakpsikoteknikdm-collab/izmirvoleybolmedya/main';
+const LIG_AD = { 'sultanlar-ligi': 'Sultanlar Ligi', 'efeler-ligi': 'Efeler Ligi', 'kadinlar-1-ligi': 'Kadınlar 1. Ligi', 'erkekler-1-ligi': 'Erkekler 1. Ligi', 'kadinlar-2-ligi': 'Kadınlar 2. Ligi', 'erkekler-2-ligi': 'Erkekler 2. Ligi' };
+
+/* Oturum (bu cihazda saklanır) */
+let oturum = null;
+try { oturum = JSON.parse(localStorage.getItem('ivm_editor') || 'null'); } catch (e) {}
+const oturumKaydet = o => { oturum = o; try { o ? localStorage.setItem('ivm_editor', JSON.stringify(o)) : localStorage.removeItem('ivm_editor'); } catch (e) {} };
+
+async function api(islem, { govde, sorgu = '' } = {}) {
+  const r = await fetch(`/api/editor?islem=${islem}${sorgu}`, {
+    method: govde ? 'POST' : 'GET',
+    headers: { 'Content-Type': 'application/json', ...(oturum ? { Authorization: 'Bearer ' + oturum.oturum } : {}) },
+    body: govde ? JSON.stringify(govde) : undefined
+  });
+  const j = await r.json().catch(() => ({ hata: 'Sunucuya ulaşılamadı.' }));
+  if (r.status === 401 && islem !== 'giris') { oturumKaydet(null); goster('giris'); girisHata(j.hata); throw new Error(j.hata); }
+  if (!r.ok || j.hata) throw new Error(j.hata || 'Bir hata oluştu.');
+  return j;
+}
+
+let bildirimZaman;
+function bildir(metin, tur = '') {
+  const b = $('#bildirim');
+  b.textContent = metin; b.className = 'bildirim ' + tur; b.hidden = false;
+  clearTimeout(bildirimZaman); bildirimZaman = setTimeout(() => b.hidden = true, 3500);
+}
+
+function goster(ekran) {
+  ['giris', 'liste', 'duzen'].forEach(e => $(`#${e}Ekrani`).hidden = e !== ekran);
+  scrollTo(0, 0);
+}
+
+/* Giriş */
+function girisHata(m) { $('#girisHata').textContent = m || ''; $('#girisHata').hidden = !m; }
+$('#girisForm').onsubmit = async e => {
+  e.preventDefault();
+  girisHata('');
+  $('#girisBtn').disabled = true; $('#girisBtn').textContent = 'Giriş yapılıyor…';
+  try {
+    const j = await api('giris', { govde: { kullanici: $('#kullanici').value, sifre: $('#sifre').value } });
+    oturumKaydet(j);
+    $('#sifre').value = '';
+    listeAc();
+  } catch (err) { girisHata(err.message); }
+  $('#girisBtn').disabled = false; $('#girisBtn').textContent = 'Giriş Yap';
+};
+$('#cikisBtn').onclick = () => { if (confirm('Çıkış yapılsın mı?')) { oturumKaydet(null); goster('giris'); } };
+
+/* Liste */
+const tarihYaz = d => { const x = new Date(d); return isNaN(x) ? '' : x.toLocaleString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }); };
+const gorselAdres = yol => !yol ? '' : /^https?:/.test(yol) ? yol : yol.startsWith('/') ? yol : '/' + yol;
+// Yeni yüklenen görsel site yayına alınana kadar GitHub'dan gösterilir
+function gorselYedek(img, yol) { img.onerror = () => { img.onerror = null; img.src = SITE_REPO_RAW + (yol.startsWith('/') ? yol : '/' + yol); }; }
+
+async function listeAc() {
+  goster('liste');
+  $('#kimText').textContent = oturum ? oturum.kullanici + ' olarak giriş yapıldı' : '';
+  $('#liste').innerHTML = '<div class="bilgi">Yükleniyor…</div>';
+  try {
+    const j = await api('liste');
+    const kutu = $('#liste');
+    kutu.textContent = '';
+    if (!j.haberler.length) { kutu.innerHTML = '<div class="bilgi">Henüz haber yok. Sağ alttaki <b>Yeni Haber</b> ile başlayın.</div>'; return; }
+    j.haberler.forEach(h => {
+      const b = document.createElement('button'); b.className = 'haber'; b.type = 'button';
+      if (h.image) { const im = document.createElement('img'); im.loading = 'lazy'; im.alt = ''; gorselYedek(im, h.image); im.src = gorselAdres(h.image); b.append(im); }
+      else { const s = document.createElement('span'); s.className = 'bos'; b.append(s); }
+      const tx = document.createElement('span'); tx.className = 'tx';
+      const t = document.createElement('b'); t.textContent = h.title;
+      const k = document.createElement('small'); k.textContent = tarihYaz(h.date);
+      if (h.lig) { const r = document.createElement('span'); r.className = 'rozet'; r.textContent = LIG_AD[h.lig] || h.lig; k.append(r); }
+      tx.append(t, k); b.append(tx);
+      b.onclick = () => duzenAc(h.ad);
+      kutu.append(b);
+    });
+  } catch (e) {
+    if (oturum) $('#liste').innerHTML = `<div class="bilgi">${e.message.replace(/[<>&]/g, '')}<br><br><button class="btn cizgi" onclick="listeAc()">Tekrar Dene</button></div>`;
+  }
+}
+$('#yenileBtn').onclick = listeAc;
+$('#yeniBtn').onclick = () => duzenAc(null);
+
+/* Düzenleme */
+let duzen = null, degisti = false;
+const yerelTarih = d => { const x = new Date(d); x.setMinutes(x.getMinutes() - x.getTimezoneOffset()); return x.toISOString().slice(0, 16); };
+function duzenHata(m) { $('#duzenHata').textContent = m || ''; $('#duzenHata').hidden = !m; if (m) scrollTo(0, 0); }
+
+async function duzenAc(ad) {
+  duzenHata('');
+  degisti = false;
+  onizleKapat();
+  if (!ad) {
+    duzen = { ad: null, sha: null, image: '' };
+    $('#duzenBaslik').textContent = 'Yeni Haber';
+    $('#fBaslik').value = ''; $('#fTarih').value = yerelTarih(new Date()); $('#fLig').value = ''; $('#fIcerik').value = '';
+    gorselGoster('');
+    $('#silBtn').hidden = true; $('#kaydetBtn').textContent = 'Yayınla';
+    goster('duzen');
+    return;
+  }
+  goster('duzen');
+  $('#duzenBaslik').textContent = 'Yükleniyor…';
+  ['#fBaslik', '#fTarih', '#fLig', '#fIcerik', '#kaydetBtn'].forEach(s => $(s).disabled = true);
+  try {
+    const h = await api('getir', { sorgu: '&ad=' + encodeURIComponent(ad) });
+    duzen = { ad: h.ad, sha: h.sha, image: h.image };
+    $('#duzenBaslik').textContent = 'Haberi Düzenle';
+    $('#fBaslik').value = h.title; $('#fTarih').value = h.date ? yerelTarih(h.date) : yerelTarih(new Date());
+    $('#fLig').value = h.lig || ''; $('#fIcerik').value = h.body;
+    gorselGoster(h.image);
+    $('#silBtn').hidden = false; $('#kaydetBtn').textContent = 'Güncelle';
+  } catch (e) { duzenHata(e.message); }
+  ['#fBaslik', '#fTarih', '#fLig', '#fIcerik', '#kaydetBtn'].forEach(s => $(s).disabled = false);
+}
+['#fBaslik', '#fTarih', '#fLig', '#fIcerik'].forEach(s => $(s).addEventListener('input', () => degisti = true));
+
+function geriDon() {
+  if (degisti && !confirm('Kaydedilmemiş değişiklikler silinecek. Çıkılsın mı?')) return;
+  listeAc();
+}
+$('#geriBtn').onclick = geriDon;
+$('#vazgecBtn').onclick = geriDon;
+addEventListener('beforeunload', e => { if (!$('#duzenEkrani').hidden && degisti) { e.preventDefault(); e.returnValue = ''; } });
+
+/* Kapak görseli: seçilen dosya küçültülüp hemen yüklenir */
+function gorselGoster(yol) {
+  duzen.image = yol || '';
+  const im = $('#gorselOnizleme');
+  im.hidden = !yol;
+  if (yol) { gorselYedek(im, yol); im.src = gorselAdres(yol); }
+  $('#gorselKutu .yukle').hidden = !!yol;
+  $('#gorselIslem').hidden = !yol;
+}
+const dosyaSec = () => $('#gorselDosya').click();
+$('#gorselKutu').onclick = () => { if (!duzen.image) dosyaSec(); };
+$('#gorselKutu').onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); dosyaSec(); } };
+$('#gorselDegistir').onclick = dosyaSec;
+$('#gorselKaldir').onclick = () => { gorselGoster(''); degisti = true; };
+
+async function kucult(dosya, enBuyuk = 1600) {
+  const bmp = await createImageBitmap(dosya).catch(() => null);
+  if (!bmp) throw new Error('Bu görsel açılamadı. JPEG veya PNG deneyin.');
+  const oran = Math.min(1, enBuyuk / Math.max(bmp.width, bmp.height));
+  const c = document.createElement('canvas');
+  c.width = Math.round(bmp.width * oran); c.height = Math.round(bmp.height * oran);
+  c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+  let kalite = .85, veri = c.toDataURL('image/jpeg', kalite);
+  while (veri.length > 3.2e6 && kalite > .4) { kalite -= .15; veri = c.toDataURL('image/jpeg', kalite); }
+  return veri;
+}
+$('#gorselDosya').onchange = async e => {
+  const dosya = e.target.files[0];
+  e.target.value = '';
+  if (!dosya) return;
+  const durum = $('#gorselDurum');
+  durum.hidden = false; durum.textContent = 'Görsel hazırlanıyor…';
+  $('#kaydetBtn').disabled = true;
+  try {
+    const veri = await kucult(dosya);
+    durum.textContent = 'Yükleniyor…';
+    const j = await api('gorsel', { govde: { ad: $('#fBaslik').value || dosya.name, veri } });
+    gorselGoster(j.yol);
+    $('#gorselOnizleme').src = j.onizleme;
+    degisti = true;
+    bildir('Görsel yüklendi', 'iyi');
+  } catch (err) { bildir(err.message, 'kotu'); }
+  durum.hidden = true;
+  $('#kaydetBtn').disabled = false;
+};
+
+/* Biçimlendirme araçları (Markdown) */
+function sar(once, sonra = once, ornek = 'metin') {
+  const t = $('#fIcerik'), b = t.selectionStart, s = t.selectionEnd;
+  const secili = t.value.slice(b, s) || ornek;
+  t.setRangeText(once + secili + sonra, b, s, 'end');
+  t.focus(); degisti = true;
+}
+function satirBasi(on) {
+  const t = $('#fIcerik'), b = t.value.lastIndexOf('\n', t.selectionStart - 1) + 1;
+  t.setRangeText(on, b, b, 'end'); t.focus(); degisti = true;
+}
+document.querySelectorAll('[data-bicim]').forEach(btn => btn.onclick = () => {
+  const b = btn.dataset.bicim;
+  if (b === 'kalin') sar('**');
+  else if (b === 'italik') sar('_');
+  else if (b === 'baslik') satirBasi('## ');
+  else if (b === 'liste') satirBasi('- ');
+  else if (b === 'baglanti') { const u = prompt('Bağlantı adresi (https://…)'); if (u && /^https?:\/\//i.test(u)) sar('[', `](${u})`, 'bağlantı metni'); }
+});
+function onizleKapat() { $('#onizleme').hidden = true; $('#fIcerik').hidden = false; $('#onizleBtn').classList.remove('aktif'); $('#onizleBtn').textContent = 'Önizle'; }
+$('#onizleBtn').onclick = () => {
+  if (!$('#onizleme').hidden) return onizleKapat();
+  const md = $('#fIcerik').value;
+  const html = window.marked ? marked.parse(md) : md.split(/\n\n+/).map(p => '<p>' + p.replace(/[<>&]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c])) + '</p>').join('');
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  doc.querySelectorAll('script,iframe,object,embed,style').forEach(n => n.remove());
+  doc.querySelectorAll('*').forEach(n => [...n.attributes].forEach(a => { if (/^on/i.test(a.name) || /^\s*javascript:/i.test(a.value)) n.removeAttribute(a.name); }));
+  $('#onizleme').innerHTML = doc.body.innerHTML || '<p style="color:var(--muted)">Önizlenecek metin yok.</p>';
+  $('#onizleme').hidden = false; $('#fIcerik').hidden = true;
+  $('#onizleBtn').classList.add('aktif'); $('#onizleBtn').textContent = 'Düzenle';
+};
+
+/* Kaydet / Sil */
+$('#kaydetBtn').onclick = async () => {
+  duzenHata('');
+  const title = $('#fBaslik').value.trim();
+  if (!title) return duzenHata('Başlık boş olamaz.');
+  if (!$('#fTarih').value) return duzenHata('Yayın tarihini seçin.');
+  if (!$('#fIcerik').value.trim() && !confirm('Haber içeriği boş. Yine de yayınlansın mı?')) return;
+  const btn = $('#kaydetBtn'), eski = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Kaydediliyor…';
+  try {
+    await api('kaydet', { govde: {
+      ad: duzen.ad, sha: duzen.sha, title, date: new Date($('#fTarih').value).toISOString(),
+      lig: $('#fLig').value, image: duzen.image, body: $('#fIcerik').value
+    } });
+    degisti = false;
+    bildir(duzen.ad ? 'Haber güncellendi. Sitede birkaç dakika içinde görünür.' : 'Haber yayınlandı! Sitede birkaç dakika içinde görünür.', 'iyi');
+    listeAc();
+  } catch (e) { duzenHata(e.message); }
+  btn.disabled = false; btn.textContent = eski;
+};
+$('#silBtn').onclick = async () => {
+  if (!confirm('Bu haber siteden kalıcı olarak silinecek. Emin misiniz?')) return;
+  $('#silBtn').disabled = true;
+  try {
+    await api('sil', { govde: { ad: duzen.ad, sha: duzen.sha } });
+    degisti = false;
+    bildir('Haber silindi.', 'iyi');
+    listeAc();
+  } catch (e) { duzenHata(e.message); }
+  $('#silBtn').disabled = false;
+};
+
+/* Ana ekrana ekleme */
+let kurOlayi = null;
+const uygulamaModu = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+addEventListener('beforeinstallprompt', e => { e.preventDefault(); kurOlayi = e; $('#kurKutu').hidden = false; $('#kurBtn').hidden = false; });
+$('#kurBtn').onclick = async () => { if (!kurOlayi) return; kurOlayi.prompt(); await kurOlayi.userChoice; kurOlayi = null; $('#kurKutu').hidden = true; };
+if (!uygulamaModu && /iphone|ipad|ipod/i.test(navigator.userAgent)) {
+  $('#kurMetin').innerHTML = 'Ana ekrana eklemek için Safari\'de <b>Paylaş</b> (□↑) düğmesine, ardından <b>Ana Ekrana Ekle</b>\'ye dokunun.';
+  $('#kurBtn').hidden = true; $('#kurKutu').hidden = false;
+}
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('/editor/sw.js', { scope: '/editor/' }).catch(() => {});
+
+/* Başlangıç */
+if (oturum) listeAc(); else goster('giris');
+</script>
+</body>
+</html>

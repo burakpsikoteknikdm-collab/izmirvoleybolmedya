@@ -428,6 +428,11 @@ function parse(t) {
   return f.title ? f : null;
 }
 const imgUrl = u => !u ? '' : /^(https?:)?\//.test(u) ? u : '/' + u;
+// Yeni yüklenen görsel site yayına alınana kadar doğrudan GitHub'dan gösterilir
+function resimKur(im, u) {
+  im.onerror = () => { im.onerror = null; if (u.startsWith('/images/')) im.src = 'https://raw.githubusercontent.com/' + REPO + '/main' + u; };
+  im.src = imgUrl(u);
+}
 const fmt = d => { const x = new Date(d); return isNaN(x) ? '' : x.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }); };
 const plain = b => b.replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/[#*_>`~]/g, '').replace(/\s+/g, ' ').trim().slice(0, 170);
 function safeHtml(md) {
@@ -449,7 +454,7 @@ function render(list) {
   list.forEach(n => {
     const c = document.createElement('button');
     c.className = 'card'; c.type = 'button';
-    if (n.image) { const im = document.createElement('img'); im.className = 'im'; im.loading = 'lazy'; im.alt = ''; im.src = imgUrl(n.image); c.append(im); }
+    if (n.image) { const im = document.createElement('img'); im.className = 'im'; im.loading = 'lazy'; im.alt = ''; resimKur(im, n.image); c.append(im); }
     else { const d = document.createElement('div'); d.className = 'im'; c.append(d); }
     const tx = document.createElement('div'); tx.className = 'tx';
     const t = document.createElement('time'); t.textContent = fmt(n.date);
@@ -464,7 +469,7 @@ function openNews(n) {
   $('#dt').textContent = fmt(n.date);
   $('#dh').textContent = n.title;
   $('#di').innerHTML = '';
-  if (n.image) { const im = document.createElement('img'); im.src = imgUrl(n.image); im.alt = ''; $('#di').append(im); }
+  if (n.image) { const im = document.createElement('img'); resimKur(im, n.image); im.alt = ''; $('#di').append(im); }
   $('#db').innerHTML = safeHtml(n.body);
   $('#dlg').showModal();
 }
@@ -656,7 +661,7 @@ function ligHaberleriCiz() {
   kutu.textContent = '';
   liste.slice(0, 8).forEach(n => {
     const b = document.createElement('button'); b.className = 'h'; b.type = 'button';
-    if (n.image) { const im = document.createElement('img'); im.src = imgUrl(n.image); im.alt = ''; im.loading = 'lazy'; b.append(im); }
+    if (n.image) { const im = document.createElement('img'); resimKur(im, n.image); im.alt = ''; im.loading = 'lazy'; b.append(im); }
     else { const d = document.createElement('span'); d.className = 'yok'; b.append(d); }
     const tx = document.createElement('span');
     const t = document.createElement('time'); t.textContent = fmt(n.date);
