@@ -4,282 +4,293 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>İzmir Voleybol Medya | Haber & Canlı Yayın Portalı</title>
-<meta name="description" content="İzmir voleybol haberleri, canlı yayınlar, maç programları, ligler, puan durumları ve fikstürler.">
+<meta name="description" content="İzmir voleybol haberleri, canlı yayınlar, maç programları, puan durumları ve fikstürler.">
+<link rel="icon" href="/logo.jpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-<!-- Google AdSense Entegrasyonu -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9798524131017882" crossorigin="anonymous"></script>
-
 <style>
-:root {
-  --navy: #0a192f;
-  --navy-light: #112240;
-  --turquoise: #38bdf8;
-  --yellow: #f59e0b;
-  --yellow-hover: #d97706;
-  --bg-soft: #f8fafc;
-  --white: #ffffff;
-  --text-dark: #0f172a;
-  --text-muted: #64748b;
-  --border: #cbd5e1;
-  --shadow: 0 10px 25px -5px rgba(10, 25, 47, 0.12);
+:root{--ink:#0b1f4d;--blue:#1e4fd8;--sky:#eaf1ff;--gold:#ffc21a;--gold-d:#e5a800;--white:#fff;--muted:#5b6b8c;--line:#d6e0f5;--r:14px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:'Barlow',system-ui,sans-serif;background:#f6f9ff;color:var(--ink);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,.btn,.nav a,.brand{font-family:'Barlow Condensed',sans-serif}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* Üst bar */
+.header{position:sticky;top:0;z-index:50;background:var(--ink);box-shadow:0 4px 18px rgba(11,31,77,.3)}
+.stripe{height:5px;background:linear-gradient(90deg,var(--blue) 0 34%,var(--gold) 34% 67%,var(--white) 67%)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:78px;gap:12px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand img{width:56px;height:56px;flex:none;border-radius:50%;object-fit:cover;border:2px solid var(--gold);background:#fff;display:block}
+.brand b{display:block;color:#fff;font-size:1.7rem;font-weight:800;line-height:1;white-space:nowrap}
+.brand b i{font-style:normal;color:var(--gold)}
+.brand small{display:block;color:#9db8ff;font-size:.8rem;font-weight:600;letter-spacing:.04em;margin-top:3px;white-space:nowrap}
+.nav{display:flex;gap:26px}
+.nav a{color:#fff;font-size:1.15rem;font-weight:700;padding:6px 0;border-bottom:3px solid transparent}
+.nav a:hover{border-color:var(--gold)}
+.menu{display:none;background:none;border:2px solid #3b5bb5;color:#fff;border-radius:10px;width:44px;height:44px;font-size:1.5rem;cursor:pointer;flex:none}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;color:#fff;background:linear-gradient(120deg,var(--ink) 0%,#123a9c 100%);padding:64px 0 56px}
+.hero .wrap{position:relative;z-index:2}
+.hero h1{font-size:clamp(2.4rem,6vw,4.4rem);line-height:.98;font-weight:800;max-width:11em}
+.hero p{margin:18px 0 28px;max-width:34em;color:#c9d8ff;font-size:1.1rem}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 26px;border-radius:999px;font-weight:800;font-size:1.15rem;border:2px solid transparent;cursor:pointer}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:var(--gold-d)}
+.btn-line{border-color:#fff;color:#fff}
+.btn-line:hover{background:rgba(255,255,255,.12)}
+.tower{position:absolute;right:max(2vw,0px);bottom:0;height:112%;width:auto;z-index:1;pointer-events:none}
+.ball{position:absolute;left:-90px;bottom:-110px;width:380px;opacity:.9;z-index:0;pointer-events:none}
+
+/* Canlı şerit */
+.live{background:var(--gold);color:var(--ink)}
+.live .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:14px;flex-wrap:wrap}
+.live strong{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;font-weight:800}
+.live span{font-weight:500}
+.live .btn{background:var(--ink);color:#fff;padding:8px 22px;font-size:1.05rem}
+
+/* Bölümler */
+.section{padding:52px 0 8px}
+.section h2{font-size:2.3rem;font-weight:800;line-height:1;margin-bottom:22px;display:flex;align-items:center;gap:12px}
+.section h2::before{content:"";width:14px;height:34px;border-radius:7px;background:linear-gradient(var(--blue) 0 50%,var(--gold) 50%)}
+.carousel{position:relative}
+.track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 18px;scrollbar-width:thin}
+.card{flex:0 0 calc((100% - 54px)/4);scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;text-align:left;font:inherit;color:inherit;padding:0}
+.card:hover{border-color:var(--blue)}
+.card .im{aspect-ratio:16/10;background:var(--sky);width:100%;object-fit:cover;display:block}
+.card .tx{padding:16px}
+.card time{font-size:.8rem;font-weight:600;color:var(--blue)}
+.card h3{font-size:1.3rem;font-weight:800;line-height:1.15;margin:4px 0 8px}
+.card p{font-size:.92rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.arrow{position:absolute;top:42%;width:44px;height:44px;border-radius:50%;border:2px solid var(--gold);background:var(--ink);color:var(--gold);font-size:1.5rem;cursor:pointer;z-index:3}
+.arrow.l{left:-14px}.arrow.r{right:-14px}
+.msg{padding:28px;background:#fff;border:1px dashed var(--line);border-radius:var(--r);color:var(--muted);width:100%}
+.msg button{margin-left:10px;color:var(--blue);font-weight:700;background:none;border:0;cursor:pointer;font:inherit}
+
+/* Program */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.box{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.box header{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--ink);color:#fff;padding:13px 18px}
+.box h3{font-size:1.35rem;color:var(--gold)}
+.box header a{font-size:.9rem;color:#cfe0ff}
+.box iframe{width:100%;height:560px;border:0;display:block}
+
+.ad{margin:26px auto 0;text-align:center}
+.ad:has(ins[data-ad-status="unfilled"]){display:none}
+
+/* Haber penceresi */
+dialog{border:0;border-radius:var(--r);max-width:760px;width:calc(100% - 28px);max-height:90vh;padding:0;margin:auto;overflow:auto}
+dialog::backdrop{background:rgba(11,31,77,.72)}
+.d-in{padding:26px}
+.d-in img{width:100%;border-radius:10px;margin:14px 0}
+.d-in h2{font-size:2rem;line-height:1.05;margin:4px 0}
+.d-in .body p{margin:0 0 14px}.d-in .body a{color:var(--blue);text-decoration:underline}
+.x{float:right;background:var(--ink);color:#fff;border:0;border-radius:50%;width:38px;height:38px;font-size:1.2rem;cursor:pointer}
+
+.footer{margin-top:60px;background:var(--ink);color:#9db8ff;text-align:center;padding:34px 0 24px}
+.footer b{display:block;font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;color:#fff}
+.footer b i{font-style:normal;color:var(--gold)}
+
+@media(max-width:1024px){.card{flex-basis:calc((100% - 36px)/3)}.grid{grid-template-columns:1fr}}
+@media(max-width:768px){
+ .menu{display:block}
+ .nav{display:none;position:absolute;top:83px;left:0;right:0;background:var(--ink);flex-direction:column;gap:0;padding:6px 20px 16px;border-top:1px solid #20366f}
+ .nav.open{display:flex}.nav a{padding:14px 0;border-bottom:1px solid #20366f}
+ .card{flex-basis:calc((100% - 18px)/2)}
+ .hero{padding:44px 0 48px}.tower{height:78%;opacity:.55}
+ .arrow{display:none}.section h2{font-size:1.9rem}.box iframe{height:460px}
 }
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 80px; }
-body { font-family: 'Barlow', sans-serif; background: var(--bg-soft); color: var(--text-dark); line-height: 1.6; }
-a { color: inherit; text-decoration: none; }
-h1, h2, h3, h4, .btn, .nav a { font-family: 'Barlow Condensed', sans-serif; }
-.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-/* TOP BAR */
-.topbar { background: #030712; color: #9ca3af; font-size: 0.85rem; border-bottom: 1px solid #1f2937; }
-.topbar .container { display: flex; justify-content: space-between; align-items: center; padding: 8px 20px; }
-.topbar-badge { background: var(--yellow); color: #000; font-weight: 800; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; }
-
-/* HEADER & LOGO */
-.header { position: sticky; top: 0; z-index: 1000; background: var(--navy); border-bottom: 3px solid var(--yellow); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-.header-wrap { display: flex; align-items: center; justify-content: space-between; height: 90px; }
-
-.logo-area { display: flex; align-items: center; gap: 14px; }
-.logo-img { height: 70px; width: 70px; border-radius: 50%; object-fit: cover; border: 2px solid var(--turquoise); background: #000; }
-.logo-text { color: var(--white); font-size: 1.8rem; font-weight: 800; line-height: 1; letter-spacing: -0.5px; }
-.logo-text span { color: var(--yellow); }
-.logo-tagline { display: block; font-size: 0.85rem; color: var(--turquoise); font-weight: 600; letter-spacing: 0.5px; margin-top: 4px; }
-
-/* NAV */
-.nav { display: flex; align-items: center; gap: 22px; }
-.nav a { color: var(--white); font-size: 1.15rem; font-weight: 700; transition: color 0.2s; }
-.nav a:hover { color: var(--yellow); }
-
-/* HERO SECTION WITH SAAT KULESI SILHOUETTE */
-.hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); color: var(--white); padding: 50px 0; position: relative; overflow: hidden; }
-.hero::after {
-  content: '';
-  position: absolute;
-  right: 4%;
-  bottom: 0;
-  width: 200px;
-  height: 280px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 200' fill='%2338bdf8' opacity='0.12'%3E%3Cpath d='M45 190h10v10H45zM40 170h20v20H40zM35 130h30v40H35zM42 100h16v30H42zM46 70h8v30H46zM48 40h4v30h-4zM50 10l5 30h-10z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: bottom right;
-  background-size: contain;
-  pointer-events: none;
+@media(max-width:520px){
+ .bar{height:68px}.brand img{width:46px;height:46px}.brand b{font-size:1.25rem}.brand small{display:none}
+ .nav{top:73px}.card{flex-basis:84%}.hero p{font-size:1rem}.tower{height:60%;opacity:.4}
+ .live .btn{width:100%}.d-in{padding:18px}
 }
-.hero-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; position: relative; z-index: 2; }
-.hero-main { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 35px; }
-.hero-title { font-size: 3.2rem; line-height: 1; font-weight: 800; color: var(--white); margin-bottom: 15px; }
-.hero-title span { color: var(--yellow); }
-.hero-desc { color: #94a3b8; font-size: 1.1rem; max-width: 600px; margin-bottom: 25px; }
-
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: all 0.2s; border: 0; }
-.btn-yellow { background: var(--yellow); color: var(--navy); }
-.btn-yellow:hover { background: var(--yellow-hover); }
-.btn-outline { border: 2px solid var(--turquoise); color: var(--turquoise); background: transparent; }
-
-.live-card { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); border-radius: 12px; padding: 22px; color: var(--white); }
-
-/* ADSENSE REKLAM ALANI */
-.ad-container { margin: 25px auto; text-align: center; background: #ffffff; border: 1px dashed var(--border); border-radius: 8px; padding: 15px; min-height: 100px; }
-.ad-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-
-/* KAYAN HABERLER (CAROUSEL) */
-.section { padding: 45px 0; }
-.section-title { font-size: 2.2rem; font-weight: 800; color: var(--navy); border-left: 5px solid var(--yellow); padding-left: 12px; line-height: 1; margin-bottom: 20px; }
-
-.carousel-wrap { position: relative; }
-.carousel-viewport { overflow: hidden; border-radius: 12px; padding: 5px 0; }
-.carousel-track { display: flex; gap: 20px; transition: transform 0.4s ease-in-out; }
-
-.news-card { flex: 0 0 calc((100% - 60px) / 4); background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border); display: flex; flex-direction: column; }
-.news-img { aspect-ratio: 16/10; background: var(--navy-light); background-size: cover; background-position: center; }
-.news-content { padding: 18px; display: flex; flex-direction: column; flex: 1; }
-.news-date { font-size: 0.8rem; font-weight: 700; color: var(--yellow); text-transform: uppercase; margin-bottom: 6px; }
-.news-title { font-size: 1.25rem; font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 8px; }
-.news-excerpt { font-size: 0.9rem; color: var(--text-muted); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-
-.carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: var(--navy); color: var(--yellow); border: 2px solid var(--yellow); cursor: pointer; z-index: 10; font-size: 1.5rem; }
-.carousel-btn.prev { left: -15px; }
-.carousel-btn.next { right: -15px; }
-
-/* PROGRAM IFRAMES */
-.program-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.program-box { background: var(--white); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; box-shadow: var(--shadow); }
-.program-box-head { background: var(--navy); color: var(--white); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
-.program-box-head h3 { font-size: 1.4rem; color: var(--yellow); }
-.program-box iframe { width: 100%; height: 600px; border: 0; }
-
-/* FOOTER */
-.footer { background: #030712; color: #9ca3af; padding: 35px 0 20px; border-top: 3px solid var(--yellow); margin-top: 50px; }
-
-@media (max-width: 1024px) {
-  .news-card { flex: 0 0 calc((100% - 40px) / 3); }
-  .hero-grid, .program-grid { grid-template-columns: 1fr; }
-}
-@media (max-width: 768px) {
-  .news-card { flex: 0 0 calc((100% - 20px) / 2); }
-  .nav { display: none; }
-}
-@media (max-width: 480px) {
-  .news-card { flex: 0 0 100%; }
-}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
-
 <body>
 
-<div class="topbar">
-  <div class="container">
-    <div><span class="topbar-badge">İZMİR</span> Voleybol Haber & Canlı Yayın Portalı</div>
-    <div>İzmir Voleybol Medya Grubu</div>
-  </div>
-</div>
-
 <header class="header">
-  <div class="container header-wrap">
-    <a href="#anasayfa" class="logo-area">
-      <img src="logo.jpg" alt="İzmir Voleybol Medya" class="logo-img" onerror="this.src='logo.jpeg'">
-      <div>
-        <div class="logo-text">İZMİR VOLEYBOL <span>MEDYA</span></div>
-        <span class="logo-tagline">HABER & CANLI YAYIN PORTALI</span>
-      </div>
+  <div class="stripe"></div>
+  <div class="wrap bar">
+    <a href="#top" class="brand">
+      <img src="/logo.jpeg" width="56" height="56" alt="İzmir Voleybol Medya logosu">
+      <span><b>İZMİR VOLEYBOL <i>MEDYA</i></b><small>HABER &amp; CANLI YAYIN PORTALI</small></span>
     </a>
-    
-    <nav class="nav">
+    <button class="menu" id="menu" aria-label="Menüyü aç" aria-expanded="false">☰</button>
+    <nav class="nav" id="nav">
       <a href="#haberler">Haberler</a>
-      <a href="#canli">Canlı Yayın</a>
       <a href="#program">Maç Programı</a>
+      <a href="#canli">Canlı Yayın</a>
       <a href="#iletisim">İletişim</a>
     </nav>
   </div>
 </header>
 
-<main id="anasayfa">
-
-<!-- HERO SECTION -->
-<section class="hero">
-  <div class="container hero-grid">
-    <div class="hero-main">
-      <h1 class="hero-title">İzmir Voleybolunun <span>Kalbi Burada Atıyor</span></h1>
-      <p class="hero-desc">Sultanlar Ligi, Efeler Ligi, yerel ligler, altyapı müsabakaları, canlı yayınlar ve en son gelişmeler tek adreste.</p>
-      <div style="display:flex; gap:12px; flex-wrap:wrap;">
-        <a href="#canli" class="btn btn-yellow">CANLI İZLE</a>
-        <a href="#program" class="btn btn-outline">MAÇ TAKVİMİ</a>
+<main id="top">
+  <section class="hero">
+    <svg class="ball" viewBox="0 0 200 200" fill="none" stroke="#fff" stroke-opacity=".1" stroke-width="3" aria-hidden="true"><circle cx="100" cy="100" r="96"/><path d="M100 4c-26 30-26 62 0 96s26 66 0 96M8 70c40 4 70 20 92 30s52 26 92 22M12 140c40-6 66-22 88-40s56-30 92-30"/></svg>
+    <svg class="tower" viewBox="30 20 140 375" aria-hidden="true">
+      <defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#ffc21a" stop-opacity=".42"/></linearGradient></defs>
+      <path fill="url(#tg)" fill-rule="evenodd" d="M40 380h120v8H40ZM48 372h104v8H48ZM56 372V300H144V372ZM66 372V340a10 10 0 0 1 20 0V372ZM90 372V340a10 10 0 0 1 20 0V372ZM114 372V340a10 10 0 0 1 20 0V372ZM50 290h100v10H50ZM54 284h92v6H54ZM52 262h8v22h-8ZM52 262l4-10 4 10ZM140 262h8v22h-8ZM140 262l4-10 4 10ZM68 200h64v84H68ZM92 270V225a8 8 0 0 1 16 0V270ZM62 200h6v84h-6ZM132 200h6v84h-6ZM58 192h84v8H58ZM62 186h76v6H62ZM74 130h52v56H74ZM83 158a17 17 0 1 0 34 0a17 17 0 1 0-34 0ZM99 146h2v14h-2ZM101 157h9v2h-9ZM70 122h60v8H70ZM76 116h48v6H76ZM82 84h36v32H82ZM94 112V98a6 6 0 0 1 12 0V112ZM78 84h44Q122 62 100 52Q78 62 78 84ZM98 34h4v18h-4ZM96 30a4 4 0 1 0 8 0a4 4 0 1 0-8 0Z"/>
+    </svg>
+    <div class="wrap">
+      <h1>İzmir voleybolu bir arada</h1>
+      <p>Sultanlar Ligi'nden altyapı maçlarına, canlı yayınlardan güncel haberlere kadar İzmir voleybolunda olan biten her şey tek adreste.</p>
+      <div class="btns">
+        <a href="#haberler" class="btn btn-gold">Son haberler</a>
+        <a href="#program" class="btn btn-line">Maç takvimi</a>
       </div>
     </div>
-    
-    <div>
-      <div class="live-card" id="canli">
-        <h3 style="font-size:1.6rem; font-weight:800; margin-bottom:8px;">YouTube Canlı Yayın</h3>
-        <p style="font-size:0.95rem; opacity:0.9; margin-bottom:15px;">İzmir bölgesel maçları ve özel yayınlarımız YouTube kanalımızda.</p>
-        <a href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" class="btn btn-yellow" style="width:100%;">KANALA GİT</a>
+  </section>
+
+  <section class="live" id="canli">
+    <div class="wrap">
+      <div><strong>YouTube canlı yayın</strong> <span id="duyuru">İzmir'deki maçları kanalımızdan canlı izleyin.</span></div>
+      <a class="btn" id="yt" href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" rel="noopener">Kanala git</a>
+    </div>
+  </section>
+
+  <section class="section" id="haberler">
+    <div class="wrap">
+      <h2>Güncel haberler</h2>
+      <div class="carousel">
+        <button class="arrow l" id="prev" aria-label="Önceki haberler">‹</button>
+        <div class="track" id="track"><div class="msg">Haberler yükleniyor…</div></div>
+        <button class="arrow r" id="next" aria-label="Sonraki haberler">›</button>
+      </div>
+      <div class="ad"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9798524131017882" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>
+    </div>
+  </section>
+
+  <section class="section" id="program">
+    <div class="wrap">
+      <h2>İzmir il maç programı ve puan durumu</h2>
+      <div class="grid">
+        <div class="box"><header><h3>Bu haftanın maçları</h3><a href="https://izmir.voleyboliltemsilciligi.com/MacTakvimi" target="_blank" rel="noopener">Resmi sayfa</a></header>
+          <iframe src="https://izmir.voleyboliltemsilciligi.com/MacTakvimi#BuHafta" loading="lazy" title="Bu haftanın maçları"></iframe></div>
+        <div class="box"><header><h3>Puan durumu</h3><a href="https://izmir.voleyboliltemsilciligi.com/PuanDurumu" target="_blank" rel="noopener">Resmi sayfa</a></header>
+          <iframe src="https://izmir.voleyboliltemsilciligi.com/PuanDurumu" loading="lazy" title="Puan durumu"></iframe></div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ADSENSE BANNER 1 -->
-<div class="container">
-  <div class="ad-container">
-    <div class="ad-label">REKLAM</div>
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-9798524131017882"
-         data-ad-slot="auto"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  </div>
-</div>
-
-<!-- KAYAN HABERLER -->
-<section class="section" id="haberler">
-  <div class="container">
-    <h2 class="section-title">GÜNCEL HABERLER</h2>
-
-    <div class="carousel-wrap">
-      <button class="carousel-btn prev" id="prevBtn">‹</button>
-      <div class="carousel-viewport">
-        <div class="carousel-track" id="newsTrack">
-          <p style="padding:20px;">Haberler yükleniyor...</p>
-        </div>
-      </div>
-      <button class="carousel-btn next" id="nextBtn">›</button>
-    </div>
-  </div>
-</section>
-
-<!-- ADSENSE BANNER 2 -->
-<div class="container">
-  <div class="ad-container">
-    <div class="ad-label">REKLAM</div>
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-9798524131017882"
-         data-ad-slot="auto"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  </div>
-</div>
-
-<!-- MAÇ PROGRAMI & FİKSTÜR -->
-<section class="section" id="program">
-  <div class="container">
-    <h2 class="section-title">İZMİR İL MAÇ PROGRAMI & FİKSTÜR</h2>
-
-    <div class="program-grid">
-      <div class="program-box">
-        <div class="program-box-head">
-          <h3>Bu Haftanın Maçları</h3>
-          <a href="https://izmir.voleyboliltemsilciligi.com/MacTakvimi" target="_blank" style="color:var(--yellow);">Resmi Sayfa →</a>
-        </div>
-        <iframe src="https://izmir.voleyboliltemsilciligi.com/MacTakvimi#BuHafta" loading="lazy"></iframe>
-      </div>
-
-      <div class="program-box">
-        <div class="program-box-head">
-          <h3>Puan Durumu</h3>
-          <a href="https://izmir.voleyboliltemsilciligi.com/PuanDurumu" target="_blank" style="color:var(--yellow);">Resmi Sayfa →</a>
-        </div>
-        <iframe src="https://izmir.voleyboliltemsilciligi.com/PuanDurumu" loading="lazy"></iframe>
-      </div>
-    </div>
-  </div>
-</section>
-
+  </section>
 </main>
 
 <footer class="footer" id="iletisim">
-  <div class="container" style="text-align:center;">
-    <div style="font-size:1.8rem; font-weight:800; color:#fff; margin-bottom:10px;">İZMİR VOLEYBOL <span style="color:var(--yellow);">MEDYA</span></div>
-    <p>E-posta: info@izmirvoleybolmedya.com | İzmir, Türkiye</p>
-    <p style="margin-top:15px; font-size:0.85rem;">© <span id="year"></span> İzmir Voleybol Medya Grubu. Tüm hakları saklıdır.</p>
+  <div class="wrap">
+    <b>İZMİR VOLEYBOL <i>MEDYA</i></b>
+    <p>info@izmirvoleybolmedya.com · İzmir, Türkiye</p>
+    <p style="margin-top:12px;font-size:.85rem">© <span id="year"></span> İzmir Voleybol Medya Grubu. Tüm hakları saklıdır.</p>
   </div>
 </footer>
 
+<dialog id="dlg"><div class="d-in"><button class="x" id="close" aria-label="Kapat">✕</button><time id="dt"></time><h2 id="dh"></h2><div id="di"></div><div class="body" id="db"></div></div></dialog>
+
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
+const REPO = 'burakpsikoteknikdm-collab/izmirvoleybolmedya';
+const $ = s => document.querySelector(s);
+$('#year').textContent = new Date().getFullYear();
 
-let newsData = [];
-let currentIdx = 0;
+/* Mobil menü */
+const nav = $('#nav'), menu = $('#menu');
+menu.onclick = () => { const o = nav.classList.toggle('open'); menu.setAttribute('aria-expanded', o); menu.textContent = o ? '✕' : '☰'; };
+nav.onclick = e => { if (e.target.tagName === 'A') { nav.classList.remove('open'); menu.textContent = '☰'; } };
 
-function getVisibleCount() {
-  if (window.innerWidth <= 480) return 1;
-  if (window.innerWidth <= 768) return 2;
-  if (window.innerWidth <= 1024) return 3;
-  return 4;
+/* Haber yardımcıları */
+function parse(t) {
+  const m = t.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+  if (!m) return null;
+  const f = {};
+  m[1].split('\n').forEach(l => { const i = l.indexOf(':'); if (i > 0) f[l.slice(0, i).trim()] = l.slice(i + 1).trim().replace(/^["']|["']$/g, ''); });
+  f.body = m[2].trim();
+  return f.title ? f : null;
+}
+const imgUrl = u => !u ? '' : /^(https?:)?\//.test(u) ? u : '/' + u;
+const fmt = d => { const x = new Date(d); return isNaN(x) ? '' : x.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }); };
+const plain = b => b.replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/[#*_>`~]/g, '').replace(/\s+/g, ' ').trim().slice(0, 170);
+function safeHtml(md) {
+  const html = window.marked ? marked.parse(md) : md.split(/\n\n+/).map(p => '<p>' + p.replace(/[<>&]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c])) + '</p>').join('');
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  doc.querySelectorAll('script,iframe,object,embed,style').forEach(n => n.remove());
+  doc.querySelectorAll('*').forEach(n => [...n.attributes].forEach(a => {
+    if (/^on/i.test(a.name) || /^\s*javascript:/i.test(a.value)) n.removeAttribute(a.name);
+  }));
+  return doc.body.innerHTML;
 }
 
-function renderCarousel() {
-  const track = document.getElementById('newsTrack');
-  if (!newsData.length) {
-    track.innerHTML = '<div style="padding:20px;">Henüz yayınlanmış haber bulunmuyor.</div>';
-    return;
+/* Kartları çiz */
+function render(list) {
+  const track = $('#track');
+  track.textContent = '';
+  if (!list.length) { track.innerHTML = '<div class="msg">Henüz yayınlanmış haber yok.</div>'; return; }
+  list.forEach(n => {
+    const c = document.createElement('button');
+    c.className = 'card'; c.type = 'button';
+    if (n.image) { const im = document.createElement('img'); im.className = 'im'; im.loading = 'lazy'; im.alt = ''; im.src = imgUrl(n.image); c.append(im); }
+    else { const d = document.createElement('div'); d.className = 'im'; c.append(d); }
+    const tx = document.createElement('div'); tx.className = 'tx';
+    const t = document.createElement('time'); t.textContent = fmt(n.date);
+    const h = document.createElement('h3'); h.textContent = n.title;
+    const p = document.createElement('p'); p.textContent = plain(n.body);
+    tx.append(t, h, p); c.append(tx);
+    c.onclick = () => openNews(n);
+    track.append(c);
+  });
+}
+function openNews(n) {
+  $('#dt').textContent = fmt(n.date);
+  $('#dh').textContent = n.title;
+  $('#di').innerHTML = '';
+  if (n.image) { const im = document.createElement('img'); im.src = imgUrl(n.image); im.alt = ''; $('#di').append(im); }
+  $('#db').innerHTML = safeHtml(n.body);
+  $('#dlg').showModal();
+}
+$('#close').onclick = () => $('#dlg').close();
+$('#dlg').onclick = e => { if (e.target.id === 'dlg') e.target.close(); };
+
+/* Haberleri depodan oku */
+async function loadNews() {
+  let list;
+  try { const c = JSON.parse(sessionStorage.getItem('ivm_news') || 'null'); if (c && Date.now() - c.t < 300000) list = c.d; } catch (e) {}
+  if (!list) {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/content/haberler?ref=main`);
+    if (!r.ok) throw new Error(r.status);
+    const files = (await r.json()).filter(x => /\.md$/i.test(x.name));
+    list = (await Promise.all(files.map(async x => {
+      let t;
+      try { const a = await fetch('/content/haberler/' + encodeURIComponent(x.name)); t = await a.text(); if (!a.ok || /^\s*<(!doctype|html)/i.test(t)) throw 0; }
+      catch (e) { t = await (await fetch(x.download_url)).text(); }
+      return parse(t);
+    }))).filter(Boolean).sort((a, b) => new Date(b.date) - new Date(a.date));
+    try { sessionStorage.setItem('ivm_news', JSON.stringify({ t: Date.now(), d: list })); } catch (e) {}
   }
-  
-  track.innerHTML = newsData.map(n => `
+  render(list);
+}
+function start() {
+  loadNews().catch(() => {
+    $('#track').innerHTML = '<div class="msg">Haberler şu anda yüklenemedi. <button id="retry">Tekrar dene</button></div>';
+    $('#retry').onclick = () => { $('#track').innerHTML = '<div class="msg">Haberler yükleniyor…</div>'; start(); };
+  });
+}
+start();
+
+/* Oklar */
+const step = d => $('#track').scrollBy({ left: d * $('#track').clientWidth * .9, behavior: 'smooth' });
+$('#prev').onclick = () => step(-1); $('#next').onclick = () => step(1);
+
+/* Canlı yayın bilgisi (panelden: content/canli.json) */
+fetch('/content/canli.json').then(r => r.ok ? r.json() : null).then(j => {
+  if (!j) return;
+  if (j.skor_duyuru) $('#duyuru').textContent = j.skor_duyuru;
+  if (j.youtube_url) { $('#yt').href = j.youtube_url; $('#yt').textContent = 'Canlı izle'; }
+}).catch(() => {});
+</script>
+</body>
+</html>
