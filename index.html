@@ -81,7 +81,7 @@ h1,h2,h3,.btn,.nav a,.brand{font-family:'Barlow Condensed',sans-serif}
 .box header a{font-size:.9rem;color:#cfe0ff}
 .box iframe{width:100%;height:560px;border:0;display:block}
 .maclar{height:560px;overflow-y:auto}
-.maclar .gun{position:sticky;top:0;background:var(--sky);color:var(--blue);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;padding:7px 16px;border-bottom:1px solid var(--line)}
+.maclar .gun,#ligTablo .gun{position:sticky;top:0;background:var(--sky);color:var(--blue);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;padding:7px 16px;border-bottom:1px solid var(--line)}
 .mac{display:grid;grid-template-columns:1fr auto 1fr;gap:4px 10px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line)}
 .mac .ev{text-align:right;font-weight:600}.mac .mis{font-weight:600}
 .mac .skor{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.15rem;background:var(--ink);color:var(--gold);border-radius:6px;padding:1px 9px;min-width:54px;text-align:center}
@@ -127,6 +127,19 @@ h1,h2,h3,.btn,.nav a,.brand{font-family:'Barlow Condensed',sans-serif}
 .chip:hover{border-color:var(--blue)}
 .chip.aktif{background:var(--ink);border-color:var(--ink);color:var(--gold)}
 .lig-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:22px;align-items:start}
+.lig-grid .box header{flex-wrap:wrap}
+#ligTablo .gun{position:static}
+.sekmeler{display:flex;gap:6px;flex-wrap:wrap}
+.sekme{background:none;border:2px solid #3b5bb5;color:#cfe0ff;border-radius:999px;padding:5px 14px;font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:700;cursor:pointer}
+.sekme:hover{border-color:var(--gold);color:#fff}
+.sekme.aktif{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.hafta-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px;border-bottom:1px solid var(--line);background:#f8faff}
+.hafta-nav[hidden]{display:none}
+.hafta-nav b{font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;display:flex;align-items:center;gap:8px}
+.hafta-nav button{width:36px;height:36px;border-radius:50%;border:2px solid var(--line);background:#fff;color:var(--ink);font-size:1.3rem;font-weight:800;cursor:pointer}
+.hafta-nav button:hover:not(:disabled){border-color:var(--blue);color:var(--blue)}
+.hafta-nav button:disabled{opacity:.35;cursor:default}
+.rozet{background:var(--gold);color:var(--ink);border-radius:999px;padding:1px 9px;font-size:.8rem}
 .box header select{font:inherit;font-size:.95rem;font-weight:600;border-radius:8px;border:0;padding:5px 8px;background:#fff;color:var(--ink)}
 .puan{width:100%;border-collapse:collapse;font-size:.98rem}
 .puan th{font-size:.78rem;font-weight:700;color:var(--muted);text-align:center;padding:10px 6px;border-bottom:2px solid var(--line);background:#f8faff}
@@ -286,7 +299,18 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
       <div class="chips" id="ligChips"></div>
       <div class="lig-grid">
         <div class="box">
-          <header><h3 id="ligTabloBaslik">Puan durumu</h3><select id="grupSec" aria-label="Grup seç" hidden></select></header>
+          <header>
+            <div class="sekmeler" role="tablist" aria-label="Lig bilgisi">
+              <button class="sekme aktif" type="button" role="tab" aria-selected="true" data-sekme="puan">Puan durumu</button>
+              <button class="sekme" type="button" role="tab" aria-selected="false" data-sekme="fikstur">Bu haftanın fikstürü</button>
+            </div>
+            <select id="grupSec" aria-label="Grup seç" hidden></select>
+          </header>
+          <div class="hafta-nav" id="haftaNav" hidden>
+            <button type="button" id="haftaOnce" aria-label="Önceki hafta">‹</button>
+            <b id="haftaAd"></b>
+            <button type="button" id="haftaSonra" aria-label="Sonraki hafta">›</button>
+          </div>
           <div id="ligTablo"><div class="msg">Puan durumu yükleniyor…</div></div>
           <div class="mac-alt"><span class="canli-nokta"></span><span id="ligGuncel">Otomatik güncellenir</span><a id="ligKaynak" href="https://tvf.org.tr" target="_blank" rel="noopener" style="margin-left:auto;color:var(--blue);font-weight:600">TVF'de aç</a></div>
         </div>
@@ -503,22 +527,77 @@ function ligHaberleriCiz() {
   });
 }
 
-async function puanYukle(yenile) {
-  const { lig, grup } = aktifLig;
-  if (!yenile) $('#ligTablo').innerHTML = '<div class="msg">Puan durumu yükleniyor…</div>';
+/* Sekme: puan durumu | bu haftanın fikstürü */
+let ligSekme = 'puan', ligIstek = 0, fikstur = null, haftaSec = null;
+document.querySelectorAll('.sekme').forEach(b => b.onclick = () => {
+  if (ligSekme === b.dataset.sekme) return;
+  ligSekme = b.dataset.sekme;
+  haftaSec = null;
+  ligYukle(false);
+});
+$('#haftaOnce').onclick = () => { if (haftaSec > 0) { haftaSec--; haftaCiz(); } };
+$('#haftaSonra').onclick = () => { if (fikstur && haftaSec < fikstur.haftalar.length - 1) { haftaSec++; haftaCiz(); } };
+
+function ligYukle(yenile) {
+  document.querySelectorAll('.sekme').forEach(b => { const a = b.dataset.sekme === ligSekme; b.classList.toggle('aktif', a); b.setAttribute('aria-selected', a); });
+  $('#haftaNav').hidden = ligSekme !== 'fikstur';
+  return ligSekme === 'fikstur' ? fiksturYukle(yenile) : puanYukle(yenile);
+}
+
+// Gelen yanıt hâlâ ekrandaki lig/grup/sekmeye aitse true
+async function ligVeri(tur, yenile, yukleniyor) {
+  const { lig, grup } = aktifLig, no = ++ligIstek;
+  if (!yenile) { $('#ligTablo').innerHTML = `<div class="msg">${yukleniyor}</div>`; $('#haftaAd').textContent = ''; }
+  const j = await (await fetch(`/api/${tur}?lig=${lig}${grup ? '&grup=' + encodeURIComponent(grup) : ''}`)).json();
+  if (j.hata) throw 0;
+  if (no !== ligIstek) return null;
+  const sec = $('#grupSec');
+  sec.hidden = !j.gruplar.length;
+  sec.innerHTML = j.gruplar.map(g => `<option value="${kacis(g.deger)}"${g.deger === j.grup ? ' selected' : ''}>${kacis(g.ad)}</option>`).join('');
+  $('#ligKaynak').href = j.kaynak;
+  $('#ligGuncel').textContent = 'Son güncelleme ' + new Date(j.guncelleme).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+  return j;
+}
+
+async function fiksturYukle(yenile) {
+  const lig = aktifLig.lig;
   try {
-    const j = await (await fetch(`/api/puan?lig=${lig}${grup ? '&grup=' + encodeURIComponent(grup) : ''}`)).json();
-    if (j.hata) throw 0;
-    if (aktifLig.lig !== lig) return;
-    const sec = $('#grupSec');
-    sec.hidden = !j.gruplar.length;
-    sec.innerHTML = j.gruplar.map(g => `<option value="${kacis(g.deger)}"${g.deger === j.grup ? ' selected' : ''}>${kacis(g.ad)}</option>`).join('');
-    $('#ligTabloBaslik').textContent = 'Puan durumu' + (j.gruplar.length ? ' · Grup ' + j.grup : '');
-    $('#ligKaynak').href = j.kaynak;
+    const j = await ligVeri('fikstur', yenile, 'Fikstür yükleniyor…');
+    if (!j) return;
+    fikstur = j;
+    if (haftaSec === null || haftaSec >= j.haftalar.length) haftaSec = j.buHafta;
+    haftaCiz();
+  } catch (e) {
+    if (!yenile || !$('#ligTablo .mac')) $('#ligTablo').innerHTML = `<div class="msg">Fikstür şu an alınamadı. <a href="https://tvf.org.tr/lig/${lig}?sekme=fikstur" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700">TVF'de aç →</a></div>`;
+  }
+}
+
+function haftaCiz() {
+  const h = fikstur.haftalar[haftaSec];
+  if (!h) { $('#ligTablo').innerHTML = '<div class="msg">Bu lig için henüz fikstür yayınlanmadı.</div>'; return; }
+  $('#haftaAd').innerHTML = kacis(h.ad) + (haftaSec === fikstur.buHafta ? ' <span class="rozet">Bu hafta</span>' : '');
+  $('#haftaOnce').disabled = haftaSec <= 0;
+  $('#haftaSonra').disabled = haftaSec >= fikstur.haftalar.length - 1;
+  let html = '', gun = '';
+  for (const m of h.maclar) {
+    if (m.tarih !== gun) { gun = m.tarih; html += `<div class="gun">${kacis(gun)}</div>`; }
+    const skorVar = m.evSet !== '' || m.misSet !== '';
+    html += `<div class="mac"><span class="ev">${kacis(m.ev)}</span>
+      <span class="skor${skorVar ? '' : ' yok'}">${skorVar ? kacis(m.evSet) + ' - ' + kacis(m.misSet) : kacis(m.saat || 'vs')}</span>
+      <span class="mis">${kacis(m.misafir)}</span>
+      <span class="bilgi">${[skorVar ? m.saat : '', m.salon, m.yayin, m.setler].filter(Boolean).map(kacis).join(' · ')}</span></div>`;
+  }
+  $('#ligTablo').innerHTML = html;
+}
+
+async function puanYukle(yenile) {
+  const lig = aktifLig.lig;
+  try {
+    const j = await ligVeri('puan', yenile, 'Puan durumu yükleniyor…');
+    if (!j) return;
     $('#ligTablo').innerHTML = j.tablo.length ? `<table class="puan"><thead><tr><th>#</th><th class="t">Takım</th><th title="Oynadığı maç">O</th><th title="Galibiyet">G</th><th title="Mağlubiyet">M</th><th class="gz" title="Alınan set">A</th><th class="gz" title="Verilen set">V</th><th title="Puan">P</th></tr></thead><tbody>${
       j.tablo.map(t => `<tr><td class="s">${kacis(t.sira)}</td><td class="t"><span class="tk">${t.logo ? `<img src="${kacis(t.logo)}" alt="" loading="lazy">` : '<span class="yok"></span>'}${kacis(t.takim)}</span></td><td>${kacis(t.o)}</td><td>${kacis(t.g)}</td><td>${kacis(t.m)}</td><td class="gz">${kacis(t.a)}</td><td class="gz">${kacis(t.v)}</td><td class="p">${kacis(t.p)}</td></tr>`).join('')
     }</tbody></table>` : '<div class="msg">Bu lig için henüz puan tablosu yayınlanmadı.</div>';
-    $('#ligGuncel').textContent = 'Son güncelleme ' + new Date(j.guncelleme).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
   } catch (e) {
     if (!yenile || !$('#ligTablo table')) $('#ligTablo').innerHTML = `<div class="msg">Puan durumu şu an alınamadı. <a href="https://tvf.org.tr/lig/${lig}" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700">TVF'de aç →</a></div>`;
   }
@@ -546,9 +625,10 @@ function yonlendir() {
   document.title = lig[1] + ' puan durumu | İzmir Voleybol Medya';
   document.querySelectorAll('#ligChips .chip, .dd-menu a').forEach(a => a.classList.toggle('aktif', a.getAttribute('href') === '#lig/' + lig[0]));
   scrollTo(0, 0);
-  puanYukle(false);
+  haftaSec = null;
+  ligYukle(false);
   ligHaberleriCiz();
-  ligZamanlayici = setInterval(() => { if (!document.hidden) puanYukle(true); }, 60000);
+  ligZamanlayici = setInterval(() => { if (!document.hidden) ligYukle(true); }, 60000);
 }
 const ilkBaslik = document.title;
 addEventListener('hashchange', () => { if (!location.hash.startsWith('#lig/')) document.title = ilkBaslik; yonlendir(); });
