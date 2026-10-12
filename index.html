@@ -372,7 +372,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
           <div class="mac-alt"><span class="canli-nokta"></span><span id="ligGuncel">Otomatik güncellenir</span><a id="ligKaynak" href="https://tvf.org.tr" target="_blank" rel="noopener" style="margin-left:auto;color:var(--blue);font-weight:600">TVF'de Aç</a></div>
         </div>
         <aside class="box">
-          <header><h3>Haberlerimiz</h3><a href="#haberler">Tümü</a></header>
+          <header><h3 id="ligHaberBaslik">Lig Haberleri</h3><a href="#haberler">Tüm Haberler</a></header>
           <div class="yan" id="ligHaberler"><div class="msg">Haberler yükleniyor…</div></div>
         </aside>
       </div>
@@ -441,7 +441,7 @@ function safeHtml(md) {
 }
 
 /* Kartları çiz */
-let haberListesi = null;
+let haberListesi = null, aktifLig = null; // aktifLig: açık lig sayfası (haberler önbellekten erken yüklenebildiği için burada tanımlı)
 function render(list) {
   const track = $('#track');
   track.textContent = '';
@@ -641,16 +641,20 @@ const LIGLER = [
   ['kadinlar-2-ligi', 'Kadınlar 2. Ligi'], ['erkekler-2-ligi', 'Erkekler 2. Ligi']
 ];
 const anaBolumler = ['.hero', '#canli', '#haberler', '#program'].map(s => $(s));
-let aktifLig = null, ligZamanlayici = null;
+let ligZamanlayici = null;
 $('#ligChips').innerHTML = LIGLER.map(([k, ad]) => `<a class="chip" href="#lig/${k}" data-lig="${k}">${ad}</a>`).join('');
 $('#grupSec').onchange = e => { location.hash = `#lig/${aktifLig.lig}/${encodeURIComponent(e.target.value)}`; };
 
 function ligHaberleriCiz() {
   const kutu = $('#ligHaberler');
-  if (!haberListesi) return;
-  if (!haberListesi.length) { kutu.innerHTML = '<div class="msg">Henüz haber yok.</div>'; return; }
+  if (!haberListesi || !aktifLig) return;
+  // Panelde "Lig" alanı bu lig seçilen haberler (gruptan bağımsız)
+  const ligAdi = (LIGLER.find(l => l[0] === aktifLig.lig) || [])[1] || '';
+  $('#ligHaberBaslik').textContent = ligAdi + ' Haberleri';
+  const liste = haberListesi.filter(n => n.lig === aktifLig.lig);
+  if (!liste.length) { kutu.innerHTML = `<div class="msg">${kacis(ligAdi)} için henüz haber yok.</div>`; return; }
   kutu.textContent = '';
-  haberListesi.slice(0, 6).forEach(n => {
+  liste.slice(0, 8).forEach(n => {
     const b = document.createElement('button'); b.className = 'h'; b.type = 'button';
     if (n.image) { const im = document.createElement('img'); im.src = imgUrl(n.image); im.alt = ''; im.loading = 'lazy'; b.append(im); }
     else { const d = document.createElement('span'); d.className = 'yok'; b.append(d); }

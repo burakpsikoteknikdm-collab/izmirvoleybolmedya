@@ -17,6 +17,18 @@ collections:
       - { label: "Haber Başlığı", name: "title", widget: "string" }
       - { label: "Yayın Tarihi", name: "date", widget: "datetime" }
       - { label: "Kapak Görseli", name: "image", widget: "image" }
+      - label: "Lig"
+        name: "lig"
+        widget: "select"
+        required: false
+        hint: "Seçerseniz haber, o ligin puan durumu ve fikstür sayfasının yanında da görünür (tüm gruplarda). Boş bırakılırsa sadece ana sayfada görünür."
+        options:
+          - { label: "Sultanlar Ligi", value: "sultanlar-ligi" }
+          - { label: "Efeler Ligi", value: "efeler-ligi" }
+          - { label: "Kadınlar 1. Ligi", value: "kadinlar-1-ligi" }
+          - { label: "Erkekler 1. Ligi", value: "erkekler-1-ligi" }
+          - { label: "Kadınlar 2. Ligi", value: "kadinlar-2-ligi" }
+          - { label: "Erkekler 2. Ligi", value: "erkekler-2-ligi" }
       - { label: "Haber İçeriği", name: "body", widget: "markdown" }
 
   - name: "canli_yayin"
