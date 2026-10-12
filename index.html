@@ -81,7 +81,7 @@ h1,h2,h3,.btn,.nav a,.brand{font-family:'Barlow Condensed',sans-serif}
 .box header a{font-size:.9rem;color:#cfe0ff}
 .box iframe{width:100%;height:560px;border:0;display:block}
 .maclar{height:560px;overflow-y:auto}
-.maclar .gun,#ligTablo .gun{position:sticky;top:0;background:var(--sky);color:var(--blue);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;padding:7px 16px;border-bottom:1px solid var(--line)}
+.maclar .gun,#ligTablo .gun,#ilSonuc .gun{position:sticky;top:0;background:var(--sky);color:var(--blue);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;padding:7px 16px;border-bottom:1px solid var(--line)}
 .mac{display:grid;grid-template-columns:1fr auto 1fr;gap:4px 10px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line)}
 .mac .ev{text-align:right;font-weight:600}.mac .mis{font-weight:600}
 .mac .skor{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.15rem;background:var(--ink);color:var(--gold);border-radius:6px;padding:1px 9px;min-width:54px;text-align:center}
@@ -106,7 +106,13 @@ h1,h2,h3,.btn,.nav a,.brand{font-family:'Barlow Condensed',sans-serif}
 #pnl .p-ust a{font-size:.9rem;color:#cfe0ff;margin-left:auto}
 #pnl .x{float:none;background:#20366f}
 #pnl .maclar{height:auto;max-height:none;overflow:visible}
-#pnl iframe{width:100%;height:75vh;border:0;display:block}
+.il-filtre{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:14px 16px;background:#f8faff;border-bottom:1px solid var(--line)}
+.il-filtre label{min-width:0;display:flex;flex-direction:column;gap:4px;font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.il-filtre select{font:inherit;font-size:.95rem;font-weight:600;text-transform:none;letter-spacing:0;color:var(--ink);border:2px solid var(--line);border-radius:8px;padding:7px 8px;background:#fff;min-width:0;width:100%}
+.il-filtre select:disabled{opacity:.5}
+.il-alt{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;font-weight:800;padding:16px 16px 8px}
+#ilSonuc .gun{position:static}
+@media(max-width:700px){.il-filtre{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* Ligler menüsü */
 .dd{position:relative}
@@ -388,7 +394,15 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
     <div class="maclar" id="maclar"><div class="msg">Maçlar yükleniyor…</div></div>
     <div class="mac-alt"><span class="canli-nokta"></span><span id="macGuncel">Otomatik güncellenir</span></div>
   </div>
-  <div id="pnlPuan" hidden></div>
+  <div id="pnlPuan" hidden>
+    <div class="il-filtre">
+      <label>Cinsiyet<select id="ilCins" data-adim="cins"></select></label>
+      <label>Kategori<select id="ilKat" data-adim="kat" disabled></select></label>
+      <label>Küme<select id="ilKume" data-adim="kume" disabled></select></label>
+      <label>Grup<select id="ilYar" data-adim="yar" disabled></select></label>
+    </div>
+    <div id="ilSonuc"><div class="msg">Yükleniyor…</div></div>
+  </div>
 </dialog>
 
 <dialog id="dlg"><div class="d-in"><button class="x" id="close" aria-label="Kapat">✕</button><time id="dt"></time><h2 id="dh"></h2><div id="di"></div><div class="body" id="db"></div></div></dialog>
@@ -534,10 +548,75 @@ function panelAc(tur) {
   $('#pnlPuan').hidden = mac;
   $('#pnlBaslik').textContent = mac ? $('#macBaslik').textContent : 'Fikstür ve Puan Durumu';
   $('#pnlLink').href = 'https://izmir.voleyboliltemsilciligi.com/' + (mac ? 'MacTakvimi' : 'PuanDurumu');
-  if (!mac && !$('#pnlPuan iframe')) $('#pnlPuan').innerHTML = '<iframe src="https://izmir.voleyboliltemsilciligi.com/PuanDurumu" title="Fikstür ve puan durumu"></iframe>';
+  if (!mac && !ilBasladi) { ilBasladi = true; ilYukle(); }
   $('#pnl').showModal();
   $('#pnl').scrollTop = 0;
 }
+/* İl Temsilciliği fikstür ve puan durumu (api/il-puan): Cinsiyet → Kategori → Küme → Grup */
+const IL_ADIMLAR = ['cins', 'kat', 'kume', 'yar'];
+const IL_SECIM_ANAHTAR = 'ivm_il_secim';
+let ilBasladi = false, ilIstek = 0, ilSecim = {};
+try { ilSecim = JSON.parse(localStorage.getItem(IL_SECIM_ANAHTAR) || '{}') || {}; } catch (e) {}
+
+document.querySelectorAll('.il-filtre select').forEach(s => s.onchange = () => {
+  const i = IL_ADIMLAR.indexOf(s.dataset.adim);
+  IL_ADIMLAR.slice(i).forEach(k => delete ilSecim[k]);
+  if (s.value) ilSecim[s.dataset.adim] = s.value;
+  ilYukle();
+});
+
+async function ilYukle() {
+  const no = ++ilIstek;
+  const q = new URLSearchParams();
+  IL_ADIMLAR.forEach(k => ilSecim[k] && q.set(k, ilSecim[k]));
+  $('#ilSonuc').innerHTML = '<div class="msg">Yükleniyor…</div>';
+  document.querySelectorAll('.il-filtre select').forEach(s => s.disabled = true);
+  try {
+    const j = await (await fetch('/api/il-puan?' + q)).json();
+    if (j.hata) throw 0;
+    if (no !== ilIstek) return;
+    ilSecim = j.secim;
+    // Tek seçenekli adımları kendiliğinden seç
+    const sonraki = IL_ADIMLAR.find(k => !ilSecim[k]);
+    if (sonraki && j.listeler[sonraki] && j.listeler[sonraki].length === 1) {
+      ilSecim[sonraki] = j.listeler[sonraki][0].deger;
+      return ilYukle();
+    }
+    try { localStorage.setItem(IL_SECIM_ANAHTAR, JSON.stringify(ilSecim)); } catch (e) {}
+    const yer = { cins: '#ilCins', kat: '#ilKat', kume: '#ilKume', yar: '#ilYar' };
+    IL_ADIMLAR.forEach(k => {
+      const s = $(yer[k]), liste = j.listeler[k] || [];
+      s.innerHTML = '<option value="">Seçiniz</option>' + liste.map(o => `<option value="${kacis(o.deger)}"${o.deger === ilSecim[k] ? ' selected' : ''}>${kacis(o.ad)}</option>`).join('');
+      s.disabled = !liste.length;
+    });
+    if (!j.tablolar) {
+      const eksik = IL_ADIMLAR.find(k => !ilSecim[k]);
+      const bos = eksik && j.listeler[eksik] && !j.listeler[eksik].length;
+      $('#ilSonuc').innerHTML = `<div class="msg">${bos ? 'Bu seçim için henüz tanımlı bir yarışma yok.' : 'Görmek istediğiniz ligi ve grubu seçin.'}</div>`;
+      return;
+    }
+    let html = '<h4 class="il-alt">Puan Durumu</h4>';
+    html += j.tablolar.length ? j.tablolar.map(t => `<table class="puan"><thead><tr><th>#</th><th class="t">Takım</th><th title="Oynadığı maç">O</th><th title="Galibiyet">G</th><th title="Mağlubiyet">M</th><th class="gz" title="Alınan set">A</th><th class="gz" title="Verilen set">V</th><th title="Puan">P</th></tr></thead><tbody>${
+      t.map(r => `<tr><td class="s">${kacis(r.sira)}</td><td class="t"><span class="tk">${r.logo ? `<img src="${kacis(r.logo)}" alt="" loading="lazy">` : '<span class="yok"></span>'}${kacis(r.takim)}</span></td><td>${kacis(r.o)}</td><td>${kacis(r.g)}</td><td>${kacis(r.m)}</td><td class="gz">${kacis(r.a)}</td><td class="gz">${kacis(r.v)}</td><td class="p">${kacis(r.p)}</td></tr>`).join('')
+    }</tbody></table>`).join('') : '<div class="msg">Puan tablosu henüz oluşmadı.</div>';
+    html += '<h4 class="il-alt">Fikstür</h4>';
+    let gun = '';
+    html += j.maclar.length ? j.maclar.map(m => {
+      const skorVar = m.evSet !== '' || m.misSet !== '';
+      const g = m.tarih !== gun ? `<div class="gun">${kacis(gun = m.tarih)}</div>` : '';
+      return g + `<div class="mac"><span class="ev">${kacis(m.ev)}</span>
+        <span class="skor${skorVar ? '' : ' yok'}">${skorVar ? kacis(m.evSet) + ' - ' + kacis(m.misSet) : kacis(m.saat || 'vs')}</span>
+        <span class="mis">${kacis(m.misafir)}</span>
+        <span class="bilgi">${[skorVar ? m.saat : '', m.salon, m.setler].filter(Boolean).map(kacis).join(' · ')}</span></div>`;
+    }).join('') : '<div class="msg">Bu grup için maç girilmemiş.</div>';
+    $('#ilSonuc').innerHTML = html;
+  } catch (e) {
+    if (no !== ilIstek) return;
+    document.querySelectorAll('.il-filtre select').forEach(s => s.disabled = s.options.length < 2);
+    $('#ilSonuc').innerHTML = '<div class="msg">Puan durumu şu an alınamadı. <a href="https://izmir.voleyboliltemsilciligi.com/PuanDurumu" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700">Resmi Sayfayı Aç →</a></div>';
+  }
+}
+
 $('#macTile').onclick = () => panelAc('mac');
 $('#puanTile').onclick = () => panelAc('puan');
 $('#pnlKapat').onclick = () => $('#pnl').close();
