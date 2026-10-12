@@ -1,5 +1,5 @@
 ---
-title: "ı🏆 2026 KADINLAR AXA SİGORTA ŞAMPİYONLAR KUPASI’NDA ŞAMPİYON VAKIFBANK! 🏐💛🖤"
+title: "🏆 2026 KADINLAR AXA SİGORTA ŞAMPİYONLAR KUPASI’NDA ŞAMPİYON VAKIFBANK! 🏐💛🖤"
 date: 2026-10-12T21:37:00.000+03:00
 image: /images/uploads/2026-10-12-i-2026-kadinlar-axa-sigorta-sampiyonlar-kupasi-nda-sampiyon-vakifbank-661e72.jpg
 lig: sultanlar-ligi
