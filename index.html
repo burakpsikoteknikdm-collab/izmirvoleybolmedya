@@ -80,6 +80,18 @@ h1,h2,h3,.btn,.nav a,.brand{font-family:'Barlow Condensed',sans-serif}
 .box h3{font-size:1.35rem;color:var(--gold)}
 .box header a{font-size:.9rem;color:#cfe0ff}
 .box iframe{width:100%;height:560px;border:0;display:block}
+.maclar{height:560px;overflow-y:auto}
+.maclar .gun{position:sticky;top:0;background:var(--sky);color:var(--blue);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;padding:7px 16px;border-bottom:1px solid var(--line)}
+.mac{display:grid;grid-template-columns:1fr auto 1fr;gap:4px 10px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line)}
+.mac .ev{text-align:right;font-weight:600}.mac .mis{font-weight:600}
+.mac .skor{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.15rem;background:var(--ink);color:var(--gold);border-radius:6px;padding:1px 9px;min-width:54px;text-align:center}
+.mac .skor.yok{background:var(--sky);color:var(--muted);font-size:.95rem}
+.mac .bilgi{grid-column:1/-1;text-align:center;font-size:.8rem;color:var(--muted)}
+.maclar .msg{border:0;border-radius:0}
+.mac-alt{display:flex;align-items:center;gap:8px;padding:9px 16px;border-top:1px solid var(--line);font-size:.82rem;color:var(--muted)}
+.canli-nokta{width:8px;height:8px;border-radius:50%;background:#16a34a;animation:nabiz 2s infinite}
+@keyframes nabiz{50%{opacity:.25}}
+@media(prefers-reduced-motion:reduce){.canli-nokta{animation:none}}
 
 .ad{margin:26px auto 0;text-align:center}
 .ad:has(ins[data-ad-status="unfilled"]){display:none}
@@ -104,7 +116,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
  .nav.open{display:flex}.nav a{padding:14px 0;border-bottom:1px solid #20366f}
  .card{flex-basis:calc((100% - 18px)/2)}
  .hero{padding:44px 0 48px}.court{width:150%;right:-50%;opacity:.55}
- .arrow{display:none}.section h2{font-size:1.9rem}.box iframe{height:460px}
+ .arrow{display:none}.section h2{font-size:1.9rem}.box iframe,.maclar{height:460px}
 }
 @media(max-width:520px){
  .bar{height:68px}.brand img{width:46px;height:46px}.brand b{font-size:1.25rem}.brand small{display:none}
@@ -176,8 +188,9 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
     <div class="wrap">
       <h2>İzmir il maç programı ve puan durumu</h2>
       <div class="grid">
-        <div class="box"><header><h3>Bu haftanın maçları</h3><a href="https://izmir.voleyboliltemsilciligi.com/MacTakvimi" target="_blank" rel="noopener">Resmi sayfa</a></header>
-          <iframe src="https://izmir.voleyboliltemsilciligi.com/MacTakvimi#BuHafta" loading="lazy" title="Bu haftanın maçları"></iframe></div>
+        <div class="box"><header><h3 id="macBaslik">Bu haftanın maçları</h3><a href="https://izmir.voleyboliltemsilciligi.com/MacTakvimi" target="_blank" rel="noopener">Resmi sayfa</a></header>
+          <div class="maclar" id="maclar"><div class="msg">Maçlar yükleniyor…</div></div>
+          <div class="mac-alt"><span class="canli-nokta"></span><span id="macGuncel">Otomatik güncellenir</span></div></div>
         <div class="box"><header><h3>Puan durumu</h3><a href="https://izmir.voleyboliltemsilciligi.com/PuanDurumu" target="_blank" rel="noopener">Resmi sayfa</a></header>
           <iframe src="https://izmir.voleyboliltemsilciligi.com/PuanDurumu" loading="lazy" title="Puan durumu"></iframe></div>
       </div>
@@ -294,6 +307,33 @@ fetch('/content/canli.json').then(r => r.ok ? r.json() : null).then(j => {
   if (j.skor_duyuru) $('#duyuru').textContent = j.skor_duyuru;
   if (j.youtube_url) { $('#yt').href = j.youtube_url; $('#yt').textContent = 'Canlı izle'; }
 }).catch(() => {});
+
+/* Bu haftanın maçları (api/maclar → İl Temsilciliği), her dakika yenilenir */
+const kacis = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+async function maclariYukle() {
+  try {
+    const j = await (await fetch('/api/maclar', { cache: 'no-store' })).json();
+    if (j.hata) throw 0;
+    const bu = j.buHafta || [], gelecek = j.gelecekHafta || [];
+    const liste = bu.length ? bu : gelecek;
+    $('#macBaslik').textContent = bu.length || !gelecek.length ? 'Bu haftanın maçları' : 'Gelecek haftanın maçları';
+    let html = '', gun = '';
+    for (const m of liste) {
+      if (m.tarih !== gun) { gun = m.tarih; html += `<div class="gun">${kacis(gun)}</div>`; }
+      const skorVar = m.evSet !== '' || m.misSet !== '';
+      html += `<div class="mac"><span class="ev">${kacis(m.ev)}</span>
+        <span class="skor${skorVar ? '' : ' yok'}">${skorVar ? kacis(m.evSet) + ' - ' + kacis(m.misSet) : kacis(m.saat || 'vs')}</span>
+        <span class="mis">${kacis(m.misafir)}</span>
+        <span class="bilgi">${[m.kume, m.salon, skorVar ? m.saat : '', m.setler].filter(Boolean).map(kacis).join(' · ')}</span></div>`;
+    }
+    $('#maclar').innerHTML = html || '<div class="msg">Bu hafta için girilmiş maç bulunmuyor.</div>';
+    $('#macGuncel').textContent = 'Son güncelleme ' + new Date(j.guncelleme).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }) + ' · her dakika yenilenir';
+  } catch (e) {
+    if (!$('#maclar .mac')) $('#maclar').innerHTML = '<div class="msg">Maç takvimi şu an alınamadı. <a href="https://izmir.voleyboliltemsilciligi.com/MacTakvimi" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700">Resmi sayfayı aç →</a></div>';
+  }
+}
+maclariYukle();
+setInterval(() => { if (!document.hidden) maclariYukle(); }, 60000);
 </script>
 </body>
 </html>
