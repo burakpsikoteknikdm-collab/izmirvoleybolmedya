@@ -1,5 +1,6 @@
-// İzmir Voleybol İl Temsilciliği maç takviminden "Bu Hafta" ve "Gelecek Hafta" maçlarını JSON olarak döndürür.
-const KAYNAK = 'https://izmir.voleyboliltemsilciligi.com/MacTakvimi';
+// İzmir Voleybol İl Temsilciliği'nden "Bu Hafta" ve "Gelecek Hafta" maçlarını JSON olarak döndürür.
+// Bu haftanın maçları ana sayfada, gelecek hafta ise Maç Takvimi sayfasında yayınlanıyor.
+const SITE = 'https://izmir.voleyboliltemsilciligi.com';
 
 const ENTITY = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' };
 const metin = s => s
@@ -10,14 +11,23 @@ const metin = s => s
   .replace(/\s+/g, ' ')
   .trim();
 
-// rowspan'leri açarak tabloyu düz satır dizisine çevirir
-function tabloOku(html) {
+// Sayfadaki id'si verilen maç tablosunu, rowspan'leri açıp başlık adlarına göre okur
+function tabloOku(html, id) {
+  const tablo = (html.match(new RegExp(`<table[^>]*id="${id}"[\\s\\S]*?</table>`, 'i')) || [])[0];
+  if (!tablo) return [];
+  const trler = tablo.match(/<tr[\s\S]*?<\/tr>/gi) || [];
+  const basliklar = [...(trler.find(tr => /<th/i.test(tr)) || '').matchAll(/<th[^>]*>([\s\S]*?)<\/th>/gi)].map(m => metin(m[1]));
+  const sutun = ad => basliklar.findIndex(b => b.startsWith(ad));
+  const S = {
+    tarih: sutun('Tarih'), salon: sutun('Salon'), saat: sutun('Saat'),
+    ev: sutun('Ev Sahibi'), evSet: sutun('A'), misSet: sutun('B'), misafir: sutun('Misafir'),
+    setler: sutun('Set'), kume: sutun('Küme')
+  };
+
   const satirlar = [];
   const bekleyen = []; // sütun -> { deger, kalan }
-  const trler = html.match(/<tr[\s\S]*?<\/tr>/gi) || [];
   for (const tr of trler) {
     if (/<th/i.test(tr)) continue;
-    const hucreler = [...tr.matchAll(/<td([^>]*)>([\s\S]*?)<\/td>/gi)];
     const satir = [];
     let col = 0;
     const doldur = () => {
@@ -27,7 +37,7 @@ function tabloOku(html) {
         col++;
       }
     };
-    for (const [, attr, ic] of hucreler) {
+    for (const [, attr, ic] of tr.matchAll(/<td([^>]*)>([\s\S]*?)<\/td>/gi)) {
       doldur();
       const deger = metin(ic);
       const rs = +(attr.match(/rowspan="?(\d+)/i) || [])[1] || 1;
@@ -38,31 +48,27 @@ function tabloOku(html) {
     doldur();
     satirlar.push(satir);
   }
-  // Sütunlar: Tarih, Salon, Saat, Ev Sahibi, A, B, Misafir, Set Sonuçları, C, Küme, Ktg, Tür, Gr
-  return satirlar.filter(s => s[3] || s[6]).map(s => ({
-    tarih: s[0] || '', salon: s[1] || '', saat: s[2] || '',
-    ev: s[3] || '', evSet: s[4] || '', misSet: s[5] || '', misafir: s[6] || '',
-    setler: s[7] || '', kume: s[9] || '', grup: s[12] || ''
-  }));
+  const al = (s, k) => (S[k] >= 0 && s[S[k]]) || '';
+  return satirlar.filter(s => al(s, 'ev') || al(s, 'misafir')).map(s =>
+    Object.fromEntries(Object.keys(S).map(k => [k, al(s, k)])));
 }
 
-function bolum(html, baslik, sonraki) {
-  const i = html.indexOf(`<h2>${baslik}</h2>`);
-  if (i < 0) return [];
-  const j = sonraki ? html.indexOf(`<h2>${sonraki}</h2>`, i) : -1;
-  return tabloOku(html.slice(i, j > i ? j : undefined));
+async function sayfa(yol) {
+  const r = await fetch(SITE + yol, { headers: { 'User-Agent': 'Mozilla/5.0 (izmirvoleybolmedya.com)' } });
+  if (!r.ok) throw new Error('Kaynak ' + r.status);
+  return r.text();
 }
 
 module.exports = async (req, res) => {
   try {
-    const r = await fetch(KAYNAK, { headers: { 'User-Agent': 'Mozilla/5.0 (izmirvoleybolmedya.com)' } });
-    if (!r.ok) throw new Error('Kaynak ' + r.status);
-    const html = await r.text();
+    const [ana, takvim] = await Promise.all([sayfa('/'), sayfa('/MacTakvimi')]);
+    let buHafta = tabloOku(ana, 'icerik_BuHafta_gvmusabakaliste');
+    if (!buHafta.length) buHafta = tabloOku(takvim, 'icerik_BuHafta1_gvmusabakaliste');
     const veri = {
       guncelleme: new Date().toISOString(),
-      kaynak: KAYNAK,
-      buHafta: bolum(html, 'Bu Hafta', 'Gelecek Hafta'),
-      gelecekHafta: bolum(html, 'Gelecek Hafta')
+      kaynak: SITE,
+      buHafta,
+      gelecekHafta: tabloOku(takvim, 'icerik_GelecekHafta1_gvmusabakaliste')
     };
     // Vercel önbelleği: 60 sn taze, sonra arka planda yenilenir
     res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300');
