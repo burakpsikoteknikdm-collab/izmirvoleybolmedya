@@ -1,7 +1,6 @@
 ---
 title: "🏆 AXA SİGORTA ŞAMPİYONLAR KUPASI HEYECANI TRT SPOR’DA!"
 date: 2026-10-12T18:48:00.000+03:00
-image: /images/uploads/2026-10-12-axa-sigorta-sampiyonlar-kupasi-heyecani-trt-spor-da-95f568.jpg
 lig: efeler-ligi
 ---
 Türk voleybolunun önemli organizasyonlarından AXA Sigorta Şampiyonlar Kupası heyecanı, TRT Spor ekranlarında voleybolseverlerle buluşuyor!
