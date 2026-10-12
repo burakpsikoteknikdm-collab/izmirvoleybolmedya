@@ -2,7 +2,8 @@ backend:
   name: github
   repo: burakpsikoteknikdm-collab/izmirvoleybolmedya
   branch: main
-
+  base_url: https://www.izmirvoleybolmedya.com
+  auth_endpoint: api/auth
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
