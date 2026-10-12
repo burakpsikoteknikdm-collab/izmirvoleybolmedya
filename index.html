@@ -93,6 +93,61 @@ h1,h2,h3,.btn,.nav a,.brand{font-family:'Barlow Condensed',sans-serif}
 @keyframes nabiz{50%{opacity:.25}}
 @media(prefers-reduced-motion:reduce){.canli-nokta{animation:none}}
 
+/* Maç programı kartları */
+.tile{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;text-align:left;font:inherit;color:#fff;cursor:pointer;border:0;border-radius:var(--r);padding:26px 70px 26px 24px;background:linear-gradient(120deg,var(--ink),#123a9c);box-shadow:0 8px 22px rgba(11,31,77,.18);transition:transform .15s,box-shadow .15s}
+.tile:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(11,31,77,.28)}
+.tile .ust{display:flex;align-items:center;gap:7px;font-size:.8rem;font-weight:600;color:#9db8ff;letter-spacing:.04em;text-transform:uppercase}
+.tile b{font-family:'Barlow Condensed',sans-serif;font-size:1.9rem;font-weight:800;line-height:1.05;color:var(--gold)}
+.tile small{font-size:.95rem;color:#c9d8ff}
+.tile .ok{position:absolute;right:22px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center;font-size:1.3rem;font-weight:800}
+#pnl{max-width:920px}
+#pnl .p-ust{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--ink);color:#fff;padding:14px 18px}
+#pnl .p-ust h3{font-size:1.5rem;color:var(--gold)}
+#pnl .p-ust a{font-size:.9rem;color:#cfe0ff;margin-left:auto}
+#pnl .x{float:none;background:#20366f}
+#pnl .maclar{height:auto;max-height:none;overflow:visible}
+#pnl iframe{width:100%;height:75vh;border:0;display:block}
+
+/* Ligler menüsü */
+.dd{position:relative}
+.dd-btn{background:none;border:0;border-bottom:3px solid transparent;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;padding:6px 0;cursor:pointer}
+.dd-btn:hover,.dd.open .dd-btn{border-color:var(--gold)}
+.dd-menu{display:none;position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);min-width:230px;background:#fff;border-radius:12px;box-shadow:0 14px 34px rgba(11,31,77,.3);padding:8px;z-index:60}
+.dd.open .dd-menu{display:block}
+.nav .dd-menu a{display:block;color:var(--ink);font-size:1.05rem;padding:9px 12px;border:0;border-radius:8px}
+.nav .dd-menu a:hover,.nav .dd-menu a.aktif{background:var(--sky);color:var(--blue)}
+.dd-menu small{display:block;padding:8px 12px 2px;font-size:.72rem;font-weight:700;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+
+/* Lig sayfası */
+.lig-ust{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.lig-ust h2{margin:0}
+.geri{color:var(--blue);font-weight:700}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.chip{border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:7px 15px;font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:700;cursor:pointer}
+.chip:hover{border-color:var(--blue)}
+.chip.aktif{background:var(--ink);border-color:var(--ink);color:var(--gold)}
+.lig-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:22px;align-items:start}
+.box header select{font:inherit;font-size:.95rem;font-weight:600;border-radius:8px;border:0;padding:5px 8px;background:#fff;color:var(--ink)}
+.puan{width:100%;border-collapse:collapse;font-size:.98rem}
+.puan th{font-size:.78rem;font-weight:700;color:var(--muted);text-align:center;padding:10px 6px;border-bottom:2px solid var(--line);background:#f8faff}
+.puan td{text-align:center;padding:9px 6px;border-bottom:1px solid var(--line)}
+.puan th.t,.puan td.t{text-align:left}
+.puan td.t{font-weight:600}
+.puan td.t .tk{display:flex;align-items:center;gap:10px}
+.puan td.t img,.puan td.t .yok{width:28px;height:28px;object-fit:contain;flex:none;border-radius:50%}
+.puan td.t .yok{background:var(--sky)}
+.puan td.s{font-weight:800;color:var(--blue);width:38px}
+.puan td.p{font-weight:800;font-size:1.08rem}
+.puan tr:hover td{background:#f8faff}
+.yan{display:flex;flex-direction:column}
+.yan .h{display:flex;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);background:none;border-left:0;border-right:0;border-top:0;text-align:left;font:inherit;color:inherit;cursor:pointer}
+.yan .h:hover{background:#f8faff}
+.yan .h img,.yan .h .yok{width:76px;height:54px;flex:none;object-fit:cover;border-radius:8px;background:var(--sky)}
+.yan .h time{font-size:.75rem;font-weight:600;color:var(--blue)}
+.yan .h b{display:block;font-size:.98rem;line-height:1.2}
+@media(max-width:1024px){.lig-grid{grid-template-columns:1fr}}
+@media(max-width:600px){#pnl .p-ust h3{font-size:1.2rem}#pnl .p-ust a{white-space:nowrap;font-size:.8rem}.tile{padding:22px 66px 22px 20px}.tile b{font-size:1.6rem}.puan .gz{display:none}.puan{font-size:.9rem}.puan td.t img,.puan td.t .yok{width:22px;height:22px}}
+
 .ad{margin:26px auto 0;text-align:center}
 .ad:has(ins[data-ad-status="unfilled"]){display:none}
 
@@ -114,6 +169,11 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
  .menu{display:block}
  .nav{display:none;position:absolute;top:83px;left:0;right:0;background:var(--ink);flex-direction:column;gap:0;padding:6px 20px 16px;border-top:1px solid #20366f}
  .nav.open{display:flex}.nav a{padding:14px 0;border-bottom:1px solid #20366f}
+ .dd-btn{width:100%;text-align:left;padding:14px 0;border-bottom:1px solid #20366f}
+ .dd-menu{position:static;transform:none;box-shadow:none;background:#13296a;margin:6px 0}
+ .nav .dd-menu a{color:#fff;border-bottom:0}.nav .dd-menu a:hover,.nav .dd-menu a.aktif{background:#20366f;color:var(--gold)}
+ .dd-menu small{color:#9db8ff}
+ .nav{max-height:calc(100vh - 90px);overflow-y:auto}
  .card{flex-basis:calc((100% - 18px)/2)}
  .hero{padding:44px 0 48px}.court{width:150%;right:-50%;opacity:.55}
  .arrow{display:none}.section h2{font-size:1.9rem}.box iframe,.maclar{height:460px}
@@ -138,6 +198,19 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
     <button class="menu" id="menu" aria-label="Menüyü aç" aria-expanded="false">☰</button>
     <nav class="nav" id="nav">
       <a href="#haberler">Haberler</a>
+      <div class="dd" id="dd">
+        <button class="dd-btn" id="ddBtn" type="button" aria-expanded="false" aria-controls="ddMenu">Ligler ▾</button>
+        <div class="dd-menu" id="ddMenu">
+          <small>Üst ligler</small>
+          <a href="#lig/sultanlar-ligi">Sultanlar Ligi</a>
+          <a href="#lig/efeler-ligi">Efeler Ligi</a>
+          <small>Alt ligler</small>
+          <a href="#lig/kadinlar-1-ligi">Kadınlar 1. Ligi</a>
+          <a href="#lig/erkekler-1-ligi">Erkekler 1. Ligi</a>
+          <a href="#lig/kadinlar-2-ligi">Kadınlar 2. Ligi</a>
+          <a href="#lig/erkekler-2-ligi">Erkekler 2. Ligi</a>
+        </div>
+      </div>
       <a href="#program">Maç Programı</a>
       <a href="#canli">Canlı Yayın</a>
       <a href="#iletisim">İletişim</a>
@@ -186,13 +259,41 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
 
   <section class="section" id="program">
     <div class="wrap">
-      <h2>İzmir il maç programı ve puan durumu</h2>
+      <h2>İzmir il haftalık maç programı</h2>
       <div class="grid">
-        <div class="box"><header><h3 id="macBaslik">Bu haftanın maçları</h3><a href="https://izmir.voleyboliltemsilciligi.com/MacTakvimi" target="_blank" rel="noopener">Resmi sayfa</a></header>
-          <div class="maclar" id="maclar"><div class="msg">Maçlar yükleniyor…</div></div>
-          <div class="mac-alt"><span class="canli-nokta"></span><span id="macGuncel">Otomatik güncellenir</span></div></div>
-        <div class="box"><header><h3>Puan durumu</h3><a href="https://izmir.voleyboliltemsilciligi.com/PuanDurumu" target="_blank" rel="noopener">Resmi sayfa</a></header>
-          <iframe src="https://izmir.voleyboliltemsilciligi.com/PuanDurumu" loading="lazy" title="Puan durumu"></iframe></div>
+        <button class="tile" id="macTile" type="button">
+          <span class="ust"><span class="canli-nokta"></span>Canlı güncellenir</span>
+          <b id="macBaslik">Bu haftanın maçları</b>
+          <small id="macOzet">Maçlar yükleniyor…</small>
+          <span class="ok" aria-hidden="true">→</span>
+        </button>
+        <button class="tile" id="puanTile" type="button">
+          <span class="ust">İzmir Voleybol İl Temsilciliği</span>
+          <b>Fikstür ve puan durumu</b>
+          <small>İzmir il liglerinin güncel tabloları</small>
+          <span class="ok" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="ligView" hidden>
+    <div class="wrap">
+      <div class="lig-ust">
+        <h2 id="ligAd">Puan durumu</h2>
+        <a href="#top" class="geri">← Ana sayfa</a>
+      </div>
+      <div class="chips" id="ligChips"></div>
+      <div class="lig-grid">
+        <div class="box">
+          <header><h3 id="ligTabloBaslik">Puan durumu</h3><select id="grupSec" aria-label="Grup seç" hidden></select></header>
+          <div id="ligTablo"><div class="msg">Puan durumu yükleniyor…</div></div>
+          <div class="mac-alt"><span class="canli-nokta"></span><span id="ligGuncel">Otomatik güncellenir</span><a id="ligKaynak" href="https://tvf.org.tr" target="_blank" rel="noopener" style="margin-left:auto;color:var(--blue);font-weight:600">TVF'de aç</a></div>
+        </div>
+        <aside class="box">
+          <header><h3>Haberlerimiz</h3><a href="#haberler">Tümü</a></header>
+          <div class="yan" id="ligHaberler"><div class="msg">Haberler yükleniyor…</div></div>
+        </aside>
       </div>
     </div>
   </section>
@@ -205,6 +306,15 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
     <p style="margin-top:12px;font-size:.85rem">© <span id="year"></span> İzmir Voleybol Medya Grubu. Tüm hakları saklıdır.</p>
   </div>
 </footer>
+
+<dialog id="pnl" aria-labelledby="pnlBaslik">
+  <div class="p-ust"><h3 id="pnlBaslik"></h3><a id="pnlLink" href="#" target="_blank" rel="noopener">Resmi sayfa</a><button class="x" id="pnlKapat" aria-label="Kapat">✕</button></div>
+  <div id="pnlMac">
+    <div class="maclar" id="maclar"><div class="msg">Maçlar yükleniyor…</div></div>
+    <div class="mac-alt"><span class="canli-nokta"></span><span id="macGuncel">Otomatik güncellenir</span></div>
+  </div>
+  <div id="pnlPuan" hidden></div>
+</dialog>
 
 <dialog id="dlg"><div class="d-in"><button class="x" id="close" aria-label="Kapat">✕</button><time id="dt"></time><h2 id="dh"></h2><div id="di"></div><div class="body" id="db"></div></div></dialog>
 
@@ -242,6 +352,7 @@ function safeHtml(md) {
 }
 
 /* Kartları çiz */
+let haberListesi = null;
 function render(list) {
   const track = $('#track');
   track.textContent = '';
@@ -287,7 +398,9 @@ async function loadNews() {
     }))).filter(Boolean).sort((a, b) => new Date(b.date) - new Date(a.date));
     try { sessionStorage.setItem('ivm_news', JSON.stringify({ t: Date.now(), d: list })); } catch (e) {}
   }
+  haberListesi = list;
   render(list);
+  ligHaberleriCiz();
 }
 function start() {
   loadNews().catch(() => {
@@ -327,6 +440,10 @@ async function maclariYukle() {
         <span class="bilgi">${[m.kume, m.salon, skorVar ? m.saat : '', m.setler].filter(Boolean).map(kacis).join(' · ')}</span></div>`;
     }
     $('#maclar').innerHTML = html || '<div class="msg">Bu hafta için girilmiş maç bulunmuyor.</div>';
+    const gunler = [...new Set(liste.map(m => m.tarih))];
+    const kisa = t => { const [g, a] = t.split('.'); return +g + ' ' + ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'][a - 1]; };
+    $('#macOzet').textContent = liste.length ? `${liste.length} maç · ${kisa(gunler[0])} – ${kisa(gunler[gunler.length - 1])}` : 'Henüz girilmiş maç yok';
+    if ($('#pnl').open && !$('#pnlMac').hidden) $('#pnlBaslik').textContent = $('#macBaslik').textContent;
     $('#macGuncel').textContent = 'Son güncelleme ' + new Date(j.guncelleme).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }) + ' · her dakika yenilenir';
   } catch (e) {
     if (!$('#maclar .mac')) $('#maclar').innerHTML = '<div class="msg">Maç takvimi şu an alınamadı. <a href="https://izmir.voleyboliltemsilciligi.com/MacTakvimi" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700">Resmi sayfayı aç →</a></div>';
@@ -334,6 +451,108 @@ async function maclariYukle() {
 }
 maclariYukle();
 setInterval(() => { if (!document.hidden) maclariYukle(); }, 60000);
+
+/* Maç programı kartları → açılır pencere */
+function panelAc(tur) {
+  const mac = tur === 'mac';
+  $('#pnlMac').hidden = !mac;
+  $('#pnlPuan').hidden = mac;
+  $('#pnlBaslik').textContent = mac ? $('#macBaslik').textContent : 'Fikstür ve puan durumu';
+  $('#pnlLink').href = 'https://izmir.voleyboliltemsilciligi.com/' + (mac ? 'MacTakvimi' : 'PuanDurumu');
+  if (!mac && !$('#pnlPuan iframe')) $('#pnlPuan').innerHTML = '<iframe src="https://izmir.voleyboliltemsilciligi.com/PuanDurumu" title="Fikstür ve puan durumu"></iframe>';
+  $('#pnl').showModal();
+  $('#pnl').scrollTop = 0;
+}
+$('#macTile').onclick = () => panelAc('mac');
+$('#puanTile').onclick = () => panelAc('puan');
+$('#pnlKapat').onclick = () => $('#pnl').close();
+$('#pnl').onclick = e => { if (e.target.id === 'pnl') e.target.close(); };
+
+/* Ligler menüsü */
+const dd = $('#dd'), ddBtn = $('#ddBtn');
+ddBtn.onclick = e => { e.stopPropagation(); const o = dd.classList.toggle('open'); ddBtn.setAttribute('aria-expanded', o); };
+document.addEventListener('click', e => { if (!dd.contains(e.target)) { dd.classList.remove('open'); ddBtn.setAttribute('aria-expanded', false); } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { dd.classList.remove('open'); ddBtn.setAttribute('aria-expanded', false); } });
+
+/* Lig sayfası: #lig/<lig>[/<grup>] — TVF puan durumu + haberlerimiz */
+const LIGLER = [
+  ['sultanlar-ligi', 'Sultanlar Ligi'], ['efeler-ligi', 'Efeler Ligi'],
+  ['kadinlar-1-ligi', 'Kadınlar 1. Ligi'], ['erkekler-1-ligi', 'Erkekler 1. Ligi'],
+  ['kadinlar-2-ligi', 'Kadınlar 2. Ligi'], ['erkekler-2-ligi', 'Erkekler 2. Ligi']
+];
+const anaBolumler = ['.hero', '#canli', '#haberler', '#program'].map(s => $(s));
+let aktifLig = null, ligZamanlayici = null;
+$('#ligChips').innerHTML = LIGLER.map(([k, ad]) => `<a class="chip" href="#lig/${k}" data-lig="${k}">${ad}</a>`).join('');
+$('#grupSec').onchange = e => { location.hash = `#lig/${aktifLig.lig}/${encodeURIComponent(e.target.value)}`; };
+
+function ligHaberleriCiz() {
+  const kutu = $('#ligHaberler');
+  if (!haberListesi) return;
+  if (!haberListesi.length) { kutu.innerHTML = '<div class="msg">Henüz haber yok.</div>'; return; }
+  kutu.textContent = '';
+  haberListesi.slice(0, 6).forEach(n => {
+    const b = document.createElement('button'); b.className = 'h'; b.type = 'button';
+    if (n.image) { const im = document.createElement('img'); im.src = imgUrl(n.image); im.alt = ''; im.loading = 'lazy'; b.append(im); }
+    else { const d = document.createElement('span'); d.className = 'yok'; b.append(d); }
+    const tx = document.createElement('span');
+    const t = document.createElement('time'); t.textContent = fmt(n.date);
+    const h = document.createElement('b'); h.textContent = n.title;
+    tx.append(t, h); b.append(tx);
+    b.onclick = () => openNews(n);
+    kutu.append(b);
+  });
+}
+
+async function puanYukle(yenile) {
+  const { lig, grup } = aktifLig;
+  if (!yenile) $('#ligTablo').innerHTML = '<div class="msg">Puan durumu yükleniyor…</div>';
+  try {
+    const j = await (await fetch(`/api/puan?lig=${lig}${grup ? '&grup=' + encodeURIComponent(grup) : ''}`)).json();
+    if (j.hata) throw 0;
+    if (aktifLig.lig !== lig) return;
+    const sec = $('#grupSec');
+    sec.hidden = !j.gruplar.length;
+    sec.innerHTML = j.gruplar.map(g => `<option value="${kacis(g.deger)}"${g.deger === j.grup ? ' selected' : ''}>${kacis(g.ad)}</option>`).join('');
+    $('#ligTabloBaslik').textContent = 'Puan durumu' + (j.gruplar.length ? ' · Grup ' + j.grup : '');
+    $('#ligKaynak').href = j.kaynak;
+    $('#ligTablo').innerHTML = j.tablo.length ? `<table class="puan"><thead><tr><th>#</th><th class="t">Takım</th><th title="Oynadığı maç">O</th><th title="Galibiyet">G</th><th title="Mağlubiyet">M</th><th class="gz" title="Alınan set">A</th><th class="gz" title="Verilen set">V</th><th title="Puan">P</th></tr></thead><tbody>${
+      j.tablo.map(t => `<tr><td class="s">${kacis(t.sira)}</td><td class="t"><span class="tk">${t.logo ? `<img src="${kacis(t.logo)}" alt="" loading="lazy">` : '<span class="yok"></span>'}${kacis(t.takim)}</span></td><td>${kacis(t.o)}</td><td>${kacis(t.g)}</td><td>${kacis(t.m)}</td><td class="gz">${kacis(t.a)}</td><td class="gz">${kacis(t.v)}</td><td class="p">${kacis(t.p)}</td></tr>`).join('')
+    }</tbody></table>` : '<div class="msg">Bu lig için henüz puan tablosu yayınlanmadı.</div>';
+    $('#ligGuncel').textContent = 'Son güncelleme ' + new Date(j.guncelleme).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+  } catch (e) {
+    if (!yenile || !$('#ligTablo table')) $('#ligTablo').innerHTML = `<div class="msg">Puan durumu şu an alınamadı. <a href="https://tvf.org.tr/lig/${lig}" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700">TVF'de aç →</a></div>`;
+  }
+}
+
+function yonlendir() {
+  const m = location.hash.match(/^#lig\/([\w-]+)(?:\/([^/]+))?$/);
+  const lig = m && LIGLER.find(l => l[0] === m[1]);
+  clearInterval(ligZamanlayici);
+  dd.classList.remove('open');
+  ['#pnl', '#dlg'].forEach(s => $(s).open && $(s).close());
+  if (!lig) {
+    aktifLig = null;
+    $('#ligView').hidden = true;
+    anaBolumler.forEach(s => s.hidden = false);
+    document.querySelectorAll('.dd-menu a').forEach(a => a.classList.remove('aktif'));
+    const hedef = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
+    if (hedef) hedef.scrollIntoView();
+    return;
+  }
+  aktifLig = { lig: lig[0], grup: m[2] ? decodeURIComponent(m[2]) : '' };
+  anaBolumler.forEach(s => s.hidden = true);
+  $('#ligView').hidden = false;
+  $('#ligAd').textContent = lig[1];
+  document.title = lig[1] + ' puan durumu | İzmir Voleybol Medya';
+  document.querySelectorAll('#ligChips .chip, .dd-menu a').forEach(a => a.classList.toggle('aktif', a.getAttribute('href') === '#lig/' + lig[0]));
+  scrollTo(0, 0);
+  puanYukle(false);
+  ligHaberleriCiz();
+  ligZamanlayici = setInterval(() => { if (!document.hidden) puanYukle(true); }, 60000);
+}
+const ilkBaslik = document.title;
+addEventListener('hashchange', () => { if (!location.hash.startsWith('#lig/')) document.title = ilkBaslik; yonlendir(); });
+if (location.hash.startsWith('#lig/')) yonlendir();
 </script>
 </body>
 </html>
