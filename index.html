@@ -116,6 +116,33 @@ h1,h2,h3,.btn,.nav a,.brand{font-family:'Barlow Condensed',sans-serif}
 .dd.open .dd-menu{display:block}
 .nav .dd-menu a{display:block;color:var(--ink);font-size:1.05rem;padding:9px 12px;border:0;border-radius:8px}
 .nav .dd-menu a:hover,.nav .dd-menu a.aktif{background:var(--sky);color:var(--blue)}
+.dd-menu.dd-genis{display:none;grid-template-columns:1fr 1fr;gap:2px 10px;min-width:520px}
+.dd.open .dd-menu.dd-genis{display:grid}
+
+/* Milli takımlar sayfası */
+.mt-haberler{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.mt-haber{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:border-color .15s,transform .15s}
+.mt-haber:hover{border-color:var(--blue);transform:translateY(-2px)}
+.mt-haber .im{aspect-ratio:16/9;width:100%;object-fit:cover;background:var(--sky);display:block}
+.mt-haber .tx{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.mt-haber time{font-size:.8rem;font-weight:600;color:var(--blue);display:flex;align-items:center;gap:8px}
+.mt-haber h3{font-size:1.25rem;font-weight:800;line-height:1.15}
+.mt-haber .oku{margin-top:auto;font-size:.88rem;font-weight:700;color:var(--blue)}
+.mt-haber.ilk{grid-column:span 2;grid-row:span 2}
+.mt-haber.ilk h3{font-size:1.8rem}
+.kadro{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px}
+.oyuncu{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.oyuncu img,.oyuncu .yok{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block;background:var(--sky)}
+.oyuncu div{padding:12px 14px}
+.oyuncu small{font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--blue)}
+.oyuncu b{display:block;font-family:'Barlow Condensed',sans-serif;font-size:1.3rem;line-height:1.1;margin:2px 0 6px}
+.oyuncu ul{list-style:none;display:flex;flex-wrap:wrap;gap:2px 12px;font-size:.82rem;color:var(--muted)}
+.oyuncu li{white-space:nowrap}
+.mt-alt{margin:34px 0 16px;font-size:1.6rem;font-weight:800}
+.kaynak-not{margin-top:18px;font-size:.85rem;color:var(--muted)}
+.kaynak-not a{color:var(--blue);font-weight:600}
+@media(max-width:900px){.mt-haberler{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.mt-haberler{grid-template-columns:1fr}.mt-haber.ilk{grid-column:auto;grid-row:auto}.mt-haber.ilk h3{font-size:1.4rem}.kadro{grid-template-columns:1fr 1fr;gap:10px}.oyuncu b{font-size:1.1rem}}
 .dd-menu small{display:block;padding:8px 12px 2px;font-size:.72rem;font-weight:700;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
 
 /* Lig sayfası */
@@ -186,6 +213,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
  .dd-menu{position:static;transform:none;box-shadow:none;background:#13296a;margin:6px 0}
  .nav .dd-menu a{color:#fff;border-bottom:0}.nav .dd-menu a:hover,.nav .dd-menu a.aktif{background:#20366f;color:var(--gold)}
  .dd-menu small{color:#9db8ff}
+ .dd-menu.dd-genis,.dd.open .dd-menu.dd-genis{min-width:0;grid-template-columns:1fr}
  .nav{max-height:calc(100vh - 90px);overflow-y:auto}
  .card{flex-basis:calc((100% - 18px)/2)}
  .hero{padding:44px 0 48px}.court{width:150%;right:-50%;opacity:.55}
@@ -211,8 +239,19 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
     <button class="menu" id="menu" aria-label="Menüyü aç" aria-expanded="false">☰</button>
     <nav class="nav" id="nav">
       <a href="#haberler">Haberler</a>
-      <div class="dd" id="dd">
-        <button class="dd-btn" id="ddBtn" type="button" aria-expanded="false" aria-controls="ddMenu">Ligler ▾</button>
+      <div class="dd">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="milliMenu">Milli Takımlar ▾</button>
+        <div class="dd-menu dd-genis" id="milliMenu">
+          <a href="#milli/kadin">Kadın Milli Takımlar</a>
+          <a href="#milli/erkek">Erkek Milli Takımlar</a>
+          <a href="#milli/a-kadin-kadro">A Milli Kadın Takımı Kadro</a>
+          <a href="#milli/a-erkek-kadro">A Milli Erkek Takımı Kadro</a>
+          <a href="#milli/altyapi-kadin">Altyapı Milli Takımlar - Kadın</a>
+          <a href="#milli/altyapi-erkek">Altyapı Milli Takımlar - Erkek</a>
+        </div>
+      </div>
+      <div class="dd">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="ddMenu">Ligler ▾</button>
         <div class="dd-menu" id="ddMenu">
           <small>Üst ligler</small>
           <a href="#lig/sultanlar-ligi">Sultanlar Ligi</a>
@@ -287,6 +326,18 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
           <span class="ok" aria-hidden="true">→</span>
         </button>
       </div>
+    </div>
+  </section>
+
+  <section class="section" id="milliView" hidden>
+    <div class="wrap">
+      <div class="lig-ust">
+        <h2 id="milliAd">Milli Takımlar</h2>
+        <a href="#top" class="geri">← Ana sayfa</a>
+      </div>
+      <div class="chips" id="milliChips"></div>
+      <div id="milliIcerik"><div class="msg">Yükleniyor…</div></div>
+      <p class="kaynak-not" id="milliNot"></p>
     </div>
   </section>
 
@@ -493,10 +544,16 @@ $('#pnlKapat').onclick = () => $('#pnl').close();
 $('#pnl').onclick = e => { if (e.target.id === 'pnl') e.target.close(); };
 
 /* Ligler menüsü */
-const dd = $('#dd'), ddBtn = $('#ddBtn');
-ddBtn.onclick = e => { e.stopPropagation(); const o = dd.classList.toggle('open'); ddBtn.setAttribute('aria-expanded', o); };
-document.addEventListener('click', e => { if (!dd.contains(e.target)) { dd.classList.remove('open'); ddBtn.setAttribute('aria-expanded', false); } });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { dd.classList.remove('open'); ddBtn.setAttribute('aria-expanded', false); } });
+const ddler = [...document.querySelectorAll('.dd')];
+const ddKapat = (haric) => ddler.forEach(d => { if (d !== haric) { d.classList.remove('open'); d.querySelector('.dd-btn').setAttribute('aria-expanded', false); } });
+ddler.forEach(d => d.querySelector('.dd-btn').onclick = e => {
+  e.stopPropagation();
+  ddKapat(d);
+  const o = d.classList.toggle('open');
+  e.currentTarget.setAttribute('aria-expanded', o);
+});
+document.addEventListener('click', e => { if (!e.target.closest('.dd')) ddKapat(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') ddKapat(); });
 
 /* Lig sayfası: #lig/<lig>[/<grup>] — TVF puan durumu + haberlerimiz */
 const LIGLER = [
@@ -603,24 +660,81 @@ async function puanYukle(yenile) {
   }
 }
 
+/* Milli takımlar sayfası: #milli/<kategori> — TVF haberleri ve A milli kadrolar */
+const MILLI = [
+  ['kadin', 'Kadın Milli Takımlar'], ['erkek', 'Erkek Milli Takımlar'],
+  ['a-kadin-kadro', 'A Milli Kadın Takımı Kadro'], ['a-erkek-kadro', 'A Milli Erkek Takımı Kadro'],
+  ['altyapi-kadin', 'Altyapı Milli Takımlar - Kadın'], ['altyapi-erkek', 'Altyapı Milli Takımlar - Erkek']
+];
+// Kadro sayfalarının altında ilgili takımın haberleri de gösterilir
+const KADRO_HABER = { 'a-kadin-kadro': 'kadin', 'a-erkek-kadro': 'erkek' };
+let milliIstek = 0;
+$('#milliChips').innerHTML = MILLI.map(([k, ad]) => `<a class="chip" href="#milli/${k}">${ad}</a>`).join('');
+
+function buHaftaMi(iso) {
+  if (!iso) return false;
+  const tr = new Date(Date.now() + 3 * 3600e3), gun = Date.parse(iso);
+  const bugun = Date.UTC(tr.getUTCFullYear(), tr.getUTCMonth(), tr.getUTCDate());
+  const pzt = bugun - ((tr.getUTCDay() + 6) % 7) * 864e5;
+  return gun >= pzt && gun < pzt + 7 * 864e5;
+}
+const haberKartlari = list => list.length ? '<div class="mt-haberler">' + list.map((h, i) => `<a class="mt-haber${i === 0 ? ' ilk' : ''}" href="${kacis(h.link)}" target="_blank" rel="noopener">
+    ${h.gorsel ? `<img class="im" src="${kacis(h.gorsel)}" alt="" loading="lazy">` : '<span class="im"></span>'}
+    <span class="tx"><time>${kacis(h.tarih)}${buHaftaMi(h.iso) ? ' <span class="rozet">Bu hafta</span>' : ''}</time><h3>${kacis(h.baslik)}</h3><span class="oku">Haberi oku →</span></span>
+  </a>`).join('') + '</div>' : '<div class="msg">Bu bölümde henüz haber yok.</div>';
+const kadroKartlari = list => list.length ? '<div class="kadro">' + list.map(o => `<div class="oyuncu">
+    ${o.foto ? `<img src="${kacis(o.foto)}" alt="${kacis(o.ad)}" loading="lazy">` : '<span class="yok"></span>'}
+    <div><small>${kacis(o.pozisyon)}</small><b>${kacis(o.ad)}</b><ul>${o.bilgi.map(b => `<li>${kacis(b.ad)}: ${kacis(b.deger)}</li>`).join('')}</ul></div>
+  </div>`).join('') + '</div>' : '<div class="msg">Kadro henüz açıklanmadı.</div>';
+
+async function milliYukle(kat) {
+  const no = ++milliIstek;
+  const al = async k => { const j = await (await fetch('/api/milli?kat=' + k)).json(); if (j.hata) throw 0; return j; };
+  $('#milliIcerik').innerHTML = '<div class="msg">Yükleniyor…</div>';
+  $('#milliNot').textContent = '';
+  try {
+    const j = await al(kat);
+    let html = j.tur === 'kadro' ? kadroKartlari(j.kadro) : haberKartlari(j.haberler);
+    if (KADRO_HABER[kat]) {
+      const h = await al(KADRO_HABER[kat]).catch(() => null);
+      if (h) html += `<h3 class="mt-alt">${kacis(h.ad)} haberleri</h3>` + haberKartlari(h.haberler.slice(0, 6));
+    }
+    if (no !== milliIstek) return;
+    $('#milliIcerik').innerHTML = html;
+    $('#milliNot').innerHTML = `Kaynak: Türkiye Voleybol Federasyonu · <a href="${kacis(j.kaynak)}" target="_blank" rel="noopener">TVF'de görüntüle</a>`;
+  } catch (e) {
+    if (no === milliIstek) $('#milliIcerik').innerHTML = '<div class="msg">Bilgiler şu an alınamadı. <a href="https://tvf.org.tr" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700">TVF\'de aç →</a></div>';
+  }
+}
+
 function yonlendir() {
   const m = location.hash.match(/^#lig\/([\w-]+)(?:\/([^/]+))?$/);
   const lig = m && LIGLER.find(l => l[0] === m[1]);
+  const mm = location.hash.match(/^#milli\/([\w-]+)$/);
+  const milli = mm && MILLI.find(x => x[0] === mm[1]);
   clearInterval(ligZamanlayici);
-  dd.classList.remove('open');
+  ddKapat();
   ['#pnl', '#dlg'].forEach(s => $(s).open && $(s).close());
+  document.querySelectorAll('.dd-menu a, .chips .chip').forEach(a => a.classList.toggle('aktif', a.getAttribute('href') === location.hash));
+  $('#ligView').hidden = !lig;
+  $('#milliView').hidden = !milli;
+  anaBolumler.forEach(s => s.hidden = !!(lig || milli));
+  if (milli) {
+    aktifLig = null;
+    $('#milliAd').textContent = milli[1];
+    document.title = milli[1] + ' | İzmir Voleybol Medya';
+    scrollTo(0, 0);
+    milliYukle(milli[0]);
+    return;
+  }
   if (!lig) {
     aktifLig = null;
-    $('#ligView').hidden = true;
-    anaBolumler.forEach(s => s.hidden = false);
-    document.querySelectorAll('.dd-menu a').forEach(a => a.classList.remove('aktif'));
+    document.title = ilkBaslik;
     const hedef = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
     if (hedef) hedef.scrollIntoView();
     return;
   }
   aktifLig = { lig: lig[0], grup: m[2] ? decodeURIComponent(m[2]) : '' };
-  anaBolumler.forEach(s => s.hidden = true);
-  $('#ligView').hidden = false;
   $('#ligAd').textContent = lig[1];
   document.title = lig[1] + ' puan durumu | İzmir Voleybol Medya';
   document.querySelectorAll('#ligChips .chip, .dd-menu a').forEach(a => a.classList.toggle('aktif', a.getAttribute('href') === '#lig/' + lig[0]));
@@ -631,8 +745,8 @@ function yonlendir() {
   ligZamanlayici = setInterval(() => { if (!document.hidden) ligYukle(true); }, 60000);
 }
 const ilkBaslik = document.title;
-addEventListener('hashchange', () => { if (!location.hash.startsWith('#lig/')) document.title = ilkBaslik; yonlendir(); });
-if (location.hash.startsWith('#lig/')) yonlendir();
+addEventListener('hashchange', yonlendir);
+if (/^#(lig|milli)\//.test(location.hash)) yonlendir();
 </script>
 </body>
 </html>
