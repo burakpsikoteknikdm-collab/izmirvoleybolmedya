@@ -2,6 +2,8 @@
 title: "VODAFONE SULTANLAR LİGİ’NDE 3. HAFTA HEYECANI BAŞLIYOR!"
 date: 2026-10-13T17:39:00.000+03:00
 image: /images/uploads/2026-10-13-vodafone-sultanlar-ligi-logo-729c98.jpg
+lig: sultanlar-ligi
+bolum: takimlar
 ---
 VODAFONE SULTANLAR LİGİ’NDE 3. HAFTA HEYECANI BAŞLIYOR!
 
