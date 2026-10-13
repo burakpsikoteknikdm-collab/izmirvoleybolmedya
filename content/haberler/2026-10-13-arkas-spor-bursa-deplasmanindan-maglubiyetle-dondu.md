@@ -3,6 +3,7 @@ title: "🏐 ARKAS SPOR, BURSA DEPLASMANINDAN MAĞLUBİYETLE DÖNDÜ"
 date: 2026-10-13T02:14:00.000+03:00
 image: /images/uploads/2026-10-12-altyapi-takimlarimiz-gectigimiz-haftayi-4-galibiyet-ve-1-maglubiyetle--7489e2.jpg
 lig: erkekler-2-ligi
+bolum: takimlar
 ---
 🏐 ARKAS SPOR, BURSA DEPLASMANINDAN MAĞLUBİYETLE DÖNDÜ
 
