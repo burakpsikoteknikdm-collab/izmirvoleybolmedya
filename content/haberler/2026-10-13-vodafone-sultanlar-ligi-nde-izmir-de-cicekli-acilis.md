@@ -3,9 +3,11 @@ title: "🌸 VODAFONE SULTANLAR LİGİ’NDE İZMİR’DE ÇİÇEKLİ AÇILIŞ!"
 date: 2026-10-13T15:58:00.000+03:00
 image: /images/uploads/2026-10-13-fb-img-1791880406345-3-8df895.jpg
 lig: sultanlar-ligi
+bolum: takimlar
 galeri:
   - /images/uploads/2026-10-13-fb-img-1791880407911-3-d011e7.jpg
   - /images/uploads/2026-10-13-fb-img-1791880409927-3-55eb0d.jpg
+sabit: true
 ---
 🌸 VODAFONE SULTANLAR LİGİ’NDE İZMİR’DE ÇİÇEKLİ AÇILIŞ! 
 
