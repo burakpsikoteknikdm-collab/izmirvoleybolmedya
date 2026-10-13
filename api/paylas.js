@@ -217,7 +217,7 @@ footer .sosyal a:hover{text-decoration:underline}
     </aside>
   </div>
 </main>
-<footer><b>İZMİR VOLEYBOL MEDYA</b>İzmir voleybol haberleri, maç sonuçları ve canlı yayınlar · <a href="mailto:info@izmirvoleybolmedya.com">info@izmirvoleybolmedya.com</a><div class="sosyal"><a href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" rel="noopener">YouTube</a><a href="https://www.instagram.com/izmirvoleybolmedya" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/share/g/19xt84G5E8/" target="_blank" rel="noopener">Facebook</a></div></footer>
+<footer><b>İZMİR VOLEYBOL MEDYA</b>İzmir voleybol haberleri, maç sonuçları ve canlı yayınlar · <a href="mailto:izmirvoleybolmg@gmail.com">izmirvoleybolmg@gmail.com</a><div class="sosyal"><a href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" rel="noopener">YouTube</a><a href="https://www.instagram.com/izmirvoleybolmedya" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/share/g/19xt84G5E8/" target="_blank" rel="noopener">Facebook</a></div></footer>
 <script>
 (function () {
   var url = ${JSON.stringify(adres)}, baslik = ${JSON.stringify(baslik).replace(/</g, '\\u003c')};

@@ -127,7 +127,7 @@ footer .sosyal a{color:#fff;font-weight:600;padding:6px 2px}
     </div>
   </article>
 </main>
-<footer><b>İZMİR VOLEYBOL MEDYA</b>İzmir voleybol haberleri, maç sonuçları ve canlı yayınlar · <a href="mailto:info@izmirvoleybolmedya.com">info@izmirvoleybolmedya.com</a>
+<footer><b>İZMİR VOLEYBOL MEDYA</b>İzmir voleybol haberleri, maç sonuçları ve canlı yayınlar · <a href="mailto:izmirvoleybolmg@gmail.com">izmirvoleybolmg@gmail.com</a>
   <div class="sosyal">${SOSYAL.map(([a, u]) => `<a href="${u}" target="_blank" rel="noopener">${a}</a>`).join('')}</div>
 </footer>
 </body>

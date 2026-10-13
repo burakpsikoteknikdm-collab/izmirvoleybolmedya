@@ -46,4 +46,4 @@ Bizim için voleybol yalnızca bir spor değil; emek, takım ruhu, dayanışma v
 
 ## İletişim
 
-Haber, yayın, reklam ve iş birliği talepleriniz için bize [info@izmirvoleybolmedya.com](mailto:info@izmirvoleybolmedya.com) adresinden ulaşabilirsiniz.
+Haber, yayın, reklam ve iş birliği talepleriniz için bize [izmirvoleybolmg@gmail.com](mailto:izmirvoleybolmg@gmail.com) adresinden ulaşabilirsiniz.

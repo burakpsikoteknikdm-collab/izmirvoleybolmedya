@@ -18,7 +18,7 @@
 <meta name="theme-color" content="#0b1f4d">
 <link rel="icon" href="/editor/ikon-192.png">
 <link rel="apple-touch-icon" href="/editor/apple-touch-icon.png">
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"NewsMediaOrganization","name":"İzmir Voleybol Medya","alternateName":["İzmir Voleybol Medya Grubu","İzmir Voleybol"],"url":"https://www.izmirvoleybolmedya.com/","logo":"https://www.izmirvoleybolmedya.com/editor/ikon-512.png","email":"info@izmirvoleybolmedya.com","areaServed":"İzmir","sameAs":["https://www.youtube.com/@izmirvoleybolmedya","https://www.instagram.com/izmirvoleybolmedya"]},{"@context":"https://schema.org","@type":"WebSite","name":"İzmir Voleybol Medya","url":"https://www.izmirvoleybolmedya.com/","inLanguage":"tr-TR"}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"NewsMediaOrganization","name":"İzmir Voleybol Medya","alternateName":["İzmir Voleybol Medya Grubu","İzmir Voleybol"],"url":"https://www.izmirvoleybolmedya.com/","logo":"https://www.izmirvoleybolmedya.com/editor/ikon-512.png","email":"izmirvoleybolmg@gmail.com","areaServed":"İzmir","sameAs":["https://www.youtube.com/@izmirvoleybolmedya","https://www.instagram.com/izmirvoleybolmedya"]},{"@context":"https://schema.org","@type":"WebSite","name":"İzmir Voleybol Medya","url":"https://www.izmirvoleybolmedya.com/","inLanguage":"tr-TR"}]</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
@@ -548,9 +548,9 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
     <div>
       <h4>İletişim</h4>
       <a href="/hakkimizda">Hakkımızda</a>
-      <a href="mailto:info@izmirvoleybolmedya.com">info@izmirvoleybolmedya.com</a>
+      <a href="mailto:izmirvoleybolmg@gmail.com">izmirvoleybolmg@gmail.com</a>
       <span>İzmir, Türkiye</span>
-      <a href="mailto:info@izmirvoleybolmedya.com?subject=Reklam">Reklam ve iş birlikleri</a>
+      <a href="mailto:izmirvoleybolmg@gmail.com?subject=Reklam">Reklam ve iş birlikleri</a>
     </div>
     <div>
       <h4>Bizi Takip Edin</h4>
@@ -806,7 +806,7 @@ function sonDakikaCiz() {
 icerikOku('son-dakika.json').then(j => { sonDakikaVeri = j || { haberler: [] }; sonDakikaCiz(); });
 
 /* Reklam şeridi (panelden: content/reklam.json) */
-const REKLAM_VARSAYILAN = { aktif: true, metin: 'Bu alana reklam verebilirsiniz\nReklam ve iş birlikleri için: info@izmirvoleybolmedya.com', link: 'mailto:info@izmirvoleybolmedya.com?subject=Reklam' };
+const REKLAM_VARSAYILAN = { aktif: true, metin: 'Bu alana reklam verebilirsiniz\nReklam ve iş birlikleri için: izmirvoleybolmg@gmail.com', link: 'mailto:izmirvoleybolmg@gmail.com?subject=Reklam' };
 let reklamAktif = false;
 icerikOku('reklam.json').then(j => {
   const r = { ...REKLAM_VARSAYILAN, ...(j || {}) };
