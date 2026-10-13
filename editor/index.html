@@ -89,6 +89,13 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
 .alt-cubuk{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--line);padding:12px 14px calc(12px + env(safe-area-inset-bottom));display:flex;gap:10px;justify-content:center}
 .alt-cubuk .btn{flex:1;max-width:340px}
 
+/* Son dakika */
+.sd-satir{background:#fff;border:1px solid var(--line);border-left:5px solid #d92d20;border-radius:12px;padding:12px;margin-bottom:10px}
+.sd-satir .ust{display:flex;gap:8px;align-items:flex-start}
+.sd-satir textarea{min-height:64px;flex:1}
+.sd-satir .sil{flex:none;width:40px;height:40px;border-radius:10px;border:2px solid #f5c2be;background:#fff;color:var(--red);font-size:1.1rem;cursor:pointer}
+.sd-satir input{margin-top:8px;font-size:.9rem}
+
 /* Bildirim */
 .bildirim{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:50;background:var(--ink);color:#fff;border-radius:12px;padding:12px 18px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.3);max-width:calc(100% - 28px);text-align:center}
 .bildirim.iyi{background:var(--green)}.bildirim.kotu{background:var(--red)}
@@ -115,6 +122,7 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
   <header class="bar">
     <img src="/editor/ikon-192.png" alt="">
     <b>İVM <i>Editör</i></b>
+    <button class="ikon" id="sonDakikaBtn" title="Son Dakika" aria-label="Son dakika şeridini düzenle" style="font-size:.95rem;font-weight:800;width:auto;padding:0 12px;border-radius:999px;background:#d92d20">⚡ Son Dakika</button>
     <button class="ikon" id="yenileBtn" title="Yenile" aria-label="Listeyi yenile">⟳</button>
     <button class="ikon" id="cikisBtn" title="Çıkış" aria-label="Çıkış yap">⎋</button>
   </header>
@@ -185,6 +193,24 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
   </div>
 </section>
 
+<!-- Son dakika şeridi -->
+<section id="sonDakikaEkrani" hidden>
+  <header class="bar">
+    <button class="ikon" id="sdGeriBtn" aria-label="Geri">←</button>
+    <b>Son Dakika Şeridi</b>
+  </header>
+  <main class="kap">
+    <div class="hata" id="sdHata" hidden></div>
+    <p class="ipucu" style="margin:0 0 14px">Bu başlıklar sitenin en üstündeki kırmızı <b>SON DAKİKA</b> şeridinde kayar. En üstteki ilk görünür. Liste boş kalırsa şeritte en son haberler <b>GÜNCEL</b> etiketiyle görünür.</p>
+    <button type="button" class="btn mavi tam" id="sdEkleBtn" style="margin-bottom:14px">＋ Son Dakika Ekle</button>
+    <div id="sdListe"><div class="bilgi">Yükleniyor…</div></div>
+  </main>
+  <div class="alt-cubuk">
+    <button class="btn cizgi" id="sdVazgecBtn">Vazgeç</button>
+    <button class="btn" id="sdKaydetBtn">Kaydet</button>
+  </div>
+</section>
+
 <div class="bildirim" id="bildirim" role="status" aria-live="polite" hidden></div>
 
 <script>
@@ -217,7 +243,7 @@ function bildir(metin, tur = '') {
 }
 
 function goster(ekran) {
-  ['giris', 'liste', 'duzen'].forEach(e => $(`#${e}Ekrani`).hidden = e !== ekran);
+  ['giris', 'liste', 'duzen', 'sonDakika'].forEach(e => $(`#${e}Ekrani`).hidden = e !== ekran);
   scrollTo(0, 0);
 }
 
@@ -421,6 +447,49 @@ $('#silBtn').onclick = async () => {
     listeAc();
   } catch (e) { duzenHata(e.message); }
   $('#silBtn').disabled = false;
+};
+
+/* Son dakika şeridi */
+let sd = { sha: null, liste: [] }, sdDegisti = false;
+function sdHata(m) { $('#sdHata').textContent = m || ''; $('#sdHata').hidden = !m; }
+function sdCiz() {
+  const kutu = $('#sdListe');
+  kutu.textContent = '';
+  if (!sd.liste.length) { kutu.innerHTML = '<div class="bilgi">Şu an son dakika başlığı yok.</div>'; return; }
+  sd.liste.forEach((h, i) => {
+    const d = document.createElement('div'); d.className = 'sd-satir';
+    const ust = document.createElement('div'); ust.className = 'ust';
+    const t = document.createElement('textarea'); t.className = 'girdi'; t.maxLength = 200; t.placeholder = 'Son dakika başlığı'; t.value = h.metin;
+    t.oninput = () => { h.metin = t.value; sdDegisti = true; };
+    const sil = document.createElement('button'); sil.type = 'button'; sil.className = 'sil'; sil.textContent = '✕'; sil.setAttribute('aria-label', 'Başlığı kaldır');
+    sil.onclick = () => { sd.liste.splice(i, 1); sdDegisti = true; sdCiz(); };
+    ust.append(t, sil);
+    const l = document.createElement('input'); l.className = 'girdi'; l.type = 'url'; l.placeholder = 'Bağlantı (isteğe bağlı, https://…)'; l.value = h.link || '';
+    l.oninput = () => { h.link = l.value; sdDegisti = true; };
+    d.append(ust, l); kutu.append(d);
+  });
+}
+async function sonDakikaAc() {
+  goster('sonDakika'); sdHata(''); sdDegisti = false;
+  $('#sdListe').innerHTML = '<div class="bilgi">Yükleniyor…</div>';
+  try { const j = await api('sondakika'); sd = { sha: j.sha, liste: j.haberler.map(h => ({ metin: h.metin || '', link: h.link || '' })) }; sdCiz(); }
+  catch (e) { sdHata(e.message); }
+}
+$('#sonDakikaBtn').onclick = sonDakikaAc;
+$('#sdEkleBtn').onclick = () => { sd.liste.unshift({ metin: '', link: '' }); sdDegisti = true; sdCiz(); const t = document.querySelector('#sdListe textarea'); if (t) t.focus(); };
+const sdGeri = () => { if (sdDegisti && !confirm('Kaydedilmemiş değişiklikler silinecek. Çıkılsın mı?')) return; listeAc(); };
+$('#sdGeriBtn').onclick = sdGeri; $('#sdVazgecBtn').onclick = sdGeri;
+$('#sdKaydetBtn').onclick = async () => {
+  sdHata('');
+  const kotuLink = sd.liste.find(h => h.link && !/^https?:\/\//i.test(h.link.trim()));
+  if (kotuLink) return sdHata('Bağlantılar https:// ile başlamalı: ' + kotuLink.link);
+  const btn = $('#sdKaydetBtn'); btn.disabled = true; btn.textContent = 'Kaydediliyor…';
+  try {
+    const j = await api('sondakika-kaydet', { govde: { sha: sd.sha, haberler: sd.liste } });
+    sd = { sha: j.sha, liste: j.haberler }; sdDegisti = false; sdCiz();
+    bildir('Son dakika şeridi güncellendi. Sitede 1-2 dakika içinde görünür.', 'iyi');
+  } catch (e) { sdHata(e.message); }
+  btn.disabled = false; btn.textContent = 'Kaydet';
 };
 
 /* Ana ekrana ekleme */

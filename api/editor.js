@@ -1,6 +1,6 @@
-// Editör uygulamasının sunucu tarafı: /api/editor?islem=giris|liste|getir|kaydet|sil|gorsel
+// Editör uygulamasının sunucu tarafı: /api/editor?islem=giris|liste|getir|kaydet|sil|gorsel|sondakika|sondakika-kaydet
 // Editörler GitHub hesabı olmadan kullanıcı adı/şifreyle girer. GitHub'a yazma işini sunucu,
-// GITHUB_ICERIK_TOKEN ile yapar ve yalnızca content/haberler ile images/uploads klasörlerine yazar.
+// GITHUB_ICERIK_TOKEN ile yapar ve yalnızca content/haberler, images/uploads ve content/son-dakika.json'a yazar.
 //
 // Vercel ortam değişkenleri:
 //   GITHUB_ICERIK_TOKEN  Bu repo için "Contents: Read and write" izinli ince ayarlı GitHub token'ı
@@ -11,6 +11,7 @@ const REPO = 'burakpsikoteknikdm-collab/izmirvoleybolmedya';
 const DAL = process.env.EDITOR_DAL || 'main'; // test için başka bir dal verilebilir
 const HABER_KLASORU = 'content/haberler';
 const GORSEL_KLASORU = 'images/uploads';
+const SON_DAKIKA = 'content/son-dakika.json';
 const LIGLER = ['sultanlar-ligi', 'efeler-ligi', 'kadinlar-1-ligi', 'erkekler-1-ligi', 'kadinlar-2-ligi', 'erkekler-2-ligi'];
 const OTURUM_SURESI = 30 * 864e5;
 
@@ -135,8 +136,31 @@ module.exports = async (req, res) => {
       return gonder(200, { ad, sha: d.sha, title: f.title || '', date: f.date || '', image: f.image || '', lig: f.lig || '', body: f.body || '' });
     }
 
+    if (islem === 'sondakika') {
+      const d = await gh(`/contents/${SON_DAKIKA}?ref=${DAL}`).catch(e => e.durum === 404 ? null : Promise.reject(e));
+      let veri = { haberler: [] };
+      if (d) { try { veri = JSON.parse(Buffer.from(d.content, 'base64').toString('utf8')); } catch (e) {} }
+      return gonder(200, { sha: d ? d.sha : null, haberler: Array.isArray(veri.haberler) ? veri.haberler : [] });
+    }
+
     if (req.method !== 'POST') return gonder(405, { hata: 'POST gerekli' });
     const g = await govde(req);
+
+    if (islem === 'sondakika-kaydet') {
+      const liste = (Array.isArray(g.haberler) ? g.haberler : []).map(h => ({
+        metin: String(h && h.metin || '').replace(/[\r\n]+/g, ' ').trim().slice(0, 200),
+        link: /^https?:\/\//i.test(String(h && h.link || '').trim()) ? String(h.link).trim().slice(0, 500) : ''
+      })).filter(h => h.metin).slice(0, 15);
+      const sonuc = await gh(`/contents/${SON_DAKIKA}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          message: `Son dakika şeridi güncellendi (editör: ${kullanici})`,
+          content: Buffer.from(JSON.stringify({ haberler: liste }, null, 2) + '\n').toString('base64'),
+          sha: g.sha || undefined, branch: DAL
+        })
+      });
+      return gonder(200, { sha: sonuc.content.sha, haberler: liste });
+    }
 
     if (islem === 'kaydet') {
       const title = String(g.title || '').trim();

@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/haber/:ad", "destination": "/api/paylas?ad=:ad" }
+  ]
+}

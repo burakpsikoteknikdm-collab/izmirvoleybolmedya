@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>İzmir Voleybol Medya | Haber & Canlı Yayın Portalı</title>
 <meta name="description" content="İzmir voleybol haberleri, canlı yayınlar, maç programları, puan durumları ve fikstürler.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="İzmir Voleybol Medya">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="İzmir Voleybol Medya | Haber &amp; Canlı Yayın Portalı">
+<meta property="og:description" content="İzmir voleybol haberleri, canlı yayınlar, maç programları, puan durumları ve fikstürler.">
+<meta property="og:url" content="https://www.izmirvoleybolmedya.com/">
+<meta property="og:image" content="https://www.izmirvoleybolmedya.com/editor/ikon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0b1f4d">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
@@ -206,9 +215,69 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
 .d-in .body p{margin:0 0 14px}.d-in .body a{color:var(--blue);text-decoration:underline}
 .x{float:right;background:var(--ink);color:#fff;border:0;border-radius:50%;width:38px;height:38px;font-size:1.2rem;cursor:pointer}
 
-.footer{margin-top:60px;background:var(--ink);color:#9db8ff;text-align:center;padding:34px 0 24px}
-.footer b{display:block;font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;color:#fff}
+.footer{margin-top:60px;background:var(--ink);color:#9db8ff;padding:44px 0 0}
+.footer b{display:block;font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;color:#fff;margin-bottom:8px}
 .footer b i{font-style:normal;color:var(--gold)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1.3fr 1fr;gap:28px}
+.footer-grid p{font-size:.92rem;line-height:1.6}
+.footer h4{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:800;color:var(--gold);letter-spacing:.03em;margin-bottom:10px}
+.footer-grid a,.footer-grid span{display:block;font-size:.92rem;padding:3px 0;color:#c9d8ff}
+.footer-grid a:hover{color:#fff;text-decoration:underline}
+.footer-alt{margin-top:32px;padding-top:18px;padding-bottom:22px;border-top:1px solid #20366f;font-size:.85rem;text-align:center}
+
+/* Üst bilgi çubuğu */
+.ust-bilgi{background:#06122e;color:#9db8ff;font-size:.82rem}
+.ust-bilgi .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:32px}
+.ust-bilgi .sosyal{display:flex;gap:16px}
+.ust-bilgi a:hover{color:#fff}
+
+/* Kayan şeritler (son dakika, reklam) */
+.kayan{overflow:hidden}
+.kayan .wrap{display:flex;align-items:stretch;gap:0;min-height:42px}
+.kayan .etiket{flex:none;display:flex;align-items:center;padding:0 14px;font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:800;letter-spacing:.04em;white-space:nowrap}
+.kayan-alan{position:relative;flex:1;min-width:0;overflow:hidden;display:flex;align-items:center;-webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
+.kayan-icerik{display:flex;white-space:nowrap;will-change:transform;animation:kay var(--sure,40s) linear infinite}
+.kayan:hover .kayan-icerik,.kayan:focus-within .kayan-icerik{animation-play-state:paused}
+.kayan-icerik a,.kayan-icerik span{padding:0 22px;font-weight:600;display:inline-flex;align-items:center;gap:22px}
+.kayan-icerik a::after,.kayan-icerik span::after{content:"•";opacity:.6}
+.kayan-icerik a:hover{text-decoration:underline}
+@keyframes kay{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.kayan-icerik{animation:none}.kayan-alan{overflow-x:auto}}
+.sondakika{background:#fff;border-bottom:3px solid #d92d20;box-shadow:0 2px 10px rgba(11,31,77,.06)}
+.sondakika .etiket{background:#d92d20;color:#fff;position:relative}
+.sondakika .etiket::before{content:"";width:8px;height:8px;border-radius:50%;background:#fff;margin-right:8px;animation:nabiz 1.2s infinite}
+.sondakika.guncel{border-bottom-color:var(--blue)}.sondakika.guncel .etiket{background:var(--blue)}
+.sondakika .kayan-icerik{color:var(--ink)}
+.reklam-serit{background:#13296a;color:#fff}
+.reklam-serit .etiket{background:var(--gold);color:var(--ink);font-size:.9rem}
+
+/* Manşet */
+.manset{padding:26px 0 0}
+.manset-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:18px}
+.manset-ana{position:relative;display:block;width:100%;border:0;padding:0;text-align:left;font:inherit;color:#fff;cursor:pointer;border-radius:var(--r);overflow:hidden;aspect-ratio:16/10;background:linear-gradient(120deg,var(--ink),#123a9c)}
+.manset-ana img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.manset-ana:hover img{transform:scale(1.03)}
+.manset-ana::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,18,46,.95) 0%,rgba(6,18,46,.45) 45%,transparent 75%)}
+.manset-ana .tx{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:26px}
+.manset-ana h2{font-size:clamp(1.6rem,3.2vw,2.6rem);line-height:1.05;font-weight:800;margin:8px 0 6px}
+.manset-ana time{font-size:.85rem;color:#c9d8ff}
+.kat{display:inline-block;background:var(--gold);color:var(--ink);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.85rem;letter-spacing:.04em;padding:3px 10px;border-radius:4px;text-transform:uppercase}
+.manset-yan{display:flex;flex-direction:column;gap:12px}
+.manset-k{display:flex;gap:12px;width:100%;flex:1;text-align:left;font:inherit;color:inherit;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;cursor:pointer;align-items:center}
+.manset-k:hover{border-color:var(--blue)}
+.manset-k img,.manset-k .bos{width:112px;height:76px;flex:none;object-fit:cover;border-radius:8px;background:var(--sky)}
+.manset-k b{font-weight:700;line-height:1.25;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.manset-k time{display:block;font-size:.78rem;font-weight:600;color:var(--blue);margin-top:4px}
+@media(max-width:900px){.manset-grid{grid-template-columns:1fr}.manset-ana{aspect-ratio:4/3}}
+@media(max-width:520px){.manset-ana .tx{padding:18px}.manset-k img,.manset-k .bos{width:92px;height:66px}.ust-bilgi .sosyal a:last-child{display:none}}
+
+/* Paylaş */
+.paylas{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0 4px}
+.paylas>span{font-size:.85rem;font-weight:700;color:var(--muted)}
+.pb{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;padding:7px 14px;font:inherit;font-size:.9rem;font-weight:700;color:#fff;cursor:pointer}
+.pb.yerel{background:var(--ink)}.pb.wa{background:#1fa855}.pb.x-tw{background:#111}.pb.fb{background:#1877f2}.pb.tg{background:#229ed9}
+.pb.kopya{background:var(--sky);color:var(--ink)}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr}.footer-grid>div:first-child{grid-column:1/-1}}
 
 @media(max-width:1024px){.card{flex-basis:calc((100% - 36px)/3)}.grid{grid-template-columns:1fr}}
 @media(max-width:768px){
@@ -235,6 +304,16 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
 </head>
 <body>
 
+<div class="ust-bilgi">
+  <div class="wrap">
+    <span id="bugun"></span>
+    <span class="sosyal">
+      <a href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.instagram.com/izmirvoleybolmedya" target="_blank" rel="noopener">Instagram</a>
+      <a href="#iletisim">Reklam &amp; İletişim</a>
+    </span>
+  </div>
+</div>
 <header class="header">
   <div class="stripe"></div>
   <div class="wrap bar">
@@ -276,8 +355,22 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
   </div>
 </header>
 
+<div class="kayan sondakika" id="sonDakika" hidden>
+  <div class="wrap">
+    <b class="etiket" id="sonDakikaEtiket">SON DAKİKA</b>
+    <div class="kayan-alan"><div class="kayan-icerik" id="sonDakikaIcerik"></div></div>
+  </div>
+</div>
+
 <main id="top">
-  <section class="hero">
+  <section class="manset" id="manset" hidden>
+    <div class="wrap manset-grid">
+      <div id="mansetAna"></div>
+      <div class="manset-yan" id="mansetYan"></div>
+    </div>
+  </section>
+
+  <section class="hero" id="hero">
     <svg class="ball" viewBox="0 0 200 200" fill="none" stroke="#fff" stroke-opacity=".1" stroke-width="3" aria-hidden="true"><circle cx="100" cy="100" r="96"/><path d="M100 4c-26 30-26 62 0 96s26 66 0 96M8 70c40 4 70 20 92 30s52 26 92 22M12 140c40-6 66-22 88-40s56-30 92-30"/></svg>
     <svg class="court" viewBox="0 0 380 200" aria-hidden="true" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="3" stroke-linecap="round">
       <rect width="380" height="200" rx="8" fill="#4f7dff" fill-opacity=".28" stroke="none"/>
@@ -302,6 +395,13 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
       <a class="btn" id="yt" href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" rel="noopener">Kanala Git</a>
     </div>
   </section>
+
+  <div class="kayan reklam-serit" id="reklamSerit" hidden>
+    <div class="wrap">
+      <b class="etiket">REKLAM</b>
+      <div class="kayan-alan"><div class="kayan-icerik" id="reklamIcerik"></div></div>
+    </div>
+  </div>
 
   <section class="section" id="haberler">
     <div class="wrap">
@@ -381,11 +481,32 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
 </main>
 
 <footer class="footer" id="iletisim">
-  <div class="wrap">
-    <b>İZMİR VOLEYBOL <i>MEDYA</i></b>
-    <p>info@izmirvoleybolmedya.com · İzmir, Türkiye</p>
-    <p style="margin-top:12px;font-size:.85rem">© <span id="year"></span> İzmir Voleybol Medya Grubu. Tüm hakları saklıdır.</p>
+  <div class="wrap footer-grid">
+    <div>
+      <b>İZMİR VOLEYBOL <i>MEDYA</i></b>
+      <p>İzmir voleybolunun haber, canlı yayın, maç programı ve puan durumu adresi. Sultanlar Ligi'nden altyapı maçlarına kadar İzmir voleybolunda olan biten her şey.</p>
+    </div>
+    <div>
+      <h4>Bölümler</h4>
+      <a href="#haberler">Haberler</a>
+      <a href="#lig/sultanlar-ligi">Ligler</a>
+      <a href="#milli/kadin">Milli Takımlar</a>
+      <a href="#program">Maç Programı</a>
+      <a href="#canli">Canlı Yayın</a>
+    </div>
+    <div>
+      <h4>İletişim</h4>
+      <a href="mailto:info@izmirvoleybolmedya.com">info@izmirvoleybolmedya.com</a>
+      <span>İzmir, Türkiye</span>
+      <a href="mailto:info@izmirvoleybolmedya.com?subject=Reklam">Reklam ve iş birlikleri</a>
+    </div>
+    <div>
+      <h4>Bizi Takip Edin</h4>
+      <a href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.instagram.com/izmirvoleybolmedya" target="_blank" rel="noopener">Instagram</a>
+    </div>
   </div>
+  <div class="wrap footer-alt">© <span id="year"></span> İzmir Voleybol Medya Grubu. Tüm hakları saklıdır.</div>
 </footer>
 
 <dialog id="pnl" aria-labelledby="pnlBaslik">
@@ -405,7 +526,17 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
   </div>
 </dialog>
 
-<dialog id="dlg"><div class="d-in"><button class="x" id="close" aria-label="Kapat">✕</button><time id="dt"></time><h2 id="dh"></h2><div id="di"></div><div class="body" id="db"></div></div></dialog>
+<dialog id="dlg"><div class="d-in"><button class="x" id="close" aria-label="Kapat">✕</button><time id="dt"></time><h2 id="dh"></h2>
+  <div class="paylas" id="paylas">
+    <span>Paylaş:</span>
+    <button type="button" class="pb yerel" data-paylas="yerel" hidden>📤 Paylaş</button>
+    <a class="pb wa" data-paylas="whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+    <a class="pb x-tw" data-paylas="x" target="_blank" rel="noopener">X</a>
+    <a class="pb fb" data-paylas="facebook" target="_blank" rel="noopener">Facebook</a>
+    <a class="pb tg" data-paylas="telegram" target="_blank" rel="noopener">Telegram</a>
+    <button type="button" class="pb kopya" data-paylas="kopyala">🔗 Linki Kopyala</button>
+  </div>
+  <div id="di"></div><div class="body" id="db"></div></div></dialog>
 
 <script>
 const REPO = 'burakpsikoteknikdm-collab/izmirvoleybolmedya';
@@ -465,21 +596,162 @@ function render(list) {
     track.append(c);
   });
 }
-function openNews(n) {
+let oncekiHash = null;
+function openNews(n, adrestenAcildi) {
   $('#dt').textContent = fmt(n.date);
   $('#dh').textContent = n.title;
   $('#di').innerHTML = '';
   if (n.image) { const im = document.createElement('img'); resimKur(im, n.image); im.alt = ''; $('#di').append(im); }
   $('#db').innerHTML = safeHtml(n.body);
+  paylasHazirla(n);
+  // Haberin kendi adresi (#haber/...) — sayfa yenilenince ya da link paylaşılınca aynı haber açılır
+  if (n.ad) {
+    oncekiHash = adrestenAcildi ? '' : location.hash;
+    if (!adrestenAcildi) history.replaceState(null, '', '#haber/' + encodeURIComponent(n.ad));
+  }
   $('#dlg').showModal();
+  $('#dlg').scrollTop = 0;
 }
-$('#close').onclick = () => $('#dlg').close();
-$('#dlg').onclick = e => { if (e.target.id === 'dlg') e.target.close(); };
+// Haber kapanınca adres, haber açılmadan önceki haline döner
+function haberAdresiniGeriAl() {
+  if (oncekiHash !== null && location.hash.startsWith('#haber/')) history.replaceState(null, '', oncekiHash || location.pathname + location.search);
+  oncekiHash = null;
+}
+const haberKapat = () => { $('#dlg').close(); haberAdresiniGeriAl(); };
+$('#close').onclick = haberKapat;
+$('#dlg').onclick = e => { if (e.target.id === 'dlg') haberKapat(); };
+['cancel', 'close'].forEach(o => $('#dlg').addEventListener(o, haberAdresiniGeriAl));
+
+/* Paylaş: telefonda yerel paylaşım menüsü (Instagram, WhatsApp…), ayrıca doğrudan bağlantılar */
+const haberAdresi = n => location.origin + '/haber/' + encodeURIComponent(n.ad || '');
+function paylasHazirla(n) {
+  const url = haberAdresi(n), t = n.title, e = encodeURIComponent;
+  $('#paylas').hidden = !n.ad;
+  const linkler = {
+    whatsapp: `https://wa.me/?text=${e(t + ' ' + url)}`,
+    x: `https://twitter.com/intent/tweet?text=${e(t)}&url=${e(url)}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${e(url)}`,
+    telegram: `https://t.me/share/url?url=${e(url)}&text=${e(t)}`
+  };
+  document.querySelectorAll('#paylas a[data-paylas]').forEach(a => a.href = linkler[a.dataset.paylas]);
+  const yerel = $('#paylas [data-paylas="yerel"]');
+  yerel.hidden = !navigator.share;
+  yerel.onclick = () => navigator.share({ title: t, text: t, url }).catch(() => {});
+  const kopya = $('#paylas [data-paylas="kopyala"]');
+  kopya.textContent = '🔗 Linki Kopyala';
+  kopya.onclick = async () => {
+    try { await navigator.clipboard.writeText(url); kopya.textContent = '✓ Kopyalandı'; }
+    catch (err) { prompt('Haber linki:', url); }
+  };
+}
+
+/* Kayan şerit: içerik iki kez yazılır, yarısı kadar kaydırılarak kesintisiz döner */
+function kayanDoldur(kutu, ogeler) {
+  kutu.textContent = '';
+  if (!ogeler.length) return;
+  ogeler.forEach(o => kutu.append(o.cloneNode(true)));
+  setTimeout(() => {
+    // Kısa listeler şerit genişliğini dolduracak kadar tekrarlanır, sonra tamamı ikiye katlanır
+    const alan = kutu.parentElement.clientWidth, set = kutu.scrollWidth || 1;
+    const tekrar = Math.min(10, Math.max(1, Math.ceil(alan / set)));
+    for (let t = 1; t < tekrar * 2; t++) ogeler.forEach(o => { const k = o.cloneNode(true); k.setAttribute('aria-hidden', 'true'); kutu.append(k); });
+    kutu.style.setProperty('--sure', Math.max(18, kutu.scrollWidth / 2 / 70) + 's');
+  });
+}
+function seritOgesi(metin, link) {
+  const el = document.createElement(link ? 'a' : 'span');
+  el.textContent = metin;
+  if (link) {
+    el.href = link;
+    if (/^https?:/i.test(link) && !link.startsWith(location.origin)) { el.target = '_blank'; el.rel = 'noopener'; }
+  }
+  return el;
+}
+const guvenliLink = l => /^(https?:\/\/|mailto:|#)/i.test(String(l || '').trim()) ? String(l).trim() : '';
+
+// Panelden düzenlenen içerik dosyaları (site yayınlanana kadar GitHub'dan da okunur)
+async function icerikOku(ad) {
+  try { const r = await fetch('/content/' + ad, { cache: 'no-cache' }); if (r.ok) return await r.json(); } catch (e) {}
+  try { const r = await fetch(`https://raw.githubusercontent.com/${REPO}/main/content/${ad}`); if (r.ok) return await r.json(); } catch (e) {}
+  return null;
+}
+
+/* Son dakika: panelden girilen başlıklar; yoksa en son haberler "GÜNCEL" olarak gösterilir */
+let sonDakikaVeri;
+function sonDakikaCiz() {
+  const elle = (sonDakikaVeri && sonDakikaVeri.haberler || []).filter(h => h && h.metin);
+  let ogeler = [];
+  if (elle.length) ogeler = elle.map(h => seritOgesi(h.metin, guvenliLink(h.link)));
+  else if (haberListesi && haberListesi.length) ogeler = haberListesi.slice(0, 6).map(n => seritOgesi(n.title, n.ad ? '#haber/' + encodeURIComponent(n.ad) : ''));
+  else if (sonDakikaVeri === undefined) return;
+  $('#sonDakikaEtiket').textContent = elle.length ? 'SON DAKİKA' : 'GÜNCEL';
+  $('#sonDakika').classList.toggle('guncel', !elle.length);
+  $('#sonDakika').hidden = !ogeler.length;
+  kayanDoldur($('#sonDakikaIcerik'), ogeler);
+}
+icerikOku('son-dakika.json').then(j => { sonDakikaVeri = j || { haberler: [] }; sonDakikaCiz(); });
+
+/* Reklam şeridi (panelden: content/reklam.json) */
+const REKLAM_VARSAYILAN = { aktif: true, metin: 'Bu alana reklam verebilirsiniz\nReklam ve iş birlikleri için: info@izmirvoleybolmedya.com', link: 'mailto:info@izmirvoleybolmedya.com?subject=Reklam' };
+let reklamAktif = false;
+icerikOku('reklam.json').then(j => {
+  const r = { ...REKLAM_VARSAYILAN, ...(j || {}) };
+  const satirlar = String(r.metin || '').split(/\n+/).map(s => s.trim()).filter(Boolean);
+  reklamAktif = r.aktif !== false && satirlar.length > 0;
+  kayanDoldur($('#reklamIcerik'), satirlar.map(s => seritOgesi(s, guvenliLink(r.link))));
+  anaDuzen();
+});
+
+/* Manşet: en son haber büyük, sonraki dört haber yanda */
+const LIG_ADI = { 'sultanlar-ligi': 'Sultanlar Ligi', 'efeler-ligi': 'Efeler Ligi', 'kadinlar-1-ligi': 'Kadınlar 1. Ligi', 'erkekler-1-ligi': 'Erkekler 1. Ligi', 'kadinlar-2-ligi': 'Kadınlar 2. Ligi', 'erkekler-2-ligi': 'Erkekler 2. Ligi' };
+function mansetCiz(list) {
+  const ana = list[0];
+  if (!ana) return;
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'manset-ana';
+  if (ana.image) { const im = document.createElement('img'); im.alt = ''; resimKur(im, ana.image); b.append(im); }
+  const tx = document.createElement('span'); tx.className = 'tx';
+  const kat = document.createElement('span'); kat.className = 'kat'; kat.textContent = LIG_ADI[ana.lig] || 'Manşet';
+  const h = document.createElement('h2'); h.textContent = ana.title;
+  const t = document.createElement('time'); t.textContent = fmt(ana.date);
+  tx.append(kat, h, t); b.append(tx);
+  b.onclick = () => openNews(ana);
+  $('#mansetAna').replaceChildren(b);
+  $('#mansetYan').replaceChildren(...list.slice(1, 5).map(n => {
+    const k = document.createElement('button'); k.type = 'button'; k.className = 'manset-k';
+    if (n.image) { const im = document.createElement('img'); im.alt = ''; im.loading = 'lazy'; resimKur(im, n.image); k.append(im); }
+    else { const s = document.createElement('span'); s.className = 'bos'; k.append(s); }
+    const y = document.createElement('span');
+    const bb = document.createElement('b'); bb.textContent = n.title;
+    const tt = document.createElement('time'); tt.textContent = fmt(n.date);
+    y.append(bb, tt); k.append(y);
+    k.onclick = () => openNews(n);
+    return k;
+  }));
+  $('#mansetYan').hidden = list.length < 2;
+}
+
+// Ana sayfa bölümlerinin görünürlüğü (lig/milli sayfası açıkken hepsi gizli)
+function anaDuzen() {
+  const ana = !/^#(lig|milli)\//.test(location.hash);
+  const haberVar = !!(haberListesi && haberListesi.length);
+  $('#manset').hidden = !ana || !haberVar;
+  $('#hero').hidden = !ana || haberVar;
+  $('#reklamSerit').hidden = !ana || !reklamAktif;
+}
+function haberAdrestenAc() {
+  const m = location.hash.match(/^#haber\/(.+)$/);
+  if (!m || !haberListesi) return;
+  let ad; try { ad = decodeURIComponent(m[1]); } catch (e) { return; }
+  const n = haberListesi.find(x => x.ad === ad);
+  if (n && !$('#dlg').open) openNews(n, true);
+}
+const bugun = new Date();
+$('#bugun').textContent = bugun.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' });
 
 /* Haberleri depodan oku */
 async function loadNews() {
   let list;
-  try { const c = JSON.parse(sessionStorage.getItem('ivm_news') || 'null'); if (c && Date.now() - c.t < 300000) list = c.d; } catch (e) {}
+  try { const c = JSON.parse(sessionStorage.getItem('ivm_news2') || 'null'); if (c && Date.now() - c.t < 300000) list = c.d; } catch (e) {}
   if (!list) {
     const r = await fetch(`https://api.github.com/repos/${REPO}/contents/content/haberler?ref=main`);
     if (!r.ok) throw new Error(r.status);
@@ -488,13 +760,19 @@ async function loadNews() {
       let t;
       try { const a = await fetch('/content/haberler/' + encodeURIComponent(x.name)); t = await a.text(); if (!a.ok || /^\s*<(!doctype|html)/i.test(t)) throw 0; }
       catch (e) { t = await (await fetch(x.download_url)).text(); }
-      return parse(t);
+      const n = parse(t);
+      if (n) n.ad = x.name.replace(/\.md$/i, '');
+      return n;
     }))).filter(Boolean).sort((a, b) => new Date(b.date) - new Date(a.date));
-    try { sessionStorage.setItem('ivm_news', JSON.stringify({ t: Date.now(), d: list })); } catch (e) {}
+    try { sessionStorage.setItem('ivm_news2', JSON.stringify({ t: Date.now(), d: list })); } catch (e) {}
   }
   haberListesi = list;
   render(list);
+  mansetCiz(list);
+  anaDuzen();
+  sonDakikaCiz();
   ligHaberleriCiz();
+  haberAdrestenAc();
 }
 function start() {
   loadNews().catch(() => {
@@ -645,7 +923,7 @@ const LIGLER = [
   ['kadinlar-1-ligi', 'Kadınlar 1. Ligi'], ['erkekler-1-ligi', 'Erkekler 1. Ligi'],
   ['kadinlar-2-ligi', 'Kadınlar 2. Ligi'], ['erkekler-2-ligi', 'Erkekler 2. Ligi']
 ];
-const anaBolumler = ['.hero', '#canli', '#haberler', '#program'].map(s => $(s));
+const anaBolumler = ['#canli', '#haberler', '#program'].map(s => $(s)); // manşet, hero ve reklam şeridi: anaDuzen()
 let ligZamanlayici = null;
 $('#ligChips').innerHTML = LIGLER.map(([k, ad]) => `<a class="chip" href="#lig/${k}" data-lig="${k}">${ad}</a>`).join('');
 $('#grupSec').onchange = e => { location.hash = `#lig/${aktifLig.lig}/${encodeURIComponent(e.target.value)}`; };
@@ -807,6 +1085,7 @@ function yonlendir() {
   $('#ligView').hidden = !lig;
   $('#milliView').hidden = !milli;
   anaBolumler.forEach(s => s.hidden = !!(lig || milli));
+  anaDuzen();
   if (milli) {
     aktifLig = null;
     $('#milliAd').textContent = milli[1];
@@ -818,6 +1097,7 @@ function yonlendir() {
   if (!lig) {
     aktifLig = null;
     document.title = ilkBaslik;
+    if (location.hash.startsWith('#haber/')) return haberAdrestenAc();
     const hedef = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
     if (hedef) hedef.scrollIntoView();
     return;
