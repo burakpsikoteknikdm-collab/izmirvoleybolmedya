@@ -3,6 +3,7 @@ title: "🏐 ROTA KOLEJİ EVİNDE SEZONUN İLK GALİBİYETİNİ ALDI"
 date: 2026-10-12T19:45:00.000+03:00
 image: /images/uploads/2026-10-12-rota-koleji-evinde-sezonun-ilk-galibiyetini-aldi-21e520.jpg
 lig: kadinlar-2-ligi
+bolum: takimlar
 ---
 🏐 ROTA KOLEJİ EVİNDE SEZONUN İLK GALİBİYETİNİ ALDI! 
 
