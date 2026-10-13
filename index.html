@@ -69,7 +69,11 @@ h1,h2,h3,.btn,.nav a,.brand{font-family:'Barlow Condensed',sans-serif}
 .section h2{font-size:2.3rem;font-weight:800;line-height:1;margin-bottom:22px;display:flex;align-items:center;gap:12px}
 .section h2::before{content:"";width:14px;height:34px;border-radius:7px;background:linear-gradient(var(--blue) 0 50%,var(--gold) 50%)}
 .carousel{position:relative}
-.track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 18px;scrollbar-width:thin}
+.track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:6px 2px 18px;scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.baslik-satir{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}
+.baslik-satir h2{margin-bottom:0}
+.oklar{display:flex;gap:10px;flex:none}
 .card{flex:0 0 calc((100% - 54px)/4);scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;text-align:left;font:inherit;color:inherit;padding:0}
 .card:hover{border-color:var(--blue)}
 .card .im{aspect-ratio:16/10;background:var(--sky);width:100%;object-fit:cover;display:block}
@@ -77,8 +81,9 @@ h1,h2,h3,.btn,.nav a,.brand{font-family:'Barlow Condensed',sans-serif}
 .card time{font-size:.8rem;font-weight:600;color:var(--blue)}
 .card h3{font-size:1.3rem;font-weight:800;line-height:1.15;margin:4px 0 8px}
 .card p{font-size:.92rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.arrow{position:absolute;top:42%;width:44px;height:44px;border-radius:50%;border:2px solid var(--gold);background:var(--ink);color:var(--gold);font-size:1.5rem;cursor:pointer;z-index:3}
-.arrow.l{left:-14px}.arrow.r{right:-14px}
+.arrow{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:#fff;color:var(--ink);font-size:1.6rem;line-height:1;font-weight:700;cursor:pointer;display:grid;place-items:center;transition:background .15s,color .15s,border-color .15s}
+.arrow:hover:not(:disabled){background:var(--ink);border-color:var(--ink);color:var(--gold)}
+.arrow:disabled{opacity:.35;cursor:default}
 .msg{padding:28px;background:#fff;border:1px dashed var(--line);border-radius:var(--r);color:var(--muted);width:100%}
 .msg button{margin-left:10px;color:var(--blue);font-weight:700;background:none;border:0;cursor:pointer;font:inherit}
 
@@ -292,7 +297,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
  .nav{max-height:calc(100vh - 90px);overflow-y:auto}
  .card{flex-basis:calc((100% - 18px)/2)}
  .hero{padding:44px 0 48px}.court{width:150%;right:-50%;opacity:.55}
- .arrow{display:none}.section h2{font-size:1.9rem}.box iframe,.maclar{height:460px}
+ .arrow{width:38px;height:38px;font-size:1.4rem}.section h2{font-size:1.9rem}.box iframe,.maclar{height:460px}
 }
 @media(max-width:520px){
  .bar{height:68px}.brand img{width:46px;height:46px}.brand b{font-size:1.25rem}.brand small{display:none}
@@ -405,11 +410,15 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
 
   <section class="section" id="haberler">
     <div class="wrap">
-      <h2>Güncel Haberler</h2>
+      <div class="baslik-satir">
+        <h2>Güncel Haberler</h2>
+        <div class="oklar">
+          <button class="arrow" id="prev" aria-label="Önceki haberler" disabled>‹</button>
+          <button class="arrow" id="next" aria-label="Sonraki haberler">›</button>
+        </div>
+      </div>
       <div class="carousel">
-        <button class="arrow l" id="prev" aria-label="Önceki haberler">‹</button>
         <div class="track" id="track"><div class="msg">Haberler yükleniyor…</div></div>
-        <button class="arrow r" id="next" aria-label="Sonraki haberler">›</button>
       </div>
       <div class="ad"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9798524131017882" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>
     </div>
@@ -783,8 +792,17 @@ function start() {
 start();
 
 /* Oklar */
-const step = d => $('#track').scrollBy({ left: d * $('#track').clientWidth * .9, behavior: 'smooth' });
+const step = d => { $('#track').scrollBy({ left: d * $('#track').clientWidth * .9, behavior: 'smooth' }); setTimeout(okDurumu, 700); };
 $('#prev').onclick = () => step(-1); $('#next').onclick = () => step(1);
+function okDurumu() {
+  const t = $('#track');
+  $('#prev').disabled = t.scrollLeft <= 4;
+  $('#next').disabled = t.scrollLeft + t.clientWidth >= t.scrollWidth - 4;
+}
+$('#track').addEventListener('scroll', okDurumu, { passive: true });
+addEventListener('resize', okDurumu);
+new MutationObserver(okDurumu).observe($('#track'), { childList: true });
+okDurumu();
 
 /* Canlı yayın bilgisi (panelden: content/canli.json) */
 fetch('/content/canli.json').then(r => r.ok ? r.json() : null).then(j => {
