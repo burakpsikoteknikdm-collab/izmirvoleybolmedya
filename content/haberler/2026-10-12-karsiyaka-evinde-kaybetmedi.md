@@ -3,6 +3,7 @@ title: "🏐 KARŞIYAKA EVİNDE KAYBETMEDİ! 💚❤️"
 date: 2026-10-12T19:20:00.000+03:00
 image: /images/uploads/2026-10-12-karsiyaka-evinde-kaybetmedi-387203.jpg
 lig: kadinlar-1-ligi
+bolum: takimlar
 galeri:
   - /images/uploads/2026-10-13-karsiyaka-evinde-kaybetmedi-370d51.jpg
   - /images/uploads/2026-10-13-karsiyaka-evinde-kaybetmedi-265d34.jpg
