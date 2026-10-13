@@ -15,6 +15,7 @@ module.exports = async (req, res) => {
   res.end(`<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${url(SITE + '/', son, '1.0', 'hourly')}
+${url(SITE + '/hakkimizda', '', '0.5', 'monthly')}
 ${haberler.map(h => url(haberAdresi(h.ad), tarih(h.date), '0.8', 'weekly')).join('\n')}
 </urlset>
 `);

@@ -296,7 +296,11 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
 @media(max-width:520px){.manset-ana .tx{padding:18px}.manset-k img,.manset-k .bos{width:92px;height:66px}.ust-bilgi .sosyal a:last-child{display:none}}
 
 /* Paylaş */
-.paylas{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0 4px}
+.paylas{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 4px;padding-top:16px;border-top:1px solid var(--line)}
+.takip{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px;padding:14px 16px;border-radius:12px;background:var(--sky)}
+.takip b{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;margin-right:6px}
+.takip a{border-radius:999px;padding:7px 15px;font-weight:700;font-size:.9rem;color:#fff;text-decoration:none}
+.takip a.yt{background:#e62117}.takip a.ig{background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af)}.takip a.fb{background:#1877f2}
 .paylas>span{font-size:.85rem;font-weight:700;color:var(--muted)}
 .pb{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;padding:7px 14px;font:inherit;font-size:.9rem;font-weight:700;color:#fff;cursor:pointer}
 .pb.yerel{background:var(--ink)}.pb.wa{background:#1fa855}.pb.x-tw{background:#111}.pb.fb{background:#1877f2}.pb.tg{background:#229ed9}
@@ -337,6 +341,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
       <a href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" rel="noopener">YouTube</a>
       <a href="https://www.instagram.com/izmirvoleybolmedya" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.facebook.com/share/g/19xt84G5E8/" target="_blank" rel="noopener">Facebook</a>
+      <a href="/hakkimizda">Hakkımızda</a>
       <a href="#iletisim">Reklam &amp; İletişim</a>
     </span>
   </div>
@@ -542,6 +547,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
     </div>
     <div>
       <h4>İletişim</h4>
+      <a href="/hakkimizda">Hakkımızda</a>
       <a href="mailto:info@izmirvoleybolmedya.com">info@izmirvoleybolmedya.com</a>
       <span>İzmir, Türkiye</span>
       <a href="mailto:info@izmirvoleybolmedya.com?subject=Reklam">Reklam ve iş birlikleri</a>
@@ -574,6 +580,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
 </dialog>
 
 <dialog id="dlg"><div class="d-in"><button class="x" id="close" aria-label="Kapat">✕</button><time id="dt"></time><h2 id="dh"></h2>
+  <div id="di"></div><div class="body" id="db"></div>
   <div class="paylas" id="paylas">
     <span>Paylaş:</span>
     <button type="button" class="pb yerel" data-paylas="yerel" hidden>📤 Paylaş</button>
@@ -583,7 +590,13 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
     <a class="pb tg" data-paylas="telegram" target="_blank" rel="noopener">Telegram</a>
     <button type="button" class="pb kopya" data-paylas="kopyala">🔗 Linki Kopyala</button>
   </div>
-  <div id="di"></div><div class="body" id="db"></div></div></dialog>
+  <div class="takip">
+    <b>Bizi sosyal medyadan takip edin</b>
+    <a class="yt" href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" rel="noopener">YouTube</a>
+    <a class="ig" href="https://www.instagram.com/izmirvoleybolmedya" target="_blank" rel="noopener">Instagram</a>
+    <a class="fb" href="https://www.facebook.com/share/g/19xt84G5E8/" target="_blank" rel="noopener">Facebook</a>
+  </div>
+</div></dialog>
 
 <script>
 const REPO = 'burakpsikoteknikdm-collab/izmirvoleybolmedya';

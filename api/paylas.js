@@ -148,6 +148,10 @@ article h1{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.08;margin:10px 0 8px
 .paylas{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 4px;padding-top:16px;border-top:1px solid var(--line)}
 .paylas>span{font-size:.88rem;font-weight:700;color:var(--muted)}
 .pb{display:inline-flex;align-items:center;border:0;border-radius:999px;padding:8px 15px;font:inherit;font-size:.92rem;font-weight:700;color:#fff;cursor:pointer}
+.takip{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px;padding:14px 16px;border-radius:12px;background:var(--sky)}
+.takip b{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;margin-right:6px}
+.takip a{border-radius:999px;padding:7px 15px;font-weight:700;font-size:.9rem;color:#fff;text-decoration:none}
+.takip a.yt{background:#e62117}.takip a.ig{background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af)}.takip a.fb{background:#1877f2}
 .pb.yerel{background:var(--ink)}.pb.wa{background:#1fa855}.pb.x{background:#111}.pb.fb{background:#1877f2}.pb.tg{background:#229ed9}.pb.kopya{background:var(--sky);color:var(--ink)}
 aside h2{font-size:1.5rem;margin-bottom:12px}
 .diger{display:flex;gap:12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:10px}
@@ -174,6 +178,7 @@ footer .sosyal a:hover{text-decoration:underline}
       <a href="/#lig/sultanlar-ligi">Ligler</a>
       <a href="/#milli/kadin">Milli Takımlar</a>
       <a href="/#program">Maç Programı</a>
+      <a href="/hakkimizda">Hakkımızda</a>
     </nav>
   </div>
 </header>
@@ -194,6 +199,12 @@ footer .sosyal a:hover{text-decoration:underline}
         <a class="pb fb" href="${kacis(paylas.facebook)}" target="_blank" rel="noopener">Facebook</a>
         <a class="pb tg" href="${kacis(paylas.telegram)}" target="_blank" rel="noopener">Telegram</a>
         <button type="button" class="pb kopya" id="kopya">🔗 Linki Kopyala</button>
+      </div>
+      <div class="takip">
+        <b>Bizi sosyal medyadan takip edin</b>
+        <a class="yt" href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" rel="noopener">YouTube</a>
+        <a class="ig" href="https://www.instagram.com/izmirvoleybolmedya" target="_blank" rel="noopener">Instagram</a>
+        <a class="fb" href="https://www.facebook.com/share/g/19xt84G5E8/" target="_blank" rel="noopener">Facebook</a>
       </div>
     </article>
     <aside>

@@ -57,6 +57,17 @@ collections:
           - { label: "Canlı Yayın YouTube Linki", name: "youtube_url", widget: "string" }
           - { label: "Günün Maç Skorları / Duyuru", name: "skor_duyuru", widget: "text" }
 
+  - name: "kurumsal"
+    label: "Kurumsal Sayfalar"
+    files:
+      - file: "content/sayfalar/hakkimizda.md"
+        label: "Hakkımızda"
+        name: "hakkimizda"
+        fields:
+          - { label: "Başlık", name: "title", widget: "string" }
+          - { label: "Kısa Açıklama (sayfa üstünde ve Google'da görünür)", name: "description", widget: "text" }
+          - { label: "Sayfa İçeriği", name: "body", widget: "markdown" }
+
   - name: "seritler"
     label: "Son Dakika & Reklam Şeridi"
     files:
