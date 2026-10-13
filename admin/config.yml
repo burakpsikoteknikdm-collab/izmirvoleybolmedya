@@ -52,7 +52,7 @@ collections:
             name: "haberler"
             widget: "list"
             required: false
-            hint: "Sitenin üstündeki kırmızı SON DAKİKA şeridinde kayar. Liste boşsa şeritte en son haberler GÜNCEL etiketiyle görünür."
+            hint: "Sitenin üstündeki kırmızı SON DAKİKA şeridinde kayar. Liste boşsa şeritte en son haber başlıkları kayar."
             summary: "{{fields.metin}}"
             fields:
               - { label: "Metin", name: "metin", widget: "string" }

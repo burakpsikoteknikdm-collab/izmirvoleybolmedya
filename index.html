@@ -676,7 +676,7 @@ async function icerikOku(ad) {
   return null;
 }
 
-/* Son dakika: panelden girilen başlıklar; yoksa en son haberler "GÜNCEL" olarak gösterilir */
+/* Son dakika: panelden girilen başlıklar; yoksa en son haberler gösterilir (etiket her zaman SON DAKİKA) */
 let sonDakikaVeri;
 function sonDakikaCiz() {
   const elle = (sonDakikaVeri && sonDakikaVeri.haberler || []).filter(h => h && h.metin);
@@ -684,8 +684,6 @@ function sonDakikaCiz() {
   if (elle.length) ogeler = elle.map(h => seritOgesi(h.metin, guvenliLink(h.link)));
   else if (haberListesi && haberListesi.length) ogeler = haberListesi.slice(0, 6).map(n => seritOgesi(n.title, n.ad ? '#haber/' + encodeURIComponent(n.ad) : ''));
   else if (sonDakikaVeri === undefined) return;
-  $('#sonDakikaEtiket').textContent = elle.length ? 'SON DAKİKA' : 'GÜNCEL';
-  $('#sonDakika').classList.toggle('guncel', !elle.length);
   $('#sonDakika').hidden = !ogeler.length;
   kayanDoldur($('#sonDakikaIcerik'), ogeler);
 }
