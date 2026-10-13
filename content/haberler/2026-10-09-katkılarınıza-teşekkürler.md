@@ -2,6 +2,7 @@
 title: KATKILARINIZA TEŞEKKÜRLER
 date: 2026-10-09T16:48:00.000+03:00
 image: /images/uploads/sponspor.jpg
+sabit: true
 ---
 İzmir Voleyboluna Güçlü Destek: Burak Psikoteknik’ten Spora Anlamlı Sponsorluk
 
