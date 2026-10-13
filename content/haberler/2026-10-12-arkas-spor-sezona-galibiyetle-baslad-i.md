@@ -3,6 +3,7 @@ title: "ARKAS SPOR SEZONA GALİBİYETLE BAŞLAD!I"
 date: 2026-10-12T19:00:00.000+03:00
 image: /images/uploads/2026-10-12-arkas-spor-sezona-galibiyetle-basladi-bcd341.jpg
 lig: erkekler-1-ligi
+bolum: takimlar
 ---
 Arabica Coffee House Erkekler Voleybol 1. Ligi’nde mücadele eden Arkas Spor, sezonun ilk hafta karşılaşmasında İzmir’de konuk ettiği Ünsal Group Şiran Belediyespor’u 3-1 mağlup ederek lige galibiyetle başladı.
 İzmir’de Kazanan Arkas Spor
