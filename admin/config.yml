@@ -17,6 +17,13 @@ collections:
       - { label: "Haber Başlığı", name: "title", widget: "string" }
       - { label: "Yayın Tarihi", name: "date", widget: "datetime" }
       - { label: "Kapak Görseli", name: "image", widget: "image" }
+      - label: "Ek Fotoğraflar (en fazla 3)"
+        name: "galeri"
+        widget: "list"
+        required: false
+        max: 3
+        hint: "Kapak görseliyle birlikte en fazla 4 fotoğraf. Birden fazla fotoğraf varsa haberde kaydırmalı galeri olarak görünür."
+        field: { label: "Fotoğraf", name: "foto", widget: "image" }
       - label: "Lig"
         name: "lig"
         widget: "select"

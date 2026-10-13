@@ -1,7 +1,7 @@
 // Haber sayfası: /haber/<ad> (vercel.json ile buraya yönlenir).
 // Google'ın dizine ekleyebilmesi için haber sunucuda tam sayfa olarak hazırlanır; WhatsApp, Facebook,
 // X gibi uygulamalar da önizleme için buradaki og: etiketlerini okur.
-const { SITE, LIG_ADI, kacis, duzMetin, mutlakAdres, markdown, haberGetir, haberListesi, haberAdresi } = require('./_haber');
+const { SITE, LIG_ADI, kacis, duzMetin, mutlakAdres, markdown, haberGetir, haberListesi, haberAdresi, fotolar } = require('./_haber');
 const VARSAYILAN_GORSEL = SITE + '/editor/ikon-512.png';
 const LOGO = SITE + '/editor/ikon-512.png';
 
@@ -35,10 +35,20 @@ module.exports = async (req, res) => {
   const lig = LIG_ADI[h.lig] || '';
   const tarih = new Date(h.date);
   const isoTarih = isNaN(tarih) ? '' : tarih.toISOString();
+  const foto = fotolar(h);
+  const fotoHtml = !foto.length ? '' : foto.length === 1
+    ? `<img class="kapak" src="${kacis(mutlakAdres(foto[0]))}" alt="${kacis(baslik)}"${yedek(foto[0])}>`
+    : `<div class="galeri" tabindex="0" aria-roledescription="fotoğraf galerisi" aria-label="${foto.length} fotoğraf">
+        <div class="g-iz">${foto.map((u, i) => `<img src="${kacis(mutlakAdres(u))}" alt="${kacis(baslik)} – fotoğraf ${i + 1}"${i ? ' loading="lazy"' : ''}${yedek(u)}>`).join('')}</div>
+        <button type="button" class="g-ok g-onc" aria-label="Önceki fotoğraf">‹</button>
+        <button type="button" class="g-ok g-son" aria-label="Sonraki fotoğraf">›</button>
+        <span class="g-sayac">1 / ${foto.length}</span>
+        <div class="g-nokta">${foto.map((_, i) => `<span${i ? '' : ' class="aktif"'}></span>`).join('')}</div>
+      </div>`;
 
   const yapisalVeri = [{
     '@context': 'https://schema.org', '@type': 'NewsArticle',
-    headline: baslik.slice(0, 110), description: ozet, image: [gorsel],
+    headline: baslik.slice(0, 110), description: ozet, image: foto.length ? foto.map(mutlakAdres) : [gorsel],
     datePublished: isoTarih || undefined, dateModified: isoTarih || undefined,
     mainEntityOfPage: { '@type': 'WebPage', '@id': adres },
     articleSection: lig || 'İzmir Voleybol', inLanguage: 'tr-TR',
@@ -119,6 +129,16 @@ article h1{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.08;margin:10px 0 8px
 .bilgi{color:var(--muted);font-size:.92rem}
 .kapak{width:100%;border-radius:10px;margin:18px 0 6px;display:block}
 .metin{font-size:1.07rem;margin-top:16px}
+.galeri{position:relative;margin:18px 0 6px;border-radius:10px;overflow:hidden;background:#0b1f4d}
+.g-iz{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.g-iz::-webkit-scrollbar{display:none}
+.g-iz img{flex:0 0 100%;width:100%;aspect-ratio:4/3;object-fit:contain;scroll-snap-align:center;display:block}
+.g-ok{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:var(--ink);font-size:1.6rem;font-weight:700;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.g-onc{left:10px}.g-son{right:10px}.g-ok:disabled{opacity:0;pointer-events:none}
+.g-sayac{position:absolute;top:10px;right:10px;background:rgba(6,18,46,.78);color:#fff;font-size:.8rem;font-weight:700;padding:3px 10px;border-radius:999px}
+.g-nokta{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px}
+.g-nokta span{width:8px;height:8px;border-radius:5px;background:rgba(255,255,255,.55);transition:width .2s}
+.g-nokta span.aktif{background:#fff;width:20px}
 .metin p,.metin ul,.metin ol,.metin blockquote{margin:0 0 16px}
 .metin ul,.metin ol{padding-left:24px}
 .metin h2,.metin h3,.metin h4{margin:22px 0 8px;line-height:1.2}
@@ -164,7 +184,7 @@ footer .sosyal a:hover{text-decoration:underline}
       ${lig ? `<a class="kat" href="/#lig/${kacis(h.lig)}">${kacis(lig)}</a>` : '<span class="kat">İzmir Voleybol</span>'}
       <h1>${kacis(baslik)}</h1>
       <div class="bilgi">${isoTarih ? `<time datetime="${isoTarih}">${tarihYaz(h.date)} · ${saatYaz(h.date)}</time> · ` : ''}İzmir Voleybol Medya</div>
-      ${h.image ? `<img class="kapak" src="${kacis(mutlakAdres(h.image))}" alt="${kacis(baslik)}"${yedek(h.image)}>` : ''}
+      ${fotoHtml}
       <div class="metin">${markdown(h.body)}</div>
       <div class="paylas">
         <span>Paylaş:</span>
@@ -192,6 +212,16 @@ footer .sosyal a:hover{text-decoration:underline}
   var url = ${JSON.stringify(adres)}, baslik = ${JSON.stringify(baslik).replace(/</g, '\\u003c')};
   var yerel = document.getElementById('yerel');
   if (navigator.share) { yerel.hidden = false; yerel.onclick = function () { navigator.share({ title: baslik, text: baslik, url: url }).catch(function () {}); }; }
+  document.querySelectorAll('.galeri').forEach(function (g) {
+    var iz = g.querySelector('.g-iz'), n = iz.children.length, onc = g.querySelector('.g-onc'), son = g.querySelector('.g-son'), t;
+    var aktif = function () { return Math.round(iz.scrollLeft / iz.clientWidth); };
+    var git = function (i) { iz.scrollTo({ left: Math.max(0, Math.min(n - 1, i)) * iz.clientWidth, behavior: 'smooth' }); setTimeout(guncelle, 450); };
+    function guncelle() { var a = aktif(); g.querySelector('.g-sayac').textContent = (a + 1) + ' / ' + n; [].forEach.call(g.querySelectorAll('.g-nokta span'), function (s, i) { s.className = i === a ? 'aktif' : ''; }); onc.disabled = a <= 0; son.disabled = a >= n - 1; }
+    iz.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(guncelle, 60); }, { passive: true });
+    onc.onclick = function () { git(aktif() - 1); }; son.onclick = function () { git(aktif() + 1); };
+    g.onkeydown = function (e) { if (e.key === 'ArrowLeft') git(aktif() - 1); if (e.key === 'ArrowRight') git(aktif() + 1); };
+    guncelle();
+  });
   var kopya = document.getElementById('kopya');
   kopya.onclick = function () {
     (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject())

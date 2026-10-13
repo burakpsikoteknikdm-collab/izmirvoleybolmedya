@@ -61,11 +61,27 @@ async function gh(yol, secenek = {}) {
 const yolKodla = p => p.split('/').map(encodeURIComponent).join('/');
 
 // Ön bilgi (front matter) — sitedeki okuyucuyla aynı basit biçim
-function ayristir(t) {
-  const m = t.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
-  if (!m) return null;
+function onBilgiAyristir(yaml) {
   const f = {};
-  m[1].split('\n').forEach(l => { const i = l.indexOf(':'); if (i > 0) f[l.slice(0, i).trim()] = l.slice(i + 1).trim().replace(/^["']|["']$/g, ''); });
+  let liste = null;
+  const temiz = v => v.trim().replace(/^["']|["']$/g, '');
+  for (const satir of yaml.split('\n')) {
+    const m = satir.match(/^\s*-\s+(.*)$/);
+    if (m && liste) { f[liste].push(temiz(m[1])); continue; }
+    const i = satir.indexOf(':');
+    if (i > 0 && !/^\s/.test(satir)) {
+      const k = satir.slice(0, i).trim(), v = satir.slice(i + 1).trim();
+      if (v === '' || v === '[]') { f[k] = []; liste = k; }
+      else if (/^\[.*\]$/.test(v)) { f[k] = v.slice(1, -1).split(',').map(temiz).filter(Boolean); liste = null; }
+      else { f[k] = temiz(v); liste = null; }
+    }
+  }
+  return f;
+}
+function ayristir(t) {
+  const m = String(t).replace(/\r\n/g, '\n').match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+  if (!m) return null;
+  const f = onBilgiAyristir(m[1]);
   f.body = m[2].trim();
   return f;
 }
@@ -74,6 +90,7 @@ function olustur(h) {
   let s = `---\ntitle: "${tek(h.title)}"\ndate: ${h.date}\n`;
   if (h.image) s += `image: ${h.image}\n`;
   if (h.lig) s += `lig: ${h.lig}\n`;
+  if (h.galeri && h.galeri.length) s += 'galeri:\n' + h.galeri.map(g => `  - ${g}\n`).join('');
   if (h.sabit) s += `sabit: true\n`;
   return s + `---\n${String(h.body || '').replace(/\r\n/g, '\n').trim()}\n`;
 }
@@ -136,7 +153,7 @@ module.exports = async (req, res) => {
       if (!gecerliHaberAdi(ad)) return gonder(400, { hata: 'Geçersiz haber' });
       const d = await gh(`/contents/${HABER_KLASORU}/${yolKodla(ad)}?ref=${DAL}`);
       const f = ayristir(Buffer.from(d.content, 'base64').toString('utf8')) || {};
-      return gonder(200, { ad, sha: d.sha, title: f.title || '', date: f.date || '', image: f.image || '', lig: f.lig || '', sabit: f.sabit === 'true', body: f.body || '' });
+      return gonder(200, { ad, sha: d.sha, title: f.title || '', date: f.date || '', image: f.image || '', galeri: Array.isArray(f.galeri) ? f.galeri : [], lig: f.lig || '', sabit: f.sabit === 'true', body: f.body || '' });
     }
 
     if (islem === 'sondakika') {
@@ -172,10 +189,12 @@ module.exports = async (req, res) => {
       if (isNaN(date)) return gonder(400, { hata: 'Geçersiz tarih.' });
       if (String(g.body || '').length > 100000) return gonder(400, { hata: 'Haber metni çok uzun.' });
       const lig = LIGLER.includes(g.lig) ? g.lig : '';
-      const image = /^\/images\/uploads\/[^/\\]+$/.test(g.image || '') ? g.image : '';
+      const gorselMi = u => /^\/images\/uploads\/[^/\\\s]+$/.test(u || '');
+      const image = gorselMi(g.image) ? g.image : '';
+      const galeri = (Array.isArray(g.galeri) ? g.galeri : []).filter(gorselMi).slice(0, 3);
       // Türkiye saatiyle ISO tarih
       const tr = new Date(date.getTime() + 3 * 3600e3).toISOString().replace('Z', '+03:00');
-      const icerik = Buffer.from(olustur({ title, date: tr, image, lig, sabit: g.sabit === true, body: g.body })).toString('base64');
+      const icerik = Buffer.from(olustur({ title, date: tr, image, galeri: image ? galeri : [], lig, sabit: g.sabit === true, body: g.body })).toString('base64');
 
       let ad = g.ad, sha = g.sha;
       if (ad) {

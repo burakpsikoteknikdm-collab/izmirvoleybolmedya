@@ -11,14 +11,32 @@ const LIG_ADI = {
 
 const kacis = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-function ayristir(t) {
-  const m = String(t).match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
-  if (!m) return null;
+function onBilgiAyristir(yaml) {
   const f = {};
-  m[1].split('\n').forEach(l => { const i = l.indexOf(':'); if (i > 0) f[l.slice(0, i).trim()] = l.slice(i + 1).trim().replace(/^["']|["']$/g, ''); });
-  f.body = m[2].trim();
-  return f.title ? f : null;
+  let liste = null;
+  const temiz = v => v.trim().replace(/^["']|["']$/g, '');
+  for (const satir of yaml.split('\n')) {
+    const m = satir.match(/^\s*-\s+(.*)$/);
+    if (m && liste) { f[liste].push(temiz(m[1])); continue; }
+    const i = satir.indexOf(':');
+    if (i > 0 && !/^\s/.test(satir)) {
+      const k = satir.slice(0, i).trim(), v = satir.slice(i + 1).trim();
+      if (v === '' || v === '[]') { f[k] = []; liste = k; }
+      else if (/^\[.*\]$/.test(v)) { f[k] = v.slice(1, -1).split(',').map(temiz).filter(Boolean); liste = null; }
+      else { f[k] = temiz(v); liste = null; }
+    }
+  }
+  return f;
 }
+function ayristir(t) {
+  const m = String(t).replace(/\r\n/g, '\n').match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+  if (!m) return null;
+  const f = onBilgiAyristir(m[1]);
+  f.body = m[2].trim();
+  return typeof f.title === 'string' && f.title ? f : null;
+}
+// Haberin fotoğrafları: kapak + galeri (en fazla 4)
+const fotolar = h => [h.image, ...(Array.isArray(h.galeri) ? h.galeri : [])].filter(u => typeof u === 'string' && u).slice(0, 4);
 
 const duzMetin = b => String(b).replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/[*_>`~]/g, '').replace(/(^|\s)#{1,6}\s/g, '$1').replace(/\s+/g, ' ').trim();
 const mutlakAdres = u => !u ? '' : /^https?:/.test(u) ? u : SITE + (u.startsWith('/') ? '' : '/') + u;
@@ -78,4 +96,4 @@ async function haberListesi() {
 
 const haberAdresi = ad => `${SITE}/haber/${encodeURIComponent(ad)}`;
 
-module.exports = { SITE, REPO, LIG_ADI, kacis, ayristir, duzMetin, mutlakAdres, markdown, haberGetir, haberListesi, haberAdresi };
+module.exports = { SITE, REPO, LIG_ADI, kacis, ayristir, fotolar, duzMetin, mutlakAdres, markdown, haberGetir, haberListesi, haberAdresi };

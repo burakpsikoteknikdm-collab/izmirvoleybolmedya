@@ -75,12 +75,17 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
 .kur div{flex:1}
 
 /* Düzenleme */
-.gorsel-kutu{position:relative;border:2px dashed var(--line);border-radius:var(--r);background:#fff;overflow:hidden;aspect-ratio:16/9;display:grid;place-items:center;cursor:pointer;text-align:center;color:var(--muted)}
-.gorsel-kutu img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.gorsel-kutu .yukle{font-weight:700}
-.gorsel-kutu .durum{position:absolute;inset:0;display:grid;place-items:center;background:rgba(11,31,77,.6);color:#fff;font-weight:700}
-.gorsel-islem{display:flex;gap:8px;margin-top:8px}
-.gorsel-islem .btn{padding:8px 14px;font-size:1rem}
+.foto-izgara{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.foto{position:relative;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:var(--sky);border:2px solid var(--line)}
+.foto.kapak{border-color:var(--gold)}
+.foto img{width:100%;height:100%;object-fit:cover;display:block}
+.foto .etiket{position:absolute;top:6px;left:6px;background:var(--gold);color:var(--ink);font-size:.72rem;font-weight:800;letter-spacing:.04em;padding:2px 8px;border-radius:999px}
+.foto .islem{position:absolute;left:0;right:0;bottom:0;display:flex;gap:6px;justify-content:flex-end;padding:6px;background:linear-gradient(transparent,rgba(6,18,46,.75))}
+.foto .islem button{border:0;border-radius:8px;min-height:34px;padding:0 10px;font-weight:700;font-size:.85rem;cursor:pointer;background:#fff;color:var(--ink)}
+.foto .islem .kaldir{background:#fff;color:var(--red);min-width:34px}
+.foto-ekle{aspect-ratio:4/3;border:2px dashed var(--line);border-radius:12px;background:#fff;color:var(--muted);font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;padding:8px}
+.foto-ekle small{font-weight:500;font-size:.8rem}
+.foto-durum{margin-top:8px;font-weight:700;color:var(--blue)}
 .arac{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
 .arac button{border:2px solid var(--line);background:#fff;border-radius:10px;min-width:42px;height:40px;padding:0 10px;font-weight:700;cursor:pointer}
 .arac button.aktif{background:var(--ink);color:#fff;border-color:var(--ink)}
@@ -171,17 +176,11 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
       <span><b>📌 Başa Tuttur</b><small>Haber manşette büyük olarak ve listede ilk sırada görünür. Hiçbir haber tutturulmazsa en son haber öne çıkar.</small></span>
     </label>
     <div class="alan" style="margin-bottom:16px">
-      <span style="display:block;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Kapak Görseli</span>
-      <div class="gorsel-kutu" id="gorselKutu" role="button" tabindex="0" aria-label="Kapak görseli seç">
-        <span class="yukle">📷 Görsel seçmek için dokunun</span>
-        <img id="gorselOnizleme" alt="" hidden>
-        <div class="durum" id="gorselDurum" hidden>Yükleniyor…</div>
-      </div>
-      <div class="gorsel-islem" id="gorselIslem" hidden>
-        <button type="button" class="btn cizgi" id="gorselDegistir">Değiştir</button>
-        <button type="button" class="btn kirmizi" id="gorselKaldir">Kaldır</button>
-      </div>
-      <input type="file" id="gorselDosya" accept="image/*" hidden>
+      <span style="display:block;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Fotoğraflar (en fazla 4 · ilki kapak)</span>
+      <div class="foto-izgara" id="fotoIzgara"></div>
+      <div class="foto-durum" id="gorselDurum" role="status" hidden></div>
+      <div class="ipucu">Birden fazla fotoğraf eklerseniz haberde kaydırmalı galeri olarak görünür. Kapak fotoğrafı manşette ve paylaşımlarda kullanılır.</div>
+      <input type="file" id="gorselDosya" accept="image/*" multiple hidden>
     </div>
     <div class="alan">
       <span style="display:block;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Haber İçeriği</span>
@@ -319,10 +318,10 @@ async function duzenAc(ad) {
   degisti = false;
   onizleKapat();
   if (!ad) {
-    duzen = { ad: null, sha: null, image: '' };
+    duzen = { ad: null, sha: null, fotolar: [] };
     $('#duzenBaslik').textContent = 'Yeni Haber';
     $('#fBaslik').value = ''; $('#fTarih').value = yerelTarih(new Date()); $('#fLig').value = ''; $('#fSabit').checked = false; $('#fIcerik').value = '';
-    gorselGoster('');
+    fotoCiz();
     $('#silBtn').hidden = true; $('#kaydetBtn').textContent = 'Yayınla';
     goster('duzen');
     return;
@@ -332,11 +331,11 @@ async function duzenAc(ad) {
   ['#fBaslik', '#fTarih', '#fLig', '#fIcerik', '#kaydetBtn'].forEach(s => $(s).disabled = true);
   try {
     const h = await api('getir', { sorgu: '&ad=' + encodeURIComponent(ad) });
-    duzen = { ad: h.ad, sha: h.sha, image: h.image };
+    duzen = { ad: h.ad, sha: h.sha, fotolar: [h.image, ...(h.galeri || [])].filter(Boolean).slice(0, 4) };
     $('#duzenBaslik').textContent = 'Haberi Düzenle';
     $('#fBaslik').value = h.title; $('#fTarih').value = h.date ? yerelTarih(h.date) : yerelTarih(new Date());
     $('#fLig').value = h.lig || ''; $('#fSabit').checked = !!h.sabit; $('#fIcerik').value = h.body;
-    gorselGoster(h.image);
+    fotoCiz();
     $('#silBtn').hidden = false; $('#kaydetBtn').textContent = 'Güncelle';
   } catch (e) { duzenHata(e.message); }
   ['#fBaslik', '#fTarih', '#fLig', '#fIcerik', '#kaydetBtn'].forEach(s => $(s).disabled = false);
@@ -351,20 +350,36 @@ $('#geriBtn').onclick = geriDon;
 $('#vazgecBtn').onclick = geriDon;
 addEventListener('beforeunload', e => { if (!$('#duzenEkrani').hidden && degisti) { e.preventDefault(); e.returnValue = ''; } });
 
-/* Kapak görseli: seçilen dosya küçültülüp hemen yüklenir */
-function gorselGoster(yol) {
-  duzen.image = yol || '';
-  const im = $('#gorselOnizleme');
-  im.hidden = !yol;
-  if (yol) { gorselYedek(im, yol); im.src = gorselAdres(yol); }
-  $('#gorselKutu .yukle').hidden = !!yol;
-  $('#gorselIslem').hidden = !yol;
+/* Fotoğraflar: en fazla 4, ilki kapak. Seçilen dosyalar küçültülüp hemen yüklenir */
+const EN_FAZLA_FOTO = 4;
+const onizlemeAdresi = {}; // yeni yüklenenler site yayına alınana kadar GitHub'dan gösterilir
+function fotoCiz() {
+  const kutu = $('#fotoIzgara');
+  kutu.textContent = '';
+  duzen.fotolar.forEach((yol, i) => {
+    const d = document.createElement('div'); d.className = 'foto' + (i ? '' : ' kapak');
+    const im = document.createElement('img'); im.alt = (i ? (i + 1) + '. fotoğraf' : 'Kapak fotoğrafı');
+    gorselYedek(im, yol); im.src = onizlemeAdresi[yol] || gorselAdres(yol);
+    d.append(im);
+    if (!i) { const e = document.createElement('span'); e.className = 'etiket'; e.textContent = 'KAPAK'; d.append(e); }
+    const islem = document.createElement('div'); islem.className = 'islem';
+    if (i) {
+      const k = document.createElement('button'); k.type = 'button'; k.textContent = 'Kapak yap';
+      k.onclick = () => { duzen.fotolar.unshift(...duzen.fotolar.splice(i, 1)); degisti = true; fotoCiz(); };
+      islem.append(k);
+    }
+    const x = document.createElement('button'); x.type = 'button'; x.className = 'kaldir'; x.textContent = '✕'; x.setAttribute('aria-label', 'Fotoğrafı kaldır');
+    x.onclick = () => { duzen.fotolar.splice(i, 1); degisti = true; fotoCiz(); };
+    islem.append(x); d.append(islem); kutu.append(d);
+  });
+  if (duzen.fotolar.length < EN_FAZLA_FOTO) {
+    const ekle = document.createElement('button'); ekle.type = 'button'; ekle.className = 'foto-ekle';
+    const kalan = EN_FAZLA_FOTO - duzen.fotolar.length;
+    ekle.innerHTML = '<span>📷 Fotoğraf Ekle</span><small>' + (duzen.fotolar.length ? kalan + ' fotoğraf daha eklenebilir' : 'Birden fazla seçebilirsiniz') + '</small>';
+    ekle.onclick = () => $('#gorselDosya').click();
+    kutu.append(ekle);
+  }
 }
-const dosyaSec = () => $('#gorselDosya').click();
-$('#gorselKutu').onclick = () => { if (!duzen.image) dosyaSec(); };
-$('#gorselKutu').onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); dosyaSec(); } };
-$('#gorselDegistir').onclick = dosyaSec;
-$('#gorselKaldir').onclick = () => { gorselGoster(''); degisti = true; };
 
 async function kucult(dosya, enBuyuk = 1600) {
   const bmp = await createImageBitmap(dosya).catch(() => null);
@@ -378,23 +393,30 @@ async function kucult(dosya, enBuyuk = 1600) {
   return veri;
 }
 $('#gorselDosya').onchange = async e => {
-  const dosya = e.target.files[0];
+  const kalan = EN_FAZLA_FOTO - duzen.fotolar.length;
+  const dosyalar = [...e.target.files].slice(0, kalan);
+  const fazla = e.target.files.length - dosyalar.length;
   e.target.value = '';
-  if (!dosya) return;
+  if (!dosyalar.length) return;
   const durum = $('#gorselDurum');
-  durum.hidden = false; durum.textContent = 'Görsel hazırlanıyor…';
+  durum.hidden = false;
   $('#kaydetBtn').disabled = true;
-  try {
-    const veri = await kucult(dosya);
-    durum.textContent = 'Yükleniyor…';
-    const j = await api('gorsel', { govde: { ad: $('#fBaslik').value || dosya.name, veri } });
-    gorselGoster(j.yol);
-    $('#gorselOnizleme').src = j.onizleme;
-    degisti = true;
-    bildir('Görsel yüklendi', 'iyi');
-  } catch (err) { bildir(err.message, 'kotu'); }
+  let yuklenen = 0;
+  for (const [i, dosya] of dosyalar.entries()) {
+    durum.textContent = `Fotoğraf ${i + 1} / ${dosyalar.length} yükleniyor…`;
+    try {
+      const veri = await kucult(dosya);
+      const j = await api('gorsel', { govde: { ad: $('#fBaslik').value || dosya.name, veri } });
+      onizlemeAdresi[j.yol] = j.onizleme;
+      duzen.fotolar.push(j.yol);
+      yuklenen++; degisti = true;
+      fotoCiz();
+    } catch (err) { bildir(err.message, 'kotu'); }
+  }
   durum.hidden = true;
   $('#kaydetBtn').disabled = false;
+  if (yuklenen) bildir(yuklenen === 1 ? 'Fotoğraf yüklendi' : yuklenen + ' fotoğraf yüklendi', 'iyi');
+  if (fazla > 0) bildir('Bir habere en fazla 4 fotoğraf eklenebilir; ' + fazla + ' fotoğraf eklenmedi.', 'kotu');
 };
 
 /* Biçimlendirme araçları (Markdown) */
@@ -441,7 +463,7 @@ $('#kaydetBtn').onclick = async () => {
   try {
     await api('kaydet', { govde: {
       ad: duzen.ad, sha: duzen.sha, title, date: new Date($('#fTarih').value).toISOString(),
-      lig: $('#fLig').value, sabit: $('#fSabit').checked, image: duzen.image, body: $('#fIcerik').value
+      lig: $('#fLig').value, sabit: $('#fSabit').checked, image: duzen.fotolar[0] || '', galeri: duzen.fotolar.slice(1), body: $('#fIcerik').value
     } });
     degisti = false;
     bildir(duzen.ad ? 'Haber güncellendi. Sitede birkaç dakika içinde görünür.' : 'Haber yayınlandı! Sitede birkaç dakika içinde görünür.', 'iyi');
