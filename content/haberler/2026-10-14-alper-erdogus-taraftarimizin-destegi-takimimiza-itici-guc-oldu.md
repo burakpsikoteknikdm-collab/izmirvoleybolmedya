@@ -3,6 +3,7 @@ title: "ALPER ERDOĞUŞ: “TARAFTARIMIZIN DESTEĞİ TAKIMIMIZA İTİCİ GÜÇ O
 date: 2026-10-14T00:01:00.000+03:00
 image: /images/uploads/2026-10-13-alper-erdogus-taraftarimizin-destegi-takimimiza-itici-guc-oldu-0bbb48.jpg
 lig: kadinlar-1-ligi
+bolum: takimlar
 ---
 ALPER ERDOĞUŞ: “TARAFTARIMIZIN DESTEĞİ TAKIMIMIZA İTİCİ GÜÇ OLDU” 
 
