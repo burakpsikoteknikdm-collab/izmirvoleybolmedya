@@ -138,6 +138,9 @@ aside h2{font-size:1.5rem;margin-bottom:12px}
 .tum{display:inline-block;margin-top:6px;background:var(--ink);color:#fff;border-radius:999px;padding:10px 20px;font-weight:700}
 footer{background:var(--ink);color:#9db8ff;padding:26px 0;text-align:center;font-size:.9rem}
 footer b{color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;display:block}
+footer .sosyal{display:flex;justify-content:center;gap:18px;margin-top:10px}
+footer .sosyal a{color:#fff;font-weight:600;padding:6px 2px}
+footer .sosyal a:hover{text-decoration:underline}
 @media(max-width:900px){.duzen{grid-template-columns:1fr}}
 @media(max-width:600px){article{padding:18px}.ust nav{gap:14px}.ust nav a{font-size:1rem}.marka b{font-size:1.25rem}.marka img{width:40px;height:40px}}
 </style>
@@ -183,7 +186,7 @@ footer b{color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;d
     </aside>
   </div>
 </main>
-<footer><b>İZMİR VOLEYBOL MEDYA</b>İzmir voleybol haberleri, maç sonuçları ve canlı yayınlar · <a href="mailto:info@izmirvoleybolmedya.com">info@izmirvoleybolmedya.com</a></footer>
+<footer><b>İZMİR VOLEYBOL MEDYA</b>İzmir voleybol haberleri, maç sonuçları ve canlı yayınlar · <a href="mailto:info@izmirvoleybolmedya.com">info@izmirvoleybolmedya.com</a><div class="sosyal"><a href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" rel="noopener">YouTube</a><a href="https://www.instagram.com/izmirvoleybolmedya" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/share/g/19xt84G5E8/" target="_blank" rel="noopener">Facebook</a></div></footer>
 <script>
 (function () {
   var url = ${JSON.stringify(adres)}, baslik = ${JSON.stringify(baslik).replace(/</g, '\\u003c')};
