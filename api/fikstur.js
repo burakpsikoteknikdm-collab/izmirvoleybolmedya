@@ -1,25 +1,5 @@
 // TVF lig fikstürünü haftalara bölünmüş JSON olarak döndürür: /api/fikstur?lig=sultanlar-ligi&grup=B
-const { TVF, LIGLER, metin, ligSayfasi, gonder } = require('./_tvf');
-
-function haftalar(html) {
-  const liste = [];
-  let hafta = null;
-  for (const tr of html.match(/<tr[\s\S]*?<\/tr>/gi) || []) {
-    if (/class="week"/.test(tr)) {
-      hafta = { ad: metin(tr), maclar: [] };
-      liste.push(hafta);
-      continue;
-    }
-    if (!hafta) continue;
-    const td = [...tr.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map(m => m[1]);
-    if (td.length < 8) continue;
-    // Sütunlar: Tarih, Saat, Yayın, Salon, Ev sahibi, A seti, B seti, Misafir, Set sonuçları
-    const [tarih, saat, yayin, salon, ev, evSet, misSet, misafir] = td.map(metin);
-    const setler = (td[8] ? metin(td[8]).match(/\d+-\d+/g) || [] : []).join(' ');
-    hafta.maclar.push({ tarih, saat, yayin, salon, ev, evSet, misSet, misafir, setler });
-  }
-  return liste.filter(h => h.maclar.length);
-}
+const { TVF, LIGLER, ligSayfasi, gonder, haftalar } = require('./_tvf');
 
 // "Bu hafta": tarihi bu haftaya (Türkiye saatiyle pazartesi–pazar) denk gelen ilk hafta;
 // yoksa bugünden sonraki ilk hafta, o da yoksa son hafta.

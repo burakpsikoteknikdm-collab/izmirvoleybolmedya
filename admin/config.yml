@@ -36,6 +36,14 @@ collections:
           - { label: "Erkekler 1. Ligi", value: "erkekler-1-ligi" }
           - { label: "Kadınlar 2. Ligi", value: "kadinlar-2-ligi" }
           - { label: "Erkekler 2. Ligi", value: "erkekler-2-ligi" }
+      - label: "İzmir Takımlarımız"
+        name: "bolum"
+        widget: "select"
+        required: false
+        hint: "Seçerseniz haber, sitedeki \"İzmir Takımlarımız\" ya da \"Altyapı\" sekmesinde de görünür."
+        options:
+          - { label: "İzmir Takımlarımız – Takımlar", value: "takimlar" }
+          - { label: "İzmir Takımlarımız – Altyapı", value: "altyapi" }
       - { label: "📌 Başa Tuttur", name: "sabit", widget: "boolean", default: false, required: false, hint: "İşaretlenirse haber manşette büyük olarak ve listede ilk sırada görünür. Hiçbir haber işaretli değilse en son haber öne çıkar." }
       - { label: "Haber İçeriği", name: "body", widget: "markdown" }
 

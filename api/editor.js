@@ -90,6 +90,7 @@ function olustur(h) {
   let s = `---\ntitle: "${tek(h.title)}"\ndate: ${h.date}\n`;
   if (h.image) s += `image: ${h.image}\n`;
   if (h.lig) s += `lig: ${h.lig}\n`;
+  if (h.bolum) s += `bolum: ${h.bolum}\n`;
   if (h.galeri && h.galeri.length) s += 'galeri:\n' + h.galeri.map(g => `  - ${g}\n`).join('');
   if (h.sabit) s += `sabit: true\n`;
   return s + `---\n${String(h.body || '').replace(/\r\n/g, '\n').trim()}\n`;
@@ -142,7 +143,7 @@ module.exports = async (req, res) => {
         const blob = await gh(`/git/blobs/${d.sha}`);
         const t = Buffer.from(blob.content, 'base64').toString('utf8');
         const f = ayristir(t) || {};
-        return { ad: d.name, sha: d.sha, title: f.title || d.name, date: f.date || '', image: f.image || '', lig: f.lig || '', sabit: f.sabit === 'true' };
+        return { ad: d.name, sha: d.sha, title: f.title || d.name, date: f.date || '', image: f.image || '', lig: f.lig || '', bolum: f.bolum || '', sabit: f.sabit === 'true' };
       }));
       liste.sort((a, b) => new Date(b.date) - new Date(a.date));
       return gonder(200, { kullanici, haberler: liste });
@@ -153,7 +154,7 @@ module.exports = async (req, res) => {
       if (!gecerliHaberAdi(ad)) return gonder(400, { hata: 'Geçersiz haber' });
       const d = await gh(`/contents/${HABER_KLASORU}/${yolKodla(ad)}?ref=${DAL}`);
       const f = ayristir(Buffer.from(d.content, 'base64').toString('utf8')) || {};
-      return gonder(200, { ad, sha: d.sha, title: f.title || '', date: f.date || '', image: f.image || '', galeri: Array.isArray(f.galeri) ? f.galeri : [], lig: f.lig || '', sabit: f.sabit === 'true', body: f.body || '' });
+      return gonder(200, { ad, sha: d.sha, title: f.title || '', date: f.date || '', image: f.image || '', galeri: Array.isArray(f.galeri) ? f.galeri : [], lig: f.lig || '', bolum: f.bolum || '', sabit: f.sabit === 'true', body: f.body || '' });
     }
 
     if (islem === 'sondakika') {
@@ -189,12 +190,13 @@ module.exports = async (req, res) => {
       if (isNaN(date)) return gonder(400, { hata: 'Geçersiz tarih.' });
       if (String(g.body || '').length > 100000) return gonder(400, { hata: 'Haber metni çok uzun.' });
       const lig = LIGLER.includes(g.lig) ? g.lig : '';
+      const bolum = ['takimlar', 'altyapi'].includes(g.bolum) ? g.bolum : '';
       const gorselMi = u => /^\/images\/uploads\/[^/\\\s]+$/.test(u || '');
       const image = gorselMi(g.image) ? g.image : '';
       const galeri = (Array.isArray(g.galeri) ? g.galeri : []).filter(gorselMi).slice(0, 3);
       // Türkiye saatiyle ISO tarih
       const tr = new Date(date.getTime() + 3 * 3600e3).toISOString().replace('Z', '+03:00');
-      const icerik = Buffer.from(olustur({ title, date: tr, image, galeri: image ? galeri : [], lig, sabit: g.sabit === true, body: g.body })).toString('base64');
+      const icerik = Buffer.from(olustur({ title, date: tr, image, galeri: image ? galeri : [], lig, bolum, sabit: g.sabit === true, body: g.body })).toString('base64');
 
       let ad = g.ad, sha = g.sha;
       if (ad) {

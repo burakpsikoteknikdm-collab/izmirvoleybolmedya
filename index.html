@@ -44,9 +44,9 @@ h1,h2,h3,.btn,.nav a,.brand{font-family:'Barlow Condensed',sans-serif}
 .brand b{display:block;color:#fff;font-size:1.7rem;font-weight:800;line-height:1;white-space:nowrap}
 .brand b i{font-style:normal;color:var(--gold)}
 .brand small{display:block;color:#9db8ff;font-size:.8rem;font-weight:600;letter-spacing:.04em;margin-top:3px;white-space:nowrap}
-.nav{display:flex;gap:26px}
-.nav a{color:#fff;font-size:1.15rem;font-weight:700;padding:6px 0;border-bottom:3px solid transparent}
-.nav a:hover{border-color:var(--gold)}
+.nav{display:flex;align-items:center;gap:26px}
+.nav a{color:#fff;font-size:1.15rem;font-weight:700;line-height:1.6;padding:6px 0;border-bottom:3px solid transparent;white-space:nowrap}
+.nav a:hover,.nav > a.aktif{border-color:var(--gold)}
 .menu{display:none;background:none;border:2px solid #3b5bb5;color:#fff;border-radius:10px;width:44px;height:44px;font-size:1.5rem;cursor:pointer;flex:none}
 
 /* Hero */
@@ -136,7 +136,7 @@ h1,h2,h3,.btn,.nav a,.brand{font-family:'Barlow Condensed',sans-serif}
 
 /* Ligler menüsü */
 .dd{position:relative}
-.dd-btn{background:none;border:0;border-bottom:3px solid transparent;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;padding:6px 0;cursor:pointer}
+.dd-btn{line-height:1.6;white-space:nowrap;background:none;border:0;border-bottom:3px solid transparent;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;padding:6px 0;cursor:pointer}
 .dd-btn:hover,.dd.open .dd-btn{border-color:var(--gold)}
 .dd-menu{display:none;position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);min-width:230px;background:#fff;border-radius:12px;box-shadow:0 14px 34px rgba(11,31,77,.3);padding:8px;z-index:60}
 .dd.open .dd-menu{display:block}
@@ -304,9 +304,9 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
 @media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr}.footer-grid>div:first-child{grid-column:1/-1}.footer-grid a{padding:9px 0}.ust-bilgi .sosyal a{padding:9px 2px}}
 
 @media(max-width:1024px){.card{flex-basis:calc((100% - 36px)/3)}.grid{grid-template-columns:1fr}}
-@media(max-width:768px){
+@media(max-width:1000px){
  .menu{display:block}
- .nav{display:none;position:absolute;top:83px;left:0;right:0;background:var(--ink);flex-direction:column;gap:0;padding:6px 20px 16px;border-top:1px solid #20366f}
+ .nav{display:none;align-items:stretch;position:absolute;top:83px;left:0;right:0;background:var(--ink);flex-direction:column;gap:0;padding:6px 20px 16px;border-top:1px solid #20366f}
  .nav.open{display:flex}.nav a{padding:14px 0;border-bottom:1px solid #20366f}
  .dd-btn{width:100%;text-align:left;padding:14px 0;border-bottom:1px solid #20366f}
  .dd-menu{position:static;transform:none;box-shadow:none;background:#13296a;margin:6px 0}
@@ -314,6 +314,8 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
  .dd-menu small{color:#9db8ff}
  .dd-menu.dd-genis,.dd.open .dd-menu.dd-genis{min-width:0;grid-template-columns:1fr}
  .nav{max-height:calc(100vh - 90px);overflow-y:auto}
+}
+@media(max-width:768px){
  .card{flex-basis:calc((100% - 18px)/2)}
  .hero{padding:44px 0 48px}.court{width:150%;right:-50%;opacity:.55}
  .arrow{width:38px;height:38px;font-size:1.4rem}.section h2{font-size:1.9rem}.box iframe,.maclar{height:460px}
@@ -349,6 +351,8 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
     <button class="menu" id="menu" aria-label="Menüyü aç" aria-expanded="false">☰</button>
     <nav class="nav" id="nav">
       <a href="#haberler">Haberler</a>
+      <a href="#bolum/takimlar">İzmir Takımlarımız</a>
+      <a href="#bolum/altyapi">Altyapı</a>
       <div class="dd">
         <button class="dd-btn" type="button" aria-expanded="false" aria-controls="milliMenu">Milli Takımlar ▾</button>
         <div class="dd-menu dd-genis" id="milliMenu">
@@ -465,6 +469,16 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
     </div>
   </section>
 
+  <section class="section" id="bolumView" hidden>
+    <div class="wrap">
+      <div class="lig-ust">
+        <h2 id="bolumAd">İzmir Takımlarımız</h2>
+        <a href="#top" class="geri">← Ana Sayfa</a>
+      </div>
+      <div id="bolumIcerik"><div class="msg">Haberler yükleniyor…</div></div>
+    </div>
+  </section>
+
   <section class="section" id="milliView" hidden>
     <div class="wrap">
       <div class="lig-ust">
@@ -519,6 +533,8 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
     <div>
       <h4>Bölümler</h4>
       <a href="#haberler">Haberler</a>
+      <a href="#bolum/takimlar">İzmir Takımlarımız</a>
+      <a href="#bolum/altyapi">Altyapı</a>
       <a href="#lig/sultanlar-ligi">Ligler</a>
       <a href="#milli/kadin">Milli Takımlar</a>
       <a href="#program">Maç Programı</a>
@@ -815,11 +831,34 @@ function mansetCiz(list) {
 
 // Ana sayfa bölümlerinin görünürlüğü (lig/milli sayfası açıkken hepsi gizli)
 function anaDuzen() {
-  const ana = !/^#(lig|milli)\//.test(location.hash);
+  const ana = !/^#(lig|milli|bolum)\//.test(location.hash);
   const haberVar = !!(haberListesi && haberListesi.length);
   $('#manset').hidden = !ana || !haberVar;
   $('#hero').hidden = !ana || haberVar;
   $('#reklamSerit').hidden = !ana || !reklamAktif;
+}
+/* İzmir Takımlarımız / Altyapı sayfaları: panelde bu bölüme işaretlenen haberler */
+const BOLUM_ADI = { takimlar: 'İzmir Takımlarımız', altyapi: 'Altyapı' };
+function bolumCiz() {
+  const m = location.hash.match(/^#bolum\/(takimlar|altyapi)$/);
+  if (!m || !haberListesi) return;
+  const liste = haberListesi.filter(n => n.bolum === m[1]);
+  const kutu = $('#bolumIcerik');
+  if (!liste.length) { kutu.innerHTML = `<div class="msg">${BOLUM_ADI[m[1]]} bölümünde henüz haber yok.</div>`; return; }
+  const izgara = document.createElement('div'); izgara.className = 'mt-haberler';
+  liste.forEach((n, i) => {
+    const a = haberOgesi(n, 'mt-haber' + (i ? '' : ' ilk'));
+    const foto = haberFotolari(n)[0];
+    if (foto) { const im = document.createElement('img'); im.className = 'im'; im.alt = n.title; if (i) im.loading = 'lazy'; resimKur(im, foto); a.append(im); }
+    else { const s = document.createElement('span'); s.className = 'im'; a.append(s); }
+    const tx = document.createElement('span'); tx.className = 'tx';
+    const t = document.createElement('time'); t.textContent = fmt(n.date);
+    const h = document.createElement('h3'); h.textContent = n.title;
+    const o = document.createElement('span'); o.className = 'oku'; o.textContent = 'Haberi Oku →';
+    tx.append(t, h, o); a.append(tx);
+    izgara.append(a);
+  });
+  kutu.replaceChildren(izgara);
 }
 function haberAdrestenAc() {
   const m = location.hash.match(/^#haber\/(.+)$/);
@@ -857,6 +896,7 @@ async function loadNews() {
   anaDuzen();
   sonDakikaCiz();
   ligHaberleriCiz();
+  bolumCiz();
   haberAdrestenAc();
 }
 function start() {
@@ -1171,14 +1211,26 @@ function yonlendir() {
   const lig = m && LIGLER.find(l => l[0] === m[1]);
   const mm = location.hash.match(/^#milli\/([\w-]+)$/);
   const milli = mm && MILLI.find(x => x[0] === mm[1]);
+  const mb = location.hash.match(/^#bolum\/(takimlar|altyapi)$/);
+  const bolum = mb && mb[1];
   clearInterval(ligZamanlayici);
   ddKapat();
   ['#pnl', '#dlg'].forEach(s => $(s).open && $(s).close());
   document.querySelectorAll('.dd-menu a, .chips .chip').forEach(a => a.classList.toggle('aktif', a.getAttribute('href') === location.hash));
   $('#ligView').hidden = !lig;
   $('#milliView').hidden = !milli;
-  anaBolumler.forEach(s => s.hidden = !!(lig || milli));
+  $('#bolumView').hidden = !bolum;
+  document.querySelectorAll('.nav > a').forEach(a => a.classList.toggle('aktif', a.getAttribute('href') === location.hash));
+  anaBolumler.forEach(s => s.hidden = !!(lig || milli || bolum));
   anaDuzen();
+  if (bolum) {
+    aktifLig = null;
+    $('#bolumAd').textContent = BOLUM_ADI[bolum];
+    document.title = BOLUM_ADI[bolum] + ' Haberleri | İzmir Voleybol Medya';
+    scrollTo(0, 0);
+    bolumCiz();
+    return;
+  }
   if (milli) {
     aktifLig = null;
     $('#milliAd').textContent = milli[1];
@@ -1207,7 +1259,7 @@ function yonlendir() {
 }
 const ilkBaslik = document.title;
 addEventListener('hashchange', yonlendir);
-if (/^#(lig|milli)\//.test(location.hash)) yonlendir();
+if (/^#(lig|milli|bolum)\//.test(location.hash)) yonlendir();
 </script>
 </body>
 </html>

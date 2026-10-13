@@ -57,6 +57,39 @@ async function ligSayfasi(lig, { sekme, grup } = {}) {
   return { html: (await u.json()).components[0].effects.html, gruplar: g.liste, grup };
 }
 
+// Puan durumu tablosu (lig sayfası)
+function tablo(html) {
+  const t = (html.match(/tvf-standings[\s\S]*?<tbody>([\s\S]*?)<\/tbody>/i) || [])[1] || '';
+  return (t.match(/<tr[\s\S]*?<\/tr>/gi) || []).map(tr => {
+    const td = [...tr.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map(m => m[1]);
+    if (td.length < 9) return null;
+    const logo = (td[1].match(/<img[^>]*src="([^"]+)"/i) || [])[1] || '';
+    const [sira, , o, g, m, p, a, v, sav] = td.map(metin);
+    return { sira, takim: metin(td[1]), logo: /^https:\/\//.test(logo) && !/logoyok/i.test(logo) ? logo : '', o, g, m, p, a, v, sav };
+  }).filter(Boolean);
+}
+
+// Fikstür: haftalara bölünmüş maçlar (fikstür sekmesi)
+function haftalar(html) {
+  const liste = [];
+  let hafta = null;
+  for (const tr of html.match(/<tr[\s\S]*?<\/tr>/gi) || []) {
+    if (/class="week"/.test(tr)) {
+      hafta = { ad: metin(tr), maclar: [] };
+      liste.push(hafta);
+      continue;
+    }
+    if (!hafta) continue;
+    const td = [...tr.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map(m => m[1]);
+    if (td.length < 8) continue;
+    // Sütunlar: Tarih, Saat, Yayın, Salon, Ev sahibi, A seti, B seti, Misafir, Set sonuçları
+    const [tarih, saat, yayin, salon, ev, evSet, misSet, misafir] = td.map(metin);
+    const setler = (td[8] ? metin(td[8]).match(/\d+-\d+/g) || [] : []).join(' ');
+    hafta.maclar.push({ tarih, saat, yayin, salon, ev, evSet, misSet, misafir, setler });
+  }
+  return liste.filter(h => h.maclar.length);
+}
+
 function gonder(res, kod, veri, onbellek) {
   res.statusCode = kod;
   res.setHeader('Cache-Control', onbellek);
@@ -64,4 +97,4 @@ function gonder(res, kod, veri, onbellek) {
   res.end(JSON.stringify(veri));
 }
 
-module.exports = { TVF, LIGLER, metin, ligSayfasi, gonder };
+module.exports = { TVF, LIGLER, metin, ligSayfasi, gonder, tablo, haftalar };

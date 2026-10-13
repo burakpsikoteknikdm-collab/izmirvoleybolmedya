@@ -171,6 +171,14 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
       </select>
       <div class="ipucu">Lig seçerseniz haber, o ligin puan durumu sayfasında da görünür.</div>
     </label>
+    <label class="alan"><span>İzmir Takımlarımız</span>
+      <select class="girdi" id="fBolum">
+        <option value="">Yok</option>
+        <option value="takimlar">İzmir Takımlarımız – Takımlar</option>
+        <option value="altyapi">İzmir Takımlarımız – Altyapı</option>
+      </select>
+      <div class="ipucu">Seçerseniz haber, sitedeki "İzmir Takımlarımız" ya da "Altyapı" sekmesinde de görünür.</div>
+    </label>
     <label class="sabitle">
       <input type="checkbox" id="fSabit">
       <span><b>📌 Başa Tuttur</b><small>Haber manşette büyük olarak ve listede ilk sırada görünür. Hiçbir haber tutturulmazsa en son haber öne çıkar.</small></span>
@@ -296,6 +304,7 @@ async function listeAc() {
       const t = document.createElement('b'); t.textContent = h.title;
       const k = document.createElement('small'); k.textContent = tarihYaz(h.date);
       if (h.lig) { const r = document.createElement('span'); r.className = 'rozet'; r.textContent = LIG_AD[h.lig] || h.lig; k.append(r); }
+      if (h.bolum) { const r = document.createElement('span'); r.className = 'rozet'; r.textContent = h.bolum === 'altyapi' ? 'Altyapı' : 'İzmir Takımlarımız'; k.append(r); }
       if (h.sabit) { const r = document.createElement('span'); r.className = 'rozet sabit'; r.textContent = '📌 Başa tutturuldu'; k.append(r); }
       tx.append(t, k); b.append(tx);
       b.onclick = () => duzenAc(h.ad);
@@ -320,7 +329,7 @@ async function duzenAc(ad) {
   if (!ad) {
     duzen = { ad: null, sha: null, fotolar: [] };
     $('#duzenBaslik').textContent = 'Yeni Haber';
-    $('#fBaslik').value = ''; $('#fTarih').value = yerelTarih(new Date()); $('#fLig').value = ''; $('#fSabit').checked = false; $('#fIcerik').value = '';
+    $('#fBaslik').value = ''; $('#fTarih').value = yerelTarih(new Date()); $('#fLig').value = ''; $('#fBolum').value = ''; $('#fSabit').checked = false; $('#fIcerik').value = '';
     fotoCiz();
     $('#silBtn').hidden = true; $('#kaydetBtn').textContent = 'Yayınla';
     goster('duzen');
@@ -334,13 +343,13 @@ async function duzenAc(ad) {
     duzen = { ad: h.ad, sha: h.sha, fotolar: [h.image, ...(h.galeri || [])].filter(Boolean).slice(0, 4) };
     $('#duzenBaslik').textContent = 'Haberi Düzenle';
     $('#fBaslik').value = h.title; $('#fTarih').value = h.date ? yerelTarih(h.date) : yerelTarih(new Date());
-    $('#fLig').value = h.lig || ''; $('#fSabit').checked = !!h.sabit; $('#fIcerik').value = h.body;
+    $('#fLig').value = h.lig || ''; $('#fBolum').value = h.bolum || ''; $('#fSabit').checked = !!h.sabit; $('#fIcerik').value = h.body;
     fotoCiz();
     $('#silBtn').hidden = false; $('#kaydetBtn').textContent = 'Güncelle';
   } catch (e) { duzenHata(e.message); }
   ['#fBaslik', '#fTarih', '#fLig', '#fIcerik', '#kaydetBtn'].forEach(s => $(s).disabled = false);
 }
-['#fBaslik', '#fTarih', '#fLig', '#fIcerik', '#fSabit'].forEach(s => $(s).addEventListener('input', () => degisti = true));
+['#fBaslik', '#fTarih', '#fLig', '#fBolum', '#fIcerik', '#fSabit'].forEach(s => $(s).addEventListener('input', () => degisti = true));
 
 function geriDon() {
   if (degisti && !confirm('Kaydedilmemiş değişiklikler silinecek. Çıkılsın mı?')) return;
@@ -463,7 +472,7 @@ $('#kaydetBtn').onclick = async () => {
   try {
     await api('kaydet', { govde: {
       ad: duzen.ad, sha: duzen.sha, title, date: new Date($('#fTarih').value).toISOString(),
-      lig: $('#fLig').value, sabit: $('#fSabit').checked, image: duzen.fotolar[0] || '', galeri: duzen.fotolar.slice(1), body: $('#fIcerik').value
+      lig: $('#fLig').value, bolum: $('#fBolum').value, sabit: $('#fSabit').checked, image: duzen.fotolar[0] || '', galeri: duzen.fotolar.slice(1), body: $('#fIcerik').value
     } });
     degisti = false;
     bildir(duzen.ad ? 'Haber güncellendi. Sitede birkaç dakika içinde görünür.' : 'Haber yayınlandı! Sitede birkaç dakika içinde görünür.', 'iyi');

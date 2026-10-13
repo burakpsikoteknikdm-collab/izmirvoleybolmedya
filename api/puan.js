@@ -1,16 +1,5 @@
 // TVF lig puan durumunu JSON olarak döndürür: /api/puan?lig=sultanlar-ligi&grup=B
-const { TVF, LIGLER, metin, ligSayfasi, gonder } = require('./_tvf');
-
-function tablo(html) {
-  const t = (html.match(/tvf-standings[\s\S]*?<tbody>([\s\S]*?)<\/tbody>/i) || [])[1] || '';
-  return (t.match(/<tr[\s\S]*?<\/tr>/gi) || []).map(tr => {
-    const td = [...tr.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map(m => m[1]);
-    if (td.length < 9) return null;
-    const logo = (td[1].match(/<img[^>]*src="([^"]+)"/i) || [])[1] || '';
-    const [sira, , o, g, m, p, a, v, sav] = td.map(metin);
-    return { sira, takim: metin(td[1]), logo: /^https:\/\//.test(logo) && !/logoyok/i.test(logo) ? logo : '', o, g, m, p, a, v, sav };
-  }).filter(Boolean);
-}
+const { TVF, LIGLER, ligSayfasi, gonder, tablo } = require('./_tvf');
 
 module.exports = async (req, res) => {
   const q = new URL(req.url, 'http://x').searchParams;
