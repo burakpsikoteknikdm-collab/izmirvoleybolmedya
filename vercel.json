@@ -1,5 +1,6 @@
 {
   "rewrites": [
-    { "source": "/haber/:ad", "destination": "/api/paylas?ad=:ad" }
+    { "source": "/haber/:ad", "destination": "/api/paylas?ad=:ad" },
+    { "source": "/sitemap.xml", "destination": "/api/sitemap" }
   ]
 }

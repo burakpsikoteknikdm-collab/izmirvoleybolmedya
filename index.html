@@ -3,17 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>İzmir Voleybol Medya | Haber & Canlı Yayın Portalı</title>
-<meta name="description" content="İzmir voleybol haberleri, canlı yayınlar, maç programları, puan durumları ve fikstürler.">
+<title>İzmir Voleybol Medya | İzmir Voleybol Haberleri, Maç Sonuçları ve Canlı Yayın</title>
+<meta name="description" content="İzmir voleybol haberleri, maç sonuçları, puan durumları, fikstür ve canlı yayınlar. Sultanlar Ligi’nden altyapıya İzmir voleybolunda olan her şey İzmir Voleybol Medya’da.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://www.izmirvoleybolmedya.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="İzmir Voleybol Medya">
 <meta property="og:locale" content="tr_TR">
-<meta property="og:title" content="İzmir Voleybol Medya | Haber &amp; Canlı Yayın Portalı">
-<meta property="og:description" content="İzmir voleybol haberleri, canlı yayınlar, maç programları, puan durumları ve fikstürler.">
+<meta property="og:title" content="İzmir Voleybol Medya | İzmir Voleybol Haberleri, Maç Sonuçları ve Canlı Yayın">
+<meta property="og:description" content="İzmir voleybol haberleri, maç sonuçları, puan durumları, fikstür ve canlı yayınlar. Sultanlar Ligi’nden altyapıya İzmir voleybolunda olan her şey İzmir Voleybol Medya’da.">
 <meta property="og:url" content="https://www.izmirvoleybolmedya.com/">
 <meta property="og:image" content="https://www.izmirvoleybolmedya.com/editor/ikon-512.png">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#0b1f4d">
+<link rel="icon" href="/editor/ikon-192.png">
+<link rel="apple-touch-icon" href="/editor/apple-touch-icon.png">
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"NewsMediaOrganization","name":"İzmir Voleybol Medya","alternateName":["İzmir Voleybol Medya Grubu","İzmir Voleybol"],"url":"https://www.izmirvoleybolmedya.com/","logo":"https://www.izmirvoleybolmedya.com/editor/ikon-512.png","email":"info@izmirvoleybolmedya.com","areaServed":"İzmir","sameAs":["https://www.youtube.com/@izmirvoleybolmedya","https://www.instagram.com/izmirvoleybolmedya"]},{"@context":"https://schema.org","@type":"WebSite","name":"İzmir Voleybol Medya","url":"https://www.izmirvoleybolmedya.com/","inLanguage":"tr-TR"}]</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
@@ -28,6 +33,7 @@ a{color:inherit;text-decoration:none}
 h1,h2,h3,.btn,.nav a,.brand{font-family:'Barlow Condensed',sans-serif}
 .wrap{max-width:1200px;margin:0 auto;padding:0 20px}
 :focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.gizli{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
 /* Üst bar */
 .header{position:sticky;top:0;z-index:50;background:var(--ink);box-shadow:0 4px 18px rgba(11,31,77,.3)}
@@ -46,7 +52,7 @@ h1,h2,h3,.btn,.nav a,.brand{font-family:'Barlow Condensed',sans-serif}
 /* Hero */
 .hero{position:relative;overflow:hidden;color:#fff;background:linear-gradient(120deg,var(--ink) 0%,#123a9c 100%);padding:64px 0 56px}
 .hero .wrap{position:relative;z-index:2}
-.hero h1{font-size:clamp(2.4rem,6vw,4.4rem);line-height:.98;font-weight:800;max-width:11em}
+.hero .hero-baslik{font-size:clamp(2.4rem,6vw,4.4rem);line-height:.98;font-weight:800;max-width:11em}
 .hero p{margin:18px 0 28px;max-width:34em;color:#c9d8ff;font-size:1.1rem}
 .btns{display:flex;gap:12px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 26px;border-radius:999px;font-weight:800;font-size:1.15rem;border:2px solid transparent;cursor:pointer}
@@ -368,6 +374,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
 </div>
 
 <main id="top">
+  <h1 class="gizli">İzmir Voleybol Haberleri, Maç Sonuçları ve Canlı Yayın – İzmir Voleybol Medya</h1>
   <section class="manset" id="manset" hidden>
     <div class="wrap manset-grid">
       <div id="mansetAna"></div>
@@ -385,7 +392,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
       <circle cx="190" cy="2" r="5" fill="#fff" stroke="none"/><circle cx="190" cy="198" r="5" fill="#fff" stroke="none"/>
     </svg>
     <div class="wrap">
-      <h1>İzmir Voleybolu Bir Arada</h1>
+      <h2 class="hero-baslik">İzmir Voleybolu Bir Arada</h2>
       <p>Sultanlar Ligi'nden altyapı maçlarına, canlı yayınlardan güncel haberlere kadar İzmir voleybolunda olan biten her şey tek adreste.</p>
       <div class="btns">
         <a href="#haberler" class="btn btn-gold">Son Haberler</a>
@@ -592,25 +599,31 @@ function render(list) {
   track.textContent = '';
   if (!list.length) { track.innerHTML = '<div class="msg">Henüz yayınlanmış haber yok.</div>'; return; }
   list.forEach(n => {
-    const c = document.createElement('button');
-    c.className = 'card'; c.type = 'button';
-    if (n.image) { const im = document.createElement('img'); im.className = 'im'; im.loading = 'lazy'; im.alt = ''; resimKur(im, n.image); c.append(im); }
+    const c = haberOgesi(n, 'card');
+    if (n.image) { const im = document.createElement('img'); im.className = 'im'; im.loading = 'lazy'; im.alt = n.title; resimKur(im, n.image); c.append(im); }
     else { const d = document.createElement('div'); d.className = 'im'; c.append(d); }
     const tx = document.createElement('div'); tx.className = 'tx';
     const t = document.createElement('time'); t.textContent = fmt(n.date);
     const h = document.createElement('h3'); h.textContent = n.title;
     const p = document.createElement('p'); p.textContent = plain(n.body);
     tx.append(t, h, p); c.append(tx);
-    c.onclick = () => openNews(n);
     track.append(c);
   });
 }
 let oncekiHash = null;
+// Haber öğesi: /haber/<ad> adresine giden gerçek bağlantı; normal tıklamada sayfa içi pencerede açılır
+function haberOgesi(n, sinif) {
+  const a = document.createElement('a');
+  a.className = sinif;
+  if (n.ad) a.href = '/haber/' + encodeURIComponent(n.ad);
+  a.onclick = e => { if (e.ctrlKey || e.metaKey || e.shiftKey || e.button > 0) return; e.preventDefault(); openNews(n); };
+  return a;
+}
 function openNews(n, adrestenAcildi) {
   $('#dt').textContent = fmt(n.date);
   $('#dh').textContent = n.title;
   $('#di').innerHTML = '';
-  if (n.image) { const im = document.createElement('img'); resimKur(im, n.image); im.alt = ''; $('#di').append(im); }
+  if (n.image) { const im = document.createElement('img'); resimKur(im, n.image); im.alt = n.title; $('#di').append(im); }
   $('#db').innerHTML = safeHtml(n.body);
   paylasHazirla(n);
   // Haberin kendi adresi (#haber/...) — sayfa yenilenince ya da link paylaşılınca aynı haber açılır
@@ -716,24 +729,22 @@ const LIG_ADI = { 'sultanlar-ligi': 'Sultanlar Ligi', 'efeler-ligi': 'Efeler Lig
 function mansetCiz(list) {
   const ana = list[0];
   if (!ana) return;
-  const b = document.createElement('button'); b.type = 'button'; b.className = 'manset-ana';
-  if (ana.image) { const im = document.createElement('img'); im.alt = ''; resimKur(im, ana.image); b.append(im); }
+  const b = haberOgesi(ana, 'manset-ana');
+  if (ana.image) { const im = document.createElement('img'); im.alt = ana.title; resimKur(im, ana.image); b.append(im); }
   const tx = document.createElement('span'); tx.className = 'tx';
   const kat = document.createElement('span'); kat.className = 'kat'; kat.textContent = LIG_ADI[ana.lig] || 'Manşet';
   const h = document.createElement('h2'); h.textContent = ana.title;
   const t = document.createElement('time'); t.textContent = fmt(ana.date);
   tx.append(kat, h, t); b.append(tx);
-  b.onclick = () => openNews(ana);
   $('#mansetAna').replaceChildren(b);
   $('#mansetYan').replaceChildren(...list.slice(1, 5).map(n => {
-    const k = document.createElement('button'); k.type = 'button'; k.className = 'manset-k';
-    if (n.image) { const im = document.createElement('img'); im.alt = ''; im.loading = 'lazy'; resimKur(im, n.image); k.append(im); }
+    const k = haberOgesi(n, 'manset-k');
+    if (n.image) { const im = document.createElement('img'); im.alt = n.title; im.loading = 'lazy'; resimKur(im, n.image); k.append(im); }
     else { const s = document.createElement('span'); s.className = 'bos'; k.append(s); }
     const y = document.createElement('span');
     const bb = document.createElement('b'); bb.textContent = n.title;
     const tt = document.createElement('time'); tt.textContent = fmt(n.date);
     y.append(bb, tt); k.append(y);
-    k.onclick = () => openNews(n);
     return k;
   }));
   $('#mansetYan').hidden = list.length < 2;
@@ -956,14 +967,13 @@ function ligHaberleriCiz() {
   if (!liste.length) { kutu.innerHTML = `<div class="msg">${kacis(ligAdi)} için henüz haber yok.</div>`; return; }
   kutu.textContent = '';
   liste.slice(0, 8).forEach(n => {
-    const b = document.createElement('button'); b.className = 'h'; b.type = 'button';
-    if (n.image) { const im = document.createElement('img'); resimKur(im, n.image); im.alt = ''; im.loading = 'lazy'; b.append(im); }
+    const b = haberOgesi(n, 'h');
+    if (n.image) { const im = document.createElement('img'); resimKur(im, n.image); im.alt = n.title; im.loading = 'lazy'; b.append(im); }
     else { const d = document.createElement('span'); d.className = 'yok'; b.append(d); }
     const tx = document.createElement('span');
     const t = document.createElement('time'); t.textContent = fmt(n.date);
     const h = document.createElement('b'); h.textContent = n.title;
     tx.append(t, h); b.append(tx);
-    b.onclick = () => openNews(n);
     kutu.append(b);
   });
 }
