@@ -102,6 +102,7 @@ ${lig ? `<meta property="article:section" content="${kacis(lig)}">` : ''}
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="/cerez.js"></script>
+<script src="/etkilesim.js" defer></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9798524131017882" crossorigin="anonymous"></script>
 <script type="application/ld+json">${jsonLd(yapisalVeri)}</script>
 <style>
@@ -153,6 +154,7 @@ article h1{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.08;margin:10px 0 8px
 .takip b{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;margin-right:6px}
 .takip a{border-radius:999px;padding:7px 15px;font-weight:700;font-size:.9rem;color:#fff;text-decoration:none}
 .takip a.yt{background:#e62117}.takip a.ig{background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af)}.takip a.fb{background:#1877f2}
+.bildirim-b{border:0;border-radius:999px;padding:7px 15px;font:700 .9rem Barlow,system-ui,sans-serif;background:#0b1f4d;color:#ffc21a;cursor:pointer}
 .pb.yerel{background:var(--ink)}.pb.wa{background:#1fa855}.pb.x{background:#111}.pb.fb{background:#1877f2}.pb.tg{background:#229ed9}.pb.kopya{background:var(--sky);color:var(--ink)}
 aside h2{font-size:1.5rem;margin-bottom:12px}
 .diger{display:flex;gap:12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:10px}
@@ -195,6 +197,7 @@ footer .sosyal a:hover{text-decoration:underline}
       <div class="bilgi">${isoTarih ? `<time datetime="${isoTarih}">${tarihYaz(h.date)} · ${saatYaz(h.date)}</time> · ` : ''}İzmir Voleybol Medya</div>
       ${fotoHtml}
       <div class="metin">${markdown(h.body)}</div>
+      <div id="etkilesim"></div>
       <div class="paylas">
         <span>Paylaş:</span>
         <button type="button" class="pb yerel" id="yerel" hidden>📤 Paylaş</button>
@@ -209,6 +212,7 @@ footer .sosyal a:hover{text-decoration:underline}
         <a class="yt" href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" rel="noopener">YouTube</a>
         <a class="ig" href="https://www.instagram.com/izmirvoleybolmedya" target="_blank" rel="noopener">Instagram</a>
         <a class="fb" href="https://www.facebook.com/share/g/19xt84G5E8/" target="_blank" rel="noopener">Facebook</a>
+        <button type="button" class="bildirim-b" data-bildirim hidden>🔔 Bildirimleri Aç</button>
       </div>
     </article>
     <aside>
@@ -237,6 +241,7 @@ footer .sosyal a:hover{text-decoration:underline}
     g.onkeydown = function (e) { if (e.key === 'ArrowLeft') git(aktif() - 1); if (e.key === 'ArrowRight') git(aktif() + 1); };
     guncelle();
   });
+  document.addEventListener('DOMContentLoaded', function () { if (window.IVM_etkilesim) IVM_etkilesim(document.getElementById('etkilesim'), ${JSON.stringify(ad).replace(/</g, '\\u003c')}); });
   var kopya = document.getElementById('kopya');
   kopya.onclick = function () {
     (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject())

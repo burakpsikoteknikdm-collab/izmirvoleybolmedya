@@ -1,0 +1,8 @@
+{
+  "name": "izmirvoleybolmedya",
+  "private": true,
+  "description": "İzmir Voleybol Medya web sitesi",
+  "dependencies": {
+    "web-push": "^3.6.7"
+  }
+}

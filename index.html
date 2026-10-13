@@ -24,6 +24,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <script src="/cerez.js"></script>
+<script src="/etkilesim.js" defer></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9798524131017882" crossorigin="anonymous"></script>
 <style>
 :root{--ink:#0b1f4d;--blue:#1e4fd8;--sky:#eaf1ff;--gold:#ffc21a;--gold-d:#e5a800;--white:#fff;--muted:#5b6b8c;--line:#d6e0f5;--r:14px}
@@ -252,6 +253,9 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
 .ust-bilgi .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:32px}
 .ust-bilgi .sosyal{display:flex;gap:16px}
 .ust-bilgi a:hover{color:#fff}
+.ust-bilgi .zil{color:#ffc21a;font-weight:700}
+.bildirim-b{border:0;border-radius:999px;padding:7px 15px;font:700 .9rem Barlow,system-ui,sans-serif;background:#0b1f4d;color:#ffc21a;cursor:pointer}
+@media(max-width:700px){.ust-bilgi .zil{display:none}}
 
 /* Kayan şeritler (son dakika, reklam) */
 .kayan{overflow:hidden}
@@ -342,6 +346,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
       <a href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" rel="noopener">YouTube</a>
       <a href="https://www.instagram.com/izmirvoleybolmedya" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.facebook.com/share/g/19xt84G5E8/" target="_blank" rel="noopener">Facebook</a>
+      <a href="#" class="zil" data-bildirim hidden>🔔 Bildirimleri Aç</a>
       <a href="/hakkimizda">Hakkımızda</a>
       <a href="#iletisim">Reklam &amp; İletişim</a>
     </span>
@@ -564,6 +569,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
     </div>
     <div>
       <h4>Bizi Takip Edin</h4>
+      <a href="#" data-bildirim hidden>🔔 Bildirimleri Aç</a>
       <a href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" rel="noopener">YouTube</a>
       <a href="https://www.instagram.com/izmirvoleybolmedya" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.facebook.com/share/g/19xt84G5E8/" target="_blank" rel="noopener">Facebook</a>
@@ -591,6 +597,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
 
 <dialog id="dlg"><div class="d-in"><button class="x" id="close" aria-label="Kapat">✕</button><time id="dt"></time><h2 id="dh"></h2>
   <div id="di"></div><div class="body" id="db"></div>
+  <div id="etkilesim"></div>
   <div class="paylas" id="paylas">
     <span>Paylaş:</span>
     <button type="button" class="pb yerel" data-paylas="yerel" hidden>📤 Paylaş</button>
@@ -605,6 +612,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
     <a class="yt" href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" rel="noopener">YouTube</a>
     <a class="ig" href="https://www.instagram.com/izmirvoleybolmedya" target="_blank" rel="noopener">Instagram</a>
     <a class="fb" href="https://www.facebook.com/share/g/19xt84G5E8/" target="_blank" rel="noopener">Facebook</a>
+    <button type="button" class="bildirim-b" data-bildirim hidden>🔔 Bildirimleri Aç</button>
   </div>
 </div></dialog>
 
@@ -728,6 +736,8 @@ function openNews(n, adrestenAcildi) {
   else if (fotolar.length > 1) $('#di').append(galeriOlustur(fotolar, n.title));
   $('#db').innerHTML = safeHtml(n.body);
   paylasHazirla(n);
+  // Beğeni ve yorumlar (etkilesim.js)
+  if (n.ad && window.IVM_etkilesim) IVM_etkilesim($('#etkilesim'), n.ad); else $('#etkilesim').textContent = '';
   // Haberin kendi adresi (#haber/...) — sayfa yenilenince ya da link paylaşılınca aynı haber açılır
   if (n.ad) {
     oncekiHash = adrestenAcildi ? '' : location.hash;

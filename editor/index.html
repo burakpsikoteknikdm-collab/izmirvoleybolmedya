@@ -101,6 +101,20 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
 .sabitle b{display:block}.sabitle small{display:block;color:var(--muted);font-size:.85rem;line-height:1.4}
 .rozet.sabit{background:#fff3c4;color:#8a5a00}
 
+/* Yorumlar */
+.sekmeler-y{display:flex;gap:8px;margin-bottom:14px}
+.sekmeler-y button{flex:1;border:2px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;font-weight:700;cursor:pointer}
+.sekmeler-y button.aktif{background:var(--ink);border-color:var(--ink);color:#fff}
+.yorum{background:#fff;border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:12px;padding:12px;margin-bottom:10px}
+.yorum .ust{font-size:.82rem;color:var(--muted);margin-bottom:4px}
+.yorum .ust b{color:var(--ink);font-size:.95rem}
+.yorum p{white-space:pre-wrap;word-break:break-word;margin:6px 0 10px}
+.yorum .haber{font-size:.8rem;color:var(--blue);font-weight:600}
+.yorum .dugmeler{display:flex;gap:8px}
+.yorum .dugmeler .btn{padding:8px 16px;font-size:1rem}
+#yorumSayi:empty{display:none}
+#yorumSayi{background:var(--gold);color:var(--ink);border-radius:999px;padding:0 7px;margin-left:2px;font-size:.8rem}
+
 /* Son dakika */
 .sd-satir{background:#fff;border:1px solid var(--line);border-left:5px solid #d92d20;border-radius:12px;padding:12px;margin-bottom:10px}
 .sd-satir .ust{display:flex;gap:8px;align-items:flex-start}
@@ -135,6 +149,7 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
     <img src="/editor/ikon-192.png" alt="">
     <b>İVM <i>Editör</i></b>
     <button class="ikon" id="sonDakikaBtn" title="Son Dakika" aria-label="Son dakika şeridini düzenle" style="font-size:.95rem;font-weight:800;width:auto;padding:0 12px;border-radius:999px;background:#d92d20">⚡ Son Dakika</button>
+    <button class="ikon" id="yorumBtn" title="Yorumlar" aria-label="Yorumları denetle" style="font-size:.95rem;font-weight:800;width:auto;padding:0 12px;border-radius:999px;background:#1e4fd8;position:relative">💬 <span id="yorumSayi"></span></button>
     <button class="ikon" id="yenileBtn" title="Yenile" aria-label="Listeyi yenile">⟳</button>
     <button class="ikon" id="cikisBtn" title="Çıkış" aria-label="Çıkış yap">⎋</button>
   </header>
@@ -211,6 +226,19 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
   </div>
 </section>
 
+<!-- Yorum denetimi -->
+<section id="yorumEkrani" hidden>
+  <header class="bar">
+    <button class="ikon" id="yGeriBtn" aria-label="Geri">←</button>
+    <b>Yorumlar</b>
+  </header>
+  <main class="kap">
+    <div class="sekmeler-y"><button type="button" class="aktif" data-durum="bekliyor">Onay Bekleyen</button><button type="button" data-durum="onayli">Yayındaki</button></div>
+    <div class="hata" id="yHata" hidden></div>
+    <div id="yListe"><div class="bilgi">Yükleniyor…</div></div>
+  </main>
+</section>
+
 <!-- Son dakika şeridi -->
 <section id="sonDakikaEkrani" hidden>
   <header class="bar">
@@ -261,7 +289,7 @@ function bildir(metin, tur = '') {
 }
 
 function goster(ekran) {
-  ['giris', 'liste', 'duzen', 'sonDakika'].forEach(e => $(`#${e}Ekrani`).hidden = e !== ekran);
+  ['giris', 'liste', 'duzen', 'sonDakika', 'yorum'].forEach(e => $(`#${e}Ekrani`).hidden = e !== ekran);
   scrollTo(0, 0);
 }
 
@@ -293,6 +321,8 @@ async function listeAc() {
   $('#liste').innerHTML = '<div class="bilgi">Yükleniyor…</div>';
   try {
     const j = await api('liste');
+    haberBasliklari = Object.fromEntries(j.haberler.map(h => [h.ad, h.title]));
+    bekleyenSayisi();
     const kutu = $('#liste');
     kutu.textContent = '';
     if (!j.haberler.length) { kutu.innerHTML = '<div class="bilgi">Henüz haber yok. Sağ alttaki <b>Yeni Haber</b> ile başlayın.</div>'; return; }
@@ -470,12 +500,12 @@ $('#kaydetBtn').onclick = async () => {
   const btn = $('#kaydetBtn'), eski = btn.textContent;
   btn.disabled = true; btn.textContent = 'Kaydediliyor…';
   try {
-    await api('kaydet', { govde: {
+    const kayit = await api('kaydet', { govde: {
       ad: duzen.ad, sha: duzen.sha, title, date: new Date($('#fTarih').value).toISOString(),
       lig: $('#fLig').value, bolum: $('#fBolum').value, sabit: $('#fSabit').checked, image: duzen.fotolar[0] || '', galeri: duzen.fotolar.slice(1), body: $('#fIcerik').value
     } });
     degisti = false;
-    bildir(duzen.ad ? 'Haber güncellendi. Sitede birkaç dakika içinde görünür.' : 'Haber yayınlandı! Sitede birkaç dakika içinde görünür.', 'iyi');
+    bildir(duzen.ad ? 'Haber güncellendi. Sitede birkaç dakika içinde görünür.' : 'Haber yayınlandı!' + (kayit.bildirim && kayit.bildirim.gonderilen ? ' ' + kayit.bildirim.gonderilen + ' aboneye bildirim gönderildi.' : ' Sitede birkaç dakika içinde görünür.'), 'iyi');
     listeAc();
   } catch (e) { duzenHata(e.message); }
   btn.disabled = false; btn.textContent = eski;
@@ -534,6 +564,48 @@ $('#sdKaydetBtn').onclick = async () => {
   } catch (e) { sdHata(e.message); }
   btn.disabled = false; btn.textContent = 'Kaydet';
 };
+
+/* Yorum denetimi */
+let yDurum = 'bekliyor', haberBasliklari = {};
+function yHata(m) { $('#yHata').textContent = m || ''; $('#yHata').hidden = !m; }
+async function bekleyenSayisi() {
+  try { const j = await api('yorumlar'); $('#yorumSayi').textContent = j.bekleyen || ''; } catch (e) {}
+}
+async function yorumlarAc() {
+  goster('yorum'); yHata('');
+  document.querySelectorAll('.sekmeler-y button').forEach(b => b.classList.toggle('aktif', b.dataset.durum === yDurum));
+  $('#yListe').innerHTML = '<div class="bilgi">Yükleniyor…</div>';
+  try {
+    const j = await api('yorumlar', { sorgu: '&durum=' + yDurum });
+    $('#yorumSayi').textContent = j.bekleyen || '';
+    const kutu = $('#yListe'); kutu.textContent = '';
+    if (!j.yorumlar.length) { kutu.innerHTML = '<div class="bilgi">' + (yDurum === 'bekliyor' ? 'Onay bekleyen yorum yok.' : 'Yayında yorum yok.') + '</div>'; return; }
+    j.yorumlar.forEach(y => {
+      const d = document.createElement('div'); d.className = 'yorum';
+      const ust = document.createElement('div'); ust.className = 'ust';
+      const ad = document.createElement('b'); ad.textContent = y.ad;
+      ust.append(ad, ' · ' + tarihYaz(y.olusturma));
+      const h = document.createElement('div'); h.className = 'haber'; h.textContent = '📰 ' + (haberBasliklari[y.haber + '.md'] || y.haber);
+      const p = document.createElement('p'); p.textContent = y.metin;
+      const dg = document.createElement('div'); dg.className = 'dugmeler';
+      if (yDurum === 'bekliyor') {
+        const on = document.createElement('button'); on.className = 'btn'; on.textContent = '✓ Onayla';
+        on.onclick = () => yorumIslem('yorum-onayla', y.id, 'Yorum yayınlandı.');
+        dg.append(on);
+      }
+      const sil = document.createElement('button'); sil.className = 'btn kirmizi'; sil.textContent = 'Sil';
+      sil.onclick = () => { if (confirm('Bu yorum kalıcı olarak silinecek. Emin misiniz?')) yorumIslem('yorum-sil', y.id, 'Yorum silindi.'); };
+      dg.append(sil);
+      d.append(ust, h, p, dg); kutu.append(d);
+    });
+  } catch (e) { yHata(e.message); $('#yListe').textContent = ''; }
+}
+async function yorumIslem(islem, id, mesaj) {
+  try { await api(islem, { govde: { id } }); bildir(mesaj, 'iyi'); yorumlarAc(); } catch (e) { yHata(e.message); }
+}
+document.querySelectorAll('.sekmeler-y button').forEach(b => b.onclick = () => { yDurum = b.dataset.durum; yorumlarAc(); });
+$('#yorumBtn').onclick = yorumlarAc;
+$('#yGeriBtn').onclick = listeAc;
 
 /* Ana ekrana ekleme */
 let kurOlayi = null;

@@ -6,6 +6,7 @@
 //   GITHUB_ICERIK_TOKEN  Bu repo için "Contents: Read and write" izinli ince ayarlı GitHub token'ı
 //   EDITORLER            kullanici:sifre çiftleri, noktalı virgülle ayrılmış (ör. ayse:Gizli123;mehmet:Sifre456)
 const crypto = require('crypto');
+const supabase = require('./_supabase');
 
 const REPO = 'burakpsikoteknikdm-collab/izmirvoleybolmedya';
 const DAL = process.env.EDITOR_DAL || 'main'; // test için başka bir dal verilebilir
@@ -164,8 +165,25 @@ module.exports = async (req, res) => {
       return gonder(200, { sha: d ? d.sha : null, haberler: Array.isArray(veri.haberler) ? veri.haberler : [] });
     }
 
+    if (islem === 'yorumlar') {
+      if (!supabase.hazirMi()) return gonder(503, { hata: 'Yorum sistemi henüz yapılandırılmadı.' });
+      const durum = new URL(req.url, 'http://x').searchParams.get('durum') === 'onayli' ? 'onayli' : 'bekliyor';
+      const yorumlar = await supabase.sb(`/yorumlar?durum=eq.${durum}&select=id,haber,ad,metin,olusturma&order=olusturma.desc&limit=100`);
+      const bekleyen = await supabase.sb('/yorumlar?durum=eq.bekliyor&select=id&limit=1', { sayim: true });
+      return gonder(200, { yorumlar, bekleyen: bekleyen.toplam });
+    }
+
     if (req.method !== 'POST') return gonder(405, { hata: 'POST gerekli' });
     const g = await govde(req);
+
+    if (islem === 'yorum-onayla' || islem === 'yorum-sil') {
+      if (!supabase.hazirMi()) return gonder(503, { hata: 'Yorum sistemi henüz yapılandırılmadı.' });
+      const id = parseInt(g.id, 10);
+      if (!id) return gonder(400, { hata: 'Geçersiz yorum' });
+      if (islem === 'yorum-onayla') await supabase.sb(`/yorumlar?id=eq.${id}`, { method: 'PATCH', body: { durum: 'onayli' } });
+      else await supabase.sb(`/yorumlar?id=eq.${id}`, { method: 'DELETE' });
+      return gonder(200, { tamam: true });
+    }
 
     if (islem === 'sondakika-kaydet') {
       const liste = (Array.isArray(g.haberler) ? g.haberler : []).map(h => ({
@@ -211,7 +229,13 @@ module.exports = async (req, res) => {
         method: 'PUT',
         body: JSON.stringify({ message: `${g.ad ? 'Haber güncellendi' : 'Yeni haber'}: ${title} (editör: ${kullanici})`, content: icerik, sha, branch: DAL })
       });
-      return gonder(200, { ad, sha: sonuc.content.sha });
+      // Yeni haberde abonelere bildirim (hata olursa haber yine kaydedilmiş olur)
+      let bildirim = null;
+      if (!g.ad && supabase.hazirMi()) {
+        const haberAdi = ad.replace(/\.md$/, '');
+        bildirim = await supabase.herkeseBildir({ baslik: 'İzmir Voleybol Medya', metin: title, url: '/haber/' + encodeURIComponent(haberAdi), gorsel: image ? 'https://www.izmirvoleybolmedya.com' + image : '', etiket: haberAdi }).catch(() => null);
+      }
+      return gonder(200, { ad, sha: sonuc.content.sha, bildirim });
     }
 
     if (islem === 'sil') {
