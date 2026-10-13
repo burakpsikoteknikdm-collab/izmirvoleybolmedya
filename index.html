@@ -237,7 +237,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
 .kayan .etiket{flex:none;display:flex;align-items:center;padding:0 14px;font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:800;letter-spacing:.04em;white-space:nowrap}
 .kayan-alan{position:relative;flex:1;min-width:0;overflow:hidden;display:flex;align-items:center;-webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
 .kayan-icerik{display:flex;white-space:nowrap;will-change:transform;animation:kay var(--sure,40s) linear infinite}
-.kayan:hover .kayan-icerik,.kayan:focus-within .kayan-icerik{animation-play-state:paused}
+.kayan:hover .kayan-icerik,.kayan:has(:focus-visible) .kayan-icerik{animation-play-state:paused}
 .kayan-icerik a,.kayan-icerik span{padding:0 22px;font-weight:600;display:inline-flex;align-items:center;gap:22px}
 .kayan-icerik a::after,.kayan-icerik span::after{content:"•";opacity:.6}
 .kayan-icerik a:hover{text-decoration:underline}
@@ -648,6 +648,8 @@ function paylasHazirla(n) {
 /* Kayan şerit: içerik iki kez yazılır, yarısı kadar kaydırılarak kesintisiz döner */
 function kayanDoldur(kutu, ogeler) {
   kutu.textContent = '';
+  // Fareyle tıklanan başlık odakta kalmasın; yoksa haber kapanınca şerit durmuş kalır
+  kutu.onclick = e => { const a = e.target.closest('a'); if (a) a.blur(); };
   if (!ogeler.length) return;
   ogeler.forEach(o => kutu.append(o.cloneNode(true)));
   setTimeout(() => {
