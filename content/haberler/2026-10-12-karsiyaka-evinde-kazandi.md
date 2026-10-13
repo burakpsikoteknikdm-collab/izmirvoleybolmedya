@@ -3,6 +3,8 @@ title: "🏐 KARŞIYAKA EVİNDE KAZANDI! 💚❤️"
 date: 2026-10-12T19:38:00.000+03:00
 image: /images/uploads/2026-10-12-karsiyaka-evinde-kazandi-d4e8dd.jpg
 lig: kadinlar-2-ligi
+galeri:
+  - /images/uploads/2026-10-13-karsiyaka-evinde-kazandi-7f1d55.jpg
 ---
 🏐 KARŞIYAKA EVİNDE KAZANDI! 💚❤️
 
