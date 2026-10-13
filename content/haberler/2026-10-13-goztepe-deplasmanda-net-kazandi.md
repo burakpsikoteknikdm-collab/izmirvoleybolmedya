@@ -4,7 +4,6 @@ date: 2026-10-13T01:24:00.000+03:00
 image: /images/uploads/2026-10-12-uzman-posta-kadinlar-2-ligi-4-mac-mac-sonucu-goztepe-miz-3-0-efor-genc-2a3d15.jpg
 lig: kadinlar-2-ligi
 bolum: takimlar
-sabit: true
 ---
 🏐 GÖZTEPE DEPLASMANDA KAZANDI, LİDERLİĞİNİ KORUDU! 💛❤️
 
