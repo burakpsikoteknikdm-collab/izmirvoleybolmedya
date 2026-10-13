@@ -3,6 +3,7 @@ title: "ALTEKMA SK’DAN AXA SİGORTA KUPA VOLEY’DE NET GALİBİYET!"
 date: 2026-10-12T20:00:00.000+03:00
 image: /images/uploads/2026-10-12-altekma-sk-dan-axa-sigorta-kupa-voley-de-net-galibiyet-57c5d9.jpg
 lig: efeler-ligi
+bolum: takimlar
 ---
 ALTEKMA SK’DAN AXA SİGORTA KUPA VOLEY’DE NET GALİBİYET!
 
