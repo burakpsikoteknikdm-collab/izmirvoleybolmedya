@@ -258,12 +258,15 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
 .kayan .etiket{flex:none;display:flex;align-items:center;padding:0 14px;font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:800;letter-spacing:.04em;white-space:nowrap}
 .kayan-alan{position:relative;flex:1;min-width:0;overflow:hidden;display:flex;align-items:center;-webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
 .kayan-icerik{display:flex;white-space:nowrap;will-change:transform;animation:kay var(--sure,40s) linear infinite}
-.kayan:hover .kayan-icerik,.kayan:has(:focus-visible) .kayan-icerik{animation-play-state:paused}
+/* Fareyle üzerine gelince durur; dokunmatik ekranlarda "üzerinde" durumu takılı kaldığı için yalnızca fareli cihazlarda */
+@media(hover:hover) and (pointer:fine){.kayan:hover .kayan-icerik{animation-play-state:paused}}
+.kayan:has(:focus-visible) .kayan-icerik{animation-play-state:paused}
 .kayan-icerik a,.kayan-icerik span{padding:0 22px;font-weight:600;display:inline-flex;align-items:center;gap:22px}
 .kayan-icerik a::after,.kayan-icerik span::after{content:"•";opacity:.6}
 .kayan-icerik a:hover{text-decoration:underline}
 @keyframes kay{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@media(prefers-reduced-motion:reduce){.kayan-icerik{animation:none}.kayan-alan{overflow-x:auto}}
+/* "Animasyonları azalt" açık cihazlarda (birçok Android pil tasarrufu modu) şerit durmaz, yavaş kayar */
+@media(prefers-reduced-motion:reduce){.kayan-icerik{animation-duration:calc(var(--sure,40s) * 1.6)}}
 .sondakika{background:#fff;border-bottom:3px solid #d92d20;box-shadow:0 2px 10px rgba(11,31,77,.06)}
 .sondakika .etiket{background:#d92d20;color:#fff;position:relative}
 .sondakika .etiket::before{content:"";width:8px;height:8px;border-radius:50%;background:#fff;margin-right:8px;animation:nabiz 1.2s infinite}
