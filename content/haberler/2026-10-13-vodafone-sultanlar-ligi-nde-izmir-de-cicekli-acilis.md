@@ -7,7 +7,6 @@ bolum: takimlar
 galeri:
   - /images/uploads/2026-10-13-fb-img-1791880407911-3-d011e7.jpg
   - /images/uploads/2026-10-13-fb-img-1791880409927-3-55eb0d.jpg
-sabit: true
 ---
 🌸 VODAFONE SULTANLAR LİGİ’NDE İZMİR’DE ÇİÇEKLİ AÇILIŞ! 
 
