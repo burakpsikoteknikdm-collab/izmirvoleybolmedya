@@ -786,6 +786,8 @@ async function loadNews() {
     }))).filter(Boolean).sort((a, b) => new Date(b.date) - new Date(a.date));
     try { sessionStorage.setItem('ivm_news2', JSON.stringify({ t: Date.now(), d: list })); } catch (e) {}
   }
+  // Başa tutturulan haberler (panelde 📌) en önde; yoksa en son haber öne çıkar
+  list = [...list.filter(n => n.sabit === 'true'), ...list.filter(n => n.sabit !== 'true')];
   haberListesi = list;
   render(list);
   mansetCiz(list);

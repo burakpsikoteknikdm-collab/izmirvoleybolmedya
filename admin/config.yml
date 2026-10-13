@@ -29,6 +29,7 @@ collections:
           - { label: "Erkekler 1. Ligi", value: "erkekler-1-ligi" }
           - { label: "Kadınlar 2. Ligi", value: "kadinlar-2-ligi" }
           - { label: "Erkekler 2. Ligi", value: "erkekler-2-ligi" }
+      - { label: "📌 Başa Tuttur", name: "sabit", widget: "boolean", default: false, required: false, hint: "İşaretlenirse haber manşette büyük olarak ve listede ilk sırada görünür. Hiçbir haber işaretli değilse en son haber öne çıkar." }
       - { label: "Haber İçeriği", name: "body", widget: "markdown" }
 
   - name: "canli_yayin"

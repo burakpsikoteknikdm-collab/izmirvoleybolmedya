@@ -74,6 +74,7 @@ function olustur(h) {
   let s = `---\ntitle: "${tek(h.title)}"\ndate: ${h.date}\n`;
   if (h.image) s += `image: ${h.image}\n`;
   if (h.lig) s += `lig: ${h.lig}\n`;
+  if (h.sabit) s += `sabit: true\n`;
   return s + `---\n${String(h.body || '').replace(/\r\n/g, '\n').trim()}\n`;
 }
 function kisaAd(s) {
@@ -120,9 +121,11 @@ module.exports = async (req, res) => {
       const dosyalar = (await gh(`/contents/${HABER_KLASORU}?ref=${DAL}`).catch(e => e.durum === 404 ? [] : Promise.reject(e)))
         .filter(d => d.type === 'file' && /\.md$/i.test(d.name));
       const liste = await Promise.all(dosyalar.map(async d => {
-        const t = await (await fetch(d.download_url + '?t=' + Date.now())).text();
+        // İçerik, dosyanın sha'sına göre okunur: önbellekten eski hali gelmez
+        const blob = await gh(`/git/blobs/${d.sha}`);
+        const t = Buffer.from(blob.content, 'base64').toString('utf8');
         const f = ayristir(t) || {};
-        return { ad: d.name, sha: d.sha, title: f.title || d.name, date: f.date || '', image: f.image || '', lig: f.lig || '' };
+        return { ad: d.name, sha: d.sha, title: f.title || d.name, date: f.date || '', image: f.image || '', lig: f.lig || '', sabit: f.sabit === 'true' };
       }));
       liste.sort((a, b) => new Date(b.date) - new Date(a.date));
       return gonder(200, { kullanici, haberler: liste });
@@ -133,7 +136,7 @@ module.exports = async (req, res) => {
       if (!gecerliHaberAdi(ad)) return gonder(400, { hata: 'Geçersiz haber' });
       const d = await gh(`/contents/${HABER_KLASORU}/${yolKodla(ad)}?ref=${DAL}`);
       const f = ayristir(Buffer.from(d.content, 'base64').toString('utf8')) || {};
-      return gonder(200, { ad, sha: d.sha, title: f.title || '', date: f.date || '', image: f.image || '', lig: f.lig || '', body: f.body || '' });
+      return gonder(200, { ad, sha: d.sha, title: f.title || '', date: f.date || '', image: f.image || '', lig: f.lig || '', sabit: f.sabit === 'true', body: f.body || '' });
     }
 
     if (islem === 'sondakika') {
@@ -172,7 +175,7 @@ module.exports = async (req, res) => {
       const image = /^\/images\/uploads\/[^/\\]+$/.test(g.image || '') ? g.image : '';
       // Türkiye saatiyle ISO tarih
       const tr = new Date(date.getTime() + 3 * 3600e3).toISOString().replace('Z', '+03:00');
-      const icerik = Buffer.from(olustur({ title, date: tr, image, lig, body: g.body })).toString('base64');
+      const icerik = Buffer.from(olustur({ title, date: tr, image, lig, sabit: g.sabit === true, body: g.body })).toString('base64');
 
       let ad = g.ad, sha = g.sha;
       if (ad) {

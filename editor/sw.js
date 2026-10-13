@@ -1,6 +1,6 @@
 // Editör uygulaması için basit service worker: uygulama kabuğunu önbelleğe alır,
 // API isteklerine hiç dokunmaz (her zaman canlı veri).
-const SURUM = 'ivm-editor-v2';
+const SURUM = 'ivm-editor-v3';
 const KABUK = ['/editor/', '/editor/manifest.webmanifest', '/editor/ikon-192.png', '/editor/ikon-512.png'];
 
 self.addEventListener('install', e => {

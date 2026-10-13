@@ -89,6 +89,13 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
 .alt-cubuk{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--line);padding:12px 14px calc(12px + env(safe-area-inset-bottom));display:flex;gap:10px;justify-content:center}
 .alt-cubuk .btn{flex:1;max-width:340px}
 
+/* Başa tuttur */
+.sabitle{display:flex;gap:12px;align-items:flex-start;background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:16px;cursor:pointer}
+.sabitle:has(input:checked){border-color:var(--gold);background:#fffbea}
+.sabitle input{width:22px;height:22px;flex:none;margin-top:2px;accent-color:var(--ink)}
+.sabitle b{display:block}.sabitle small{display:block;color:var(--muted);font-size:.85rem;line-height:1.4}
+.rozet.sabit{background:#fff3c4;color:#8a5a00}
+
 /* Son dakika */
 .sd-satir{background:#fff;border:1px solid var(--line);border-left:5px solid #d92d20;border-radius:12px;padding:12px;margin-bottom:10px}
 .sd-satir .ust{display:flex;gap:8px;align-items:flex-start}
@@ -158,6 +165,10 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
         <option value="erkekler-2-ligi">Erkekler 2. Ligi</option>
       </select>
       <div class="ipucu">Lig seçerseniz haber, o ligin puan durumu sayfasında da görünür.</div>
+    </label>
+    <label class="sabitle">
+      <input type="checkbox" id="fSabit">
+      <span><b>📌 Başa Tuttur</b><small>Haber manşette büyük olarak ve listede ilk sırada görünür. Hiçbir haber tutturulmazsa en son haber öne çıkar.</small></span>
     </label>
     <div class="alan" style="margin-bottom:16px">
       <span style="display:block;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Kapak Görseli</span>
@@ -286,6 +297,7 @@ async function listeAc() {
       const t = document.createElement('b'); t.textContent = h.title;
       const k = document.createElement('small'); k.textContent = tarihYaz(h.date);
       if (h.lig) { const r = document.createElement('span'); r.className = 'rozet'; r.textContent = LIG_AD[h.lig] || h.lig; k.append(r); }
+      if (h.sabit) { const r = document.createElement('span'); r.className = 'rozet sabit'; r.textContent = '📌 Başa tutturuldu'; k.append(r); }
       tx.append(t, k); b.append(tx);
       b.onclick = () => duzenAc(h.ad);
       kutu.append(b);
@@ -309,7 +321,7 @@ async function duzenAc(ad) {
   if (!ad) {
     duzen = { ad: null, sha: null, image: '' };
     $('#duzenBaslik').textContent = 'Yeni Haber';
-    $('#fBaslik').value = ''; $('#fTarih').value = yerelTarih(new Date()); $('#fLig').value = ''; $('#fIcerik').value = '';
+    $('#fBaslik').value = ''; $('#fTarih').value = yerelTarih(new Date()); $('#fLig').value = ''; $('#fSabit').checked = false; $('#fIcerik').value = '';
     gorselGoster('');
     $('#silBtn').hidden = true; $('#kaydetBtn').textContent = 'Yayınla';
     goster('duzen');
@@ -323,13 +335,13 @@ async function duzenAc(ad) {
     duzen = { ad: h.ad, sha: h.sha, image: h.image };
     $('#duzenBaslik').textContent = 'Haberi Düzenle';
     $('#fBaslik').value = h.title; $('#fTarih').value = h.date ? yerelTarih(h.date) : yerelTarih(new Date());
-    $('#fLig').value = h.lig || ''; $('#fIcerik').value = h.body;
+    $('#fLig').value = h.lig || ''; $('#fSabit').checked = !!h.sabit; $('#fIcerik').value = h.body;
     gorselGoster(h.image);
     $('#silBtn').hidden = false; $('#kaydetBtn').textContent = 'Güncelle';
   } catch (e) { duzenHata(e.message); }
   ['#fBaslik', '#fTarih', '#fLig', '#fIcerik', '#kaydetBtn'].forEach(s => $(s).disabled = false);
 }
-['#fBaslik', '#fTarih', '#fLig', '#fIcerik'].forEach(s => $(s).addEventListener('input', () => degisti = true));
+['#fBaslik', '#fTarih', '#fLig', '#fIcerik', '#fSabit'].forEach(s => $(s).addEventListener('input', () => degisti = true));
 
 function geriDon() {
   if (degisti && !confirm('Kaydedilmemiş değişiklikler silinecek. Çıkılsın mı?')) return;
@@ -429,7 +441,7 @@ $('#kaydetBtn').onclick = async () => {
   try {
     await api('kaydet', { govde: {
       ad: duzen.ad, sha: duzen.sha, title, date: new Date($('#fTarih').value).toISOString(),
-      lig: $('#fLig').value, image: duzen.image, body: $('#fIcerik').value
+      lig: $('#fLig').value, sabit: $('#fSabit').checked, image: duzen.image, body: $('#fIcerik').value
     } });
     degisti = false;
     bildir(duzen.ad ? 'Haber güncellendi. Sitede birkaç dakika içinde görünür.' : 'Haber yayınlandı! Sitede birkaç dakika içinde görünür.', 'iyi');
