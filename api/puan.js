@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     gonder(res, 200, {
       lig, ad: LIGLER[lig], grup: s.grup, gruplar: s.gruplar,
       tablo: tablo(s.html), kaynak: `${TVF}/lig/${lig}`, guncelleme: new Date().toISOString()
-    }, 's-maxage=120, stale-while-revalidate=600');
+    }, 's-maxage=300, stale-while-revalidate=3600');
   } catch (e) {
     gonder(res, 502, { hata: 'Puan durumu şu an alınamadı.' }, 'no-store');
   }

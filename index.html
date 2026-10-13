@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js" defer></script>
 <script src="/cerez.js"></script>
 <script src="/etkilesim.js" defer></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9798524131017882" crossorigin="anonymous"></script>
@@ -715,7 +715,7 @@ function galeriOlustur(fotolar, baslik) {
   const g = document.createElement('div'); g.className = 'galeri'; g.tabIndex = 0;
   g.setAttribute('aria-roledescription', 'fotoğraf galerisi'); g.setAttribute('aria-label', fotolar.length + ' fotoğraf');
   const iz = document.createElement('div'); iz.className = 'g-iz';
-  fotolar.forEach((u, i) => { const im = document.createElement('img'); im.alt = baslik + ' – fotoğraf ' + (i + 1); if (i) im.loading = 'lazy'; resimKur(im, u); iz.append(im); });
+  fotolar.forEach((u, i) => { const im = document.createElement('img'); im.alt = baslik + ' – fotoğraf ' + (i + 1); if (i) im.loading = 'lazy'; resimKur(im, u, 1080); iz.append(im); });
   const ok = (sinif, metin, etiket) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'g-ok ' + sinif; b.textContent = metin; b.setAttribute('aria-label', etiket); return b; };
   const onc = ok('g-onc', '‹', 'Önceki fotoğraf'), son = ok('g-son', '›', 'Sonraki fotoğraf');
   const sayac = document.createElement('span'); sayac.className = 'g-sayac';
@@ -739,9 +739,19 @@ function galeriOlustur(fotolar, baslik) {
 }
 const imgUrl = u => !u ? '' : /^(https?:)?\//.test(u) ? u : '/' + u;
 // Yeni yüklenen görsel site yayına alınana kadar doğrudan GitHub'dan gösterilir
-function resimKur(im, u) {
-  im.onerror = () => { im.onerror = null; if (u.startsWith('/images/')) im.src = 'https://raw.githubusercontent.com/' + REPO + '/main' + u; };
-  im.src = imgUrl(u);
+// Sitedeki görseller Vercel görsel servisiyle küçültülüp WebP olarak gelir; açılmazsa asıl dosya, o da yoksa GitHub
+const GORSEL_GENISLIK = [256, 640, 1080, 1600];
+function resimKur(im, u, genislik = 640) {
+  const yedekler = [];
+  let ilk = imgUrl(u);
+  if (u.startsWith('/images/')) {
+    const w = GORSEL_GENISLIK.find(x => x >= genislik) || 1600;
+    yedekler.push(ilk, 'https://raw.githubusercontent.com/' + REPO + '/main' + u);
+    ilk = '/_vercel/image?url=' + encodeURIComponent(u) + '&w=' + w + '&q=75';
+  }
+  im.onerror = () => { const s = yedekler.shift(); if (s) im.src = s; else im.onerror = null; };
+  im.decoding = 'async';
+  im.src = ilk;
 }
 const fmt = d => { const x = new Date(d); return isNaN(x) ? '' : x.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }); };
 const plain = b => b.replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/[#*_>`~]/g, '').replace(/\s+/g, ' ').trim().slice(0, 170);
@@ -787,7 +797,7 @@ function openNews(n, adrestenAcildi) {
   $('#dh').textContent = n.title;
   $('#di').innerHTML = '';
   const fotolar = haberFotolari(n);
-  if (fotolar.length === 1) { const im = document.createElement('img'); resimKur(im, fotolar[0]); im.alt = n.title; $('#di').append(im); }
+  if (fotolar.length === 1) { const im = document.createElement('img'); resimKur(im, fotolar[0], 1080); im.alt = n.title; $('#di').append(im); }
   else if (fotolar.length > 1) $('#di').append(galeriOlustur(fotolar, n.title));
   $('#db').innerHTML = safeHtml(n.body);
   paylasHazirla(n);
@@ -897,7 +907,7 @@ function mansetCiz(list) {
   const ana = list[0];
   if (!ana) return;
   const b = haberOgesi(ana, 'manset-ana');
-  if (ana.image) { const im = document.createElement('img'); im.alt = ana.title; resimKur(im, ana.image); b.append(im); }
+  if (ana.image) { const im = document.createElement('img'); im.alt = ana.title; im.fetchPriority = 'high'; resimKur(im, ana.image, 1080); b.append(im); }
   const tx = document.createElement('span'); tx.className = 'tx';
   const kat = document.createElement('span'); kat.className = 'kat'; kat.textContent = LIG_ADI[ana.lig] || 'Manşet';
   const h = document.createElement('h2'); h.textContent = ana.title;
@@ -906,7 +916,7 @@ function mansetCiz(list) {
   $('#mansetAna').replaceChildren(b);
   $('#mansetYan').replaceChildren(...list.slice(1, 5).map(n => {
     const k = haberOgesi(n, 'manset-k');
-    if (n.image) { const im = document.createElement('img'); im.alt = n.title; im.loading = 'lazy'; resimKur(im, n.image); k.append(im); }
+    if (n.image) { const im = document.createElement('img'); im.alt = n.title; im.loading = 'lazy'; resimKur(im, n.image, 256); k.append(im); }
     else { const s = document.createElement('span'); s.className = 'bos'; k.append(s); }
     const y = document.createElement('span');
     const bb = document.createElement('b'); bb.textContent = n.title;
@@ -1039,6 +1049,12 @@ $('#bugun').textContent = bugun.toLocaleDateString('tr-TR', { day: 'numeric', mo
 async function loadNews() {
   let list;
   try { const c = JSON.parse(sessionStorage.getItem('ivm_news3') || 'null'); if (c && Date.now() - c.t < 300000) list = c.d; } catch (e) {}
+  if (!list) {
+    try {
+      const p = await fetch('/veri/haberler.json');
+      if (p.ok) list = (await p.json()).haberler;
+    } catch (e) {}
+  }
   if (!list) {
     const r = await fetch(`https://api.github.com/repos/${REPO}/contents/content/haberler?ref=main`);
     if (!r.ok) throw new Error(r.status);
@@ -1239,7 +1255,7 @@ function ligHaberleriCiz() {
   kutu.textContent = '';
   liste.slice(0, 8).forEach(n => {
     const b = haberOgesi(n, 'h');
-    if (n.image) { const im = document.createElement('img'); resimKur(im, n.image); im.alt = n.title; im.loading = 'lazy'; b.append(im); }
+    if (n.image) { const im = document.createElement('img'); resimKur(im, n.image, 256); im.alt = n.title; im.loading = 'lazy'; b.append(im); }
     else { const d = document.createElement('span'); d.className = 'yok'; b.append(d); }
     const tx = document.createElement('span');
     const t = document.createElement('time'); t.textContent = fmt(n.date);

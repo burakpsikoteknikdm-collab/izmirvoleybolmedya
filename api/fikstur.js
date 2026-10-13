@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
       lig, ad: LIGLER[lig], grup: s.grup, gruplar: s.gruplar,
       haftalar: liste, buHafta: buHaftaIndex(liste),
       kaynak: `${TVF}/lig/${lig}?sekme=fikstur`, guncelleme: new Date().toISOString()
-    }, 's-maxage=120, stale-while-revalidate=600');
+    }, 's-maxage=300, stale-while-revalidate=3600');
   } catch (e) {
     gonder(res, 502, { hata: 'Fikstür şu an alınamadı.' }, 'no-store');
   }

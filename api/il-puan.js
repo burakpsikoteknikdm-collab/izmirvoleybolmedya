@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
     }
     const veri = { secim, listeler, kaynak: SAYFA, guncelleme: new Date().toISOString() };
     if (secim.yar) { veri.tablolar = puanTablolari(html); veri.maclar = maclar(html); }
-    gonder(200, veri, 's-maxage=300, stale-while-revalidate=900');
+    gonder(200, veri, 's-maxage=600, stale-while-revalidate=3600');
   } catch (e) {
     gonder(502, { hata: 'Puan durumu şu an alınamadı.' }, 'no-store');
   }

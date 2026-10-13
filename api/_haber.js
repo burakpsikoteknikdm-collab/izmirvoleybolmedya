@@ -87,13 +87,23 @@ async function haberListesi() {
   const dosyalar = (await gh(`/contents/${KLASOR}?ref=main`)).filter(d => d.type === 'file' && /\.md$/i.test(d.name));
   const liste = await Promise.all(dosyalar.map(async d => {
     try {
-      const h = ayristir(await (await fetch(d.download_url)).text());
+      const metin = process.env.GITHUB_ICERIK_TOKEN
+        ? Buffer.from((await gh('/git/blobs/' + d.sha)).content, 'base64').toString('utf8')
+        : await (await fetch(d.download_url)).text();
+      const h = ayristir(metin);
       return h && { ...h, ad: d.name.replace(/\.md$/i, '') };
     } catch (e) { return null; }
   }));
   return liste.filter(Boolean).sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
+// Sitenin önbellekli haber paketi (/veri/haberler.json); GitHub'a tekrar tekrar gitmemek için
+async function onbellekliListe() {
+  const r = await fetch(SITE + '/veri/haberler.json');
+  if (!r.ok) throw new Error('liste ' + r.status);
+  return (await r.json()).haberler;
+}
+
 const haberAdresi = ad => `${SITE}/haber/${encodeURIComponent(ad)}`;
 
-module.exports = { SITE, REPO, LIG_ADI, kacis, ayristir, fotolar, duzMetin, mutlakAdres, markdown, haberGetir, haberListesi, haberAdresi };
+module.exports = { SITE, REPO, LIG_ADI, kacis, ayristir, fotolar, onbellekliListe, duzMetin, mutlakAdres, markdown, haberGetir, haberListesi, haberAdresi };

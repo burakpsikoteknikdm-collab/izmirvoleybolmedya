@@ -1,9 +1,9 @@
 // Site haritası: /sitemap.xml (vercel.json ile buraya yönlenir). Yeni haberler kendiliğinden eklenir.
-const { SITE, kacis, haberListesi, haberAdresi } = require('./_haber');
+const { SITE, kacis, haberListesi, haberAdresi, onbellekliListe } = require('./_haber');
 
 module.exports = async (req, res) => {
   let haberler = [];
-  try { haberler = await haberListesi(); } catch (e) {}
+  try { haberler = await onbellekliListe(); } catch (e) { try { haberler = await haberListesi(); } catch (e2) {} }
   const tarih = d => { const x = new Date(d); return isNaN(x) ? '' : x.toISOString(); };
   const son = haberler[0] ? tarih(haberler[0].date) : '';
   const url = (loc, lastmod, oncelik, siklik) =>

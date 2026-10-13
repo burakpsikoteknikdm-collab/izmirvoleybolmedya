@@ -1,17 +1,33 @@
 // Haber sayfası: /haber/<ad> (vercel.json ile buraya yönlenir).
 // Google'ın dizine ekleyebilmesi için haber sunucuda tam sayfa olarak hazırlanır; WhatsApp, Facebook,
 // X gibi uygulamalar da önizleme için buradaki og: etiketlerini okur.
-const { SITE, LIG_ADI, kacis, duzMetin, mutlakAdres, markdown, haberGetir, haberListesi, haberAdresi, fotolar } = require('./_haber');
+const { SITE, LIG_ADI, kacis, duzMetin, mutlakAdres, markdown, haberGetir, haberListesi, haberAdresi, fotolar, onbellekliListe } = require('./_haber');
 const VARSAYILAN_GORSEL = SITE + '/editor/ikon-512.png';
 const LOGO = SITE + '/editor/ikon-512.png';
 
 const tarihYaz = d => { const x = new Date(d); return isNaN(x) ? '' : x.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Istanbul' }); };
 const saatYaz = d => { const x = new Date(d); return isNaN(x) ? '' : x.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Istanbul' }); };
 // Yeni yüklenen görsel site yayına alınana kadar GitHub'dan gösterilir
-const yedek = yol => String(yol || '').startsWith('/images/') ? ` onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/burakpsikoteknikdm-collab/izmirvoleybolmedya/main${kacis(yol)}'"` : '';
+// Vercel görsel servisi: küçültülmüş WebP; olmazsa asıl dosya
+const kucuk = (yol, w) => String(yol || '').startsWith('/images/') ? `/_vercel/image?url=${encodeURIComponent(yol)}&w=${w}&q=75` : mutlakAdres(yol);
+const yedek = yol => String(yol || '').startsWith('/images/') ? ` onerror="this.onerror=function(){this.onerror=null;this.src='https://raw.githubusercontent.com/burakpsikoteknikdm-collab/izmirvoleybolmedya/main${kacis(yol)}'};this.src='${kacis(yol)}'"` : '';
 const jsonLd = o => JSON.stringify(o).replace(/</g, '\\u003c');
 
 module.exports = async (req, res) => {
+  // Tüm haberler tek pakette: /veri/haberler.json (ana sayfa bunu kullanır; Vercel önbelleğinde tutulur)
+  if (new URL(req.url, 'http://x').searchParams.get('liste')) {
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    try {
+      const haberler = await haberListesi();
+      res.statusCode = 200;
+      res.setHeader('Cache-Control', 's-maxage=120, stale-while-revalidate=900');
+      return res.end(JSON.stringify({ haberler, guncelleme: new Date().toISOString() }));
+    } catch (e) {
+      res.statusCode = 502;
+      res.setHeader('Cache-Control', 'no-store');
+      return res.end(JSON.stringify({ hata: 'Haberler şu an alınamadı.' }));
+    }
+  }
   let ad = new URL(req.url, 'http://x').searchParams.get('ad') || '';
   try { ad = decodeURIComponent(ad); } catch (e) {}
   ad = ad.replace(/\.md$/i, '');
@@ -26,7 +42,7 @@ module.exports = async (req, res) => {
     return res.end(`<!DOCTYPE html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Haber bulunamadı | İzmir Voleybol Medya</title></head><body style="font-family:system-ui,sans-serif;padding:40px;text-align:center"><h1>Haber bulunamadı</h1><p>Aradığınız haber kaldırılmış olabilir.</p><p><a href="/">Ana sayfaya dön</a></p></body></html>`);
   }
   // Diğer haberler: iç bağlantılar (hata olursa sayfa yine açılır)
-  const digerleri = await haberListesi().then(l => l.filter(x => x.ad !== ad).slice(0, 6)).catch(() => []);
+  const digerleri = await onbellekliListe().catch(() => haberListesi()).then(l => l.filter(x => x.ad !== ad).slice(0, 6)).catch(() => []);
 
   const baslik = h.title;
   const ozet = duzMetin(h.body).slice(0, 160) || 'İzmir voleybol haberleri';
@@ -37,9 +53,9 @@ module.exports = async (req, res) => {
   const isoTarih = isNaN(tarih) ? '' : tarih.toISOString();
   const foto = fotolar(h);
   const fotoHtml = !foto.length ? '' : foto.length === 1
-    ? `<img class="kapak" src="${kacis(mutlakAdres(foto[0]))}" alt="${kacis(baslik)}"${yedek(foto[0])}>`
+    ? `<img class="kapak" src="${kacis(kucuk(foto[0], 1080))}" alt="${kacis(baslik)}"${yedek(foto[0])}>`
     : `<div class="galeri" tabindex="0" aria-roledescription="fotoğraf galerisi" aria-label="${foto.length} fotoğraf">
-        <div class="g-iz">${foto.map((u, i) => `<img src="${kacis(mutlakAdres(u))}" alt="${kacis(baslik)} – fotoğraf ${i + 1}"${i ? ' loading="lazy"' : ''}${yedek(u)}>`).join('')}</div>
+        <div class="g-iz">${foto.map((u, i) => `<img src="${kacis(kucuk(u, 1080))}" alt="${kacis(baslik)} – fotoğraf ${i + 1}"${i ? ' loading="lazy"' : ''}${yedek(u)}>`).join('')}</div>
         <button type="button" class="g-ok g-onc" aria-label="Önceki fotoğraf">‹</button>
         <button type="button" class="g-ok g-son" aria-label="Sonraki fotoğraf">›</button>
         <span class="g-sayac">1 / ${foto.length}</span>
@@ -218,7 +234,7 @@ footer .sosyal a:hover{text-decoration:underline}
     <aside>
       <h2>Diğer Haberler</h2>
       ${digerleri.map(d => `<a class="diger" href="/haber/${encodeURIComponent(d.ad)}">
-        ${d.image ? `<img src="${kacis(mutlakAdres(d.image))}" alt="${kacis(d.title)}" loading="lazy"${yedek(d.image)}>` : '<span class="bos"></span>'}
+        ${d.image ? `<img src="${kacis(kucuk(d.image, 256))}" alt="${kacis(d.title)}" loading="lazy"${yedek(d.image)}>` : '<span class="bos"></span>'}
         <span><b>${kacis(d.title)}</b><time>${tarihYaz(d.date)}</time></span>
       </a>`).join('')}
       <a class="tum" href="/#haberler">Tüm Haberler →</a>

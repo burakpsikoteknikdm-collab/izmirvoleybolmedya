@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/veri/haberler.json",
+      "destination": "/api/paylas?liste=1"
+    },
+    {
       "source": "/haber/:ad",
       "destination": "/api/paylas?ad=:ad"
     },
@@ -12,5 +16,22 @@
       "source": "/:ad(hakkimizda|kunye|kvkk|cerez-politikasi|kullanim-kosullari)",
       "destination": "/api/sayfa?ad=:ad"
     }
-  ]
+  ],
+  "images": {
+    "sizes": [
+      256,
+      640,
+      1080,
+      1600
+    ],
+    "formats": [
+      "image/webp"
+    ],
+    "minimumCacheTTL": 86400,
+    "localPatterns": [
+      {
+        "pathname": "^/images/.*$"
+      }
+    ]
+  }
 }

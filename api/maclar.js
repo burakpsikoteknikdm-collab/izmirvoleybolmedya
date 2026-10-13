@@ -71,7 +71,7 @@ module.exports = async (req, res) => {
       gelecekHafta: tabloOku(takvim, 'icerik_GelecekHafta1_gvmusabakaliste')
     };
     // Vercel önbelleği: 60 sn taze, sonra arka planda yenilenir
-    res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300');
+    res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=900');
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
     res.end(JSON.stringify(veri));
   } catch (e) {
