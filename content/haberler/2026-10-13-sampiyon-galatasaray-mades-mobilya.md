@@ -1,7 +1,12 @@
 ---
 title: "ŞAMPİYON GALATASARAY MADEŞ MOBİLYA"
 date: 2026-10-13T23:30:00.000+03:00
+image: /images/uploads/2026-10-13-sampiyon-galatasaray-mades-mobilya-5c1cbb.jpg
 lig: efeler-ligi
+galeri:
+  - /images/uploads/2026-10-13-sampiyon-galatasaray-mades-mobilya-0bfc3d.jpg
+  - /images/uploads/2026-10-13-sampiyon-galatasaray-mades-mobilya-0e01ff.jpg
+  - /images/uploads/2026-10-13-sampiyon-galatasaray-mades-mobilya-4defef.jpg
 ---
 ŞAMPİYON GALATASARAY MADEŞ MOBİLYA!
 
