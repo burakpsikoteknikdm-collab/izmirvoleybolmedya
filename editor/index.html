@@ -101,6 +101,14 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
 .sabitle b{display:block}.sabitle small{display:block;color:var(--muted);font-size:.85rem;line-height:1.4}
 .rozet.sabit{background:#fff3c4;color:#8a5a00}
 
+/* Yönetim ızgarası */
+.yonetim{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:18px}
+.yonetim button{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;font-weight:700;font-size:.95rem;cursor:pointer;text-align:left;color:var(--ink)}
+.yonetim button:hover{border-color:var(--blue)}
+.yonetim button span{font-size:1.2rem}
+.yonetim #yorumSayi:empty{display:none}
+.yonetim #yorumSayi{background:var(--gold);border-radius:999px;padding:0 8px;font-size:.8rem;margin-left:auto}
+
 /* Yorumlar */
 .sekmeler-y{display:flex;gap:8px;margin-bottom:14px}
 .sekmeler-y button{flex:1;border:2px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;font-weight:700;cursor:pointer}
@@ -157,6 +165,13 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
     <div class="kur" id="kurKutu" hidden>
       <div id="kurMetin">Bu uygulamayı telefonunuzun ana ekranına ekleyebilirsiniz.</div>
       <button class="btn mavi" id="kurBtn" style="padding:8px 14px;font-size:1rem">Yükle</button>
+    </div>
+    <div class="yonetim" aria-label="Yönetim">
+      <button type="button" id="sonDakikaBtn"><span>⚡</span>Son Dakika</button>
+      <button type="button" id="yorumBtn"><span>💬</span>Yorumlar <b id="yorumSayi"></b></button>
+      <button type="button" id="canliBtn"><span>📺</span>Canlı Yayın</button>
+      <button type="button" id="reklamBtn"><span>📢</span>Reklam Şeridi</button>
+      <button type="button" id="sayfaBtn"><span>📄</span>Kurumsal Sayfalar</button>
     </div>
     <div class="ust-satir"><h2>Haberler</h2><small id="kimText" style="color:var(--muted)"></small></div>
     <div id="liste"><div class="bilgi">Yükleniyor…</div></div>
@@ -226,6 +241,48 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
   </div>
 </section>
 
+<!-- Canlı yayın -->
+<section id="canliEkrani" hidden>
+  <header class="bar"><button class="ikon geriListe" aria-label="Geri">←</button><b>Canlı Yayın</b></header>
+  <main class="kap">
+    <div class="hata" id="canliHata" hidden></div>
+    <p class="ipucu" style="margin:0 0 14px">Ana sayfadaki sarı canlı yayın şeridinde görünür. Link girilirse şeritteki düğme "Canlı İzle" olur.</p>
+    <label class="alan"><span>YouTube Canlı Yayın Linki</span><input class="girdi" id="cYoutube" type="url" placeholder="https://www.youtube.com/live/..."></label>
+    <label class="alan"><span>Duyuru / Günün Maç Skorları</span><textarea class="girdi" id="cDuyuru" maxlength="300" style="min-height:90px" placeholder="Örn. Göztepe – Karşıyaka maçı 19:00'da kanalımızda canlı!"></textarea></label>
+  </main>
+  <div class="alt-cubuk"><button class="btn cizgi geriListe">Vazgeç</button><button class="btn" id="canliKaydet">Kaydet</button></div>
+</section>
+
+<!-- Reklam şeridi -->
+<section id="reklamEkrani" hidden>
+  <header class="bar"><button class="ikon geriListe" aria-label="Geri">←</button><b>Reklam Şeridi</b></header>
+  <main class="kap">
+    <div class="hata" id="reklamHata" hidden></div>
+    <label class="sabitle"><input type="checkbox" id="rAktif"><span><b>Şerit görünsün</b><small>Canlı yayın şeridinin altında kayan reklam şeridi.</small></span></label>
+    <label class="alan"><span>Kayan Metin</span><textarea class="girdi" id="rMetin" maxlength="600" style="min-height:110px"></textarea><div class="ipucu">Her satır ayrı bir mesaj olarak kayar.</div></label>
+    <label class="alan"><span>Tıklanınca Gidilecek Adres (isteğe bağlı)</span><input class="girdi" id="rLink" placeholder="https://... ya da mailto:..."></label>
+  </main>
+  <div class="alt-cubuk"><button class="btn cizgi geriListe">Vazgeç</button><button class="btn" id="reklamKaydet">Kaydet</button></div>
+</section>
+
+<!-- Kurumsal sayfalar -->
+<section id="sayfaEkrani" hidden>
+  <header class="bar"><button class="ikon geriListe" aria-label="Geri">←</button><b>Kurumsal Sayfalar</b></header>
+  <main class="kap">
+    <div class="hata" id="sayfaHata" hidden></div>
+    <label class="alan"><span>Sayfa</span>
+      <select class="girdi" id="pAd">
+        <option value="hakkimizda">Hakkımızda</option><option value="kunye">Künye</option><option value="kvkk">KVKK Aydınlatma Metni</option>
+        <option value="cerez-politikasi">Çerez Politikası</option><option value="kullanim-kosullari">Kullanım Koşulları</option>
+      </select>
+    </label>
+    <label class="alan"><span>Başlık</span><input class="girdi" id="pBaslik" maxlength="100"></label>
+    <label class="alan"><span>Kısa Açıklama</span><textarea class="girdi" id="pAciklama" maxlength="300" style="min-height:70px"></textarea><div class="ipucu">Sayfanın üstünde ve Google'da görünür.</div></label>
+    <label class="alan"><span>Sayfa İçeriği</span><textarea class="girdi" id="pIcerik" style="min-height:360px"></textarea><div class="ipucu">Ara başlık için satır başına "## " yazın; kalın yazı için **metin**, liste için satır başına "- ".</div></label>
+  </main>
+  <div class="alt-cubuk"><button class="btn cizgi geriListe">Vazgeç</button><button class="btn" id="sayfaKaydet">Kaydet</button></div>
+</section>
+
 <!-- Yorum denetimi -->
 <section id="yorumEkrani" hidden>
   <header class="bar">
@@ -289,7 +346,7 @@ function bildir(metin, tur = '') {
 }
 
 function goster(ekran) {
-  ['giris', 'liste', 'duzen', 'sonDakika', 'yorum'].forEach(e => $(`#${e}Ekrani`).hidden = e !== ekran);
+  ['giris', 'liste', 'duzen', 'sonDakika', 'yorum', 'canli', 'reklam', 'sayfa'].forEach(e => $(`#${e}Ekrani`).hidden = e !== ekran);
   scrollTo(0, 0);
 }
 
@@ -606,6 +663,69 @@ async function yorumIslem(islem, id, mesaj) {
 document.querySelectorAll('.sekmeler-y button').forEach(b => b.onclick = () => { yDurum = b.dataset.durum; yorumlarAc(); });
 $('#yorumBtn').onclick = yorumlarAc;
 $('#yGeriBtn').onclick = listeAc;
+
+/* Site ayarları: canlı yayın, reklam şeridi, kurumsal sayfalar */
+const ayar = { canli: null, reklam: null, sayfa: null };
+let ayarDegisti = false;
+document.querySelectorAll('#canliEkrani .girdi, #reklamEkrani .girdi, #reklamEkrani input, #sayfaEkrani input, #sayfaEkrani textarea').forEach(el => el.addEventListener('input', () => ayarDegisti = true));
+document.querySelectorAll('.geriListe').forEach(b => b.onclick = () => { if (ayarDegisti && !confirm('Kaydedilmemiş değişiklikler silinecek. Çıkılsın mı?')) return; ayarDegisti = false; listeAc(); });
+const hataYaz = (id, m) => { $(id).textContent = m || ''; $(id).hidden = !m; };
+async function kaydetDugmesi(btn, is) {
+  const eski = btn.textContent; btn.disabled = true; btn.textContent = 'Kaydediliyor…';
+  try { await is(); ayarDegisti = false; } finally { btn.disabled = false; btn.textContent = eski; }
+}
+
+$('#canliBtn').onclick = async () => {
+  goster('canli'); hataYaz('#canliHata'); ayarDegisti = false;
+  try { const j = await api('ayar', { sorgu: '&dosya=canli' }); ayar.canli = j; $('#cYoutube').value = j.veri.youtube_url || ''; $('#cDuyuru').value = j.veri.skor_duyuru || ''; }
+  catch (e) { hataYaz('#canliHata', e.message); }
+};
+$('#canliKaydet').onclick = () => kaydetDugmesi($('#canliKaydet'), async () => {
+  hataYaz('#canliHata');
+  try {
+    const j = await api('ayar-kaydet', { govde: { dosya: 'canli', sha: ayar.canli && ayar.canli.sha, veri: { youtube_url: $('#cYoutube').value, skor_duyuru: $('#cDuyuru').value } } });
+    ayar.canli = { sha: j.sha, veri: j.veri };
+    bildir('Canlı yayın bilgisi kaydedildi. Sitede 1-2 dakika içinde görünür.', 'iyi');
+  } catch (e) { hataYaz('#canliHata', e.message); }
+});
+
+$('#reklamBtn').onclick = async () => {
+  goster('reklam'); hataYaz('#reklamHata'); ayarDegisti = false;
+  try { const j = await api('ayar', { sorgu: '&dosya=reklam' }); ayar.reklam = j; $('#rAktif').checked = j.veri.aktif !== false; $('#rMetin').value = j.veri.metin || ''; $('#rLink').value = j.veri.link || ''; }
+  catch (e) { hataYaz('#reklamHata', e.message); }
+};
+$('#reklamKaydet').onclick = () => kaydetDugmesi($('#reklamKaydet'), async () => {
+  hataYaz('#reklamHata');
+  try {
+    const j = await api('ayar-kaydet', { govde: { dosya: 'reklam', sha: ayar.reklam && ayar.reklam.sha, veri: { aktif: $('#rAktif').checked, metin: $('#rMetin').value, link: $('#rLink').value } } });
+    ayar.reklam = { sha: j.sha, veri: j.veri };
+    bildir('Reklam şeridi kaydedildi. Sitede 1-2 dakika içinde görünür.', 'iyi');
+  } catch (e) { hataYaz('#reklamHata', e.message); }
+});
+
+async function sayfaYukle() {
+  hataYaz('#sayfaHata'); ayarDegisti = false;
+  ['#pBaslik', '#pAciklama', '#pIcerik'].forEach(s => { $(s).value = ''; $(s).disabled = true; });
+  try {
+    const j = await api('sayfa', { sorgu: '&ad=' + $('#pAd').value });
+    ayar.sayfa = j; $('#pBaslik').value = j.title; $('#pAciklama').value = j.description; $('#pIcerik').value = j.body;
+  } catch (e) { hataYaz('#sayfaHata', e.message); }
+  ['#pBaslik', '#pAciklama', '#pIcerik'].forEach(s => $(s).disabled = false);
+}
+let oncekiSayfa = 'hakkimizda';
+$('#pAd').onchange = () => {
+  if (ayarDegisti && !confirm('Kaydedilmemiş değişiklikler silinecek. Başka sayfaya geçilsin mi?')) { $('#pAd').value = oncekiSayfa; return; }
+  oncekiSayfa = $('#pAd').value; sayfaYukle();
+};
+$('#sayfaBtn').onclick = () => { goster('sayfa'); sayfaYukle(); };
+$('#sayfaKaydet').onclick = () => kaydetDugmesi($('#sayfaKaydet'), async () => {
+  hataYaz('#sayfaHata');
+  try {
+    const j = await api('sayfa-kaydet', { govde: { ad: $('#pAd').value, sha: ayar.sayfa && ayar.sayfa.sha, title: $('#pBaslik').value, description: $('#pAciklama').value, body: $('#pIcerik').value } });
+    ayar.sayfa.sha = j.sha;
+    bildir('Sayfa kaydedildi. Sitede 1-2 dakika içinde görünür.', 'iyi');
+  } catch (e) { hataYaz('#sayfaHata', e.message); }
+});
 
 /* Ana ekrana ekleme */
 let kurOlayi = null;

@@ -158,6 +158,29 @@ module.exports = async (req, res) => {
       return gonder(200, { ad, sha: d.sha, title: f.title || '', date: f.date || '', image: f.image || '', galeri: Array.isArray(f.galeri) ? f.galeri : [], lig: f.lig || '', bolum: f.bolum || '', sabit: f.sabit === 'true', body: f.body || '' });
     }
 
+    // Site ayarları ve kurumsal sayfalar (yalnızca bu dosyalar)
+    const AYAR_DOSYALARI = { canli: 'content/canli.json', reklam: 'content/reklam.json' };
+    const KURUMSAL = { hakkimizda: 'Hakkımızda', kunye: 'Künye', kvkk: 'KVKK Aydınlatma Metni', 'cerez-politikasi': 'Çerez Politikası', 'kullanim-kosullari': 'Kullanım Koşulları' };
+    const dosyaOku = async yol => {
+      const d = await gh(`/contents/${yol}?ref=${DAL}`).catch(e => e.durum === 404 ? null : Promise.reject(e));
+      return d ? { sha: d.sha, metin: Buffer.from(d.content, 'base64').toString('utf8') } : { sha: null, metin: '' };
+    };
+    if (islem === 'ayar') {
+      const dosya = new URL(req.url, 'http://x').searchParams.get('dosya');
+      if (!AYAR_DOSYALARI[dosya]) return gonder(400, { hata: 'Geçersiz ayar' });
+      const d = await dosyaOku(AYAR_DOSYALARI[dosya]);
+      let veri = {};
+      try { veri = d.metin ? JSON.parse(d.metin) : {}; } catch (e) {}
+      return gonder(200, { sha: d.sha, veri });
+    }
+    if (islem === 'sayfa') {
+      const ad = new URL(req.url, 'http://x').searchParams.get('ad');
+      if (!KURUMSAL[ad]) return gonder(400, { hata: 'Geçersiz sayfa' });
+      const d = await dosyaOku(`content/sayfalar/${ad}.md`);
+      const f = ayristir(d.metin) || {};
+      return gonder(200, { sha: d.sha, title: f.title || KURUMSAL[ad], description: f.description || '', body: f.body || '' });
+    }
+
     if (islem === 'sondakika') {
       const d = await gh(`/contents/${SON_DAKIKA}?ref=${DAL}`).catch(e => e.durum === 404 ? null : Promise.reject(e));
       let veri = { haberler: [] };
@@ -183,6 +206,44 @@ module.exports = async (req, res) => {
       if (islem === 'yorum-onayla') await supabase.sb(`/yorumlar?id=eq.${id}`, { method: 'PATCH', body: { durum: 'onayli' } });
       else await supabase.sb(`/yorumlar?id=eq.${id}`, { method: 'DELETE' });
       return gonder(200, { tamam: true });
+    }
+
+    if (islem === 'ayar-kaydet') {
+      const yol = AYAR_DOSYALARI[g.dosya];
+      if (!yol) return gonder(400, { hata: 'Geçersiz ayar' });
+      const v = g.veri || {};
+      let veri;
+      if (g.dosya === 'canli') {
+        const url = String(v.youtube_url || '').trim();
+        if (url && !/^https:\/\/(www\.|m\.)?(youtube\.com|youtu\.be)\//i.test(url)) return gonder(400, { hata: 'YouTube linki https://www.youtube.com/... ya da https://youtu.be/... biçiminde olmalı.' });
+        veri = { youtube_url: url, skor_duyuru: String(v.skor_duyuru || '').replace(/\s+/g, ' ').trim().slice(0, 300) };
+      } else {
+        const link = String(v.link || '').trim();
+        if (link && !/^(https:\/\/|mailto:)/i.test(link)) return gonder(400, { hata: 'Bağlantı https:// ya da mailto: ile başlamalı.' });
+        veri = { aktif: v.aktif !== false, metin: String(v.metin || '').replace(/\r\n/g, '\n').trim().slice(0, 600), link };
+      }
+      const sonuc = await gh(`/contents/${yol}`, {
+        method: 'PUT',
+        body: JSON.stringify({ message: `${g.dosya === 'canli' ? 'Canlı yayın bilgisi' : 'Reklam şeridi'} güncellendi (editör: ${kullanici})`, content: Buffer.from(JSON.stringify(veri, null, 2) + '\n').toString('base64'), sha: g.sha || undefined, branch: DAL })
+      });
+      return gonder(200, { sha: sonuc.content.sha, veri });
+    }
+
+    if (islem === 'sayfa-kaydet') {
+      if (!KURUMSAL[g.ad]) return gonder(400, { hata: 'Geçersiz sayfa' });
+      const title = String(g.title || '').replace(/[\r\n]+/g, ' ').trim();
+      const description = String(g.description || '').replace(/[\r\n]+/g, ' ').trim();
+      const body = String(g.body || '').replace(/\r\n/g, '\n').trim();
+      if (!title || title.length > 100) return gonder(400, { hata: 'Başlık gerekli (en fazla 100 karakter).' });
+      if (description.length > 300) return gonder(400, { hata: 'Kısa açıklama en fazla 300 karakter olabilir.' });
+      if (!body || body.length > 60000) return gonder(400, { hata: 'Sayfa içeriği boş olamaz.' });
+      const tek = s => s.replace(/"/g, '”');
+      const icerik = `---\ntitle: "${tek(title)}"\ndescription: "${tek(description)}"\n---\n${body}\n`;
+      const sonuc = await gh(`/contents/content/sayfalar/${g.ad}.md`, {
+        method: 'PUT',
+        body: JSON.stringify({ message: `${KURUMSAL[g.ad]} sayfası güncellendi (editör: ${kullanici})`, content: Buffer.from(icerik).toString('base64'), sha: g.sha || undefined, branch: DAL })
+      });
+      return gonder(200, { sha: sonuc.content.sha });
     }
 
     if (islem === 'sondakika-kaydet') {
@@ -263,7 +324,7 @@ module.exports = async (req, res) => {
 
     return gonder(400, { hata: 'Bilinmeyen işlem' });
   } catch (e) {
-    if (e.durum === 409) return gonder(409, { hata: 'Bu haber siz düzenlerken başka biri tarafından değiştirildi. Listeyi yenileyip tekrar deneyin.' });
+    if (e.durum === 409 || e.durum === 422) return gonder(409, { hata: 'Bu içerik siz düzenlerken başka biri tarafından değiştirildi. Geri dönüp yeniden açın ve tekrar deneyin.' });
     return gonder(e.durum === 413 ? 413 : 502, { hata: 'İşlem tamamlanamadı: ' + e.message });
   }
 };

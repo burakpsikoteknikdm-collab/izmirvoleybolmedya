@@ -1087,7 +1087,7 @@ new MutationObserver(okDurumu).observe($('#track'), { childList: true });
 okDurumu();
 
 /* Canlı yayın bilgisi (panelden: content/canli.json) */
-fetch('/content/canli.json').then(r => r.ok ? r.json() : null).then(j => {
+icerikOku('canli.json').then(j => {
   if (!j) return;
   if (j.skor_duyuru) $('#duyuru').textContent = j.skor_duyuru;
   if (j.youtube_url) { $('#yt').href = j.youtube_url; $('#yt').textContent = 'Canlı İzle'; }
