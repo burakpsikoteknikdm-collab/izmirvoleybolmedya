@@ -12,7 +12,7 @@ Uzman Posta Kadınlar Voleybol 2. Ligi 6. Grup’ta 2. hafta heyecanı, çekişm
 Her iki takımı da ortaya koydukları mücadeleden dolayı tebrik ediyor, sezonun kalan bölümünde başarılar diliyoruz.
 ⭐ İzmir’in Yükselen Yıldızı
 İzmir Voleybol Medya Grubu | Zafer Elli
-🌐 www.voleybolizmir.com
+🌐 www.izmirvoleybolmedya.com
 #İzmirVoleybolMedya #ZaferElli #AkhisarGücü #VenüsSpor #UzmanPosta #Kadınlar2Lig #Voleybol #İzmirinYükselenYıldızı
 Salon bilgisini daha net yaz
 Deplasman vurgusunu güçlendir

@@ -13,7 +13,7 @@ Uzman Posta Erkekler Voleybol 2. Ligi karşılaşmasında İzmir temsilcimiz Ark
 Büyük çekişmeye sahne olan karşılaşmada mücadele eden Arkas Spor, sahadan istediği sonuçla ayrılamadı. İzmir temsilcimize önümüzdeki karşılaşmalarda başarılar diliyoruz.
 ⭐ İzmir’in Yükselen Yıldızı
 İzmir Voleybol Medya Grubu | Zafer Elli
-🌐 www.voleybolizmir.com
+🌐 www.izmirvoleybolmedya.com
 #İzmirVoleybolMedya #ZaferElli #ArkasSpor #YenişehirBelediyespor #UzmanPosta #Erkekler2Lig #Voleybol #İzmirinYükselenYıldızı
 Set skorlarını ekleyip metni güçlendir
 Maç sonucunu daha dikkat çekici yap

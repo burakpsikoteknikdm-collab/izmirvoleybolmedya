@@ -22,6 +22,6 @@ Set: 8-15
 
 ⭐ İzmir’in Yükselen Yıldızı
 İzmir Voleybol Medya Grubu | Zafer Elli
-🌐 www.voleybolizmir.com
+🌐 www.izmirvoleybolmedya.com
 
 #İzmirVoleybolMedya #ZaferElli #ArkasSpor #ArabicaCoffeeHouse #Erkekler1Lig #Voleybol #İzmirinYükselenYıldızı

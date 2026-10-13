@@ -23,6 +23,6 @@ Set: 19-25
 ⭐ İzmir’in Yükselen Yıldızı
 İzmir Voleybol Medya Grubu | Zafer Elli
 
-🌐 www.voleybolizmir.com
+🌐 www.izmirvoleybolmedya.com
 
 #Göztepe #EforGençlik #UzmanPostaKadınlar2Ligi #KadınlarVoleybol #İzmirVoleybol #İzmirVoleybolMedya #İzmirinYükselenYıldızı #ZaferElli
