@@ -168,7 +168,7 @@ footer .sosyal a:hover{text-decoration:underline}
 <body>
 <header class="ust">
   <div class="wrap">
-    <a class="marka" href="/"><img src="/editor/ikon-192.png" alt="İzmir Voleybol Medya logosu" width="48" height="48"><b>İZMİR VOLEYBOL <i>MEDYA</i></b></a>
+    <a class="marka" href="/"><img src="/images/logo-256.webp" alt="İzmir Voleybol Medya logosu" width="48" height="48"><b>İZMİR VOLEYBOL <i>MEDYA</i></b></a>
     <nav aria-label="Ana menü">
       <a href="/#haberler">Haberler</a>
       <a href="/#lig/sultanlar-ligi">Ligler</a>
