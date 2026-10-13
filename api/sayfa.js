@@ -108,7 +108,7 @@ footer .sosyal a{color:#fff;font-weight:600;padding:6px 2px}
     <nav aria-label="Ana menü">
       <a href="/#haberler">Haberler</a>
       <a href="/#bolum/takimlar">İzmir Takımlarımız</a>
-      <a href="/#bolum/altyapi">Altyapı</a>
+      <a href="/#bolum/altyapi">İzmir Altyapı Takımlarımız</a>
       <a href="/#program">Maç Programı</a>
     </nav>
   </div>

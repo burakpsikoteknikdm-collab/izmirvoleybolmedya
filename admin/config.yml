@@ -40,10 +40,10 @@ collections:
         name: "bolum"
         widget: "select"
         required: false
-        hint: "Seçerseniz haber, sitedeki \"İzmir Takımlarımız\" ya da \"Altyapı\" sekmesinde de görünür."
+        hint: "Seçerseniz haber, sitedeki \"İzmir Takımlarımız\" ya da \"İzmir Altyapı Takımlarımız\" bölümünde de görünür."
         options:
-          - { label: "İzmir Takımlarımız – Takımlar", value: "takimlar" }
-          - { label: "İzmir Takımlarımız – Altyapı", value: "altyapi" }
+          - { label: "İzmir Takımlarımız", value: "takimlar" }
+          - { label: "İzmir Altyapı Takımlarımız", value: "altyapi" }
       - { label: "📌 Başa Tuttur", name: "sabit", widget: "boolean", default: false, required: false, hint: "İşaretlenirse haber manşette büyük olarak ve listede ilk sırada görünür. Hiçbir haber işaretli değilse en son haber öne çıkar." }
       - { label: "Haber İçeriği", name: "body", widget: "markdown" }
 
