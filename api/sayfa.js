@@ -3,7 +3,7 @@
 const { SITE, REPO, kacis, ayristir, duzMetin, markdown } = require('./_haber');
 
 // Yayındaki kurumsal sayfalar (dosya adı → menüde görünen ad)
-const SAYFALAR = { hakkimizda: 'Hakkımızda' };
+const SAYFALAR = { 'hakkimizda': 'Hakkımızda', 'kunye': 'Künye', 'kvkk': 'KVKK Aydınlatma Metni', 'cerez-politikasi': 'Çerez Politikası', 'kullanim-kosullari': 'Kullanım Koşulları' };
 const SOSYAL = [
   ['YouTube', 'https://www.youtube.com/@izmirvoleybolmedya'],
   ['Instagram', 'https://www.instagram.com/izmirvoleybolmedya'],
@@ -50,6 +50,7 @@ module.exports = async (req, res) => {
 <meta property="og:url" content="${kacis(adres)}">
 <meta name="theme-color" content="#0b1f4d">
 <link rel="icon" href="/editor/ikon-192.png">
+<script src="/cerez.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
@@ -92,6 +93,9 @@ article strong{color:var(--ink)}
 .takip a.yt{background:#e62117}.takip a.ig{background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af)}.takip a.fb{background:#1877f2}
 footer{background:var(--ink);color:#9db8ff;padding:26px 0;text-align:center;font-size:.9rem}
 footer b{color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;display:block}
+footer .kurumsal{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin-top:12px;font-size:.85rem}
+footer .kurumsal a{color:#c9d8ff;padding:4px 0}
+footer .kurumsal a:hover{color:#fff;text-decoration:underline}
 footer .sosyal{display:flex;justify-content:center;gap:18px;margin-top:10px}
 footer .sosyal a{color:#fff;font-weight:600;padding:6px 2px}
 @media(max-width:600px){article{padding:20px}.ust nav{gap:14px}.ust nav a{font-size:1rem}.marka b{font-size:1.25rem}.marka img{width:40px;height:40px}}
@@ -129,6 +133,7 @@ footer .sosyal a{color:#fff;font-weight:600;padding:6px 2px}
 </main>
 <footer><b>İZMİR VOLEYBOL MEDYA</b>İzmir voleybol haberleri, maç sonuçları ve canlı yayınlar · <a href="mailto:izmirvoleybolmg@gmail.com">izmirvoleybolmg@gmail.com</a>
   <div class="sosyal">${SOSYAL.map(([a, u]) => `<a href="${u}" target="_blank" rel="noopener">${a}</a>`).join('')}</div>
+  <div class="kurumsal"><a href="/hakkimizda">Hakkımızda</a><a href="/kunye">Künye</a><a href="/kvkk">KVKK Aydınlatma Metni</a><a href="/cerez-politikasi">Çerez Politikası</a><a href="/kullanim-kosullari">Kullanım Koşulları</a><a href="#" onclick="cerezTercihleri();return false">Çerez Tercihleri</a></div>
 </footer>
 </body>
 </html>`);

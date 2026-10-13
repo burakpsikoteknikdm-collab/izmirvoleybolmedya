@@ -9,8 +9,8 @@
       "destination": "/api/sitemap"
     },
     {
-      "source": "/hakkimizda",
-      "destination": "/api/sayfa?ad=hakkimizda"
+      "source": "/:ad(hakkimizda|kunye|kvkk|cerez-politikasi|kullanim-kosullari)",
+      "destination": "/api/sayfa?ad=:ad"
     }
   ]
 }

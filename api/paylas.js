@@ -101,6 +101,7 @@ ${lig ? `<meta property="article:section" content="${kacis(lig)}">` : ''}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="/cerez.js"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9798524131017882" crossorigin="anonymous"></script>
 <script type="application/ld+json">${jsonLd(yapisalVeri)}</script>
 <style>
@@ -162,6 +163,9 @@ aside h2{font-size:1.5rem;margin-bottom:12px}
 .tum{display:inline-block;margin-top:6px;background:var(--ink);color:#fff;border-radius:999px;padding:10px 20px;font-weight:700}
 footer{background:var(--ink);color:#9db8ff;padding:26px 0;text-align:center;font-size:.9rem}
 footer b{color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;display:block}
+footer .kurumsal{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin-top:12px;font-size:.85rem}
+footer .kurumsal a{color:#c9d8ff;padding:4px 0}
+footer .kurumsal a:hover{color:#fff;text-decoration:underline}
 footer .sosyal{display:flex;justify-content:center;gap:18px;margin-top:10px}
 footer .sosyal a{color:#fff;font-weight:600;padding:6px 2px}
 footer .sosyal a:hover{text-decoration:underline}
@@ -217,7 +221,7 @@ footer .sosyal a:hover{text-decoration:underline}
     </aside>
   </div>
 </main>
-<footer><b>İZMİR VOLEYBOL MEDYA</b>İzmir voleybol haberleri, maç sonuçları ve canlı yayınlar · <a href="mailto:izmirvoleybolmg@gmail.com">izmirvoleybolmg@gmail.com</a><div class="sosyal"><a href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" rel="noopener">YouTube</a><a href="https://www.instagram.com/izmirvoleybolmedya" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/share/g/19xt84G5E8/" target="_blank" rel="noopener">Facebook</a></div></footer>
+<footer><b>İZMİR VOLEYBOL MEDYA</b>İzmir voleybol haberleri, maç sonuçları ve canlı yayınlar · <a href="mailto:izmirvoleybolmg@gmail.com">izmirvoleybolmg@gmail.com</a><div class="sosyal"><a href="https://www.youtube.com/@izmirvoleybolmedya" target="_blank" rel="noopener">YouTube</a><a href="https://www.instagram.com/izmirvoleybolmedya" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/share/g/19xt84G5E8/" target="_blank" rel="noopener">Facebook</a></div><div class="kurumsal"><a href="/hakkimizda">Hakkımızda</a><a href="/kunye">Künye</a><a href="/kvkk">KVKK Aydınlatma Metni</a><a href="/cerez-politikasi">Çerez Politikası</a><a href="/kullanim-kosullari">Kullanım Koşulları</a><a href="#" onclick="cerezTercihleri();return false">Çerez Tercihleri</a></div></footer>
 <script>
 (function () {
   var url = ${JSON.stringify(adres)}, baslik = ${JSON.stringify(baslik).replace(/</g, '\\u003c')};

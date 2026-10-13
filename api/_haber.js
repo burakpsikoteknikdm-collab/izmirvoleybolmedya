@@ -40,7 +40,7 @@ const fotolar = h => [h.image, ...(Array.isArray(h.galeri) ? h.galeri : [])].fil
 
 const duzMetin = b => String(b).replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/[*_>`~]/g, '').replace(/(^|\s)#{1,6}\s/g, '$1').replace(/\s+/g, ' ').trim();
 const mutlakAdres = u => !u ? '' : /^https?:/.test(u) ? u : SITE + (u.startsWith('/') ? '' : '/') + u;
-const guvenliUrl = u => /^(https?:\/\/|\/|#|mailto:)/i.test(u) ? u : '';
+const guvenliUrl = u => /^(https?:\/\/|\/|#|mailto:|tel:)/i.test(u) ? u : '';
 
 // Basit ve güvenli Markdown → HTML (önce tüm HTML kaçırılır)
 function satirIci(s) {

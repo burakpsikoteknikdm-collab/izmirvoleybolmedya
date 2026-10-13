@@ -67,6 +67,34 @@ collections:
           - { label: "Başlık", name: "title", widget: "string" }
           - { label: "Kısa Açıklama (sayfa üstünde ve Google'da görünür)", name: "description", widget: "text" }
           - { label: "Sayfa İçeriği", name: "body", widget: "markdown" }
+      - file: "content/sayfalar/kunye.md"
+        label: "Künye"
+        name: "kunye"
+        fields:
+          - { label: "Başlık", name: "title", widget: "string" }
+          - { label: "Kısa Açıklama (sayfa üstünde ve Google'da görünür)", name: "description", widget: "text" }
+          - { label: "Sayfa İçeriği", name: "body", widget: "markdown" }
+      - file: "content/sayfalar/kvkk.md"
+        label: "KVKK Aydınlatma Metni"
+        name: "kvkk"
+        fields:
+          - { label: "Başlık", name: "title", widget: "string" }
+          - { label: "Kısa Açıklama (sayfa üstünde ve Google'da görünür)", name: "description", widget: "text" }
+          - { label: "Sayfa İçeriği", name: "body", widget: "markdown" }
+      - file: "content/sayfalar/cerez-politikasi.md"
+        label: "Çerez Politikası"
+        name: "cerez_politikasi"
+        fields:
+          - { label: "Başlık", name: "title", widget: "string" }
+          - { label: "Kısa Açıklama (sayfa üstünde ve Google'da görünür)", name: "description", widget: "text" }
+          - { label: "Sayfa İçeriği", name: "body", widget: "markdown" }
+      - file: "content/sayfalar/kullanim-kosullari.md"
+        label: "Kullanım Koşulları"
+        name: "kullanim_kosullari"
+        fields:
+          - { label: "Başlık", name: "title", widget: "string" }
+          - { label: "Kısa Açıklama (sayfa üstünde ve Google'da görünür)", name: "description", widget: "text" }
+          - { label: "Sayfa İçeriği", name: "body", widget: "markdown" }
 
   - name: "seritler"
     label: "Son Dakika & Reklam Şeridi"

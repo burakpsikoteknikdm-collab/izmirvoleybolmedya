@@ -46,4 +46,4 @@ Bizim için voleybol yalnızca bir spor değil; emek, takım ruhu, dayanışma v
 
 ## İletişim
 
-Haber, yayın, reklam ve iş birliği talepleriniz için bize [izmirvoleybolmg@gmail.com](mailto:izmirvoleybolmg@gmail.com) adresinden ulaşabilirsiniz.
+Haber, yayın, reklam ve iş birliği talepleriniz için bize [izmirvoleybolmg@gmail.com](mailto:izmirvoleybolmg@gmail.com) adresinden ya da [0532 353 05 65](tel:+905323530565) numaralı telefondan ulaşabilirsiniz.

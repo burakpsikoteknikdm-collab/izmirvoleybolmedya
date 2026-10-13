@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
   res.end(`<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${url(SITE + '/', son, '1.0', 'hourly')}
-${url(SITE + '/hakkimizda', '', '0.5', 'monthly')}
+${['hakkimizda', 'kunye', 'kvkk', 'cerez-politikasi', 'kullanim-kosullari'].map(a => url(SITE + '/' + a, '', a === 'hakkimizda' ? '0.5' : '0.3', 'monthly')).join('\n')}
 ${haberler.map(h => url(haberAdresi(h.ad), tarih(h.date), '0.8', 'weekly')).join('\n')}
 </urlset>
 `);
