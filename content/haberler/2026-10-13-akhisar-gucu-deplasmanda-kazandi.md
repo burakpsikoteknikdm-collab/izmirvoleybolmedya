@@ -3,6 +3,7 @@ title: "🏐 AKHİSAR GÜCÜ DEPLASMANDA KAZANDI"
 date: 2026-10-13T01:12:00.000+03:00
 image: /images/uploads/2026-10-12-akhisar-gucu-deplasmanda-kazandi-d146df.jpg
 lig: kadinlar-2-ligi
+bolum: takimlar
 ---
 🏐 AKHİSAR GÜCÜ DEPLASMANDA KAZANDI!
 
