@@ -1,9 +1,11 @@
 ---
 title: "🏐 SULTANLAR LİGİ’NDE İZMİR’DEN MUHTEŞEM GERİ DÖNÜŞ"
 date: 2026-10-14T19:03:00.000+03:00
-image: /images/uploads/2026-10-14-sultanlar-ligi-nde-izmir-den-muhtesem-geri-donus-46a136.jpg
+image: /images/uploads/2026-10-14-sultanlar-ligi-nde-izmir-den-muhtesem-geri-donus-d1d87b.jpg
 lig: sultanlar-ligi
 bolum: takimlar
+galeri:
+  - /images/uploads/2026-10-14-sultanlar-ligi-nde-izmir-den-muhtesem-geri-donus-46a136.jpg
 sabit: true
 ---
 🏐 SULTANLAR LİGİ’NDE İZMİR’DEN MUHTEŞEM GERİ DÖNÜŞ!
