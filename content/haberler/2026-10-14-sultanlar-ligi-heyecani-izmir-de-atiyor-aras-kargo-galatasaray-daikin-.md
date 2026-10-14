@@ -8,7 +8,6 @@ galeri:
   - /images/uploads/2026-10-14-sultanlar-ligi-heyecani-izmir-de-atiyor-aras-kargo-galatasaray-daikin--2f01bb.jpg
   - /images/uploads/2026-10-14-sultanlar-ligi-heyecani-izmir-de-atiyor-aras-kargo-galatasaray-daikin--baa898.jpg
   - /images/uploads/2026-10-14-sultanlar-ligi-heyecani-izmir-de-atiyor-aras-kargo-galatasaray-daikin--81492b.jpg
-sabit: true
 ---
 Sultanlar Ligi Heyecanı İzmir’de Atıyor: Aras Kargo, Galatasaray Daikin’i Ağırlıyor
 
