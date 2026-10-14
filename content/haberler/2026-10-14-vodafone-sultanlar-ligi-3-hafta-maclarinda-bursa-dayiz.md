@@ -2,6 +2,7 @@
 title: "🏐 VODAFONE SULTANLAR LİGİ’NDE 3. HAFTA HEYECANI BURSA’DA"
 date: 2026-10-14T14:07:00.000+03:00
 image: /images/uploads/2026-10-14-file-00000000108c81f686ed5c0a16ba82cd-982a5a.jpg
+lig: sultanlar-ligi
 sabit: true
 ---
 🏐 VODAFONE SULTANLAR LİGİ’NDE 3. HAFTA HEYECANI BURSA’DA!
