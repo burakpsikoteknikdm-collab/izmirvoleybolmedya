@@ -6,7 +6,6 @@ lig: sultanlar-ligi
 bolum: takimlar
 galeri:
   - /images/uploads/2026-10-14-sultanlar-ligi-nde-izmir-den-muhtesem-geri-donus-46a136.jpg
-sabit: true
 ---
 🏐 SULTANLAR LİGİ’NDE İZMİR’DEN MUHTEŞEM GERİ DÖNÜŞ!
 
