@@ -14,7 +14,7 @@ ALTEKMA’DAN MUHTEŞEM GERİ DÖNÜŞ! İZMİR EKİBİ SEZONA GALİBİYETLE BA�
 
 SMS Grup Efeler Ligi’nde ilk hafta heyecanında Altekma, iki set geriye düştüğü karşılaşmada Spor Toto’yu 3-2 mağlup ederek sezona muhteşem bir başlangıç yaptı.
 
-İzmir Atatürk Voleybol Salonu Vestel Spor Kompleksi’nde oynanan mücadelede Altekma, büyük bir mücadele örneği sergileyerek taraftarlarına unutulmaz bir galibiyet yaşattı.
+İzmir Atatürk Voleybol Salonunda   oynanan mücadelede Altekma, büyük bir mücadele örneği sergileyerek taraftarlarına unutulmaz bir galibiyet yaşattı.
 
 Karşılaşmanın ilk iki setini 29-27 ve 25-21’lik skorlarla kazanan Spor Toto, maçta 2-0 öne geçti. Ancak mücadeleyi bırakmayan İzmir temsilcisi Altekma, üçüncü sette 25-9’luk farklı bir skorla geri dönüşün sinyallerini verdi.
 
