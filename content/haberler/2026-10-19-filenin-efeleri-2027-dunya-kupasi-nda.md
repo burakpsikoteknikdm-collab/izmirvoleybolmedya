@@ -1,6 +1,7 @@
 ---
 title: "FİLENİN EFELERİ 2027 DÜNYA KUPASI’NDA!"
 date: 2026-10-19T22:30:00.000+03:00
+image: /images/uploads/2026-10-19-filenin-efeleri-2027-dunya-kupasi-nda-9c76a1.jpg
 lig: efeler-ligi
 ---
 FİLENİN EFELERİ 2027 DÜNYA KUPASI’NDA! 
