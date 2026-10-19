@@ -4,6 +4,7 @@ date: 2026-10-19T10:06:00.000+03:00
 image: /images/uploads/2026-10-19-evimizde-galibiyet-hatirasi-goztepeyuppo-izmirinsultanlari-yuppo-org-3f66ab.jpg
 lig: sultanlar-ligi
 bolum: takimlar
+sabit: true
 ---
 🏐 EVİMİZDE 3 PUAN BİZİM! GÖZTEPE YUPPO’DAN NET GALİBİYET
 
