@@ -8,7 +8,6 @@ galeri:
   - /images/uploads/2026-10-19-aras-kargo-deplasmanda-kazandi-d37e25.jpg
   - /images/uploads/2026-10-19-aras-kargo-deplasmanda-kazandi-70e273.jpg
   - /images/uploads/2026-10-19-aras-kargo-deplasmanda-kazandi-0daee7.jpg
-sabit: true
 ---
 🏐 ARAS KARGO DEPLASMANDA KAZANDI!
 
