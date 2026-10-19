@@ -8,7 +8,6 @@ galeri:
   - /images/uploads/2026-10-18-altekma-dan-muhtesem-geri-donus-izmir-ekibi-sezona-galibiyetle-basladi-d6718b.jpg
   - /images/uploads/2026-10-18-altekma-dan-muhtesem-geri-donus-izmir-ekibi-sezona-galibiyetle-basladi-4ce161.jpg
   - /images/uploads/2026-10-18-altekma-dan-muhtesem-geri-donus-izmir-ekibi-sezona-galibiyetle-basladi-53b3d6.jpg
-sabit: true
 ---
 ALTEKMA’DAN MUHTEŞEM GERİ DÖNÜŞ! SEZONA GALİBİYETLE BAŞLADI
 
