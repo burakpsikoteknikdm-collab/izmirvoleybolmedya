@@ -1,7 +1,7 @@
 ---
 title: "İSTANBUL GENÇLİK SPOR BALKAN ŞAMPİYONU!"
 date: 2026-10-19T23:44:00.000+03:00
-image: /images/uploads/2026-10-20-istanbul-genclik-spor-balkan-sampiyonu-825a2e.jpg
+image: /images/uploads/2026-10-20-istanbul-genclik-spor-balkan-sampiyonu-a43aee.jpg
 lig: efeler-ligi
 ---
 İSTANBUL GENÇLİK SPOR BALKAN ŞAMPİYONU!
