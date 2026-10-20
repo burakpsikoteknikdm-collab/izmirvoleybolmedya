@@ -37,7 +37,17 @@
   function stilEkle() { if (document.getElementById('etkStil')) return; var s = document.createElement('style'); s.id = 'etkStil'; s.textContent = STIL; document.head.appendChild(s); }
 
   // Bir haberin altına beğeni + yorum alanını kurar
+  // Okunma: aynı oturumda aynı haber bir kez sayılır
+  function okunduSay(ad) {
+    var k = 'ivm_okundu_' + ad;
+    try { if (sessionStorage.getItem(k)) return; sessionStorage.setItem(k, '1'); } catch (e) {}
+    fetch(API + '?islem=okundu', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ad: ad }), keepalive: true }).catch(function () {});
+    // Ana sayfada açılır pencerede okunan haber de Vercel Analytics'e sayfa olarak bildirilir
+    if (location.pathname.indexOf('/haber/') !== 0 && window.va) window.va('pageview', { route: '/haber/[ad]', path: '/haber/' + encodeURIComponent(ad) });
+  }
+
   window.IVM_etkilesim = function (kutu, ad) {
+    okunduSay(ad);
     if (!kutu || !ad) return;
     stilEkle();
     kutu.className = 'etk';

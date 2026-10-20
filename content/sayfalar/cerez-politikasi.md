@@ -12,6 +12,7 @@ Son güncelleme: 13 Ekim 2026
 
 - **Zorunlu çerezler ve yerel depolama:** Sitenin çalışması için gereklidir. Çerez tercihiniz, son seçtiğiniz il ligi ve kısa süreli haber önbelleği gibi bilgileri saklar. Bu çerezler için onay alınmaz; tarayıcı ayarlarınızdan silebilirsiniz.
 - **İşlevsel veriler:** Beğendiğiniz haberlerin tekrar beğenilmemesi için cihazınıza atanan anonim bir tanımlayıcı ve bildirim aboneliği tercihiniz saklanır.
+- **Anonim ziyaret istatistikleri:** Hangi sayfaların ve haberlerin kaç kez okunduğunu görmek için çerez kullanmayan, kişiyi tanımlamayan istatistikler tutulur (Vercel Web Analytics ve haber okunma sayacı). Aynı haberin aynı ziyarette birden fazla sayılmaması için tarayıcının oturum belleğine (sessionStorage) geçici bir işaret yazılır; tarayıcı kapatılınca silinir.
 - **Reklam çerezleri (Google AdSense):** Sitede gösterilen reklamlar Google tarafından sunulur. **Onay vermeniz hâlinde** Google ve iş ortakları ilgi alanlarınıza göre kişiselleştirilmiş reklam göstermek için çerez kullanabilir. Onay vermezseniz yalnızca kişiselleştirilmemiş reklamlar gösterilir; bu reklamlar da sıklık sınırlama ve kötüye kullanımı önleme gibi amaçlarla sınırlı çerez kullanabilir.
 
 Google'ın verileri nasıl kullandığı hakkında bilgi için: [policies.google.com/technologies/partner-sites](https://policies.google.com/technologies/partner-sites)

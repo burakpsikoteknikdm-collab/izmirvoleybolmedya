@@ -50,6 +50,8 @@ module.exports = async (req, res) => {
 <meta property="og:url" content="${kacis(adres)}">
 <meta name="theme-color" content="#0b1f4d">
 <link rel="icon" href="/editor/ikon-192.png">
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
 <script src="/cerez.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

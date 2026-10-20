@@ -100,6 +100,7 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
 .sabitle input{width:22px;height:22px;flex:none;margin-top:2px;accent-color:var(--ink)}
 .sabitle b{display:block}.sabitle small{display:block;color:var(--muted);font-size:.85rem;line-height:1.4}
 .rozet.sabit{background:#fff3c4;color:#8a5a00}
+.rozet.okunma{background:#e7f6ee;color:#12805c}
 
 /* Yönetim ızgarası */
 .yonetim{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:18px}
@@ -393,6 +394,7 @@ async function listeAc() {
       if (h.lig) { const r = document.createElement('span'); r.className = 'rozet'; r.textContent = LIG_AD[h.lig] || h.lig; k.append(r); }
       if (h.bolum) { const r = document.createElement('span'); r.className = 'rozet'; r.textContent = h.bolum === 'altyapi' ? 'İzmir Altyapı Takımlarımız' : 'İzmir Takımlarımız'; k.append(r); }
       if (h.sabit) { const r = document.createElement('span'); r.className = 'rozet sabit'; r.textContent = '📌 Başa tutturuldu'; k.append(r); }
+      if (h.okunma != null) { const r = document.createElement('span'); r.className = 'rozet okunma'; r.textContent = '👁 ' + h.okunma.toLocaleString('tr-TR') + ' okunma'; k.append(r); }
       tx.append(t, k); b.append(tx);
       b.onclick = () => duzenAc(h.ad);
       kutu.append(b);

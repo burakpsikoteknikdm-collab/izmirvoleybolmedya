@@ -147,6 +147,13 @@ module.exports = async (req, res) => {
         return { ad: d.name, sha: d.sha, title: f.title || d.name, date: f.date || '', image: f.image || '', lig: f.lig || '', bolum: f.bolum || '', sabit: f.sabit === 'true' };
       }));
       liste.sort((a, b) => new Date(b.date) - new Date(a.date));
+      // Okunma sayıları (Supabase); alınamazsa liste yine gösterilir
+      try {
+        if (supabase.hazirMi()) {
+          const say = Object.fromEntries((await supabase.sb('/okunmalar?select=haber,sayi&limit=5000')).map(o => [o.haber, o.sayi]));
+          liste.forEach(h => { h.okunma = say[h.ad.replace(/\.md$/i, '')] || 0; });
+        }
+      } catch (e) {}
       return gonder(200, { kullanici, haberler: liste });
     }
 

@@ -5,6 +5,7 @@
 //  GET  vapid                          → bildirim aboneliği için açık anahtar
 //  POST abone   { abonelik }           → bildirim aboneliği kaydı
 //  POST abonelik-iptal { endpoint }
+//  POST okundu { ad }                 → haberin okunma sayısını 1 artırır (kişisel veri tutulmaz)
 const { hazirMi, sb, ipOzeti, vapid } = require('./_supabase');
 
 const haberAdiMi = ad => typeof ad === 'string' && ad.length > 0 && ad.length < 200 && !/[\/\\]|\.\./.test(ad);
@@ -71,6 +72,14 @@ module.exports = async (req, res) => {
       const son = await sb(`/yorumlar?ip_ozet=eq.${ip}&olusturma=gte.${onDk}&select=id`, { sayim: true });
       if (son.toplam >= 3) return gonder(429, { hata: 'Çok sık yorum gönderdiniz. Lütfen birkaç dakika sonra tekrar deneyin.' });
       await sb('/yorumlar', { method: 'POST', body: { haber: g.ad, ad: isim, metin, ip_ozet: ip } });
+      return gonder(200, { tamam: true });
+    }
+
+    if (islem === 'okundu') {
+      if (!haberAdiMi(g.ad)) return gonder(400, { hata: 'Geçersiz haber' });
+      // Arama motoru botları ve önizleme robotları sayılmaz
+      if (/bot|crawl|spider|slurp|preview|facebookexternalhit|whatsapp|headless|lighthouse/i.test(req.headers['user-agent'] || '')) return gonder(200, { tamam: true });
+      await sb('/rpc/okunma_arttir', { method: 'POST', body: { h: g.ad } });
       return gonder(200, { tamam: true });
     }
 
