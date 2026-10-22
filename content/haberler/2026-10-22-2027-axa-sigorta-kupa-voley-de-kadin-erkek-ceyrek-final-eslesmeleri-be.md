@@ -66,3 +66,5 @@ Eczacıbaşı Peron İstanbul - Aras Kargo
 AXA Sigorta Kupa Voley'de çeyrek final müsabakaları kadınlarda 18-19 Kasım 2026 tarihlerinde oynanacak.
 
 Çeyrek final maçları 2025-2026 sezonu lig sıralamasında üst sırada bulunan takımın sahasında oynanır. Tek maç üzerinden oynanan maçlar sonunda galip gelen 4 takım Dörtlü Finale yükselir.
+
+www.izmirvoleybolmedya.com
