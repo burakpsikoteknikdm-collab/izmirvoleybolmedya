@@ -7,7 +7,6 @@ galeri:
   - /images/uploads/2026-10-20-analig-voleybolda-izmir-den-turkiye-ikinciligi-anadolu-yildizlar-ligi--16d0f6.jpg
   - /images/uploads/2026-10-20-analig-voleybolda-izmir-den-turkiye-ikinciligi-anadolu-yildizlar-ligi--356399.jpg
   - /images/uploads/2026-10-20-analig-voleybolda-izmir-den-turkiye-ikinciligi-anadolu-yildizlar-ligi--1b5e3c.jpg
-sabit: true
 ---
 🇹🇷 ANALİG VOLEYBOLDA İZMİR’DEN TÜRKİYE İKİNCİLİĞİ! 🇹🇷
 
