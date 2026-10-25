@@ -4,7 +4,6 @@ date: 2026-10-25T13:17:00.000+03:00
 image: /images/uploads/2026-10-25-filenin-sultanlari-na-cumhuriyete-deger-katanlar-odulu-09dcda.jpg
 lig: sultanlar-ligi
 bolum: takimlar
-sabit: true
 ---
 Filenin Sultanları’na “Cumhuriyete Değer Katanlar” Ödülü
 
