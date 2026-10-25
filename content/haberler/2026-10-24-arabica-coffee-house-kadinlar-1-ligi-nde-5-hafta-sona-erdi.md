@@ -8,7 +8,6 @@ galeri:
   - /images/uploads/2026-10-24-arabica-coffee-house-kadinlar-1-ligi-nde-5-hafta-sona-erdi-c0e8ba.jpg
   - /images/uploads/2026-10-24-arabica-coffee-house-kadinlar-1-ligi-nde-5-hafta-sona-erdi-a90ebf.jpg
   - /images/uploads/2026-10-24-arabica-coffee-house-kadinlar-1-ligi-nde-5-hafta-sona-erdi-b22256.jpg
-sabit: true
 ---
 Arabica Coffee House Kadınlar 1. Ligi'nde 5.Hafta Sona Erdi.
 
