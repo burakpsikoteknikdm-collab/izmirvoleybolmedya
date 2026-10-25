@@ -8,6 +8,7 @@ galeri:
   - /images/uploads/2026-10-25-sms-grup-efeler-ligi-nde-2-7a1981.jpg
   - /images/uploads/2026-10-25-sms-grup-efeler-ligi-nde-2-526d16.jpg
   - /images/uploads/2026-10-25-sms-grup-efeler-ligi-nde-2-ff30a5.jpg
+sabit: true
 ---
 🏐 SMS GRUP EFELER LİGİ’NDE 2. HAFTA SONA ERDİ!
 
