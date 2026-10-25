@@ -2,7 +2,6 @@
 title: "GEÇMİŞ OLSUN ZAFER ELLİ"
 date: 2026-10-19T13:08:00.000+03:00
 image: /images/uploads/2026-10-19-gecmis-olsun-zafer-elli.jpg
-sabit: true
 ---
 İzmir Voleybol Medya’nın kurucusu Zafer Elli, perşembe akşamı yaşadığı rahatsızlık nedeniyle hastaneye kaldırıldı.
 
