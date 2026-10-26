@@ -8,7 +8,6 @@ galeri:
   - /images/uploads/2026-10-25-arabica-coffee-house-erkekler-1-ligi-nde-4-37e03e.jpg
   - /images/uploads/2026-10-25-arabica-coffee-house-erkekler-1-ligi-nde-4-46c069.jpg
   - /images/uploads/2026-10-25-arabica-coffee-house-erkekler-1-ligi-nde-4-f019c3.jpg
-sabit: true
 ---
 🏐 ARABICA COFFEE HOUSE ERKEKLER 1. LİGİ’NDE 4. HAFTA SONA ERDİ!
 
