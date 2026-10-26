@@ -1,7 +1,9 @@
 ---
 title: "Filenin Sultanları’nın Dünya Kupası’ndaki Rakipleri Belli Oldu!"
 date: 2026-10-26T20:14:00.000+03:00
+image: /images/uploads/2026-10-26-filenin-sultanlari-nin-dunya-kupasi-ndaki-rakipleri-belli-oldu-6513ff.jpg
 lig: sultanlar-ligi
+sabit: true
 ---
 Filenin Sultanları’nın Dünya Kupası’ndaki Rakipleri Belli Oldu!
 
