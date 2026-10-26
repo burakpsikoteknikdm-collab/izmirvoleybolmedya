@@ -8,7 +8,6 @@ galeri:
   - /images/uploads/2026-10-25-vodafone-sultanlar-ligi-nde-5-9f9c5e.jpg
   - /images/uploads/2026-10-25-vodafone-sultanlar-ligi-nde-5-0cdf7d.jpg
   - /images/uploads/2026-10-25-vodafone-sultanlar-ligi-nde-5-f76695.jpg
-sabit: true
 ---
 Vodafone Sultanlar Ligi’nde 5. Hafta Sona Erdi
 
