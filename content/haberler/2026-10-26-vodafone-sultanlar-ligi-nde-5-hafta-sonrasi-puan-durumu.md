@@ -4,6 +4,7 @@ date: 2026-10-26T07:21:00.000+03:00
 image: /images/uploads/2026-10-26-vodafone-sultanlar-ligi-nde-5-9fd857.jpg
 lig: sultanlar-ligi
 bolum: takimlar
+sabit: true
 ---
 Vodafone Sultanlar Ligi’nde 5. Hafta Sonrası Puan Durumu
 
