@@ -4,7 +4,6 @@ date: 2026-10-27T11:59:00.000+03:00
 image: /images/uploads/2026-10-27-kadinlar-1-lig-20261023-200903-0000-b4d1d4.jpg
 lig: erkekler-1-ligi
 bolum: takimlar
-sabit: true
 ---
 Arabica Coffee House Erkekler 1. Ligi’nde 5. Hafta Heyecanı Başlıyor!
 
