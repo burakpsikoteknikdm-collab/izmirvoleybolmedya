@@ -6,7 +6,6 @@ galeri:
   - /images/uploads/2026-10-27-tvf-baskani-mehmet-akif-ustundag-a-aile-ve-spor-degerlerine-katki-odul-9b5c63.jpg
   - /images/uploads/2026-10-27-tvf-baskani-mehmet-akif-ustundag-a-aile-ve-spor-degerlerine-katki-odul-a91de9.jpg
   - /images/uploads/2026-10-27-tvf-baskani-mehmet-akif-ustundag-a-aile-ve-spor-degerlerine-katki-odul-6f7a1b.jpg
-sabit: true
 ---
 TVF Başkanı Mehmet Akif Üstündağ’a “Aile ve Spor Değerlerine Katkı Ödülü”
 
