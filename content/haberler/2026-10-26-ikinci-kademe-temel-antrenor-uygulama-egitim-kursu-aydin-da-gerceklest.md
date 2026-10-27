@@ -6,7 +6,6 @@ galeri:
   - /images/uploads/2026-10-26-ikinci-kademe-temel-antrenor-uygulama-egitim-kursu-aydin-da-gerceklest-67fc20.jpg
   - /images/uploads/2026-10-26-ikinci-kademe-temel-antrenor-uygulama-egitim-kursu-aydin-da-gerceklest-0eba94.jpg
   - /images/uploads/2026-10-26-ikinci-kademe-temel-antrenor-uygulama-egitim-kursu-aydin-da-gerceklest-4fe307.jpg
-sabit: true
 ---
 İkinci Kademe Temel Antrenör Uygulama Eğitim Kursu Aydın’da Gerçekleştirildi
 
