@@ -7,6 +7,7 @@ galeri:
   - /images/uploads/2026-10-27-fb-img-1793092728191-4e192a.jpg
   - /images/uploads/2026-10-27-fb-img-1793092683768-d17c48.jpg
   - /images/uploads/2026-10-27-fb-img-1793092563448-0dfd39.jpg
+sabit: true
 ---
 Eylül Akarçeşme Yatgın, Eski Takımı Galatasaray Daikin’e Karşı Sakatlandı
 
