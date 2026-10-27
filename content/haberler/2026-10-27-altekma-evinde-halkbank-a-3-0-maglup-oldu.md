@@ -8,7 +8,6 @@ galeri:
   - /images/uploads/2026-10-27-altekma4-163055.jpg
   - /images/uploads/2026-10-27-altekma1-494852.jpg
   - /images/uploads/2026-10-27-altekma2-703746.jpg
-sabit: true
 ---
 Altekma Evinde Halkbank’a 3-0 Mağlup Oldu
 
