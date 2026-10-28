@@ -6,7 +6,6 @@ galeri:
   - /images/uploads/2026-10-28-img-20261015-wa0009-471f4b.jpg
   - /images/uploads/2026-10-28-img-20261015-wa0006-9544f7.jpg
   - /images/uploads/2026-10-28-img-20261015-wa0005-ba6497.jpg
-sabit: true
 ---
 Voleybol Antrenman Bilimi: Teoriden Uygulamaya, Bilimsel Bilgiden Yüksek Performansa
 Voleybol antrenörleri, beden eğitimi öğretmenleri ve spor bilimciler için hazırlanan “Voleybol Antrenman Bilimi” kitabı, bilimsel bilgiyi saha uygulamalarıyla buluşturarak voleybolda performans gelişimine kapsamlı bir bakış sunuyor.
