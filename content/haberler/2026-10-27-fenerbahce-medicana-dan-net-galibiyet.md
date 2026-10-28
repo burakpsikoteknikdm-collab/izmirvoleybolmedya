@@ -6,7 +6,6 @@ lig: efeler-ligi
 galeri:
   - /images/uploads/2026-10-27-fenerbahce-medicana-dan-net-galibiyet-e24173.jpg
   - /images/uploads/2026-10-27-fenerbahce-medicana-dan-net-galibiyet-3cbcce.jpg
-sabit: true
 ---
 Fenerbahçe Medicana’dan Net Galibiyet!
 
