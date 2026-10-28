@@ -1,7 +1,9 @@
 ---
 title: "2026 Kadınlar AXA Sigorta Kupa Voley’de Çeyrek Final Programı Belli Oldu"
 date: 2026-10-28T11:41:00.000+03:00
+image: /images/uploads/2026-10-28-2026-kadinlar-axa-sigorta-kupa-voley-de-ceyrek-final-programi-belli-ol-e899c3.jpg
 lig: sultanlar-ligi
+sabit: true
 ---
 2026 Kadınlar AXA Sigorta Kupa Voley’de Çeyrek Final Programı Belli Oldu
 
