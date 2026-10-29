@@ -775,7 +775,7 @@ function galeriOlustur(fotolar, baslik) {
 }
 // Haber fotoğrafları Supabase deposunda; eski /images/uploads/<ad> yolları oraya çevrilir
 const GORSEL_DEPO = 'https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/';
-const ESKILER_DEPODA = false; // eski fotoğraflar depoya taşınınca true yapılır
+const ESKILER_DEPODA = true; // eski fotoğraflar depoya taşınınca true yapılır
 const imgUrl = u => !u ? '' : ESKILER_DEPODA && /^\/?images\/uploads\//.test(u) ? GORSEL_DEPO + u.replace(/^\/?images\/uploads\//, '') : /^(https?:)?\//.test(u) ? u : '/' + u;
 // Fotoğraflar Vercel görsel servisiyle küçültülüp WebP olarak gelir; açılmazsa asıl dosya
 const GORSEL_GENISLIK = [256, 640, 1080, 1600];

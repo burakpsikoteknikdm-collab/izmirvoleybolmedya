@@ -13,7 +13,7 @@ const LIG_ADI = {
 // Eski haberlerdeki /images/uploads/<ad> yolları otomatik olarak bu depoya çevrilir.
 const GORSEL_DEPO = 'https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/';
 const ESKI_GORSEL = /^\/?images\/uploads\//;
-const ESKILER_DEPODA = false; // eski fotoğraflar depoya taşınınca true yapılır
+const ESKILER_DEPODA = true; // eski fotoğraflar depoya taşınınca true yapılır
 const gorselUrl = u => ESKILER_DEPODA && typeof u === 'string' && ESKI_GORSEL.test(u) ? GORSEL_DEPO + u.replace(ESKI_GORSEL, '') : u;
 
 const kacis = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
