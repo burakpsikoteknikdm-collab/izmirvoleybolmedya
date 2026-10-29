@@ -1,17 +1,17 @@
 // Editör uygulamasının sunucu tarafı: /api/editor?islem=giris|liste|getir|kaydet|sil|gorsel|sondakika|sondakika-kaydet
 // Editörler GitHub hesabı olmadan kullanıcı adı/şifreyle girer. GitHub'a yazma işini sunucu,
-// GITHUB_ICERIK_TOKEN ile yapar ve yalnızca content/haberler, images/uploads ve content/son-dakika.json'a yazar.
+// GITHUB_ICERIK_TOKEN ile yapar ve yalnızca content/ altına yazar. Fotoğraflar Supabase "gorseller" deposuna yüklenir.
 //
 // Vercel ortam değişkenleri:
 //   GITHUB_ICERIK_TOKEN  Bu repo için "Contents: Read and write" izinli ince ayarlı GitHub token'ı
 //   EDITORLER            kullanici:sifre çiftleri, noktalı virgülle ayrılmış (ör. ayse:Gizli123;mehmet:Sifre456)
 const crypto = require('crypto');
 const supabase = require('./_supabase');
+const { GORSEL_DEPO, gorselUrl, mutlakAdres } = require('./_haber');
 
 const REPO = 'burakpsikoteknikdm-collab/izmirvoleybolmedya';
 const DAL = process.env.EDITOR_DAL || 'main'; // test için başka bir dal verilebilir
 const HABER_KLASORU = 'content/haberler';
-const GORSEL_KLASORU = 'images/uploads';
 const SON_DAKIKA = 'content/son-dakika.json';
 const LIGLER = ['sultanlar-ligi', 'efeler-ligi', 'kadinlar-1-ligi', 'erkekler-1-ligi', 'kadinlar-2-ligi', 'erkekler-2-ligi'];
 const OTURUM_SURESI = 30 * 864e5;
@@ -277,7 +277,8 @@ module.exports = async (req, res) => {
       if (String(g.body || '').length > 100000) return gonder(400, { hata: 'Haber metni çok uzun.' });
       const lig = LIGLER.includes(g.lig) ? g.lig : '';
       const bolum = ['takimlar', 'altyapi'].includes(g.bolum) ? g.bolum : '';
-      const gorselMi = u => /^\/images\/uploads\/[^/\\\s]+$/.test(u || '');
+      // Depodaki fotoğraf adresi ya da eski haberlerin /images/uploads/<ad> yolu
+      const gorselMi = u => /^\/images\/uploads\/[^/\\\s]+$/.test(u || '') || (String(u || '').startsWith(GORSEL_DEPO) && /^[^/\\\s?#]+$/.test(String(u).slice(GORSEL_DEPO.length)));
       const image = gorselMi(g.image) ? g.image : '';
       const galeri = (Array.isArray(g.galeri) ? g.galeri : []).filter(gorselMi).slice(0, 3);
       // Türkiye saatiyle ISO tarih
@@ -301,7 +302,7 @@ module.exports = async (req, res) => {
       let bildirim = null;
       if (!g.ad && supabase.hazirMi()) {
         const haberAdi = ad.replace(/\.md$/, '');
-        bildirim = await supabase.herkeseBildir({ baslik: 'İzmir Voleybol Medya', metin: title, url: '/haber/' + encodeURIComponent(haberAdi), gorsel: image ? 'https://www.izmirvoleybolmedya.com' + image : '', etiket: haberAdi }).catch(() => null);
+        bildirim = await supabase.herkeseBildir({ baslik: 'İzmir Voleybol Medya', metin: title, url: '/haber/' + encodeURIComponent(haberAdi), gorsel: image ? mutlakAdres(gorselUrl(image)) : '', etiket: haberAdi }).catch(() => null);
       }
       return gonder(200, { ad, sha: sonuc.content.sha, bildirim });
     }
@@ -322,11 +323,39 @@ module.exports = async (req, res) => {
       if (bayt.length > 3.5e6) return gonder(400, { hata: 'Görsel 3,5 MB\'tan küçük olmalı.' });
       const uzanti = m[1] === 'jpeg' ? 'jpg' : m[1];
       const ad = `${new Date().toISOString().slice(0, 10)}-${kisaAd(String(g.ad || 'gorsel').replace(/\.[^.]+$/, ''))}-${crypto.randomBytes(3).toString('hex')}.${uzanti}`;
-      await gh(`/contents/${GORSEL_KLASORU}/${yolKodla(ad)}`, {
-        method: 'PUT',
-        body: JSON.stringify({ message: `Görsel yüklendi: ${ad} (editör: ${kullanici})`, content: m[2], branch: DAL })
-      });
-      return gonder(200, { yol: `/${GORSEL_KLASORU}/${ad}`, onizleme: `https://raw.githubusercontent.com/${REPO}/${DAL}/${GORSEL_KLASORU}/${encodeURIComponent(ad)}` });
+      // Fotoğraf GitHub'a değil Supabase deposuna gider: site yeniden yayınlanmaz, Vercel alanı dolmaz
+      try {
+        if (!supabase.hazirMi()) throw new Error('depo yapılandırılmadı');
+        const yol = await supabase.gorselYukle(ad, bayt, 'image/' + m[1]);
+        return gonder(200, { yol, onizleme: yol });
+      } catch (e) {
+        // Depo geçici olarak yanıt vermezse eski yöntem: GitHub'a yükle (editör fotoğrafsız kalmasın)
+        console.error('Supabase görsel yüklemesi başarısız, GitHub kullanılıyor:', e.message);
+        await gh(`/contents/images/uploads/${yolKodla(ad)}`, {
+          method: 'PUT',
+          body: JSON.stringify({ message: `Görsel yüklendi: ${ad} (editör: ${kullanici})`, content: m[2], branch: DAL })
+        });
+        return gonder(200, { yol: `/images/uploads/${ad}`, onizleme: `https://raw.githubusercontent.com/${REPO}/${DAL}/images/uploads/${encodeURIComponent(ad)}` });
+      }
+    }
+
+    // Tek seferlik: GitHub'daki images/uploads fotoğraflarını Supabase deposuna kopyalar (parça parça; bas = başlangıç sırası)
+    if (islem === 'gorsel-tasi') {
+      if (!supabase.hazirMi()) return gonder(503, { hata: 'Fotoğraf deposu henüz yapılandırılmadı.' });
+      const dosyalar = (await gh(`/contents/images/uploads?ref=main`).catch(e => e.durum === 404 ? [] : Promise.reject(e)))
+        .filter(d => d.type === 'file' && /\.(jpe?g|png|webp)$/i.test(d.name)).sort((a, b) => a.name.localeCompare(b.name));
+      const bas = Math.max(0, +g.bas || 0), parca = dosyalar.slice(bas, bas + 15);
+      const hatalar = [];
+      await Promise.all(parca.map(async d => {
+        try {
+          const r = await fetch(d.download_url);
+          if (!r.ok) throw new Error('GitHub ' + r.status);
+          const uz = d.name.split('.').pop().toLowerCase();
+          await supabase.gorselYukle(d.name, Buffer.from(await r.arrayBuffer()), uz === 'png' ? 'image/png' : uz === 'webp' ? 'image/webp' : 'image/jpeg', true);
+        } catch (e) { hatalar.push(d.name + ': ' + e.message); }
+      }));
+      const sonraki = bas + parca.length;
+      return gonder(200, { toplam: dosyalar.length, tasinan: parca.length - hatalar.length, sonraki: sonraki < dosyalar.length ? sonraki : null, hatalar });
     }
 
     return gonder(400, { hata: 'Bilinmeyen işlem' });

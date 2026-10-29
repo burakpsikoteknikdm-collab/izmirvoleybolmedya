@@ -9,6 +9,13 @@ const LIG_ADI = {
   'kadinlar-2-ligi': 'Kadınlar 2. Ligi', 'erkekler-2-ligi': 'Erkekler 2. Ligi'
 };
 
+// Haber fotoğrafları Supabase Storage'daki "gorseller" deposunda durur (her yayında 40 MB taşınmasın diye).
+// Eski haberlerdeki /images/uploads/<ad> yolları otomatik olarak bu depoya çevrilir.
+const GORSEL_DEPO = 'https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/';
+const ESKI_GORSEL = /^\/?images\/uploads\//;
+const ESKILER_DEPODA = false; // eski fotoğraflar depoya taşınınca true yapılır
+const gorselUrl = u => ESKILER_DEPODA && typeof u === 'string' && ESKI_GORSEL.test(u) ? GORSEL_DEPO + u.replace(ESKI_GORSEL, '') : u;
+
 const kacis = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 function onBilgiAyristir(yaml) {
@@ -33,6 +40,9 @@ function ayristir(t) {
   if (!m) return null;
   const f = onBilgiAyristir(m[1]);
   f.body = m[2].trim();
+  if (ESKILER_DEPODA) f.body = f.body.replace(/\]\(\/?images\/uploads\//g, '](' + GORSEL_DEPO);
+  if (f.image) f.image = gorselUrl(f.image);
+  if (Array.isArray(f.galeri)) f.galeri = f.galeri.map(gorselUrl);
   return typeof f.title === 'string' && f.title ? f : null;
 }
 // Haberin fotoğrafları: kapak + galeri (en fazla 4)
@@ -106,4 +116,4 @@ async function onbellekliListe() {
 
 const haberAdresi = ad => `${SITE}/haber/${encodeURIComponent(ad)}`;
 
-module.exports = { SITE, REPO, LIG_ADI, kacis, ayristir, fotolar, onbellekliListe, duzMetin, mutlakAdres, markdown, haberGetir, haberListesi, haberAdresi };
+module.exports = { SITE, REPO, LIG_ADI, GORSEL_DEPO, gorselUrl, kacis, ayristir, fotolar, onbellekliListe, duzMetin, mutlakAdres, markdown, haberGetir, haberListesi, haberAdresi };

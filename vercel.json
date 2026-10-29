@@ -32,6 +32,13 @@
       {
         "pathname": "^/images/.*$"
       }
+    ],
+    "remotePatterns": [
+      {
+        "protocol": "https",
+        "hostname": "syugifngkyxwkfgklcrd.supabase.co",
+        "pathname": "^/storage/v1/object/public/gorseller/.*$"
+      }
     ]
   }
 }
