@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/images/uploads/:ad",
+      "destination": "https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/:ad",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/veri/haberler.json",
@@ -31,6 +38,13 @@
     "localPatterns": [
       {
         "pathname": "^/images/.*$"
+      }
+    ],
+    "remotePatterns": [
+      {
+        "protocol": "https",
+        "hostname": "syugifngkyxwkfgklcrd.supabase.co",
+        "pathname": "^/storage/v1/object/public/gorseller/.*$"
       }
     ]
   }

@@ -1,16 +1,16 @@
 // Haber sayfası: /haber/<ad> (vercel.json ile buraya yönlenir).
 // Google'ın dizine ekleyebilmesi için haber sunucuda tam sayfa olarak hazırlanır; WhatsApp, Facebook,
 // X gibi uygulamalar da önizleme için buradaki og: etiketlerini okur.
-const { SITE, LIG_ADI, kacis, duzMetin, mutlakAdres, markdown, haberGetir, haberListesi, haberAdresi, fotolar, onbellekliListe } = require('./_haber');
+const { SITE, LIG_ADI, GORSEL_DEPO, kacis, duzMetin, mutlakAdres, markdown, haberGetir, haberListesi, haberAdresi, fotolar, onbellekliListe } = require('./_haber');
 const VARSAYILAN_GORSEL = SITE + '/editor/ikon-512.png';
 const LOGO = SITE + '/editor/ikon-512.png';
 
 const tarihYaz = d => { const x = new Date(d); return isNaN(x) ? '' : x.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Istanbul' }); };
 const saatYaz = d => { const x = new Date(d); return isNaN(x) ? '' : x.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Istanbul' }); };
-// Yeni yüklenen görsel site yayına alınana kadar GitHub'dan gösterilir
-// Vercel görsel servisi: küçültülmüş WebP; olmazsa asıl dosya
-const kucuk = (yol, w) => String(yol || '').startsWith('/images/') ? `/_vercel/image?url=${encodeURIComponent(yol)}&w=${w}&q=75` : mutlakAdres(yol);
-const yedek = yol => String(yol || '').startsWith('/images/') ? ` onerror="this.onerror=function(){this.onerror=null;this.src='https://raw.githubusercontent.com/burakpsikoteknikdm-collab/izmirvoleybolmedya/main${kacis(yol)}'};this.src='${kacis(yol)}'"` : '';
+// Haber fotoğrafları Supabase deposunda; Vercel görsel servisi küçültülmüş WebP verir, olmazsa asıl dosya
+const depoMu = yol => String(yol || '').startsWith(GORSEL_DEPO);
+const kucuk = (yol, w) => depoMu(yol) ? `/_vercel/image?url=${encodeURIComponent(yol)}&w=${w}&q=75` : mutlakAdres(yol);
+const yedek = yol => depoMu(yol) ? ` onerror="this.onerror=null;this.src='${kacis(yol)}'"` : '';
 const jsonLd = o => JSON.stringify(o).replace(/</g, '\\u003c');
 
 module.exports = async (req, res) => {

@@ -1,4 +1,4 @@
-// Supabase (yorum, beğeni, bildirim aboneliği) ve web bildirimi için ortak yardımcılar.
+// Supabase (yorum, beğeni, bildirim aboneliği, haber fotoğrafları) ve web bildirimi için ortak yardımcılar.
 // Tablolar yalnızca sunucudan, SUPABASE_SERVICE_KEY ile erişilir (satır güvenliği açık, herkese açık izin yok).
 const crypto = require('crypto');
 
@@ -26,6 +26,21 @@ async function sb(yol, { method = 'GET', body, prefer, sayim } = {}) {
     return { veri, toplam };
   }
   return veri;
+}
+
+// Haber fotoğrafını herkese açık "gorseller" deposuna yükler, kalıcı adresini döner
+const GORSEL_DEPOSU = 'gorseller';
+async function gorselYukle(ad, bayt, tur) {
+  const k = anahtar();
+  const basliklar = { apikey: k, 'Content-Type': tur, 'x-upsert': 'false', 'cache-control': 'max-age=31536000' };
+  if (k.startsWith('eyJ')) basliklar.Authorization = 'Bearer ' + k;
+  const r = await fetch(`${SUPABASE_URL}/storage/v1/object/${GORSEL_DEPOSU}/${encodeURIComponent(ad)}`, { method: 'POST', headers: basliklar, body: bayt });
+  if (!r.ok) {
+    const e = new Error('Fotoğraf depoya yüklenemedi (' + r.status + '): ' + (await r.text()).slice(0, 200));
+    e.durum = r.status;
+    throw e;
+  }
+  return `${SUPABASE_URL}/storage/v1/object/public/${GORSEL_DEPOSU}/${encodeURIComponent(ad)}`;
 }
 
 // IP adresi açık hâliyle saklanmaz; tuzlu özeti kısa süreli kötüye kullanım kontrolü için tutulur
@@ -70,4 +85,4 @@ async function herkeseBildir(yuk) {
   return { gonderilen, toplam: aboneler.length };
 }
 
-module.exports = { SUPABASE_URL, hazirMi, sb, ipOzeti, vapid, herkeseBildir };
+module.exports = { SUPABASE_URL, hazirMi, sb, gorselYukle, ipOzeti, vapid, herkeseBildir };
