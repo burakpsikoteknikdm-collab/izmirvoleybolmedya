@@ -329,6 +329,25 @@ module.exports = async (req, res) => {
       return gonder(200, { yol, onizleme: yol });
     }
 
+    // Tek seferlik: GitHub'daki images/uploads fotoğraflarını Supabase deposuna kopyalar (parça parça; bas = başlangıç sırası)
+    if (islem === 'gorsel-tasi') {
+      if (!supabase.hazirMi()) return gonder(503, { hata: 'Fotoğraf deposu henüz yapılandırılmadı.' });
+      const dosyalar = (await gh(`/contents/images/uploads?ref=main`).catch(e => e.durum === 404 ? [] : Promise.reject(e)))
+        .filter(d => d.type === 'file' && /\.(jpe?g|png|webp)$/i.test(d.name)).sort((a, b) => a.name.localeCompare(b.name));
+      const bas = Math.max(0, +g.bas || 0), parca = dosyalar.slice(bas, bas + 15);
+      const hatalar = [];
+      await Promise.all(parca.map(async d => {
+        try {
+          const r = await fetch(d.download_url);
+          if (!r.ok) throw new Error('GitHub ' + r.status);
+          const uz = d.name.split('.').pop().toLowerCase();
+          await supabase.gorselYukle(d.name, Buffer.from(await r.arrayBuffer()), uz === 'png' ? 'image/png' : uz === 'webp' ? 'image/webp' : 'image/jpeg', true);
+        } catch (e) { hatalar.push(d.name + ': ' + e.message); }
+      }));
+      const sonraki = bas + parca.length;
+      return gonder(200, { toplam: dosyalar.length, tasinan: parca.length - hatalar.length, sonraki: sonraki < dosyalar.length ? sonraki : null, hatalar });
+    }
+
     return gonder(400, { hata: 'Bilinmeyen işlem' });
   } catch (e) {
     if (e.durum === 409 || e.durum === 422) return gonder(409, { hata: 'Bu içerik siz düzenlerken başka biri tarafından değiştirildi. Geri dönüp yeniden açın ve tekrar deneyin.' });

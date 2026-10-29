@@ -28,13 +28,28 @@ async function sb(yol, { method = 'GET', body, prefer, sayim } = {}) {
   return veri;
 }
 
-// Haber fotoğrafını herkese açık "gorseller" deposuna yükler, kalıcı adresini döner
+// Haber fotoğrafını herkese açık "gorseller" deposuna yükler, kalıcı adresini döner.
+// Depo yoksa (ilk kullanımda) otomatik oluşturulur. ustuneYaz: aynı adlı dosya varsa değiştir (taşıma için)
 const GORSEL_DEPOSU = 'gorseller';
-async function gorselYukle(ad, bayt, tur) {
+const depoBasliklari = ek => {
   const k = anahtar();
-  const basliklar = { apikey: k, 'Content-Type': tur, 'x-upsert': 'false', 'cache-control': 'max-age=31536000' };
-  if (k.startsWith('eyJ')) basliklar.Authorization = 'Bearer ' + k;
-  const r = await fetch(`${SUPABASE_URL}/storage/v1/object/${GORSEL_DEPOSU}/${encodeURIComponent(ad)}`, { method: 'POST', headers: basliklar, body: bayt });
+  const b = { apikey: k, ...ek };
+  if (k.startsWith('eyJ')) b.Authorization = 'Bearer ' + k;
+  return b;
+};
+async function depoOlustur() {
+  const r = await fetch(`${SUPABASE_URL}/storage/v1/bucket`, {
+    method: 'POST', headers: depoBasliklari({ 'Content-Type': 'application/json' }),
+    body: JSON.stringify({ id: GORSEL_DEPOSU, name: GORSEL_DEPOSU, public: true, file_size_limit: 5242880, allowed_mime_types: ['image/jpeg', 'image/png', 'image/webp'] })
+  });
+  if (!r.ok && r.status !== 409 && !/already exists/i.test(await r.text())) throw new Error('Fotoğraf deposu oluşturulamadı (' + r.status + ')');
+}
+async function gorselYukle(ad, bayt, tur, ustuneYaz = false) {
+  const gonder = () => fetch(`${SUPABASE_URL}/storage/v1/object/${GORSEL_DEPOSU}/${encodeURIComponent(ad)}`, {
+    method: 'POST', headers: depoBasliklari({ 'Content-Type': tur, 'x-upsert': String(ustuneYaz), 'cache-control': 'max-age=31536000' }), body: bayt
+  });
+  let r = await gonder();
+  if (!r.ok && /bucket not found/i.test(await r.clone().text())) { await depoOlustur(); r = await gonder(); }
   if (!r.ok) {
     const e = new Error('Fotoğraf depoya yüklenemedi (' + r.status + '): ' + (await r.text()).slice(0, 200));
     e.durum = r.status;
