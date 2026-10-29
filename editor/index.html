@@ -371,7 +371,8 @@ $('#cikisBtn').onclick = () => { if (confirm('Çıkış yapılsın mı?')) { otu
 const tarihYaz = d => { const x = new Date(d); return isNaN(x) ? '' : x.toLocaleString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }); };
 // Haber fotoğrafları Supabase deposunda; eski /images/uploads/<ad> yolları oraya çevrilir
 const GORSEL_DEPO = 'https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/';
-const gorselAdres = yol => !yol ? '' : /^\/?images\/uploads\//.test(yol) ? GORSEL_DEPO + yol.replace(/^\/?images\/uploads\//, '') : /^https?:/.test(yol) ? yol : yol.startsWith('/') ? yol : '/' + yol;
+const ESKILER_DEPODA = false; // eski fotoğraflar depoya taşınınca true yapılır
+const gorselAdres = yol => !yol ? '' : ESKILER_DEPODA && /^\/?images\/uploads\//.test(yol) ? GORSEL_DEPO + yol.replace(/^\/?images\/uploads\//, '') : /^https?:/.test(yol) ? yol : yol.startsWith('/') ? yol : '/' + yol;
 // Depoya henüz taşınmamış eski bir fotoğraf varsa GitHub'dan gösterilir
 function gorselYedek(img, yol) { img.onerror = () => { img.onerror = null; if (!/^https?:/.test(yol)) img.src = SITE_REPO_RAW + (yol.startsWith('/') ? yol : '/' + yol); }; }
 

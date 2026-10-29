@@ -775,13 +775,14 @@ function galeriOlustur(fotolar, baslik) {
 }
 // Haber fotoğrafları Supabase deposunda; eski /images/uploads/<ad> yolları oraya çevrilir
 const GORSEL_DEPO = 'https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/';
-const imgUrl = u => !u ? '' : /^\/?images\/uploads\//.test(u) ? GORSEL_DEPO + u.replace(/^\/?images\/uploads\//, '') : /^(https?:)?\//.test(u) ? u : '/' + u;
+const ESKILER_DEPODA = false; // eski fotoğraflar depoya taşınınca true yapılır
+const imgUrl = u => !u ? '' : ESKILER_DEPODA && /^\/?images\/uploads\//.test(u) ? GORSEL_DEPO + u.replace(/^\/?images\/uploads\//, '') : /^(https?:)?\//.test(u) ? u : '/' + u;
 // Fotoğraflar Vercel görsel servisiyle küçültülüp WebP olarak gelir; açılmazsa asıl dosya
 const GORSEL_GENISLIK = [256, 640, 1080, 1600];
 function resimKur(im, u, genislik = 640) {
   const yedekler = [];
   let ilk = imgUrl(u);
-  if (ilk.startsWith(GORSEL_DEPO)) {
+  if (ilk.startsWith(GORSEL_DEPO) || ilk.startsWith('/images/')) {
     const w = GORSEL_GENISLIK.find(x => x >= genislik) || 1600;
     yedekler.push(ilk);
     ilk = '/_vercel/image?url=' + encodeURIComponent(ilk) + '&w=' + w + '&q=75';

@@ -8,9 +8,9 @@ const LOGO = SITE + '/editor/ikon-512.png';
 const tarihYaz = d => { const x = new Date(d); return isNaN(x) ? '' : x.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Istanbul' }); };
 const saatYaz = d => { const x = new Date(d); return isNaN(x) ? '' : x.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Istanbul' }); };
 // Haber fotoğrafları Supabase deposunda; Vercel görsel servisi küçültülmüş WebP verir, olmazsa asıl dosya
-const depoMu = yol => String(yol || '').startsWith(GORSEL_DEPO);
-const kucuk = (yol, w) => depoMu(yol) ? `/_vercel/image?url=${encodeURIComponent(yol)}&w=${w}&q=75` : mutlakAdres(yol);
-const yedek = yol => depoMu(yol) ? ` onerror="this.onerror=null;this.src='${kacis(yol)}'"` : '';
+const kucultulur = yol => String(yol || '').startsWith(GORSEL_DEPO) || String(yol || '').startsWith('/images/');
+const kucuk = (yol, w) => kucultulur(yol) ? `/_vercel/image?url=${encodeURIComponent(yol)}&w=${w}&q=75` : mutlakAdres(yol);
+const yedek = yol => kucultulur(yol) ? ` onerror="this.onerror=null;this.src='${kacis(yol)}'"` : '';
 const jsonLd = o => JSON.stringify(o).replace(/</g, '\\u003c');
 
 module.exports = async (req, res) => {

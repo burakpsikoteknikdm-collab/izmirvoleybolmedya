@@ -13,7 +13,8 @@ const LIG_ADI = {
 // Eski haberlerdeki /images/uploads/<ad> yolları otomatik olarak bu depoya çevrilir.
 const GORSEL_DEPO = 'https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/';
 const ESKI_GORSEL = /^\/?images\/uploads\//;
-const gorselUrl = u => typeof u === 'string' && ESKI_GORSEL.test(u) ? GORSEL_DEPO + u.replace(ESKI_GORSEL, '') : u;
+const ESKILER_DEPODA = false; // eski fotoğraflar depoya taşınınca true yapılır
+const gorselUrl = u => ESKILER_DEPODA && typeof u === 'string' && ESKI_GORSEL.test(u) ? GORSEL_DEPO + u.replace(ESKI_GORSEL, '') : u;
 
 const kacis = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -38,7 +39,8 @@ function ayristir(t) {
   const m = String(t).replace(/\r\n/g, '\n').match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
   if (!m) return null;
   const f = onBilgiAyristir(m[1]);
-  f.body = m[2].trim().replace(/\]\(\/?images\/uploads\//g, '](' + GORSEL_DEPO);
+  f.body = m[2].trim();
+  if (ESKILER_DEPODA) f.body = f.body.replace(/\]\(\/?images\/uploads\//g, '](' + GORSEL_DEPO);
   if (f.image) f.image = gorselUrl(f.image);
   if (Array.isArray(f.galeri)) f.galeri = f.galeri.map(gorselUrl);
   return typeof f.title === 'string' && f.title ? f : null;
