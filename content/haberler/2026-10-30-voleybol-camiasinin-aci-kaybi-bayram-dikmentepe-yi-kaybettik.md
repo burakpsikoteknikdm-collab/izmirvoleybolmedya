@@ -16,7 +16,7 @@ Voleybola kattığınız değer, yetiştirdiğiniz insanlar ve bıraktığınız
 
 İzmir Voleybol Medya olarak merhum Bayram Dikmentepe hocamıza Allah’tan rahmet; başta ailesi olmak üzere yakınlarına, sevenlerine, meslektaşlarına ve tüm voleybol camiasına sabır ve başsağlığı diliyoruz.
 
-"Cenaze 31 Ekim Cumartesi öğle namazını müteakip Buca- Yavuz Sultan Selim camiinden kaldırılacaktır."
+"Cenaze 31 Ekim Cumartesi öğle namazını müteakip Buca- Yavuz Sultan Selim camiinden kaldırılacaktır, Buca kaynaklar mezarlığına defnedilecektir."
 
 Mekânınız cennet olsun hocam. Saygı, rahmet ve özlemle…
 
