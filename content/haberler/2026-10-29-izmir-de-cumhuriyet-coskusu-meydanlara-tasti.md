@@ -7,7 +7,6 @@ galeri:
   - /images/uploads/2026-10-29-izmir-de-cumhuriyet-coskusu-meydanlara-tasti-076e1f.jpg
   - /images/uploads/2026-10-29-izmir-de-cumhuriyet-coskusu-meydanlara-tasti-0577c3.jpg
   - /images/uploads/2026-10-29-izmir-de-cumhuriyet-coskusu-meydanlara-tasti-42a835.jpg
-sabit: true
 ---
 İZMİR’DE CUMHURİYET COŞKUSU MEYDANLARA TAŞTI!
 
