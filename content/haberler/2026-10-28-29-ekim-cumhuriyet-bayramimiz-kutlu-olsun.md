@@ -2,7 +2,6 @@
 title: "🇹🇷 29 Ekim Cumhuriyet Bayramımız Kutlu Olsun"
 date: 2026-10-28T21:09:00.000+03:00
 image: /images/uploads/2026-10-28-29-ekim-cumhuriyet-bayramimiz-kutlu-olsun-66f7ad.jpg
-sabit: true
 ---
 🇹🇷 29 Ekim Cumhuriyet Bayramımız Kutlu Olsun!
 
