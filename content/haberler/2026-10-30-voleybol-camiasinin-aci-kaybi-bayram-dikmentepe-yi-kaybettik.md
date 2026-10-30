@@ -3,6 +3,8 @@ title: "VOLEYBOL CAMİASININ ACI KAYBI: BAYRAM DİKMENTEPE’Yİ KAYBETTİK"
 date: 2026-10-30T10:41:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-10-30-voleybola-kattiginiz-deger-yetistirdiginiz-insanlar-ve-biraktiginiz-iz-1ed1ce.jpg
 bolum: takimlar
+galeri:
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-10-30-voleybol-camiasinin-aci-kaybi-bayram-dikmentepe-yi-kaybettik-92de12.jpg
 sabit: true
 ---
 VOLEYBOL CAMİASININ ACI KAYBI: BAYRAM DİKMENTEPE’Yİ KAYBETTİK
