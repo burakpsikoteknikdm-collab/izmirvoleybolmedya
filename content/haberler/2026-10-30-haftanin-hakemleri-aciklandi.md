@@ -4,6 +4,7 @@ date: 2026-10-30T22:11:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-10-30-haftanin-hakemleri-aciklandi-7e642b.jpg
 lig: sultanlar-ligi
 bolum: takimlar
+sabit: true
 ---
 HAFTANIN HAKEMLERİ AÇIKLANDI! 
 
