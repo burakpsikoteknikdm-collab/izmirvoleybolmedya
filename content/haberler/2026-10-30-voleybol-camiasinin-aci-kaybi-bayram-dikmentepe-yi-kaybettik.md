@@ -9,9 +9,11 @@ VOLEYBOL CAMİASININ ACI KAYBI: BAYRAM DİKMENTEPE’Yİ KAYBETTİK
 
 Voleybol camiasının değerli isimlerinden; eski uluslararası voleybol hakemimiz, hakem ve gözlemci, Eğitim Kurulu Üyesi, İzmir Voleybol Spor Kulübü yöneticisi ve antrenörlerinden Bayram Dikmentepe’nin vefatını derin bir üzüntüyle öğrenmiş bulunuyoruz.
 
-Yıllar boyunca voleybola hizmet eden, bilgi ve tecrübeleriyle birçok sporcuya ve voleybol insanına katkı sağlayan Bayram Dikmentepe hocamız, Türk voleyboluna kattığı değerler ve geride bıraktığı güzel hatıralarla daima saygı ve rahmetle anılacaktır.
+Yıllar boyunca voleybola hizmet eden, bilgi ve tecrübeleriyle birçok sporcuya ve voleybol insanına katkı sağlayan Bayram Dikmentepe hocamız, 
+Türk voleyboluna kattığı değerler ve geride bıraktığı güzel hatıralarla daima saygı ve rahmetle anılacaktır.
 
 Voleybola kattığınız değer, yetiştirdiğiniz insanlar ve bıraktığınız izler daima yaşayacak. Aynı voleybol ailesinin bir parçası olmak bizler için büyük bir değerdi.
+
 İzmir Voleybol Medya olarak merhum Bayram Dikmentepe hocamıza Allah’tan rahmet; başta ailesi olmak üzere yakınlarına, sevenlerine, meslektaşlarına ve tüm voleybol camiasına sabır ve başsağlığı diliyoruz.
 
 Mekânınız cennet olsun hocam. Saygı, rahmet ve özlemle…
