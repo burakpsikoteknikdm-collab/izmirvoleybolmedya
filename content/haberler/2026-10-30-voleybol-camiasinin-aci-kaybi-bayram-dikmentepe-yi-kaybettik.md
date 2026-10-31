@@ -5,7 +5,6 @@ image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorsell
 bolum: takimlar
 galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-10-30-voleybol-camiasinin-aci-kaybi-bayram-dikmentepe-yi-kaybettik-92de12.jpg
-sabit: true
 ---
 VOLEYBOL CAMİASININ ACI KAYBI: BAYRAM DİKMENTEPE’Yİ KAYBETTİK
 
