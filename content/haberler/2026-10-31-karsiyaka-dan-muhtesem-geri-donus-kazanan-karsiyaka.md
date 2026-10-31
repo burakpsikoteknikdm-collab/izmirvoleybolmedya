@@ -7,6 +7,7 @@ bolum: takimlar
 galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-10-31-bergama-belediye-spor-kulubu-galibiyetimizden-kareler-1d84ac.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-10-31-bergama-belediye-spor-kulubu-galibiyetimizden-kareler-1-1be317.jpg
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-10-31-karsiyaka-dan-muhtesem-geri-donus-kazanan-karsiyaka-b0271f.jpg
 sabit: true
 ---
 KARŞIYAKA’DAN MUHTEŞEM GERİ DÖNÜŞ! KAZANAN KARŞIYAKA
