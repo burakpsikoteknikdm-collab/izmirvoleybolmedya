@@ -10,21 +10,30 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-10-31-karsiyaka-dan-muhtesem-geri-donus-kazanan-karsiyaka-43d763.jpg
 sabit: true
 ---
-KARŞIYAKA’DAN MUHTEŞEM GERİ DÖNÜŞ! KAZANAN KARŞIYAKA
+KARŞIYAKA’DAN MUHTEŞEM GERİ DÖNÜŞ! DERBİNİN KAZANANI KARŞIYAKA
 
-Karşıyaka: 3 – Ateş Wind Power Bergama Belediyespor: 2
+İki set geriye düşen yeşil-kırmızılılar, müthiş mücadeleyle maçı 3-2 kazanmayı başardı!
+Arabica Coffee House Kadınlar 1. Ligi A Grubu’nda İzmir derbisinde Karşıyaka ile Ateş Wind Power Bergama Belediyespor karşı karşıya geldi. Büyük çekişmeye sahne olan mücadelede gülen taraf, iki set geriden gelerek 3-2’lik skorla Karşıyaka oldu.
 
-Arabica Coffee House Kadınlar 1. Ligi’nde İzmir derbisi nefesleri kesti. Karşıyaka ile Ateş Wind Power Bergama Belediyespor arasında oynanan mücadelede büyük heyecan yaşandı.
+Karşılaşmanın ilk seti büyük bir heyecana sahne oldu. İki takımın karşılıklı sayılarla başa baş mücadele ettiği setin son bölümünde üstünlüğü ele geçiren Bergama Belediyespor, uzayan seti 28-26 kazanarak 1-0 öne geçti.
 
-Karşılaşmanın ilk setini 28-26 kazanan Bergama Belediyespor, ikinci sette de 25-19’luk skorla üstünlüğünü sürdürerek 2-0 öne geçti.
+İkinci sette de etkili oyununu sürdüren Bergama temsilcisi, Karşıyaka’nın direncine rağmen seti 25-19 kazanarak skoru 2-0’a getirdi. 
 
-İki set geriye düşen Karşıyaka, pes etmedi. Üçüncü sette büyük çekişme yaşanırken 29-27’lik skorla maça tutunan yeşil-kırmızılı ekip, dördüncü sette ise oyunun kontrolünü tamamen eline aldı. Rakibine 25-14 üstünlük sağlayan Karşıyaka, karşılaşmayı karar setine taşıdı.
+Ancak Karşıyaka pes etmedi! Üçüncü sette büyük bir mücadele ortaya koyan yeşil-kırmızılılar, uzun rallilerin ve karşılıklı sayıların yaşandığı seti 29-27 kazanarak maça yeniden ortak oldu.  
 
-Büyük heyecana sahne olan beşinci sette de mücadeleyi bırakmayan Karşıyaka, rakibini mağlup ederek sahadan 3-2 galip ayrıldı.
-İki set geriden gelerek kazanılan bu önemli galibiyet, Karşıyaka adına büyük bir moral oldu.
+Dördüncü sette ise Karşıyaka adeta fırtına gibi esti. Oyunun kontrolünü tamamen eline alan ev sahibi ekip, 25-14’lük farklı skorla seti kazanarak karşılaşmayı karar setine taşıdı.   
 
-İzmir derbisinde kazanan, müthiş geri dönüşe imza atan Karşıyaka oldu!
+Final setinde de heyecan doruktaydı. İki takımın büyük mücadele verdiği karar setinde Karşıyaka, rakibine üstünlük sağlayarak seti 16-14, karşılaşmayı ise 3-2 kazandı.
+
+MAÇ SONUCU
+Karşıyaka 3-2 Ateş Wind Power Bergama Belediyespor
+Setler: 26-28, 19-25, 29-27, 25-14, 16-14
+İki set geriden gelerek muhteşem bir geri dönüşe imza atan Karşıyaka, İzmir derbisinde önemli bir galibiyet elde etti. Her iki takımı da ortaya koydukları mücadeleden dolayı tebrik ediyoruz.
+
+Haber: Zafer Elli
 İzmir’in Yükselen Yıldızı
-İzmir Voleybol Medya | Zafer Elli
+İzmir Voleybol Medya . 
 
 🌐 www.izmirvoleybolmedya.com
+İzmir’den Türkiye’ye, voleybolun olduğu her yerde!
+#İzmirinYükselenYıldızı
