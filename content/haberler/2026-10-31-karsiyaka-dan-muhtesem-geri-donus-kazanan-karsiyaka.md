@@ -8,7 +8,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-10-31-karsiyaka-dan-muhtesem-geri-donus-kazanan-karsiyaka-cfab4a.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-10-31-karsiyaka-dan-muhtesem-geri-donus-kazanan-karsiyaka-c58deb.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-10-31-karsiyaka-dan-muhtesem-geri-donus-kazanan-karsiyaka-43d763.jpg
-sabit: true
 ---
 KARŞIYAKA’DAN MUHTEŞEM GERİ DÖNÜŞ! DERBİNİN KAZANANI KARŞIYAKA
 
