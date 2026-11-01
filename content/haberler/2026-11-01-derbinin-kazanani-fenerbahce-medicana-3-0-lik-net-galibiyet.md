@@ -3,6 +3,9 @@ title: "DERBİNİN KAZANANI FENERBAHÇE MEDICANA! 3-0’LIK NET GALİBİYET"
 date: 2026-11-01T20:43:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-01-derbinin-kazanani-fenerbahce-medicana-3-0-lik-net-galibiyet-4a9e89.jpg
 lig: sultanlar-ligi
+galeri:
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-01-derbinin-kazanani-fenerbahce-medicana-3-0-lik-net-galibiyet-dce7ea.jpg
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-01-derbinin-kazanani-fenerbahce-medicana-3-0-lik-net-galibiyet-1dbf2d.jpg
 sabit: true
 ---
 DERBİNİN KAZANANI FENERBAHÇE MEDICANA! 3-0’LIK NET GALİBİYET
