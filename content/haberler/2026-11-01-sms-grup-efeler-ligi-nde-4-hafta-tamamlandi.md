@@ -8,7 +8,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-10-31-sms-grup-efeler-ligi-nde-4-8c33f8.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-10-31-sms-grup-efeler-ligi-nde-4-7bea6a.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-10-31-sms-grup-efeler-ligi-nde-4-2e935c.jpg
-sabit: true
 ---
 SMS GRUP EFELER LİGİ’NDE 4. HAFTA TAMAMLANDI!
 
