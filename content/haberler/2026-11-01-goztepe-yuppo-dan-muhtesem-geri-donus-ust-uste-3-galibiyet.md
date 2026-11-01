@@ -7,7 +7,6 @@ bolum: takimlar
 galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-01-goztepe-yuppo-dan-muhtesem-geri-donus-ust-uste-3-e763b1.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-01-goztepe-yuppo-dan-muhtesem-geri-donus-ust-uste-3-ebe206.jpg
-sabit: true
 ---
 GÖZTEPE YUPPO’DAN MUHTEŞEM GERİ DÖNÜŞ! ÜST ÜSTE 3. GALİBİYET
 
