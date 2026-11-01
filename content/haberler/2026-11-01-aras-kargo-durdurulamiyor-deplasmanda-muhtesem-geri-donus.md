@@ -6,7 +6,6 @@ lig: sultanlar-ligi
 bolum: takimlar
 galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-01-aras-kargo-durdurulamiyor-deplasmanda-muhtesem-geri-donus-2ce829.jpg
-sabit: true
 ---
 ARAS KARGO DURDURULAMIYOR! DEPLASMANDA MUHTEŞEM GERİ DÖNÜŞ
 
