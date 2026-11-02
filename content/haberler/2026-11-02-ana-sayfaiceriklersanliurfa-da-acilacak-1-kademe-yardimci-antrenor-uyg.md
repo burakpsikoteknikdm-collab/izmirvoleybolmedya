@@ -1,5 +1,5 @@
 ---
-title: "Ana SayfaİçeriklerŞanlıurfa'da Açılacak 1. Kademe Yardımcı Antrenör Uygulama Eğitim Kursu Duyurusu"
+title: "Şanlıurfa'da Açılacak 1. Kademe Yardımcı Antrenör Uygulama Eğitim Kursu Duyurusu"
 date: 2026-11-02T18:26:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-02-ana-sayfaiceriklersanliurfa-da-acilacak-1-d5569e.jpg
 ---
