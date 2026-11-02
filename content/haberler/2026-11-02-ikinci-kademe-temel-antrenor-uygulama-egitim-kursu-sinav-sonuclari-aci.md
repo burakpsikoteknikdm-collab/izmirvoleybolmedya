@@ -13,6 +13,8 @@ Adaylar, sınav sonuçlarının ilan edilmesinden itibaren beş iş günü içer
 
 İtiraz dilekçeleri, Word dosyası olarak antrenor@tvf.org.tr mail adresine iletilebilir.
 
+https://tvf.org.tr/icerik/ikinci-kademe-temel-antrenor-uygulama-egitim-kursu-sinav-sonuclari-aciklandi-8
+
 www.izmirvoleybolmedya.com 
 
 İzmir Voleybol medya 
