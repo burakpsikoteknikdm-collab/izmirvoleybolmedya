@@ -1,7 +1,13 @@
 ---
 title: "SMS GRUP EFELER LİGİ’NDE İKİ KARŞILAŞMA OYNANDI"
 date: 2026-11-03T21:50:00.000+03:00
+image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-03-sms-grup-efeler-ligi-nde-iki-karsilasma-oynandi-28dc18.jpg
 lig: efeler-ligi
+galeri:
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-03-sms-grup-efeler-ligi-nde-iki-karsilasma-oynandi-d9eaab.jpg
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-03-sms-grup-efeler-ligi-nde-iki-karsilasma-oynandi-00533e.jpg
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-03-sms-grup-efeler-ligi-nde-iki-karsilasma-oynandi-a44f84.jpg
+sabit: true
 ---
 SMS GRUP EFELER LİGİ’NDE İKİ KARŞILAŞMA OYNANDI
 
