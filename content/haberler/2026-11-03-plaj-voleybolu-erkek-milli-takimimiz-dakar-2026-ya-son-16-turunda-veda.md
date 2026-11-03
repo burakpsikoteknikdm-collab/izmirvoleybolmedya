@@ -1,6 +1,7 @@
 ---
 title: "PLAJ VOLEYBOLU ERKEK MİLLİ TAKIMIMIZ DAKAR 2026’YA SON 16 TURUNDA VEDA ETTİ"
 date: 2026-11-03T14:16:00.000+03:00
+image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-03-plaj-voleybolu-erkek-milli-takimimiz-dakar-2026-ya-son-16-turunda-veda-185523.jpg
 ---
 PLAJ VOLEYBOLU ERKEK MİLLİ TAKIMIMIZ DAKAR 2026’YA SON 16 TURUNDA VEDA ETTİ
 
