@@ -7,7 +7,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-03-sms-grup-efeler-ligi-nde-iki-karsilasma-oynandi-d9eaab.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-03-sms-grup-efeler-ligi-nde-iki-karsilasma-oynandi-00533e.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-03-sms-grup-efeler-ligi-nde-iki-karsilasma-oynandi-a44f84.jpg
-sabit: true
 ---
 SMS GRUP EFELER LİGİ’NDE İKİ KARŞILAŞMA OYNANDI
 
