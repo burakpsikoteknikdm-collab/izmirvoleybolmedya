@@ -4,7 +4,6 @@ date: 2026-11-03T14:38:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-03-alper-erdogus-tan-muhtesem-geri-donus-sonrasi-takimina-ovgu-7914d3.jpg
 lig: kadinlar-1-ligi
 bolum: takimlar
-sabit: true
 ---
 ALPER ERDOĞUŞ’TAN MUHTEŞEM GERİ DÖNÜŞ SONRASI TAKIMINA ÖVGÜ! 
 
