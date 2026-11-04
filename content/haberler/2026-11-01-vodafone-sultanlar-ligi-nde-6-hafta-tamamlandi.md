@@ -8,7 +8,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-01-vodafone-sultanlar-ligi-nde-6-c04d61.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-01-vodafone-sultanlar-ligi-nde-6-cb1343.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-01-vodafone-sultanlar-ligi-nde-6-c35e34.jpg
-sabit: true
 ---
 VODAFONE SULTANLAR LİGİ’NDE 6. HAFTA TAMAMLANDI!
 
