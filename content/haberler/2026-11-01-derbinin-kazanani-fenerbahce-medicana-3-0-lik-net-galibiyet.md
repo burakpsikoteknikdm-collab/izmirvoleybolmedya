@@ -7,7 +7,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-01-derbinin-kazanani-fenerbahce-medicana-3-0-lik-net-galibiyet-4a9e89.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-01-derbinin-kazanani-fenerbahce-medicana-3-0-lik-net-galibiyet-1dbf2d.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-01-derbinin-kazanani-fenerbahce-medicana-3-0-lik-net-galibiyet-df0d60.jpg
-sabit: true
 ---
 DERBİNİN KAZANANI FENERBAHÇE MEDICANA! 3-0’LIK NET GALİBİYET
 
