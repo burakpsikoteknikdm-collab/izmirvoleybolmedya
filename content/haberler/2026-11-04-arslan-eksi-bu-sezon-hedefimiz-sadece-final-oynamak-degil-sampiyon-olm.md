@@ -3,7 +3,6 @@ title: "ARSLAN EKŞİ: “BU SEZON HEDEFİMİZ SADECE FİNAL OYNAMAK DEĞİL, Ş
 date: 2026-11-04T14:34:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-04-sultanbeyli-belediyespor-maci-icin-isinmadayiz-fileninaslanlari-gofors-b7b8e3.jpg
 lig: efeler-ligi
-sabit: true
 ---
 ARSLAN EKŞİ: “BU SEZON HEDEFİMİZ SADECE FİNAL OYNAMAK DEĞİL, ŞAMPİYON OLMAK!”     
 
