@@ -5,7 +5,6 @@ image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorsell
 lig: kadinlar-1-ligi
 galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-04-ilker-alkan-in-denizli-sinden-istanbul-da-kritik-zafer-a5e610.jpg
-sabit: true
 ---
 İLKER ALKAN’IN DENİZLİ’SİNDEN İSTANBUL’DA KRİTİK ZAFER!
 
