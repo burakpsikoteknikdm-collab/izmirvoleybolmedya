@@ -8,7 +8,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-04-01m6krr50azwphdrhprq5xgtq1-7f9fb0.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-04-01m6krr4yppn7achwx1r4c6204-fb45f5.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-04-galibiyet-hatirasi-goztepeyuppo-izmirinsultanlari-2ac6a5.jpg
-sabit: true
 ---
 VODAFONE SULTANLAR LİGİ’NDE 7. HAFTA HEYECANI BAŞLADI! 
 
