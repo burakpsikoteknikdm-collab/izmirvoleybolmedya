@@ -4,7 +4,6 @@ date: 2026-11-04T21:28:00.000+03:00
 image: /images/uploads/2026-11-04-goztepe-den-muhtesem-galibiyet-zeren-spor-u-3-2-maglup-etti-0a4cd8.jpg
 lig: sultanlar-ligi
 bolum: takimlar
-sabit: true
 ---
 GÖZTEPE’DEN MUHTEŞEM GALİBİYET! ZEREN SPOR’U 3-2 MAĞLUP ETTİ
 
