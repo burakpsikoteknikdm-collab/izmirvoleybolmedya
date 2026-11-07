@@ -3,6 +3,7 @@ title: "ARABICA COFFEE HOUSE KADINLAR 1. LİGİ’NDE 7. HAFTA TAMAMLANDI!"
 date: 2026-11-08T01:12:00.000+03:00
 lig: kadinlar-1-ligi
 bolum: takimlar
+sabit: true
 ---
 ARABICA COFFEE HOUSE KADINLAR 1. LİGİ’NDE 7. HAFTA TAMAMLANDI! 
 
