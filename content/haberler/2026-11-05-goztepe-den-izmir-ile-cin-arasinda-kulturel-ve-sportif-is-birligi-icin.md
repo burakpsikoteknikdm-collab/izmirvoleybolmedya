@@ -8,7 +8,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-05-izmir-buyuksehir-belediye-baskani-sayin-dr-cemil-tugay-i-ziyaret-edere-e89341.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-05-goztepe-den-izmir-in-uluslararasi-tanitimina-katki-saglayacak-onemli-a-a2ffd4.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-05-goztepe-den-izmir-in-uluslararasi-tanitimina-katki-saglayacak-onemli-a-b8c8a3.jpg
-sabit: true
 ---
 GÖZTEPE’DEN İZMİR’İN ULUSLARARASI TANITIMINA KATKI SAĞLAYACAK ÖNEMLİ ADIM!
 
