@@ -4,7 +4,6 @@ date: 2026-11-05T15:45:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-05-kadinlar-1-lig-20261023-200903-0000-256d58.jpg
 lig: erkekler-1-ligi
 bolum: takimlar
-sabit: true
 ---
 ARABICA COFFEE HOUSE ERKEKLER 1. LİGİ’NDE 7. HAFTA HEYECANI BAŞLIYOR!
 
