@@ -7,7 +7,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-05-fenerbahce-medicana-7-haftayida-galibiyetle-tamamladi-fenerbahce-medic-5873f9.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-05-galibiyetimizden-kareler-sarimelekler-6be69c.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-05-fenerbahce-medicana-rahat-kazandi-a2c8e7.jpg
-sabit: true
 ---
 FENERBAHÇE MEDICANA RAHAT KAZANDI!
 
