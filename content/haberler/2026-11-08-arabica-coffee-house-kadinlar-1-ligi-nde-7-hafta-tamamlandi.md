@@ -1,8 +1,13 @@
 ---
 title: "ARABICA COFFEE HOUSE KADINLAR 1. LİGİ’NDE 7. HAFTA TAMAMLANDI!"
 date: 2026-11-08T01:12:00.000+03:00
+image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-07-arabica-coffee-house-kadinlar-1-ligi-nde-7-ec6408.jpg
 lig: kadinlar-1-ligi
 bolum: takimlar
+galeri:
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-07-arabica-coffee-house-kadinlar-1-ligi-nde-7-cf7395.jpg
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-07-arabica-coffee-house-kadinlar-1-ligi-nde-7-e2dd63.jpg
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-07-arabica-coffee-house-kadinlar-1-ligi-nde-7-06a77e.jpg
 sabit: true
 ---
 ARABICA COFFEE HOUSE KADINLAR 1. LİGİ’NDE 7. HAFTA TAMAMLANDI! 
