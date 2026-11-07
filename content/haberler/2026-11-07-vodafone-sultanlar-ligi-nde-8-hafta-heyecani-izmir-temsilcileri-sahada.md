@@ -4,7 +4,6 @@ date: 2026-11-07T10:57:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-07-vodafone-sultanlar-ligi-nde-8-9bc882.jpg
 lig: sultanlar-ligi
 bolum: takimlar
-sabit: true
 ---
 VODAFONE SULTANLAR LİGİ’NDE 8. HAFTA HEYECANI! İZMİR TEMSİLCİLERİ SAHADA
 
