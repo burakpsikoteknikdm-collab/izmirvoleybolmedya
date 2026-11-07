@@ -2,7 +2,6 @@
 title: "ARABICA COFFEE HOUSE KADINLAR 1. LİGİ’NDE 7. HAFTA HEYECANI! İZMİR TEMSİLCİLERİ SAHAYA ÇIKIYOR"
 date: 2026-11-06T23:21:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-06-arabica-coffee-house-kadinlar-1-ligi-nde-7-5ed7fc.jpg
-sabit: true
 ---
 ARABICA COFFEE HOUSE KADINLAR 1. LİGİ’NDE 7. HAFTA HEYECANI! İZMİR TEMSİLCİLERİ SAHAYA ÇIKIYOR
 
