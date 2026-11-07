@@ -3,7 +3,6 @@ title: "Altyapı Kız Voleybol Milli Sporcu Taramaları Duyurusu"
 date: 2026-11-05T10:45:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-05-alptyapilar-milli-takim-20261105-104810-0000-754947.jpg
 bolum: altyapi
-sabit: true
 ---
 Altyapı Kız Voleybol Milli Sporcu Taramaları Duyurusu
 
