@@ -8,7 +8,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-07-sms-grup-efeler-ligi-nde-5-fa6ea5.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-07-sms-grup-efeler-ligi-nde-5-c490da.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-07-sms-grup-efeler-ligi-nde-5-c783da.jpg
-sabit: true
 ---
 SMS GRUP EFELER LİGİ’NDE 5. HAFTA TAMAMLANDI! HEYECAN DORUKTAYDI
 
