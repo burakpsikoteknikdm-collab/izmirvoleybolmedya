@@ -1,8 +1,14 @@
 ---
 title: "ARKAS SPOR’DAN 7’DE 7! DÜZCE BELEDİYE SPOR AKADEMİ’YE SET VERMEDİ"
 date: 2026-11-08T20:52:00.000+03:00
+image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-08-arkas-spor-dan-7-de-7-duzce-belediye-spor-akademi-ye-set-vermedi-4174d8.jpg
 lig: erkekler-1-ligi
 bolum: takimlar
+galeri:
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-08-arkas-spor-dan-7-de-7-duzce-belediye-spor-akademi-ye-set-vermedi-855e4a.jpg
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-08-arkas-spor-dan-7-de-7-duzce-belediye-spor-akademi-ye-set-vermedi-88f0ed.jpg
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-08-arkas-spor-dan-7-de-7-duzce-belediye-spor-akademi-ye-set-vermedi-895c4a.jpg
+sabit: true
 ---
 ARKAS SPOR’DAN 7’DE 7! DÜZCE BELEDİYE SPOR AKADEMİ’YE SET VERMEDİ
 
