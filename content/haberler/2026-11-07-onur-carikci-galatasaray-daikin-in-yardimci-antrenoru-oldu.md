@@ -4,7 +4,6 @@ date: 2026-11-07T21:27:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-07-galatasaray-daikin-kadin-voleybol-takimimizda-yardimci-antrenorluk-gor-f495a4.jpg
 lig: sultanlar-ligi
 bolum: takimlar
-sabit: true
 ---
 ONUR ÇARIKÇI, GALATASARAY DAİKİN’İN YARDIMCI ANTRENÖRÜ OLDU!
 
