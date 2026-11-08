@@ -8,7 +8,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-07-altekma-dan-muhtesem-geri-donus-izmir-de-kazanan-altekma-3-2-e37a35.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-07-altekma-dan-muhtesem-geri-donus-izmir-de-kazanan-altekma-3-2-353327.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-07-altekma-dan-muhtesem-geri-donus-izmir-de-kazanan-altekma-3-2-754b4d.jpg
-sabit: true
 ---
 ALTEKMA’DAN MUHTEŞEM GERİ DÖNÜŞ! İZMİR’DE KAZANAN ALTEKMA: 3-2
 
