@@ -92,18 +92,44 @@ async function haberGetir(ad) {
   return h;
 }
 
-// Tüm haberler (yeniden eskiye); tam içerik isteğe bağlı
-async function haberListesi() {
-  const dosyalar = (await gh(`/contents/${KLASOR}?ref=main`)).filter(d => d.type === 'file' && /\.md$/i.test(d.name));
+// Haber dosyalarının tamamı tek GraphQL çağrısıyla okunur (haber başına ayrı çağrı GitHub'ın saatlik sınırını doldurur).
+// Olmazsa: dosya listesi için 1 API çağrısı + içerikler raw.githubusercontent üzerinden (API sınırına sayılmaz).
+async function haberDosyalari(dal = 'main') {
+  const token = process.env.GITHUB_ICERIK_TOKEN;
+  if (token) {
+    try {
+      const [sahip, ad] = REPO.split('/');
+      const r = await fetch('https://api.github.com/graphql', {
+        method: 'POST',
+        headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json', 'User-Agent': 'izmirvoleybolmedya-seo' },
+        body: JSON.stringify({
+          query: 'query($sahip:String!,$ad:String!,$yol:String!){repository(owner:$sahip,name:$ad){object(expression:$yol){...on Tree{entries{name type oid object{...on Blob{text}}}}}}}',
+          variables: { sahip, ad, yol: `${dal}:${KLASOR}` }
+        })
+      });
+      const j = await r.json();
+      if (!r.ok || j.errors) throw new Error('GraphQL ' + r.status);
+      return ((j.data.repository.object || {}).entries || [])
+        .filter(e => e.type === 'blob' && /.md$/i.test(e.name) && typeof (e.object || {}).text === 'string')
+        .map(e => ({ ad: e.name, sha: e.oid, metin: e.object.text }));
+    } catch (e) { console.error('GraphQL okunamadı, yedek yöntem:', e.message); }
+  }
+  const dosyalar = (await gh(`/contents/${KLASOR}?ref=${dal}`)).filter(d => d.type === 'file' && /.md$/i.test(d.name));
   const liste = await Promise.all(dosyalar.map(async d => {
     try {
-      const metin = process.env.GITHUB_ICERIK_TOKEN
-        ? Buffer.from((await gh('/git/blobs/' + d.sha)).content, 'base64').toString('utf8')
-        : await (await fetch(d.download_url)).text();
-      const h = ayristir(metin);
-      return h && { ...h, ad: d.name.replace(/\.md$/i, '') };
+      const r = await fetch(d.download_url);
+      return r.ok ? { ad: d.name, sha: d.sha, metin: await r.text() } : null;
     } catch (e) { return null; }
   }));
+  return liste.filter(Boolean);
+}
+
+// Tüm haberler (yeniden eskiye)
+async function haberListesi() {
+  const liste = (await haberDosyalari()).map(d => {
+    const h = ayristir(d.metin);
+    return h && { ...h, ad: d.ad.replace(/.md$/i, '') };
+  });
   return liste.filter(Boolean).sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
@@ -116,4 +142,4 @@ async function onbellekliListe() {
 
 const haberAdresi = ad => `${SITE}/haber/${encodeURIComponent(ad)}`;
 
-module.exports = { SITE, REPO, LIG_ADI, GORSEL_DEPO, gorselUrl, kacis, ayristir, fotolar, onbellekliListe, duzMetin, mutlakAdres, markdown, haberGetir, haberListesi, haberAdresi };
+module.exports = { haberDosyalari, SITE, REPO, LIG_ADI, GORSEL_DEPO, gorselUrl, kacis, ayristir, fotolar, onbellekliListe, duzMetin, mutlakAdres, markdown, haberGetir, haberListesi, haberAdresi };

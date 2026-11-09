@@ -7,7 +7,7 @@
 //   EDITORLER            kullanici:sifre çiftleri, noktalı virgülle ayrılmış (ör. ayse:Gizli123;mehmet:Sifre456)
 const crypto = require('crypto');
 const supabase = require('./_supabase');
-const { GORSEL_DEPO, gorselUrl, mutlakAdres } = require('./_haber');
+const { GORSEL_DEPO, gorselUrl, mutlakAdres, haberDosyalari } = require('./_haber');
 
 const REPO = 'burakpsikoteknikdm-collab/izmirvoleybolmedya';
 const DAL = process.env.EDITOR_DAL || 'main'; // test için başka bir dal verilebilir
@@ -137,15 +137,11 @@ module.exports = async (req, res) => {
     if (!kullanici) return gonder(401, { hata: 'Oturum süresi doldu, lütfen tekrar giriş yapın.' });
 
     if (islem === 'liste') {
-      const dosyalar = (await gh(`/contents/${HABER_KLASORU}?ref=${DAL}`).catch(e => e.durum === 404 ? [] : Promise.reject(e)))
-        .filter(d => d.type === 'file' && /\.md$/i.test(d.name));
-      const liste = await Promise.all(dosyalar.map(async d => {
-        // İçerik, dosyanın sha'sına göre okunur: önbellekten eski hali gelmez
-        const blob = await gh(`/git/blobs/${d.sha}`);
-        const t = Buffer.from(blob.content, 'base64').toString('utf8');
-        const f = ayristir(t) || {};
-        return { ad: d.name, sha: d.sha, title: f.title || d.name, date: f.date || '', image: f.image || '', lig: f.lig || '', bolum: f.bolum || '', sabit: f.sabit === 'true' };
-      }));
+      // Tek çağrıyla okunur: her haber için ayrı çağrı GitHub'ın saatlik sınırını dolduruyordu
+      const liste = (await haberDosyalari(DAL).catch(e => e.message === 'GitHub 404' ? [] : Promise.reject(e))).map(d => {
+        const f = ayristir(d.metin) || {};
+        return { ad: d.ad, sha: d.sha, title: f.title || d.ad, date: f.date || '', image: f.image || '', lig: f.lig || '', bolum: f.bolum || '', sabit: f.sabit === 'true' };
+      });
       liste.sort((a, b) => new Date(b.date) - new Date(a.date));
       // Okunma sayıları (Supabase); alınamazsa liste yine gösterilir
       try {
