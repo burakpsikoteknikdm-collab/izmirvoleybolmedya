@@ -345,8 +345,29 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
 .manset-k img,.manset-k .bos{width:112px;height:76px;flex:none;object-fit:cover;border-radius:8px;background:var(--sky)}
 .manset-k b{font-weight:700;line-height:1.25;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .manset-k time{display:block;font-size:.78rem;font-weight:600;color:var(--blue);margin-top:4px}
+.ms-kutu{position:relative;overflow:hidden;border-radius:var(--r);background:var(--ink)}
+.ms-iz{display:flex;transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+.ms-iz .manset-ana{flex:0 0 100%;border-radius:0}
+.ms-iz .manset-ana .tx{padding-bottom:42px}
+.ms-iz .manset-ana h2{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.ms-cizgiler{position:absolute;left:26px;right:26px;bottom:18px;z-index:3;display:flex;gap:6px}
+.ms-cizgi{flex:1;height:18px;padding:7px 0;background:none;border:0;cursor:pointer}
+.ms-cizgi span{display:block;height:4px;border-radius:2px;background:rgba(255,255,255,.4);overflow:hidden}
+.ms-cizgi i{display:block;height:100%;width:0;background:var(--gold)}
+.ms-cizgi.gecti i{width:100%}
+.ms-cizgi.aktif i{width:100%;transform-origin:left;animation:msDolum 6s linear forwards}
+@keyframes msDolum{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.ms-kutu.durdu .ms-cizgi.aktif i,.ms-kutu:has(:focus-visible) .ms-cizgi.aktif i{animation-play-state:paused}
+@media(hover:hover){.ms-kutu:hover .ms-cizgi.aktif i{animation-play-state:paused}}
+.ms-ok{position:absolute;top:50%;z-index:3;width:42px;height:42px;margin-top:-34px;border:0;border-radius:50%;background:rgba(6,18,46,.6);color:#fff;font-size:1.5rem;line-height:1;cursor:pointer;opacity:0;transition:opacity .2s}
+.ms-ok.onc{left:12px}.ms-ok.son{right:12px}
+.ms-ok:hover{background:var(--gold);color:var(--ink)}
+.ms-ok:focus-visible{opacity:1}
+.ms-kutu:hover .ms-ok{opacity:1}
+@media(hover:none){.ms-ok{display:none}}
+@media(prefers-reduced-motion:reduce){.ms-iz{transition:none}.ms-cizgi.aktif i{animation:none;transform:none}}
 @media(max-width:900px){.manset-grid{grid-template-columns:1fr}.manset-ana{aspect-ratio:4/3}}
-@media(max-width:520px){.manset-ana .tx{padding:18px}.manset-k img,.manset-k .bos{width:92px;height:66px}.ust-bilgi .sosyal a:last-child{display:none}}
+@media(max-width:520px){.ms-cizgiler{left:18px;right:18px;bottom:10px}.ms-iz .manset-ana .tx{padding-bottom:34px}.manset-ana .tx{padding:18px}.manset-k img,.manset-k .bos{width:92px;height:66px}.ust-bilgi .sosyal a:last-child{display:none}}
 
 /* Paylaş */
 .paylas{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 4px;padding-top:16px;border-top:1px solid var(--line)}
@@ -939,20 +960,98 @@ icerikOku('reklam.json').then(j => {
   anaDuzen();
 });
 
-/* Manşet: en son haber büyük, sonraki dört haber yanda */
+/* Manşet: en son haberler solda kayar (6 sn'de bir), sonraki dört haber yanda */
 const LIG_ADI = { 'sultanlar-ligi': 'Sultanlar Ligi', 'efeler-ligi': 'Efeler Ligi', 'kadinlar-1-ligi': 'Kadınlar 1. Ligi', 'erkekler-1-ligi': 'Erkekler 1. Ligi', 'kadinlar-2-ligi': 'Kadınlar 2. Ligi', 'erkekler-2-ligi': 'Erkekler 2. Ligi' };
+const MANSET_SLAYT = 6;
+function mansetSlaytlari(haberler) {
+  const kutu = document.createElement('div');
+  kutu.className = 'ms-kutu';
+  kutu.setAttribute('role', 'region');
+  kutu.setAttribute('aria-roledescription', 'carousel');
+  kutu.setAttribute('aria-label', 'Manşet haberler');
+  const iz = document.createElement('div'); iz.className = 'ms-iz';
+  const slaytlar = haberler.map((n, i) => {
+    const b = haberOgesi(n, 'manset-ana');
+    b.draggable = false;
+    const tx = document.createElement('span'); tx.className = 'tx';
+    const kat = document.createElement('span'); kat.className = 'kat'; kat.textContent = LIG_ADI[n.lig] || 'Manşet';
+    const h = document.createElement('h2'); h.textContent = n.title;
+    const t = document.createElement('time'); t.textContent = fmt(n.date);
+    tx.append(kat, h, t); b.append(tx);
+    return b;
+  });
+  iz.append(...slaytlar);
+  kutu.append(iz);
+  // Fotoğraf sırası gelince (ve bir sonraki için) yüklenir; hepsi birden inmesin
+  const fotoYukle = i => {
+    const n = haberler[i], b = slaytlar[i];
+    if (!n.image || b.querySelector('img')) return;
+    const im = document.createElement('img'); im.alt = n.title;
+    if (!i) im.fetchPriority = 'high';
+    resimKur(im, n.image, 1080);
+    b.prepend(im);
+  };
+  let aktif = -1, cizgiler = [];
+  const git = y => {
+    const s = (y + haberler.length) % haberler.length;
+    if (s === aktif) return;
+    aktif = s;
+    fotoYukle(s); fotoYukle((s + 1) % haberler.length);
+    iz.style.transform = 'translateX(' + (-s * 100) + '%)';
+    slaytlar.forEach((b, i) => { b.inert = i !== s; });
+    cizgiler.forEach((c, i) => {
+      c.classList.toggle('gecti', i < s);
+      c.classList.remove('aktif');
+      if (i === s) { void c.offsetWidth; c.classList.add('aktif'); }
+      c.setAttribute('aria-current', i === s ? 'true' : 'false');
+    });
+  };
+  if (haberler.length > 1) {
+    const sira = document.createElement('div'); sira.className = 'ms-cizgiler';
+    cizgiler = haberler.map((n, i) => {
+      const c = document.createElement('button');
+      c.type = 'button'; c.className = 'ms-cizgi';
+      c.setAttribute('aria-label', (i + 1) + '. manşet: ' + n.title);
+      c.innerHTML = '<span><i></i></span>';
+      c.onclick = () => git(i);
+      return c;
+    });
+    sira.append(...cizgiler);
+    // Çizgi dolunca sonraki manşet: üzerine gelince dolum durduğu için geçiş de durur
+    sira.addEventListener('animationend', () => {
+      // Sekme arka plandaysa ya da haber penceresi açıksa geçme, çizgiyi yeniden doldur
+      if (!document.hidden && !$('#dlg').open && !$('#pnl').open) return git(aktif + 1);
+      const c = cizgiler[aktif];
+      c.classList.remove('aktif'); void c.offsetWidth; c.classList.add('aktif');
+    });
+    const ok = (sinif, isaret, etiket, yon) => {
+      const o = document.createElement('button');
+      o.type = 'button'; o.className = 'ms-ok ' + sinif; o.textContent = isaret;
+      o.setAttribute('aria-label', etiket);
+      o.onclick = () => git(aktif + yon);
+      return o;
+    };
+    kutu.append(sira, ok('onc', '‹', 'Önceki manşet', -1), ok('son', '›', 'Sonraki manşet', 1));
+    // Telefonda parmakla kaydırma
+    let basX = null, basY = 0;
+    kutu.addEventListener('touchstart', e => { basX = e.touches[0].clientX; basY = e.touches[0].clientY; kutu.classList.add('durdu'); }, { passive: true });
+    kutu.addEventListener('touchend', e => {
+      kutu.classList.remove('durdu');
+      if (basX === null) return;
+      const dx = e.changedTouches[0].clientX - basX, dy = e.changedTouches[0].clientY - basY;
+      basX = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) git(aktif + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+  }
+  git(0);
+  return kutu;
+}
 function mansetCiz(list) {
-  const ana = list[0];
-  if (!ana) return;
-  const b = haberOgesi(ana, 'manset-ana');
-  if (ana.image) { const im = document.createElement('img'); im.alt = ana.title; im.fetchPriority = 'high'; resimKur(im, ana.image, 1080); b.append(im); }
-  const tx = document.createElement('span'); tx.className = 'tx';
-  const kat = document.createElement('span'); kat.className = 'kat'; kat.textContent = LIG_ADI[ana.lig] || 'Manşet';
-  const h = document.createElement('h2'); h.textContent = ana.title;
-  const t = document.createElement('time'); t.textContent = fmt(ana.date);
-  tx.append(kat, h, t); b.append(tx);
-  $('#mansetAna').replaceChildren(b);
-  $('#mansetYan').replaceChildren(...list.slice(1, 5).map(n => {
+  if (!list[0]) return;
+  // Yan listede tekrar olmasın: manşette 6, yanda sonraki 4 haber (az haber varsa manşet küçülür)
+  const adet = list.length >= MANSET_SLAYT + 4 ? MANSET_SLAYT : Math.max(1, list.length - 4);
+  $('#mansetAna').replaceChildren(mansetSlaytlari(list.slice(0, adet)));
+  $('#mansetYan').replaceChildren(...list.slice(adet, adet + 4).map(n => {
     const k = haberOgesi(n, 'manset-k');
     if (n.image) { const im = document.createElement('img'); im.alt = n.title; im.loading = 'lazy'; resimKur(im, n.image, 256); k.append(im); }
     else { const s = document.createElement('span'); s.className = 'bos'; k.append(s); }
@@ -962,7 +1061,7 @@ function mansetCiz(list) {
     y.append(bb, tt); k.append(y);
     return k;
   }));
-  $('#mansetYan').hidden = list.length < 2;
+  $('#mansetYan').hidden = list.length <= adet;
 }
 
 // Ana sayfa bölümlerinin görünürlüğü (lig/milli sayfası açıkken hepsi gizli)
