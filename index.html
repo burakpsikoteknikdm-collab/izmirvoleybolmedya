@@ -960,9 +960,9 @@ icerikOku('reklam.json').then(j => {
   anaDuzen();
 });
 
-/* Manşet: en son haberler solda kayar (6 sn'de bir), sonraki dört haber yanda */
+/* Manşet: editörde seçilenler + kalan yerlere en son haberler solda kayar (6 sn'de bir), sonraki dört haber yanda */
 const LIG_ADI = { 'sultanlar-ligi': 'Sultanlar Ligi', 'efeler-ligi': 'Efeler Ligi', 'kadinlar-1-ligi': 'Kadınlar 1. Ligi', 'erkekler-1-ligi': 'Erkekler 1. Ligi', 'kadinlar-2-ligi': 'Kadınlar 2. Ligi', 'erkekler-2-ligi': 'Erkekler 2. Ligi' };
-const MANSET_SLAYT = 6;
+const MANSET_SLAYT = 10;
 function mansetSlaytlari(haberler) {
   const kutu = document.createElement('div');
   kutu.className = 'ms-kutu';
@@ -1048,8 +1048,8 @@ function mansetSlaytlari(haberler) {
 }
 function mansetCiz(list) {
   if (!list[0]) return;
-  // Yan listede tekrar olmasın: manşette 6, yanda sonraki 4 haber (az haber varsa manşet küçülür)
-  const adet = list.length >= MANSET_SLAYT + 4 ? MANSET_SLAYT : Math.max(1, list.length - 4);
+  // Liste zaten seçilenler önde, sonra en yeniler sıralı: ilk 10'u manşet, sonraki 4'ü yan liste (tekrar olmaz)
+  const adet = Math.min(MANSET_SLAYT, list.length);
   $('#mansetAna').replaceChildren(mansetSlaytlari(list.slice(0, adet)));
   $('#mansetYan').replaceChildren(...list.slice(adet, adet + 4).map(n => {
     const k = haberOgesi(n, 'manset-k');
@@ -1206,7 +1206,7 @@ async function loadNews() {
     }))).filter(Boolean).sort((a, b) => new Date(b.date) - new Date(a.date));
     try { sessionStorage.setItem('ivm_news3', JSON.stringify({ t: Date.now(), d: list })); } catch (e) {}
   }
-  // Başa tutturulan haberler (panelde 📌) en önde; yoksa en son haber öne çıkar
+  // Manşete eklenen haberler (editörde 📌) en önde, ardından en son haberler
   list = [...list.filter(n => n.sabit === 'true'), ...list.filter(n => n.sabit !== 'true')];
   haberListesi = list;
   render(list);

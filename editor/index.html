@@ -94,7 +94,7 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
 .alt-cubuk{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--line);padding:12px 14px calc(12px + env(safe-area-inset-bottom));display:flex;gap:10px;justify-content:center}
 .alt-cubuk .btn{flex:1;max-width:340px}
 
-/* Başa tuttur */
+/* Manşete ekle */
 .sabitle{display:flex;gap:12px;align-items:flex-start;background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:16px;cursor:pointer}
 .sabitle:has(input:checked){border-color:var(--gold);background:#fffbea}
 .sabitle input{width:22px;height:22px;flex:none;margin-top:2px;accent-color:var(--ink)}
@@ -212,7 +212,7 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
     </label>
     <label class="sabitle">
       <input type="checkbox" id="fSabit">
-      <span><b>📌 Başa Tuttur</b><small>Haber manşette büyük olarak ve listede ilk sırada görünür. Hiçbir haber tutturulmazsa en son haber öne çıkar.</small></span>
+      <span><b>📌 Manşete Ekle</b><small>Ana sayfadaki kayan manşette ilk sıralarda görünür. Manşette 10 yer var: 10'dan az haber seçilirse kalan yerlere en son haberler gelir, 10'dan fazla seçilirse seçilenlerin en yeni 10'u görünür.</small></span>
     </label>
     <div class="alan" style="margin-bottom:16px">
       <span style="display:block;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Fotoğraflar (en fazla 4 · ilki kapak)</span>
@@ -396,7 +396,7 @@ async function listeAc() {
       const k = document.createElement('small'); k.textContent = tarihYaz(h.date);
       if (h.lig) { const r = document.createElement('span'); r.className = 'rozet'; r.textContent = LIG_AD[h.lig] || h.lig; k.append(r); }
       if (h.bolum) { const r = document.createElement('span'); r.className = 'rozet'; r.textContent = h.bolum === 'altyapi' ? 'İzmir Altyapı Takımlarımız' : 'İzmir Takımlarımız'; k.append(r); }
-      if (h.sabit) { const r = document.createElement('span'); r.className = 'rozet sabit'; r.textContent = '📌 Başa tutturuldu'; k.append(r); }
+      if (h.sabit) { const r = document.createElement('span'); r.className = 'rozet sabit'; r.textContent = '📌 Manşette'; k.append(r); }
       if (h.okunma != null) { const r = document.createElement('span'); r.className = 'rozet okunma'; r.textContent = '👁 ' + h.okunma.toLocaleString('tr-TR') + ' okunma'; k.append(r); }
       tx.append(t, k); b.append(tx);
       b.onclick = () => duzenAc(h.ad);
