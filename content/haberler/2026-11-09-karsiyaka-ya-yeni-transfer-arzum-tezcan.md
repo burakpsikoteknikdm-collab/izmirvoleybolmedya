@@ -4,7 +4,6 @@ date: 2026-11-09T18:42:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-09-karsiyaka-ya-yeni-transfer-arzum-tezcan-c4ac42.jpg
 lig: kadinlar-1-ligi
 bolum: takimlar
-sabit: true
 ---
 KARŞIYAKA’YA YENİ TRANSFER: ARZUM TEZCAN! 
 
