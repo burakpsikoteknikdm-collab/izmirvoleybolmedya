@@ -4,7 +4,6 @@ date: 2026-11-08T22:31:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-08-karsiyaka-evinde-kazandi-501447.jpg
 lig: kadinlar-2-ligi
 bolum: takimlar
-sabit: true
 ---
 🏐 KARŞIYAKA EVİNDE KAZANDI!
 
