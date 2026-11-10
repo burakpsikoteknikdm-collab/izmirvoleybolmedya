@@ -8,7 +8,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-08-01m6xqhb3qhphc0h7gakhqne34-676e32.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-08-01m6xqg8h00k3fv5qc6h95pke4-855d6b.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-08-01m6xqhb5tqqkfw1jc9jahqgky-499411.jpg
-sabit: true
 ---
 ARABICA COFFEE HOUSE ERKEKLER 1. LİGİ’NDE 7. HAFTA SONA ERDİ! ARKAS SPOR’DAN 7’DE 7ARABICA COFFEE HOUSE ERKEKLER 1. LİGİ’NDE 7. HAFTA SONA ERDİ! ARKAS SPOR’DAN 7’DE 7
 
