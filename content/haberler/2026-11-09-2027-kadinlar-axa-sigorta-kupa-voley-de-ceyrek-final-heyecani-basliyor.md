@@ -4,7 +4,6 @@ date: 2026-11-09T15:44:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-09-2027-kadinlar-axa-sigorta-kupa-voley-de-ceyrek-final-heyecani-basliyor-b19ecf.jpg
 lig: sultanlar-ligi
 bolum: takimlar
-sabit: true
 ---
 2027 KADINLAR AXA SİGORTA KUPA VOLEY’DE ÇEYREK FİNAL HEYECANI BAŞLIYOR!
 
