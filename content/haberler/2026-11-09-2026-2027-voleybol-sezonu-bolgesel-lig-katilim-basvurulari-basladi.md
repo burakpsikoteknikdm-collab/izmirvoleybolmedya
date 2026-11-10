@@ -3,7 +3,6 @@ title: "2026-2027 VOLEYBOL SEZONU BÖLGESEL LİG KATILIM BAŞVURULARI BAŞLADI!"
 date: 2026-11-09T18:15:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-09-2026-2027-voleybol-sezonu-bolgesel-lig-katilim-basvurulari-basladi-b50521.jpg
 bolum: takimlar
-sabit: true
 ---
 2026-2027 VOLEYBOL SEZONU BÖLGESEL LİG KATILIM BAŞVURULARI BAŞLADI!
 
