@@ -6,7 +6,6 @@ lig: kadinlar-2-ligi
 bolum: takimlar
 galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-10-goztepe-evinde-kazandi-c3e07d.jpg
-sabit: true
 ---
 🏐 GÖZTEPE EVİNDE KAZANDI!  
 
