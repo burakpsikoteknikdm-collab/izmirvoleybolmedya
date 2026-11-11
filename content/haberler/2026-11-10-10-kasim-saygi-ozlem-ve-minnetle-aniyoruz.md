@@ -2,7 +2,6 @@
 title: "🇹🇷 10 KASIM | SAYGI, ÖZLEM VE MİNNETLE ANIYORUZ"
 date: 2026-11-10T00:30:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-09-10-kasim-saygi-ozlem-ve-minnetle-aniyoruz-aa579e.jpg
-sabit: true
 ---
 🇹🇷 10 KASIM | SAYGI, ÖZLEM VE MİNNETLE ANIYORUZ
 
