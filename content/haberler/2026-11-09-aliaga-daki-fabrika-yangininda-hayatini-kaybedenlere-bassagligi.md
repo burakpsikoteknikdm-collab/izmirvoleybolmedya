@@ -2,7 +2,6 @@
 title: "ALİAĞA’DAKİ FABRİKA YANGININDA HAYATINI KAYBEDENLERE BAŞSAĞLIĞI"
 date: 2026-11-09T19:12:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-09-aliaga-daki-fabrika-yangininda-hayatini-kaybedenlere-bassagligi-bb5fd1.jpg
-sabit: true
 ---
 ALİAĞA’DAKİ FABRİKA YANGININDA HAYATINI KAYBEDENLERE BAŞSAĞLIĞI 
 
