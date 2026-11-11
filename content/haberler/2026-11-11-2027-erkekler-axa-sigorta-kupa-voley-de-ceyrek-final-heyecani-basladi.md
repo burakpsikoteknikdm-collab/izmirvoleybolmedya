@@ -8,7 +8,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-11-2027-erkekler-axa-sigorta-kupa-voley-de-ceyrek-final-heyecani-basladi-1a6281.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-11-2027-erkekler-axa-sigorta-kupa-voley-de-ceyrek-final-heyecani-basladi-f9d0bf.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-11-2027-erkekler-axa-sigorta-kupa-voley-de-ceyrek-final-heyecani-basladi-d0ccd8.jpg
-sabit: true
 ---
 2027 ERKEKLER AXA SİGORTA KUPA VOLEY’DE ÇEYREK FİNAL HEYECANI BAŞLADI!
 
