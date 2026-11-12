@@ -1,8 +1,10 @@
 ---
 title: "ZEREN SPOR’DA ALPER HAMURCU DÖNEMİ BAŞLIYOR!"
 date: 2026-11-12T15:49:00.000+03:00
-image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-12-zeren-spor-da-alper-hamurcu-donemi-basliyor-89f5ac.jpg
+image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-12-zeren-spor-da-alper-hamurcu-donemi-basliyor-f9f260.jpg
 lig: sultanlar-ligi
+galeri:
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-12-zeren-spor-da-alper-hamurcu-donemi-basliyor-5ba7ef.jpg
 sabit: true
 ---
 ZEREN SPOR’DA ALPER HAMURCU DÖNEMİ BAŞLIYOR!
