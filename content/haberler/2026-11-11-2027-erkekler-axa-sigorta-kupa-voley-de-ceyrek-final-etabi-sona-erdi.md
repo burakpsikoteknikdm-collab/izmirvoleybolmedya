@@ -7,7 +7,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-11-2027-erkekler-axa-sigorta-kupa-voley-de-ceyrek-final-etabi-sona-erdi-8b335e.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-11-2027-erkekler-axa-sigorta-kupa-voley-de-ceyrek-final-etabi-sona-erdi-3bf547.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-11-2027-erkekler-axa-sigorta-kupa-voley-de-ceyrek-final-etabi-sona-erdi-fcf590.jpg
-sabit: true
 ---
 2027 Erkekler AXA Sigorta Kupa Voley'de Çeyrek Final Etabı Sona Erdi
 
