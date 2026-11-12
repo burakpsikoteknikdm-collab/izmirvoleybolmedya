@@ -3,7 +3,6 @@ title: "2027 ERKEKLER AXA SİGORTA KUPA VOLEY’DE ÇEYREK FİNAL HEYECANI BAŞL
 date: 2026-11-09T15:36:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-09-2027-erkekler-axa-sigorta-kupa-voley-de-ceyrek-final-heyecani-basliyor-8d6b4a.jpg
 lig: efeler-ligi
-sabit: true
 ---
 2027 ERKEKLER AXA SİGORTA KUPA VOLEY’DE ÇEYREK FİNAL HEYECANI BAŞLIYOR!
 
