@@ -1,7 +1,14 @@
 ---
 title: "2027 KADINLAR AXA SİGORTA KUPA VOLEY’DE ÇEYREK FİNAL HEYECANI BAŞLADI!"
 date: 2026-11-12T21:30:00.000+03:00
+image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-12-2027-kadinlar-axa-sigorta-kupa-voley-de-ceyrek-final-heyecani-basladi-eecf1e.jpg
 lig: sultanlar-ligi
+bolum: takimlar
+galeri:
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-12-2027-kadinlar-axa-sigorta-kupa-voley-de-ceyrek-final-heyecani-basladi-9c8156.jpg
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-12-2027-kadinlar-axa-sigorta-kupa-voley-de-ceyrek-final-heyecani-basladi-6e3b26.jpg
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-12-2027-kadinlar-axa-sigorta-kupa-voley-de-ceyrek-final-heyecani-basladi-a3b2ea.jpg
+sabit: true
 ---
 2027 KADINLAR AXA SİGORTA KUPA VOLEY’DE ÇEYREK FİNAL HEYECANI BAŞLADI!
 
