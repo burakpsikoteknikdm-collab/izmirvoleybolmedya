@@ -5,7 +5,6 @@ image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorsell
 lig: sultanlar-ligi
 galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-12-zeren-spor-da-alper-hamurcu-donemi-basliyor-5ba7ef.jpg
-sabit: true
 ---
 ZEREN SPOR’DA ALPER HAMURCU DÖNEMİ BAŞLIYOR!
 
