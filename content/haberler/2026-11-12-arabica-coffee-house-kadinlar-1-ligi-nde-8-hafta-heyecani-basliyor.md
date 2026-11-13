@@ -4,7 +4,6 @@ date: 2026-11-12T11:30:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-12-arabica-coffee-house-kadinlar-1-ligi-nde-8-04d767.jpg
 lig: kadinlar-1-ligi
 bolum: takimlar
-sabit: true
 ---
 ARABICA COFFEE HOUSE KADINLAR 1. LİGİ'NDE 8. HAFTA HEYECANI BAŞLIYOR!
 
