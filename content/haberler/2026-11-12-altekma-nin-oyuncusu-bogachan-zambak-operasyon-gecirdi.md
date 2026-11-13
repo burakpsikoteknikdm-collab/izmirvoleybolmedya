@@ -4,7 +4,6 @@ date: 2026-11-12T14:05:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-12-altekma-nin-oyuncusu-bogachan-zambak-operasyon-gecirdi-962671.jpg
 lig: efeler-ligi
 bolum: takimlar
-sabit: true
 ---
 ALTEKMA’NIN OYUNCUSU BOĞAÇHAN ZAMBAK OPERASYON GEÇİRDİ
 
