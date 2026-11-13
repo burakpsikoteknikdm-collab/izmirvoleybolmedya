@@ -2,7 +2,6 @@
 title: "Antrenör Üst Düzey-Altyapı Vize/Gelişim Telafi Semineri Duyurusu"
 date: 2026-11-12T14:20:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-12-kirmizi-tvf-logo-1-d8cb7b.jpg
-sabit: true
 ---
 Antrenör Üst Düzey-Altyapı Vize/Gelişim Telafi Semineri Duyurusu
 
