@@ -9,7 +9,7 @@ sabit: true
 ROTA KOLEJİ'NDEN 7'DE 7! ARKAS SPOR KARŞISINDA NET GALİBİYET: 3-0
 SON TOPA KADAR MÜCADELE, ZİRVEDE KARARLI YÜRÜYÜŞ!
 
-TVF Kadınlar 2. Lig 7. Grup'ta 7. hafta karşılaşmasında Rota Koleji, Arkas Spor'u 3-0 mağlup ederek namağlup yürüyüşünü sürdürdü.
+TVF Kadınlar 2. Lig 6. Grup'ta 7. hafta karşılaşmasında Rota Koleji, Arkas Spor'u 3-0 mağlup ederek namağlup yürüyüşünü sürdürdü.
 
 Sezon boyunca ortaya koyduğu başarılı performansla dikkat çeken Rota Koleji, güçlü rakibi Arkas Spor karşısında aldığı net galibiyetle ligde 7'de 7 yapmayı başardı.
 
