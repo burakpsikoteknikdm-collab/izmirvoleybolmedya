@@ -7,7 +7,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-12-melissa-vargas-tan-fenerbahce-medicana-ile-3-yillik-yeni-sozlesme-2486b7.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-12-melissa-vargas-tan-fenerbahce-medicana-ile-3-yillik-yeni-sozlesme-e2422c.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-12-melissa-vargas-tan-fenerbahce-medicana-ile-3-yillik-yeni-sozlesme-51afc8.jpg
-sabit: true
 ---
 MELİSSA VARGAS'TAN FENERBAHÇE MEDICANA İLE 3 YILLIK YENİ SÖZLEŞME!
 
