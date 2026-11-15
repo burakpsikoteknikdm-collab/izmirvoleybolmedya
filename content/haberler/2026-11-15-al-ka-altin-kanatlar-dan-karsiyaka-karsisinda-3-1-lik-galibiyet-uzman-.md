@@ -1,5 +1,5 @@
 ---
-title: "Al-Ka Altın Kanatlar’dan Karşıyaka Karşısında 3-1’lik Galibiyet  Uzman Posta Kadınlar Voleybol 2. Ligi 6. Grup 7. hafta mücadelesinde Al-Ka Altın Kanatlar, Karşıyaka’yı 3-1 mağlup ederek haftayı galib"
+title: "Al-Ka Altın Kanatlar’dan Karşıyaka Karşısında 3-1’lik Galibiyet"
 date: 2026-11-15T20:22:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-15-al-ka-altin-kanatlar-dan-karsiyaka-karsisinda-3-1-lik-galibiyet-uzman--5f2920.jpg
 lig: kadinlar-2-ligi
