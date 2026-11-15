@@ -6,7 +6,6 @@ lig: kadinlar-2-ligi
 bolum: takimlar
 galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-14-karsiyaka-dan-duru-hascelik-e-gecmis-olsun-ziyareti-9b4020.jpg
-sabit: true
 ---
 KARŞIYAKA’DAN DURU HASÇELİK’E GEÇMİŞ OLSUN ZİYARETİ 
 
