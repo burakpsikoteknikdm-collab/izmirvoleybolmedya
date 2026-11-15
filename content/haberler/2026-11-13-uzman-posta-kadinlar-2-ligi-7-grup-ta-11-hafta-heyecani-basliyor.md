@@ -3,7 +3,6 @@ title: "UZMAN POSTA KADINLAR 2. LİGİ 7. GRUP’TA 11. HAFTA HEYECANI BAŞLIYOR
 date: 2026-11-13T13:36:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-13-uzman-posta-kadinlar-2-ligi-7-grup-ta-11-4d35b2.jpg
 lig: kadinlar-2-ligi
-sabit: true
 ---
 UZMAN POSTA KADINLAR 2. LİGİ 7. GRUP’TA 11. HAFTA HEYECANI BAŞLIYOR!
 
