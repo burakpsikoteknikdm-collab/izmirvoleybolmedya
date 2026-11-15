@@ -4,7 +4,6 @@ date: 2026-11-14T21:56:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-14-rota-koleji-nden-7-de-7-arkas-spor-karsisinda-net-galibiyet-3-0-son-to-64a899.jpg
 lig: kadinlar-2-ligi
 bolum: takimlar
-sabit: true
 ---
 ROTA KOLEJİ'NDEN 7'DE 7! ARKAS SPOR KARŞISINDA NET GALİBİYET: 3-0
 SON TOPA KADAR MÜCADELE, ZİRVEDE KARARLI YÜRÜYÜŞ!
