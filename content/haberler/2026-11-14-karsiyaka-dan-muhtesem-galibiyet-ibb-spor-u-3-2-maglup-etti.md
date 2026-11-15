@@ -4,7 +4,6 @@ date: 2026-11-14T21:29:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-14-karsiyaka-dan-muhtesem-galibiyet-ibb-spor-u-3-2-maglup-etti-a74e46.jpg
 lig: kadinlar-1-ligi
 bolum: takimlar
-sabit: true
 ---
 KARŞIYAKA’DAN MUHTEŞEM GALİBİYET! İBB SPOR’U 3-2 MAĞLUP ETTİ
 
