@@ -4,7 +4,6 @@ date: 2026-11-13T13:28:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-13-uzman-posta-kadinlar-2-ligi-nde-7-ca9147.jpg
 lig: kadinlar-2-ligi
 bolum: takimlar
-sabit: true
 ---
 UZMAN POSTA KADINLAR 2. LİGİ’NDE 6. Gurup  7. HAFTA HEYECANI BAŞLIYOR!
 
