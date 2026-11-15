@@ -4,7 +4,6 @@ date: 2026-11-13T12:12:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-13-vodafone-sultanlar-ligi-nde-9-e5c325.jpg
 lig: sultanlar-ligi
 bolum: takimlar
-sabit: true
 ---
 VODAFONE SULTANLAR LİGİ’NDE 9. HAFTA HEYECANI BAŞLIYOR!
 
