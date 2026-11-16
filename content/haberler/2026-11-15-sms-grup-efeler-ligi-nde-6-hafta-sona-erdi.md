@@ -8,7 +8,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-14-sms-grup-efeler-ligi-nde-6-642506.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-14-sms-grup-efeler-ligi-nde-6-b53c1d.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-14-sms-grup-efeler-ligi-nde-6-67bddb.jpg
-sabit: true
 ---
 SMS Grup Efeler Ligi’nde 6. Hafta Sona Erdi
 
