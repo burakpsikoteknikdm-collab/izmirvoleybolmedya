@@ -434,17 +434,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
       <a href="#haberler">Haberler</a>
       <a href="#bolum/takimlar">İzmir Takımlarımız</a>
       <a href="#bolum/altyapi">İzmir Altyapı Takımlarımız</a>
-      <div class="dd">
-        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="milliMenu">Milli Takımlar ▾</button>
-        <div class="dd-menu dd-genis" id="milliMenu">
-          <a href="#milli/kadin">Kadın Milli Takımlar</a>
-          <a href="#milli/erkek">Erkek Milli Takımlar</a>
-          <a href="#milli/a-kadin-kadro">A Milli Kadın Takımı Kadro</a>
-          <a href="#milli/a-erkek-kadro">A Milli Erkek Takımı Kadro</a>
-          <a href="#milli/altyapi-kadin">Altyapı Milli Takımlar - Kadın</a>
-          <a href="#milli/altyapi-erkek">Altyapı Milli Takımlar - Erkek</a>
-        </div>
-      </div>
+      <a href="#bolum/milli">Milli Takımlar</a>
       <div class="dd">
         <button class="dd-btn" type="button" aria-expanded="false" aria-controls="ddMenu">Ligler ▾</button>
         <div class="dd-menu" id="ddMenu">
@@ -586,9 +576,8 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
 
   <section class="section akis" id="akisMilli">
     <div class="wrap">
-      <div class="baslik-satir"><h2>Milli Takımlar</h2><a class="tumu" href="#milli/kadin">Tümü →</a></div>
-      <div class="chips" id="akisMilliChips"></div>
-      <div id="akisMilliIcerik"><div class="msg">Milli takım haberleri yükleniyor…</div></div>
+      <div class="baslik-satir"><h2>Milli Takımlar</h2><a class="tumu" href="#bolum/milli">Tümü →</a></div>
+      <div id="akisMilliIcerik"><div class="msg">Haberler yükleniyor…</div></div>
     </div>
   </section>
 
@@ -602,17 +591,6 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
     </div>
   </section>
 
-  <section class="section" id="milliView" hidden>
-    <div class="wrap">
-      <div class="lig-ust">
-        <h2 id="milliAd">Milli Takımlar</h2>
-        <a href="#top" class="geri">← Ana Sayfa</a>
-      </div>
-      <div class="chips" id="milliChips"></div>
-      <div id="milliIcerik"><div class="msg">Yükleniyor…</div></div>
-      <p class="kaynak-not" id="milliNot"></p>
-    </div>
-  </section>
 
   <section class="section" id="ligView" hidden>
     <div class="wrap">
@@ -659,7 +637,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
       <a href="#bolum/takimlar">İzmir Takımlarımız</a>
       <a href="#bolum/altyapi">İzmir Altyapı Takımlarımız</a>
       <a href="#lig/sultanlar-ligi">Ligler</a>
-      <a href="#milli/kadin">Milli Takımlar</a>
+      <a href="#bolum/milli">Milli Takımlar</a>
       <a href="#program">Maç Programı</a>
       <a href="#canli">Canlı Yayın</a>
     </div>
@@ -1074,9 +1052,9 @@ function anaDuzen() {
   $('#reklamSerit').hidden = !ana || !reklamAktif;
 }
 /* İzmir Takımlarımız / Altyapı sayfaları: panelde bu bölüme işaretlenen haberler */
-const BOLUM_ADI = { takimlar: 'İzmir Takımlarımız', altyapi: 'İzmir Altyapı Takımlarımız' };
+const BOLUM_ADI = { takimlar: 'İzmir Takımlarımız', altyapi: 'İzmir Altyapı Takımlarımız', milli: 'Milli Takımlar' };
 function bolumCiz() {
-  const m = location.hash.match(/^#bolum\/(takimlar|altyapi)$/);
+  const m = location.hash.match(/^#bolum\/(takimlar|altyapi|milli)$/);
   if (!m || !haberListesi) return;
   const liste = haberListesi.filter(n => n.bolum === m[1]);
   const kutu = $('#bolumIcerik');
@@ -1110,7 +1088,7 @@ function akisKarti(n) {
 }
 function akisCiz() {
   if (!haberListesi) return;
-  [['takimlar', '#akisTakimlarIcerik'], ['altyapi', '#akisAltyapiIcerik']].forEach(([bolum, yer]) => {
+  [['takimlar', '#akisTakimlarIcerik'], ['altyapi', '#akisAltyapiIcerik'], ['milli', '#akisMilliIcerik']].forEach(([bolum, yer]) => {
     const liste = haberListesi.filter(n => n.bolum === bolum).slice(0, 4);
     if (!liste.length) { $(yer).innerHTML = '<div class="msg">Bu bölüme eklenen haberler burada görünecek.</div>'; return; }
     const izgara = document.createElement('div'); izgara.className = 'akis-izgara';
@@ -1152,26 +1130,6 @@ async function akisLigler() {
     const alt = document.createElement('span'); alt.className = 'alt'; alt.textContent = 'Puan durumu ve fikstür →';
     a.append(ol, alt); kutu.append(a);
   });
-}
-async function akisMilli() {
-  $('#akisMilliChips').innerHTML = MILLI.map(([k, ad]) => `<a class="chip" href="#milli/${k}">${ad}</a>`).join('');
-  const veriler = await Promise.all(['kadin', 'erkek', 'altyapi-kadin', 'altyapi-erkek'].map(k => fetch('/api/milli?kat=' + k).then(r => r.json()).catch(() => null)));
-  const tum = veriler.filter(Boolean).flatMap(v => v.haberler || []);
-  const gorulen = new Set();
-  const liste = tum.filter(h => !gorulen.has(h.link) && gorulen.add(h.link)).sort((a, b) => (b.iso || '').localeCompare(a.iso || '')).slice(0, 4);
-  if (!liste.length) { $('#akisMilliIcerik').innerHTML = '<div class="msg">Milli takım haberleri şu an alınamadı.</div>'; return; }
-  const izgara = document.createElement('div'); izgara.className = 'akis-izgara';
-  liste.forEach(h => {
-    const a = document.createElement('a'); a.className = 'mt-haber'; a.href = h.link; a.target = '_blank'; a.rel = 'noopener';
-    if (h.gorsel) { const im = document.createElement('img'); im.className = 'im'; im.alt = h.baslik; im.loading = 'lazy'; im.src = h.gorsel; a.append(im); }
-    else { const s = document.createElement('span'); s.className = 'im'; a.append(s); }
-    const tx = document.createElement('span'); tx.className = 'tx';
-    const t = document.createElement('time'); t.textContent = h.tarih;
-    const b = document.createElement('h3'); b.textContent = h.baslik;
-    const o = document.createElement('span'); o.className = 'oku'; o.textContent = "TVF'de oku →";
-    tx.append(t, b, o); a.append(tx); izgara.append(a);
-  });
-  $('#akisMilliIcerik').replaceChildren(izgara);
 }
 function haberAdrestenAc() {
   const m = location.hash.match(/^#haber\/(.+)$/);
@@ -1491,69 +1449,21 @@ async function puanYukle(yenile) {
   }
 }
 
-/* Milli takımlar sayfası: #milli/<kategori> — TVF haberleri ve A milli kadrolar */
-const MILLI = [
-  ['kadin', 'Kadın Milli Takımlar'], ['erkek', 'Erkek Milli Takımlar'],
-  ['a-kadin-kadro', 'A Milli Kadın Takımı Kadro'], ['a-erkek-kadro', 'A Milli Erkek Takımı Kadro'],
-  ['altyapi-kadin', 'Altyapı Milli Takımlar - Kadın'], ['altyapi-erkek', 'Altyapı Milli Takımlar - Erkek']
-];
-// Kadro sayfalarının altında ilgili takımın haberleri de gösterilir
-const KADRO_HABER = { 'a-kadin-kadro': 'kadin', 'a-erkek-kadro': 'erkek' };
-let milliIstek = 0;
-$('#milliChips').innerHTML = MILLI.map(([k, ad]) => `<a class="chip" href="#milli/${k}">${ad}</a>`).join('');
-
-function buHaftaMi(iso) {
-  if (!iso) return false;
-  const tr = new Date(Date.now() + 3 * 3600e3), gun = Date.parse(iso);
-  const bugun = Date.UTC(tr.getUTCFullYear(), tr.getUTCMonth(), tr.getUTCDate());
-  const pzt = bugun - ((tr.getUTCDay() + 6) % 7) * 864e5;
-  return gun >= pzt && gun < pzt + 7 * 864e5;
-}
-const haberKartlari = list => list.length ? '<div class="mt-haberler">' + list.map((h, i) => `<a class="mt-haber${i === 0 ? ' ilk' : ''}" href="${kacis(h.link)}" target="_blank" rel="noopener">
-    ${h.gorsel ? `<img class="im" src="${kacis(h.gorsel)}" alt="" loading="lazy">` : '<span class="im"></span>'}
-    <span class="tx"><time>${kacis(h.tarih)}${buHaftaMi(h.iso) ? ' <span class="rozet">Bu Hafta</span>' : ''}</time><h3>${kacis(h.baslik)}</h3><span class="oku">Haberi Oku →</span></span>
-  </a>`).join('') + '</div>' : '<div class="msg">Bu bölümde henüz haber yok.</div>';
-const kadroKartlari = list => list.length ? '<div class="kadro">' + list.map(o => `<div class="oyuncu">
-    ${o.foto ? `<img src="${kacis(o.foto)}" alt="${kacis(o.ad)}" loading="lazy">` : '<span class="yok"></span>'}
-    <div><small>${kacis(o.pozisyon)}</small><b>${kacis(o.ad)}</b><ul>${o.bilgi.map(b => `<li>${kacis(b.ad)}: ${kacis(b.deger)}</li>`).join('')}</ul></div>
-  </div>`).join('') + '</div>' : '<div class="msg">Kadro henüz açıklanmadı.</div>';
-
-async function milliYukle(kat) {
-  const no = ++milliIstek;
-  const al = async k => { const j = await (await fetch('/api/milli?kat=' + k)).json(); if (j.hata) throw 0; return j; };
-  $('#milliIcerik').innerHTML = '<div class="msg">Yükleniyor…</div>';
-  $('#milliNot').textContent = '';
-  try {
-    const j = await al(kat);
-    let html = j.tur === 'kadro' ? kadroKartlari(j.kadro) : haberKartlari(j.haberler);
-    if (KADRO_HABER[kat]) {
-      const h = await al(KADRO_HABER[kat]).catch(() => null);
-      if (h) html += `<h3 class="mt-alt">${kacis(h.ad)} Haberleri</h3>` + haberKartlari(h.haberler.slice(0, 6));
-    }
-    if (no !== milliIstek) return;
-    $('#milliIcerik').innerHTML = html;
-    $('#milliNot').innerHTML = `Kaynak: Türkiye Voleybol Federasyonu · <a href="${kacis(j.kaynak)}" target="_blank" rel="noopener">TVF'de Görüntüle</a>`;
-  } catch (e) {
-    if (no === milliIstek) $('#milliIcerik').innerHTML = '<div class="msg">Bilgiler şu an alınamadı. <a href="https://tvf.org.tr" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700">TVF\'de aç →</a></div>';
-  }
-}
-
 function yonlendir() {
+  // Eski TVF milli takım adresleri (#milli/...) artık kendi haberlerimizin bölümüne gider
+  if (/^#milli\//.test(location.hash)) history.replaceState(null, '', '#bolum/milli');
   const m = location.hash.match(/^#lig\/([\w-]+)(?:\/([^/]+))?$/);
   const lig = m && LIGLER.find(l => l[0] === m[1]);
-  const mm = location.hash.match(/^#milli\/([\w-]+)$/);
-  const milli = mm && MILLI.find(x => x[0] === mm[1]);
-  const mb = location.hash.match(/^#bolum\/(takimlar|altyapi)$/);
+  const mb = location.hash.match(/^#bolum\/(takimlar|altyapi|milli)$/);
   const bolum = mb && mb[1];
   clearInterval(ligZamanlayici);
   ddKapat();
   ['#pnl', '#dlg'].forEach(s => $(s).open && $(s).close());
   document.querySelectorAll('.dd-menu a, .chips .chip').forEach(a => a.classList.toggle('aktif', a.getAttribute('href') === location.hash));
   $('#ligView').hidden = !lig;
-  $('#milliView').hidden = !milli;
   $('#bolumView').hidden = !bolum;
   document.querySelectorAll('.nav > a').forEach(a => a.classList.toggle('aktif', a.getAttribute('href') === location.hash));
-  anaBolumler.forEach(s => s.hidden = !!(lig || milli || bolum));
+  anaBolumler.forEach(s => s.hidden = !!(lig || bolum));
   anaDuzen();
   if (bolum) {
     aktifLig = null;
@@ -1561,14 +1471,6 @@ function yonlendir() {
     document.title = BOLUM_ADI[bolum] + ' Haberleri | İzmir Voleybol Medya';
     scrollTo(0, 0);
     bolumCiz();
-    return;
-  }
-  if (milli) {
-    aktifLig = null;
-    $('#milliAd').textContent = milli[1];
-    document.title = milli[1] + ' | İzmir Voleybol Medya';
-    scrollTo(0, 0);
-    milliYukle(milli[0]);
     return;
   }
   if (!lig) {
@@ -1593,7 +1495,6 @@ const ilkBaslik = document.title;
 addEventListener('hashchange', yonlendir);
 if (/^#(lig|milli|bolum)\//.test(location.hash)) yonlendir();
 akisGec('#akisLigler', akisLigler);
-akisGec('#akisMilli', akisMilli);
 </script>
 </body>
 </html>

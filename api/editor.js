@@ -272,7 +272,7 @@ module.exports = async (req, res) => {
       if (isNaN(date)) return gonder(400, { hata: 'Geçersiz tarih.' });
       if (String(g.body || '').length > 100000) return gonder(400, { hata: 'Haber metni çok uzun.' });
       const lig = LIGLER.includes(g.lig) ? g.lig : '';
-      const bolum = ['takimlar', 'altyapi'].includes(g.bolum) ? g.bolum : '';
+      const bolum = ['takimlar', 'altyapi', 'milli'].includes(g.bolum) ? g.bolum : '';
       // Depodaki fotoğraf adresi ya da eski haberlerin /images/uploads/<ad> yolu
       const gorselMi = u => /^\/images\/uploads\/[^/\\\s]+$/.test(u || '') || (String(u || '').startsWith(GORSEL_DEPO) && /^[^/\\\s?#]+$/.test(String(u).slice(GORSEL_DEPO.length)));
       const image = gorselMi(g.image) ? g.image : '';

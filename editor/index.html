@@ -207,6 +207,7 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
         <option value="">Yok</option>
         <option value="takimlar">İzmir Takımlarımız</option>
         <option value="altyapi">İzmir Altyapı Takımlarımız</option>
+        <option value="milli">Milli Takımlar</option>
       </select>
       <div class="ipucu">Seçerseniz haber, sitedeki "İzmir Takımlarımız" ya da "İzmir Altyapı Takımlarımız" bölümünde de görünür.</div>
     </label>
@@ -395,7 +396,7 @@ async function listeAc() {
       const t = document.createElement('b'); t.textContent = h.title;
       const k = document.createElement('small'); k.textContent = tarihYaz(h.date);
       if (h.lig) { const r = document.createElement('span'); r.className = 'rozet'; r.textContent = LIG_AD[h.lig] || h.lig; k.append(r); }
-      if (h.bolum) { const r = document.createElement('span'); r.className = 'rozet'; r.textContent = h.bolum === 'altyapi' ? 'İzmir Altyapı Takımlarımız' : 'İzmir Takımlarımız'; k.append(r); }
+      if (h.bolum) { const r = document.createElement('span'); r.className = 'rozet'; r.textContent = ({ altyapi: 'İzmir Altyapı Takımlarımız', milli: 'Milli Takımlar' })[h.bolum] || 'İzmir Takımlarımız'; k.append(r); }
       if (h.sabit) { const r = document.createElement('span'); r.className = 'rozet sabit'; r.textContent = '📌 Manşette'; k.append(r); }
       if (h.okunma != null) { const r = document.createElement('span'); r.className = 'rozet okunma'; r.textContent = '👁 ' + h.okunma.toLocaleString('tr-TR') + ' okunma'; k.append(r); }
       tx.append(t, k); b.append(tx);

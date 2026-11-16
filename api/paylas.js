@@ -200,7 +200,7 @@ footer .sosyal a:hover{text-decoration:underline}
     <nav aria-label="Ana menü">
       <a href="/#haberler">Haberler</a>
       <a href="/#lig/sultanlar-ligi">Ligler</a>
-      <a href="/#milli/kadin">Milli Takımlar</a>
+      <a href="/#bolum/milli">Milli Takımlar</a>
       <a href="/#program">Maç Programı</a>
       <a href="/hakkimizda">Hakkımızda</a>
     </nav>
