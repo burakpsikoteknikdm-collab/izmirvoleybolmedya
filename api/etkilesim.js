@@ -2,11 +2,13 @@
 //  GET  haber&ad=<haber>&cihaz=<id>  → beğeni sayısı, bu cihaz beğendi mi, onaylı yorumlar
 //  POST begen   { ad, cihaz }         → beğen / beğeniyi geri al
 //  POST yorum   { ad, isim, metin, onay, web }  → yorum onaya gönderilir (web: bot tuzağı, boş olmalı)
+//  GET  skor                           → canlı skor (editörden girilen maçlar)
 //  GET  vapid                          → bildirim aboneliği için açık anahtar
 //  POST abone   { abonelik }           → bildirim aboneliği kaydı
 //  POST abonelik-iptal { endpoint }
 //  POST okundu { ad }                 → haberin okunma sayısını 1 artırır (kişisel veri tutulmaz)
-const { hazirMi, sb, ipOzeti, vapid } = require('./_supabase');
+const { hazirMi, sb, ipOzeti, vapid, veriOku } = require('./_supabase');
+const skor = require('./_skor');
 
 const haberAdiMi = ad => typeof ad === 'string' && ad.length > 0 && ad.length < 200 && !/[\/\\]|\.\./.test(ad);
 const cihazMi = c => typeof c === 'string' && /^[A-Za-z0-9_-]{16,64}$/.test(c);
@@ -31,6 +33,10 @@ module.exports = async (req, res) => {
   if (!hazirMi()) return gonder(503, { hata: 'Yorum ve beğeni sistemi henüz yapılandırılmadı.' });
 
   try {
+    if (islem === 'skor') {
+      const v = await veriOku(skor.DOSYA, { maclar: [] });
+      return gonder(200, { maclar: skor.gorunenler(v && v.maclar) }, 's-maxage=8, stale-while-revalidate=20');
+    }
     if (islem === 'vapid') return gonder(200, { anahtar: vapid().publicKey }, 's-maxage=86400');
 
     if (islem === 'haber') {

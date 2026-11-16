@@ -102,6 +102,29 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
 .rozet.sabit{background:#fff3c4;color:#8a5a00}
 .rozet.okunma{background:#e7f6ee;color:#12805c}
 
+/* Canlı skor */
+.skor-kart{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:14px}
+.skor-kart.bitti{opacity:.85;border-style:dashed}
+.skor-kart .ust{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.skor-kart .ust b{flex:1;font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;color:var(--blue)}
+.skor-kart .ust .rozet{font-size:.72rem}
+.skor-takim{display:grid;grid-template-columns:1fr auto auto auto;gap:8px;align-items:center;padding:6px 0}
+.skor-takim .ad{font-weight:800;font-size:1.1rem;line-height:1.2}
+.skor-takim .ad small{display:block;font-weight:600;color:var(--muted);font-size:.8rem}
+.skor-takim .puan{min-width:58px;text-align:center;font-size:2.2rem;font-weight:800;font-family:'Barlow Condensed',sans-serif;line-height:1}
+.skor-takim button{width:56px;height:56px;border-radius:14px;border:0;font-size:1.8rem;font-weight:800;cursor:pointer;background:var(--ink);color:#fff;touch-action:manipulation}
+.skor-takim button.eksi{width:44px;background:#fff;color:var(--ink);border:2px solid var(--line);font-size:1.4rem}
+.skor-takim button:active{transform:scale(.95)}
+.skor-setler{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.skor-setler label{display:flex;align-items:center;gap:4px;background:var(--sky);border-radius:10px;padding:5px 8px;font-size:.8rem;font-weight:700;color:var(--muted)}
+.skor-setler input{width:44px;border:1px solid var(--line);border-radius:7px;padding:4px;text-align:center;font-size:1rem;font-weight:700}
+.skor-dugmeler{display:flex;gap:8px;flex-wrap:wrap}
+.skor-dugmeler .btn{flex:1;padding:10px 12px;font-size:1rem;min-width:110px}
+.skor-kayit{font-size:.82rem;color:var(--muted);margin-top:8px;min-height:1.2em}
+.skor-kayit.hata{color:var(--red);font-weight:600}
+.skor-yeni{background:#fff;border:2px dashed var(--line);border-radius:var(--r);padding:14px;margin:16px 0}
+.skor-yeni .iki{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+
 /* Yönetim ızgarası */
 .yonetim{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:18px}
 .yonetim button{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;font-weight:700;font-size:.95rem;cursor:pointer;text-align:left;color:var(--ink)}
@@ -170,6 +193,7 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
     <div class="yonetim" aria-label="Yönetim">
       <button type="button" id="sonDakikaBtn"><span>⚡</span>Son Dakika</button>
       <button type="button" id="yorumBtn"><span>💬</span>Yorumlar <b id="yorumSayi"></b></button>
+      <button type="button" id="skorBtn"><span>🏐</span>Canlı Skor</button>
       <button type="button" id="canliBtn"><span>📺</span>Canlı Yayın</button>
       <button type="button" id="reklamBtn"><span>📢</span>Reklam Şeridi</button>
       <button type="button" id="sayfaBtn"><span>📄</span>Kurumsal Sayfalar</button>
@@ -241,6 +265,24 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
     <button class="btn cizgi" id="vazgecBtn">Vazgeç</button>
     <button class="btn" id="kaydetBtn">Yayınla</button>
   </div>
+</section>
+
+<!-- Canlı skor -->
+<section id="skorEkrani" hidden>
+  <header class="bar"><button class="ikon geriListe" aria-label="Geri">←</button><b>Canlı Skor</b></header>
+  <main class="kap">
+    <div class="hata" id="skorHata" hidden></div>
+    <p class="ipucu" style="margin:0 0 14px">Yayın yapmadığınız maçların skorunu buradan girin; ana sayfadaki Canlı Yayın bölümünde set set görünür. Her dokunuş birkaç saniye içinde sitede güncellenir, ayrıca kaydetmeniz gerekmez. Maçlar son güncellemeden 8 saat sonra sitede kendiliğinden gizlenir.</p>
+    <div id="skorListe"><div class="bilgi">Yükleniyor…</div></div>
+    <form class="skor-yeni" id="skorYeni">
+      <div class="iki">
+        <input class="girdi" id="sTakim1" maxlength="60" placeholder="Ev sahibi takım" required>
+        <input class="girdi" id="sTakim2" maxlength="60" placeholder="Misafir takım" required>
+      </div>
+      <input class="girdi" id="sLig" maxlength="80" placeholder="Lig / Maç adı (örn. Küçük Kızlar Süper Lig)" style="margin-bottom:8px">
+      <button class="btn mavi" style="width:100%">＋ Maçı Başlat</button>
+    </form>
+  </main>
 </section>
 
 <!-- Canlı yayın -->
@@ -348,7 +390,7 @@ function bildir(metin, tur = '') {
 }
 
 function goster(ekran) {
-  ['giris', 'liste', 'duzen', 'sonDakika', 'yorum', 'canli', 'reklam', 'sayfa'].forEach(e => $(`#${e}Ekrani`).hidden = e !== ekran);
+  ['giris', 'liste', 'duzen', 'sonDakika', 'yorum', 'skor', 'canli', 'reklam', 'sayfa'].forEach(e => $(`#${e}Ekrani`).hidden = e !== ekran);
   scrollTo(0, 0);
 }
 
@@ -680,6 +722,92 @@ async function kaydetDugmesi(btn, is) {
   const eski = btn.textContent; btn.disabled = true; btn.textContent = 'Kaydediliyor…';
   try { await is(); ayarDegisti = false; } finally { btn.disabled = false; btn.textContent = eski; }
 }
+
+/* Canlı skor: her değişiklik kısa bir gecikmeyle otomatik kaydedilir (Supabase, site yeniden yayınlanmaz) */
+let skorMaclar = [], skorZaman, skorZincir = Promise.resolve(), skorBekleyen = false, skorSonDurum = ['', false];
+const skorKac = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const setAlinan = m => { const al = [0, 0]; (m.durum === 'bitti' ? m.setler : m.setler.slice(0, -1)).forEach(s => { if (s[0] !== s[1]) al[s[0] > s[1] ? 0 : 1]++; }); return al; };
+function skorDurum(metin, hata) {
+  skorSonDurum = [metin, !!hata];
+  document.querySelectorAll('.skor-kayit').forEach(e => { e.textContent = metin; e.classList.toggle('hata', !!hata); });
+}
+function skorKaydet() {
+  skorBekleyen = true; skorDurum('Kaydediliyor…');
+  clearTimeout(skorZaman);
+  skorZaman = setTimeout(() => {
+    const gonderilen = JSON.parse(JSON.stringify(skorMaclar));
+    skorZincir = skorZincir.then(async () => {
+      try {
+        const j = await api('skor-kaydet', { govde: { maclar: gonderilen } });
+        // Kaydederken yeni dokunuş olmadıysa sunucudaki hâli al (kimlik ve zaman bilgisi)
+        if (JSON.stringify(gonderilen) === JSON.stringify(skorMaclar)) { skorMaclar = j.maclar; skorBekleyen = false; }
+        skorDurum('Sitede yayında ✓ ' + new Date().toLocaleTimeString('tr-TR'));
+      } catch (e) { skorDurum('Kaydedilemedi: ' + e.message + ' (bir sonraki dokunuşta tekrar denenir)', true); }
+    });
+  }, 700);
+}
+function skorCiz() {
+  const kutu = $('#skorListe');
+  if (!skorMaclar.length) { kutu.innerHTML = '<div class="bilgi">Şu an girilmiş maç yok. Aşağıdan yeni maç başlatın.</div>'; return; }
+  kutu.innerHTML = skorMaclar.map((m, i) => {
+    const devam = m.durum !== 'bitti', al = setAlinan(m), su = m.setler[m.setler.length - 1];
+    const takim = k => `<div class="skor-takim"><div class="ad">${skorKac(m['takim' + (k + 1)])}<small>Aldığı set: ${al[k]}</small></div>` +
+      (devam ? `<div class="puan">${su[k]}</div><button class="eksi" data-i="${i}" data-k="${k}" data-d="-1" aria-label="Sayı geri al">−</button><button data-i="${i}" data-k="${k}" data-d="1" aria-label="Sayı ekle">+</button>`
+             : `<div class="puan">${al[k]}</div><span></span><span></span>`) + '</div>';
+    const setler = m.setler.map((s, n) => `<label>${n + 1}.S <input type="number" min="0" max="99" inputmode="numeric" value="${s[0]}" data-i="${i}" data-s="${n}" data-k="0">-<input type="number" min="0" max="99" inputmode="numeric" value="${s[1]}" data-i="${i}" data-s="${n}" data-k="1"></label>`).join('');
+    return `<div class="skor-kart${devam ? '' : ' bitti'}"><div class="ust"><b>${skorKac(m.lig || 'Maç')}</b><span class="rozet">${devam ? m.setler.length + '. set oynanıyor' : 'Maç bitti ' + al[0] + '-' + al[1]}</span></div>` +
+      takim(0) + takim(1) + `<div class="skor-setler">${setler}</div><div class="skor-dugmeler">` +
+      (devam ? `<button class="btn" data-is="set" data-i="${i}">Seti Bitir</button><button class="btn cizgi" data-is="bitir" data-i="${i}">Maçı Bitir</button>`
+             : `<button class="btn cizgi" data-is="devam" data-i="${i}">Devam Ettir</button>`) +
+      `<button class="btn kirmizi" data-is="sil" data-i="${i}">Kaldır</button></div><div class="skor-kayit"></div></div>`;
+  }).join('');
+  skorDurum(...skorSonDurum);
+}
+$('#skorListe').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const m = skorMaclar[+b.dataset.i]; if (!m) return;
+  if (b.dataset.d) {
+    const su = m.setler[m.setler.length - 1], k = +b.dataset.k;
+    su[k] = Math.max(0, Math.min(99, su[k] + +b.dataset.d));
+    if (navigator.vibrate) navigator.vibrate(15);
+  } else if (b.dataset.is === 'set') {
+    const su = m.setler[m.setler.length - 1];
+    if (su[0] === su[1]) return bildir('Set berabere bitemez, skoru kontrol edin.', 'kotu');
+    const al = setAlinan(m); al[su[0] > su[1] ? 0 : 1]++;
+    if (al[0] === 3 || al[1] === 3 || m.setler.length >= 5) { if (!confirm(`Maç ${al[0]}-${al[1]} bitti olarak işaretlensin mi?`)) return; m.durum = 'bitti'; }
+    else m.setler.push([0, 0]);
+  } else if (b.dataset.is === 'bitir') {
+    const su = m.setler[m.setler.length - 1];
+    if (!confirm('Maç bitti olarak işaretlensin mi?' + (su[0] === su[1] ? ' (Son setteki berabere skor sayılmaz.)' : ''))) return;
+    if (su[0] === su[1] && m.setler.length > 1) m.setler.pop();
+    m.durum = 'bitti';
+  } else if (b.dataset.is === 'devam') {
+    m.durum = 'devam'; m.setler.push([0, 0]);
+  } else if (b.dataset.is === 'sil') {
+    if (!confirm('Bu maç listeden ve siteden kaldırılsın mı?')) return;
+    skorMaclar.splice(+b.dataset.i, 1);
+  } else return;
+  skorCiz(); skorKaydet();
+});
+$('#skorListe').addEventListener('change', e => {
+  const g = e.target; if (!g.dataset.s) return;
+  const m = skorMaclar[+g.dataset.i]; if (!m) return;
+  m.setler[+g.dataset.s][+g.dataset.k] = Math.max(0, Math.min(99, parseInt(g.value, 10) || 0));
+  skorCiz(); skorKaydet();
+});
+$('#skorYeni').onsubmit = e => {
+  e.preventDefault();
+  skorMaclar.unshift({ takim1: $('#sTakim1').value.trim(), takim2: $('#sTakim2').value.trim(), lig: $('#sLig').value.trim(), setler: [[0, 0]], durum: 'devam' });
+  $('#skorYeni').reset();
+  skorCiz(); skorKaydet();
+};
+$('#skorBtn').onclick = async () => {
+  goster('skor'); hataYaz('#skorHata'); ayarDegisti = false;
+  if (skorBekleyen) { skorCiz(); return; } // kaydedilmemiş dokunuş varsa sunucudakiyle ezme
+  $('#skorListe').innerHTML = '<div class="bilgi">Yükleniyor…</div>';
+  try { skorMaclar = (await api('skor')).maclar || []; skorSonDurum = ['', false]; skorCiz(); }
+  catch (e) { hataYaz('#skorHata', e.message); $('#skorListe').innerHTML = ''; }
+};
 
 $('#canliBtn').onclick = async () => {
   goster('canli'); hataYaz('#canliHata'); ayarDegisti = false;

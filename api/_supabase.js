@@ -58,6 +58,34 @@ async function gorselYukle(ad, bayt, tur, ustuneYaz = false) {
   return `${SUPABASE_URL}/storage/v1/object/public/${GORSEL_DEPOSU}/${encodeURIComponent(ad)}`;
 }
 
+// Küçük JSON verileri (ör. canlı skor) için özel (herkese kapalı) "veri" deposu.
+// GitHub'a yazılmadığı için her güncelleme siteyi yeniden yayınlatmaz; okuma da yalnızca sunucudan yapılır.
+const VERI_DEPOSU = 'veri';
+async function veriDeposuOlustur() {
+  const r = await fetch(`${SUPABASE_URL}/storage/v1/bucket`, {
+    method: 'POST', headers: depoBasliklari({ 'Content-Type': 'application/json' }),
+    body: JSON.stringify({ id: VERI_DEPOSU, name: VERI_DEPOSU, public: false, file_size_limit: 262144, allowed_mime_types: ['application/json'] })
+  });
+  if (!r.ok && r.status !== 409 && !/already exists/i.test(await r.text())) throw new Error('Veri deposu oluşturulamadı (' + r.status + ')');
+}
+async function veriOku(ad, varsayilan = null) {
+  const r = await fetch(`${SUPABASE_URL}/storage/v1/object/${VERI_DEPOSU}/${encodeURIComponent(ad)}?t=${Date.now()}`, { headers: depoBasliklari({ 'Cache-Control': 'no-cache' }), cache: 'no-store' });
+  if (!r.ok) {
+    const metin = await r.text();
+    if (r.status === 404 || r.status === 400 && /not.?found/i.test(metin)) return varsayilan;
+    throw new Error('Veri okunamadı (' + r.status + '): ' + metin.slice(0, 200));
+  }
+  try { return JSON.parse(await r.text()); } catch (e) { return varsayilan; }
+}
+async function veriYaz(ad, veri) {
+  const gonder = () => fetch(`${SUPABASE_URL}/storage/v1/object/${VERI_DEPOSU}/${encodeURIComponent(ad)}`, {
+    method: 'POST', headers: depoBasliklari({ 'Content-Type': 'application/json', 'x-upsert': 'true', 'cache-control': 'max-age=0, no-cache' }), body: JSON.stringify(veri)
+  });
+  let r = await gonder();
+  if (!r.ok && /bucket not found/i.test(await r.clone().text())) { await veriDeposuOlustur(); r = await gonder(); }
+  if (!r.ok) throw new Error('Veri kaydedilemedi (' + r.status + '): ' + (await r.text()).slice(0, 200));
+}
+
 // IP adresi açık hâliyle saklanmaz; tuzlu özeti kısa süreli kötüye kullanım kontrolü için tutulur
 function ipOzeti(req) {
   const ip = String(req.headers['x-forwarded-for'] || req.socket?.remoteAddress || '').split(',')[0].trim();
@@ -100,4 +128,4 @@ async function herkeseBildir(yuk) {
   return { gonderilen, toplam: aboneler.length };
 }
 
-module.exports = { SUPABASE_URL, hazirMi, sb, gorselYukle, ipOzeti, vapid, herkeseBildir };
+module.exports = { SUPABASE_URL, hazirMi, sb, gorselYukle, veriOku, veriYaz, ipOzeti, vapid, herkeseBildir };

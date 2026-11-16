@@ -8,6 +8,7 @@
 const crypto = require('crypto');
 const supabase = require('./_supabase');
 const { GORSEL_DEPO, gorselUrl, mutlakAdres, haberDosyalari } = require('./_haber');
+const skor = require('./_skor');
 
 const REPO = 'burakpsikoteknikdm-collab/izmirvoleybolmedya';
 const DAL = process.env.EDITOR_DAL || 'main'; // test için başka bir dal verilebilir
@@ -199,8 +200,23 @@ module.exports = async (req, res) => {
       return gonder(200, { yorumlar, bekleyen: bekleyen.toplam });
     }
 
+    // Canlı skor (Supabase "veri" deposu; site yeniden yayınlanmaz)
+    if (islem === 'skor') {
+      if (!supabase.hazirMi()) return gonder(503, { hata: 'Canlı skor için Supabase yapılandırılmadı.' });
+      const v = await supabase.veriOku(skor.DOSYA, { maclar: [] });
+      return gonder(200, { maclar: (v && v.maclar) || [] });
+    }
+
     if (req.method !== 'POST') return gonder(405, { hata: 'POST gerekli' });
     const g = await govde(req);
+
+    if (islem === 'skor-kaydet') {
+      if (!supabase.hazirMi()) return gonder(503, { hata: 'Canlı skor için Supabase yapılandırılmadı.' });
+      const eski = await supabase.veriOku(skor.DOSYA, { maclar: [] });
+      const maclar = skor.duzenle(g.maclar, eski && eski.maclar);
+      await supabase.veriYaz(skor.DOSYA, { maclar, editor: kullanici });
+      return gonder(200, { maclar });
+    }
 
     if (islem === 'yorum-onayla' || islem === 'yorum-sil') {
       if (!supabase.hazirMi()) return gonder(503, { hata: 'Yorum sistemi henüz yapılandırılmadı.' });
@@ -337,6 +353,7 @@ module.exports = async (req, res) => {
 
     return gonder(400, { hata: 'Bilinmeyen işlem' });
   } catch (e) {
+    if (e.durum === 400) return gonder(400, { hata: e.message });
     if (e.durum === 409 || e.durum === 422) return gonder(409, { hata: 'Bu içerik siz düzenlerken başka biri tarafından değiştirildi. Geri dönüp yeniden açın ve tekrar deneyin.' });
     return gonder(e.durum === 413 ? 413 : 502, { hata: 'İşlem tamamlanamadı: ' + e.message });
   }
