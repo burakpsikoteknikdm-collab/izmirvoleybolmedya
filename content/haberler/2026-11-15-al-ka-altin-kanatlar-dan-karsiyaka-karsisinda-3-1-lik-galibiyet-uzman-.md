@@ -4,7 +4,6 @@ date: 2026-11-15T20:22:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-15-al-ka-altin-kanatlar-dan-karsiyaka-karsisinda-3-1-lik-galibiyet-uzman--5f2920.jpg
 lig: kadinlar-2-ligi
 bolum: takimlar
-sabit: true
 ---
 Al-Ka Altın Kanatlar’dan Karşıyaka Karşısında 3-1’lik Galibiyet
 
