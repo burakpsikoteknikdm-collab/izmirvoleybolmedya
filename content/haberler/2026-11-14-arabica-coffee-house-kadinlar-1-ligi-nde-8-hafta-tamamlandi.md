@@ -8,7 +8,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-14-arabica-coffee-house-kadinlar-1-ligi-nde-8-77cabc.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-14-arabica-coffee-house-kadinlar-1-ligi-nde-8-f6aa11.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-14-arabica-coffee-house-kadinlar-1-ligi-nde-8-c8ffc6.jpg
-sabit: true
 ---
 ARABICA COFFEE HOUSE KADINLAR 1. LİGİ'NDE 8. HAFTA TAMAMLANDI!
 
