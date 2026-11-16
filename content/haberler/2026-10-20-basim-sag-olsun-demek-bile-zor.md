@@ -2,6 +2,7 @@
 title: "BAŞIM SAĞ OLSUN DEMEK BİLE ZOR… 😢"
 date: 2026-10-20T14:03:00.000+03:00
 image: /images/uploads/2026-10-20-basim-sag-olsun-demek-bile-zor-323621.jpg
+bolum: gundem
 ---
 BAŞIM SAĞ OLSUN DEMEK BİLE ZOR… 😢
 Bugün hayatımın en acı ve unutulmaz anlarından birini yaşadım.
