@@ -8,7 +8,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-15-vodafone-sultanlar-ligi-nde-9-e58052.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-15-vodafone-sultanlar-ligi-nde-9-9dd38e.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-15-vodafone-sultanlar-ligi-nde-9-7119b3.jpg
-sabit: true
 ---
 Vodafone Sultanlar Ligi’nde 9. Hafta Sona Erdi
 
