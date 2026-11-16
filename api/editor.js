@@ -163,7 +163,7 @@ module.exports = async (req, res) => {
 
     // Site ayarları ve kurumsal sayfalar (yalnızca bu dosyalar)
     const AYAR_DOSYALARI = { canli: 'content/canli.json', reklam: 'content/reklam.json' };
-    const KURUMSAL = { hakkimizda: 'Hakkımızda', kunye: 'Künye', kvkk: 'KVKK Aydınlatma Metni', 'cerez-politikasi': 'Çerez Politikası', 'kullanim-kosullari': 'Kullanım Koşulları' };
+    const KURUMSAL = { hakkimizda: 'Hakkımızda', kunye: 'Künye', kvkk: 'KVKK Aydınlatma Metni', 'cerez-politikasi': 'Çerez Politikası', 'kullanim-kosullari': 'Kullanım Koşulları', iletisim: 'İletişim' };
     const dosyaOku = async yol => {
       const d = await gh(`/contents/${yol}?ref=${DAL}`).catch(e => e.durum === 404 ? null : Promise.reject(e));
       return d ? { sha: d.sha, metin: Buffer.from(d.content, 'base64').toString('utf8') } : { sha: null, metin: '' };

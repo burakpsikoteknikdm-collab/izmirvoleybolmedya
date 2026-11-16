@@ -20,7 +20,7 @@
       "destination": "/api/sitemap"
     },
     {
-      "source": "/:ad(hakkimizda|kunye|kvkk|cerez-politikasi|kullanim-kosullari)",
+      "source": "/:ad(hakkimizda|kunye|kvkk|cerez-politikasi|kullanim-kosullari|iletisim)",
       "destination": "/api/sayfa?ad=:ad"
     }
   ],

@@ -3,7 +3,7 @@
 const { SITE, REPO, kacis, ayristir, duzMetin, markdown } = require('./_haber');
 
 // Yayındaki kurumsal sayfalar (dosya adı → menüde görünen ad)
-const SAYFALAR = { 'hakkimizda': 'Hakkımızda', 'kunye': 'Künye', 'kvkk': 'KVKK Aydınlatma Metni', 'cerez-politikasi': 'Çerez Politikası', 'kullanim-kosullari': 'Kullanım Koşulları' };
+const SAYFALAR = { 'hakkimizda': 'Hakkımızda', 'kunye': 'Künye', 'kvkk': 'KVKK Aydınlatma Metni', 'cerez-politikasi': 'Çerez Politikası', 'kullanim-kosullari': 'Kullanım Koşulları', 'iletisim': 'İletişim' };
 const SOSYAL = [
   ['YouTube', 'https://www.youtube.com/@izmirvoleybolmedya'],
   ['Instagram', 'https://www.instagram.com/izmirvoleybolmedya'],
@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
   const aciklama = s.description || duzMetin(s.body).slice(0, 160);
   const adres = `${SITE}/${ad}`;
   const yapisalVeri = {
-    '@context': 'https://schema.org', '@type': ad === 'hakkimizda' ? 'AboutPage' : 'WebPage',
+    '@context': 'https://schema.org', '@type': ad === 'hakkimizda' ? 'AboutPage' : ad === 'iletisim' ? 'ContactPage' : 'WebPage',
     name: baslik, description: aciklama, url: adres, inLanguage: 'tr-TR',
     publisher: { '@type': 'NewsMediaOrganization', name: 'İzmir Voleybol Medya', url: SITE, logo: { '@type': 'ImageObject', url: SITE + '/editor/ikon-512.png' }, sameAs: SOSYAL.map(x => x[1]).filter(u => !u.includes('/share/')) }
   };
@@ -135,7 +135,7 @@ footer .sosyal a{color:#fff;font-weight:600;padding:6px 2px}
 </main>
 <footer><b>İZMİR VOLEYBOL MEDYA</b>İzmir voleybol haberleri, maç sonuçları ve canlı yayınlar · <a href="mailto:izmirvoleybolmg@gmail.com">izmirvoleybolmg@gmail.com</a>
   <div class="sosyal">${SOSYAL.map(([a, u]) => `<a href="${u}" target="_blank" rel="noopener">${a}</a>`).join('')}</div>
-  <div class="kurumsal"><a href="/hakkimizda">Hakkımızda</a><a href="/kunye">Künye</a><a href="/kvkk">KVKK Aydınlatma Metni</a><a href="/cerez-politikasi">Çerez Politikası</a><a href="/kullanim-kosullari">Kullanım Koşulları</a><a href="#" onclick="cerezTercihleri();return false">Çerez Tercihleri</a></div>
+  <div class="kurumsal"><a href="/hakkimizda">Hakkımızda</a><a href="/kunye">Künye</a><a href="/kvkk">KVKK Aydınlatma Metni</a><a href="/cerez-politikasi">Çerez Politikası</a><a href="/kullanim-kosullari">Kullanım Koşulları</a><a href="/iletisim">İletişim</a><a href="#" onclick="cerezTercihleri();return false">Çerez Tercihleri</a></div>
 </footer>
 </body>
 </html>`);
