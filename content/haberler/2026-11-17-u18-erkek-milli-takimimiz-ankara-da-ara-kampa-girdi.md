@@ -3,7 +3,7 @@ title: "U18 Erkek Milli Takımımız Ankara’da Ara Kampa Girdi"
 date: 2026-11-17T00:04:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-16-u18-erkek-milli-takimimiz-ankara-da-ara-kampa-girdi-7015ac.jpg
 lig: erkekler-1-ligi
-bolum: altyapi
+bolum: milli
 galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-16-u18-erkek-milli-takimimiz-ankara-da-ara-kampa-girdi-d7982f.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-16-u18-erkek-milli-takimimiz-ankara-da-ara-kampa-girdi-ff9634.jpg
