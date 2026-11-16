@@ -48,7 +48,8 @@ h1,h2,h3,.btn,.nav a,.brand{font-family:'Barlow Condensed',sans-serif}
 .brand b{display:block;color:#fff;font-size:1.7rem;font-weight:800;line-height:1;white-space:nowrap}
 .brand b i{font-style:normal;color:var(--gold)}
 .brand small{display:block;color:#9db8ff;font-size:.8rem;font-weight:600;letter-spacing:.04em;margin-top:3px;white-space:nowrap}
-.nav{display:flex;align-items:center;gap:20px}
+.wrap.bar{max-width:1440px}
+.nav{display:flex;align-items:center;gap:16px}
 .nav a{color:#fff;font-size:1.08rem;font-weight:700;line-height:1.6;padding:6px 0;border-bottom:3px solid transparent;white-space:nowrap}
 .nav a:hover,.nav > a.aktif{border-color:var(--gold)}
 .menu{display:none;background:none;border:2px solid #3b5bb5;color:#fff;border-radius:10px;width:44px;height:44px;font-size:1.5rem;cursor:pointer;flex:none}
@@ -411,7 +412,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
 @media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr}.footer-grid>div:first-child{grid-column:1/-1}.footer-grid a{padding:9px 0}.ust-bilgi .sosyal a{padding:9px 2px}}
 
 @media(max-width:1024px){.card{flex-basis:calc((100% - 36px)/3)}.grid{grid-template-columns:1fr}}
-@media(max-width:1240px){
+@media(max-width:1400px){
  .menu{display:block}
  .nav{display:none;align-items:stretch;position:absolute;top:83px;left:0;right:0;background:var(--ink);flex-direction:column;gap:0;padding:6px 20px 16px;border-top:1px solid #20366f}
  .nav.open{display:flex}.nav a{padding:14px 0;border-bottom:1px solid #20366f}
@@ -464,13 +465,8 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
       <a href="#bolum/takimlar">İzmir Takımlarımız</a>
       <a href="#bolum/altyapi">İzmir Altyapı Takımlarımız</a>
       <a href="#bolum/milli">Milli Takımlar</a>
-      <div class="dd">
-        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="ddGundem">Spor &amp; Gündem ▾</button>
-        <div class="dd-menu" id="ddGundem">
-          <a href="#bolum/spor">Spor Haberleri</a>
-          <a href="#bolum/gundem">İzmir Gündemi</a>
-        </div>
-      </div>
+      <a href="#bolum/spor">Spor Haberleri</a>
+      <a href="#bolum/gundem">Güncel Gündem Haberleri</a>
       <div class="dd">
         <button class="dd-btn" type="button" aria-expanded="false" aria-controls="ddMenu">Ligler ▾</button>
         <div class="dd-menu" id="ddMenu">
@@ -630,7 +626,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
 
   <section class="section akis" id="akisGundem">
     <div class="wrap">
-      <div class="baslik-satir"><h2>İzmir Gündemi</h2><a class="tumu" href="#bolum/gundem">Tümü →</a></div>
+      <div class="baslik-satir"><h2>Güncel Gündem Haberleri</h2><a class="tumu" href="#bolum/gundem">Tümü →</a></div>
       <div id="akisGundemIcerik"><div class="msg">Haberler yükleniyor…</div></div>
     </div>
   </section>
@@ -693,7 +689,7 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
       <a href="#lig/sultanlar-ligi">Ligler</a>
       <a href="#bolum/milli">Milli Takımlar</a>
       <a href="#bolum/spor">Spor Haberleri</a>
-      <a href="#bolum/gundem">İzmir Gündemi</a>
+      <a href="#bolum/gundem">Güncel Gündem Haberleri</a>
       <a href="#program">Maç Programı</a>
       <a href="#canli">Canlı Yayın</a>
     </div>
@@ -1108,7 +1104,7 @@ function anaDuzen() {
   $('#reklamSerit').hidden = !ana || !reklamAktif;
 }
 /* İzmir Takımlarımız / Altyapı sayfaları: panelde bu bölüme işaretlenen haberler */
-const BOLUM_ADI = { takimlar: 'İzmir Takımlarımız', altyapi: 'İzmir Altyapı Takımlarımız', milli: 'Milli Takımlar', spor: 'Spor Haberleri', gundem: 'İzmir Gündemi' };
+const BOLUM_ADI = { takimlar: 'İzmir Takımlarımız', altyapi: 'İzmir Altyapı Takımlarımız', milli: 'Milli Takımlar', spor: 'Spor Haberleri', gundem: 'Güncel Gündem Haberleri' };
 function bolumCiz() {
   const m = location.hash.match(/^#bolum\/(takimlar|altyapi|milli|spor|gundem)$/);
   if (!m || !haberListesi) return;
