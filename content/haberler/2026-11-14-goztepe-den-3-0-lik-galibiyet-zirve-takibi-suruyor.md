@@ -4,7 +4,6 @@ date: 2026-11-14T22:27:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-14-goztepe-den-3-0-lik-galibiyet-zirve-takibi-suruyor-c62910.jpg
 lig: kadinlar-2-ligi
 bolum: takimlar
-sabit: true
 ---
 GÖZTEPE'DEN 3-0'LIK GALİBİYET! ZİRVE TAKİBİ SÜRÜYOR 
 
