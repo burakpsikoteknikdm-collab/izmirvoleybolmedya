@@ -4,7 +4,6 @@ date: 2026-11-15T20:38:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-15-gaziemir-belediyespor-dan-deplasmanda-onemli-galibiyet-778962.jpg
 lig: kadinlar-2-ligi
 bolum: takimlar
-sabit: true
 ---
 Gaziemir Belediyespor’dan Deplasmanda Önemli Galibiyet!
 
