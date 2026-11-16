@@ -465,6 +465,13 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
       <a href="#bolum/altyapi">İzmir Altyapı Takımlarımız</a>
       <a href="#bolum/milli">Milli Takımlar</a>
       <div class="dd">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="ddGundem">Spor &amp; Gündem ▾</button>
+        <div class="dd-menu" id="ddGundem">
+          <a href="#bolum/spor">Spor Haberleri</a>
+          <a href="#bolum/gundem">İzmir Gündemi</a>
+        </div>
+      </div>
+      <div class="dd">
         <button class="dd-btn" type="button" aria-expanded="false" aria-controls="ddMenu">Ligler ▾</button>
         <div class="dd-menu" id="ddMenu">
           <small>Üst Ligler</small>
@@ -614,6 +621,20 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
     </div>
   </section>
 
+  <section class="section akis" id="akisSpor">
+    <div class="wrap">
+      <div class="baslik-satir"><h2>Spor Haberleri</h2><a class="tumu" href="#bolum/spor">Tümü →</a></div>
+      <div id="akisSporIcerik"><div class="msg">Haberler yükleniyor…</div></div>
+    </div>
+  </section>
+
+  <section class="section akis" id="akisGundem">
+    <div class="wrap">
+      <div class="baslik-satir"><h2>İzmir Gündemi</h2><a class="tumu" href="#bolum/gundem">Tümü →</a></div>
+      <div id="akisGundemIcerik"><div class="msg">Haberler yükleniyor…</div></div>
+    </div>
+  </section>
+
   <section class="section" id="bolumView" hidden>
     <div class="wrap">
       <div class="lig-ust">
@@ -671,6 +692,8 @@ dialog::backdrop{background:rgba(11,31,77,.72)}
       <a href="#bolum/altyapi">İzmir Altyapı Takımlarımız</a>
       <a href="#lig/sultanlar-ligi">Ligler</a>
       <a href="#bolum/milli">Milli Takımlar</a>
+      <a href="#bolum/spor">Spor Haberleri</a>
+      <a href="#bolum/gundem">İzmir Gündemi</a>
       <a href="#program">Maç Programı</a>
       <a href="#canli">Canlı Yayın</a>
     </div>
@@ -1085,9 +1108,9 @@ function anaDuzen() {
   $('#reklamSerit').hidden = !ana || !reklamAktif;
 }
 /* İzmir Takımlarımız / Altyapı sayfaları: panelde bu bölüme işaretlenen haberler */
-const BOLUM_ADI = { takimlar: 'İzmir Takımlarımız', altyapi: 'İzmir Altyapı Takımlarımız', milli: 'Milli Takımlar' };
+const BOLUM_ADI = { takimlar: 'İzmir Takımlarımız', altyapi: 'İzmir Altyapı Takımlarımız', milli: 'Milli Takımlar', spor: 'Spor Haberleri', gundem: 'İzmir Gündemi' };
 function bolumCiz() {
-  const m = location.hash.match(/^#bolum\/(takimlar|altyapi|milli)$/);
+  const m = location.hash.match(/^#bolum\/(takimlar|altyapi|milli|spor|gundem)$/);
   if (!m || !haberListesi) return;
   const liste = haberListesi.filter(n => n.bolum === m[1]);
   const kutu = $('#bolumIcerik');
@@ -1121,7 +1144,7 @@ function akisKarti(n) {
 }
 function akisCiz() {
   if (!haberListesi) return;
-  [['takimlar', '#akisTakimlarIcerik'], ['altyapi', '#akisAltyapiIcerik'], ['milli', '#akisMilliIcerik']].forEach(([bolum, yer]) => {
+  [['takimlar', '#akisTakimlarIcerik'], ['altyapi', '#akisAltyapiIcerik'], ['milli', '#akisMilliIcerik'], ['spor', '#akisSporIcerik'], ['gundem', '#akisGundemIcerik']].forEach(([bolum, yer]) => {
     const liste = haberListesi.filter(n => n.bolum === bolum).slice(0, 4);
     if (!liste.length) { $(yer).innerHTML = '<div class="msg">Bu bölüme eklenen haberler burada görünecek.</div>'; return; }
     const izgara = document.createElement('div'); izgara.className = 'akis-izgara';
@@ -1415,7 +1438,7 @@ const LIGLER = [
   ['kadinlar-1-ligi', 'Kadınlar 1. Ligi'], ['erkekler-1-ligi', 'Erkekler 1. Ligi'],
   ['kadinlar-2-ligi', 'Kadınlar 2. Ligi'], ['erkekler-2-ligi', 'Erkekler 2. Ligi']
 ];
-const anaBolumler = ['#canli', '#haberler', '#akisTakimlar', '#akisAltyapi', '#program', '#akisLigler', '#akisMilli'].map(s => $(s)); // manşet, hero ve reklam şeridi: anaDuzen()
+const anaBolumler = ['#canli', '#haberler', '#akisTakimlar', '#akisAltyapi', '#program', '#akisLigler', '#akisMilli', '#akisSpor', '#akisGundem'].map(s => $(s)); // manşet, hero ve reklam şeridi: anaDuzen()
 let ligZamanlayici = null;
 $('#ligChips').innerHTML = LIGLER.map(([k, ad]) => `<a class="chip" href="#lig/${k}" data-lig="${k}">${ad}</a>`).join('');
 $('#grupSec').onchange = e => { location.hash = `#lig/${aktifLig.lig}/${encodeURIComponent(e.target.value)}`; };
@@ -1522,7 +1545,7 @@ function yonlendir() {
   if (/^#milli\//.test(location.hash)) history.replaceState(null, '', '#bolum/milli');
   const m = location.hash.match(/^#lig\/([\w-]+)(?:\/([^/]+))?$/);
   const lig = m && LIGLER.find(l => l[0] === m[1]);
-  const mb = location.hash.match(/^#bolum\/(takimlar|altyapi|milli)$/);
+  const mb = location.hash.match(/^#bolum\/(takimlar|altyapi|milli|spor|gundem)$/);
   const bolum = mb && mb[1];
   clearInterval(ligZamanlayici);
   ddKapat();

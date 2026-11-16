@@ -201,6 +201,8 @@ footer .sosyal a:hover{text-decoration:underline}
       <a href="/#haberler">Haberler</a>
       <a href="/#lig/sultanlar-ligi">Ligler</a>
       <a href="/#bolum/milli">Milli Takımlar</a>
+      <a href="/#bolum/spor">Spor</a>
+      <a href="/#bolum/gundem">Gündem</a>
       <a href="/#program">Maç Programı</a>
       <a href="/hakkimizda">Hakkımızda</a>
     </nav>

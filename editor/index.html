@@ -226,14 +226,16 @@ textarea.girdi{min-height:260px;resize:vertical;line-height:1.6}
       </select>
       <div class="ipucu">Lig seçerseniz haber, o ligin puan durumu sayfasında da görünür.</div>
     </label>
-    <label class="alan"><span>İzmir Takımlarımız</span>
+    <label class="alan"><span>Bölüm</span>
       <select class="girdi" id="fBolum">
         <option value="">Yok</option>
         <option value="takimlar">İzmir Takımlarımız</option>
         <option value="altyapi">İzmir Altyapı Takımlarımız</option>
         <option value="milli">Milli Takımlar</option>
+        <option value="spor">Spor Haberleri (futbol, basketbol vb.)</option>
+        <option value="gundem">İzmir Gündemi (kesinti, kaza, zam, ulaşım vb.)</option>
       </select>
-      <div class="ipucu">Seçerseniz haber, sitedeki "İzmir Takımlarımız" ya da "İzmir Altyapı Takımlarımız" bölümünde de görünür.</div>
+      <div class="ipucu">Seçerseniz haber, sitede seçtiğiniz bölümde (İzmir Takımlarımız, Altyapı, Milli Takımlar, Spor Haberleri ya da İzmir Gündemi) de görünür.</div>
     </label>
     <label class="sabitle">
       <input type="checkbox" id="fSabit">
@@ -438,7 +440,7 @@ async function listeAc() {
       const t = document.createElement('b'); t.textContent = h.title;
       const k = document.createElement('small'); k.textContent = tarihYaz(h.date);
       if (h.lig) { const r = document.createElement('span'); r.className = 'rozet'; r.textContent = LIG_AD[h.lig] || h.lig; k.append(r); }
-      if (h.bolum) { const r = document.createElement('span'); r.className = 'rozet'; r.textContent = ({ altyapi: 'İzmir Altyapı Takımlarımız', milli: 'Milli Takımlar' })[h.bolum] || 'İzmir Takımlarımız'; k.append(r); }
+      if (h.bolum) { const r = document.createElement('span'); r.className = 'rozet'; r.textContent = ({ altyapi: 'İzmir Altyapı Takımlarımız', milli: 'Milli Takımlar', spor: 'Spor Haberleri', gundem: 'İzmir Gündemi' })[h.bolum] || 'İzmir Takımlarımız'; k.append(r); }
       if (h.sabit) { const r = document.createElement('span'); r.className = 'rozet sabit'; r.textContent = '📌 Manşette'; k.append(r); }
       if (h.okunma != null) { const r = document.createElement('span'); r.className = 'rozet okunma'; r.textContent = '👁 ' + h.okunma.toLocaleString('tr-TR') + ' okunma'; k.append(r); }
       tx.append(t, k); b.append(tx);
