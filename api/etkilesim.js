@@ -35,7 +35,7 @@ module.exports = async (req, res) => {
   try {
     if (islem === 'skor') {
       const v = await veriOku(skor.DOSYA, { maclar: [] });
-      return gonder(200, { maclar: skor.gorunenler(v && v.maclar) }, 's-maxage=8, stale-while-revalidate=20');
+      return gonder(200, { maclar: skor.gorunenler(v && v.maclar) }, 'public, max-age=0, s-maxage=2');
     }
     if (islem === 'vapid') return gonder(200, { anahtar: vapid().publicKey }, 's-maxage=86400');
 

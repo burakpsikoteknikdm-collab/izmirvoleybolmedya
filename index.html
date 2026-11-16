@@ -1250,7 +1250,7 @@ icerikOku('canli.json').then(j => {
   im.src = 'https://i.ytimg.com/vi/' + id + '/maxresdefault.jpg';
 }).catch(() => {});
 
-/* Canlı skor (panelden; api/etkilesim?islem=skor). Maç varken 15 sn'de bir, yokken 90 sn'de bir yenilenir */
+/* Canlı skor (panelden; api/etkilesim?islem=skor). Maç sürerken 4 sn'de bir, yokken 30 sn'de bir yenilenir */
 const skorKac = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 function skorOnce(t) {
   const dk = Math.round((Date.now() - Date.parse(t)) / 60e3);
@@ -1271,7 +1271,7 @@ let skorZamanlayici;
 async function skorYukle() {
   clearTimeout(skorZamanlayici);
   let maclar = [];
-  try { maclar = (await (await fetch('/api/etkilesim?islem=skor')).json()).maclar || []; } catch (e) {}
+  try { maclar = (await (await fetch('/api/etkilesim?islem=skor', { cache: 'no-store' })).json()).maclar || []; } catch (e) {}
   // Devam eden maçlar önce
   maclar.sort((a, b) => (a.durum === 'bitti') - (b.durum === 'bitti'));
   $('#skorPanel').hidden = !maclar.length;
@@ -1280,7 +1280,7 @@ async function skorYukle() {
     $('#skorListe').innerHTML = maclar.map(skorMacHtml).join('');
     $('#skorZaman').textContent = 'Otomatik güncellenir';
   }
-  skorZamanlayici = setTimeout(skorYukle, maclar.some(m => m.durum !== 'bitti') ? 15e3 : 90e3);
+  skorZamanlayici = setTimeout(skorYukle, maclar.some(m => m.durum !== 'bitti') ? 4e3 : 30e3);
 }
 document.addEventListener('visibilitychange', () => { if (document.hidden) clearTimeout(skorZamanlayici); else skorYukle(); });
 skorYukle();
