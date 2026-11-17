@@ -1,5 +1,5 @@
 ---
-title: "KÜÇÜK KIZLAR SÜPER LİG YARI FİNALİNDE NEFES KESEN MÜCADELE! DOKUZ EYLÜL VOLEYBOL KAZANDI"
+title: "YILDIZ KIZLAR SÜPER LİG YARI FİNALİNDE NEFES KESEN MÜCADELE! DOKUZ EYLÜL VOLEYBOL KAZANDI"
 date: 2026-11-17T22:07:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-17-kucuk-kizlar-super-lig-yari-finalinde-nefes-kesen-mucadele-dokuz-eylul-543c78.jpg
 bolum: altyapi
