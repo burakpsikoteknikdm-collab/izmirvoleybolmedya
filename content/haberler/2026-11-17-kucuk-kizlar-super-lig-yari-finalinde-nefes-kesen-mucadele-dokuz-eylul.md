@@ -5,13 +5,13 @@ image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorsell
 bolum: altyapi
 sabit: true
 ---
-KÜÇÜK KIZLAR SÜPER LİG YARI FİNALİNDE NEFES KESEN MÜCADELE! DOKUZ EYLÜL VOLEYBOL KAZANDI
+YILDIZ KIZLAR SÜPER LİG YARI FİNALİNDE NEFES KESEN MÜCADELE! DOKUZ EYLÜL VOLEYBOL KAZANDI
 
 Maç Sonucu:
 
 Dokuz Eylül Voleybol 3-1 Alfa Karşıyaka
 
-İzmir Küçük Kızlar Süper Lig Yarı Final karşılaşmasında Dokuz Eylül Voleybol ile Alfa Karşıyaka kozlarını paylaştı. Büyük çekişmeye sahne olan mücadelede gülen taraf 3-1'lik skorla Dokuz Eylül Voleybol oldu.
+İzmir Yıldıx Kızlar Süper Lig Yarı Final karşılaşmasında Dokuz Eylül Voleybol ile Alfa Karşıyaka kozlarını paylaştı. Büyük çekişmeye sahne olan mücadelede gülen taraf 3-1'lik skorla Dokuz Eylül Voleybol oldu.
 
 Karşılaşma boyunca her iki takımın sporcuları da ortaya koydukları mücadele, azim ve kazanma isteğiyle büyük takdir topladı. 
 
