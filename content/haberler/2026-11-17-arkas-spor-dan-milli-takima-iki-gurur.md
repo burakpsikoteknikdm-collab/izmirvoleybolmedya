@@ -4,7 +4,6 @@ date: 2026-11-17T00:48:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-16-arkas-spor-dan-milli-takima-iki-gurur-4e88f2.jpg
 lig: erkekler-2-ligi
 bolum: altyapi
-sabit: true
 ---
 ARKAS SPOR’DAN MİLLİ TAKIMA İKİ GURUR!
 
