@@ -3,7 +3,6 @@ title: "TARİHTE BUGÜN VOLEYBOL"
 date: 2026-11-17T00:57:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-16-tarihte-bugun-voleybol-78108c.jpg
 bolum: spor
-sabit: true
 ---
 TARİHTE BUGÜN VOLEYBOL
 
