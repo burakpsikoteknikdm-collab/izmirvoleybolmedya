@@ -6,7 +6,6 @@ lig: kadinlar-2-ligi
 bolum: takimlar
 galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-17-uzman-posta-kadinlar-2-ligi-nde-6-ve-7-d1fd79.jpg
-sabit: true
 ---
 UZMAN POSTA KADINLAR 2. LİGİ’NDE 6. VE 7. GRUPTA PUAN DURUMU HEYECANI!
 
