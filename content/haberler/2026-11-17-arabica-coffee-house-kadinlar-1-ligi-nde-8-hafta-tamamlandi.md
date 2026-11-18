@@ -6,7 +6,6 @@ lig: kadinlar-1-ligi
 bolum: takimlar
 galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-17-gemini-generated-image-dkv0l1dkv0l1dkv0-86f0b7.jpg
-sabit: true
 ---
 ARABICA COFFEE HOUSE KADINLAR 1. LİGİ’NDE 8. HAFTA TAMAMLANDI!
 
