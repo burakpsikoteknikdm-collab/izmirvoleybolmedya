@@ -3,7 +3,6 @@ title: "Ataman Güneyligil’den Maç Sonu Değerlendirmesi: “Oyuncularımın 
 date: 2026-11-15T21:30:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-15-ataman-guneyligil-den-mac-sonu-degerlendirmesi-oyuncularimin-konsantra-63306e.jpg
 lig: kadinlar-1-ligi
-sabit: true
 ---
 Ataman Güneyligil’den Maç Sonu Değerlendirmesi: “Oyuncularımın Konsantrasyonu Bizi Mutlu Etti”
 
