@@ -7,7 +7,6 @@ galeri:
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-15-altyapi-kiz-voleybol-milli-takimlari-icin-sporcu-taramalari-devam-ediy-33bde6.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-15-altyapi-kiz-voleybol-milli-takimlari-icin-sporcu-taramalari-devam-ediy-2454db.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-15-altyapi-kiz-voleybol-milli-takimlari-icin-sporcu-taramalari-devam-ediy-4bca40.jpg
-sabit: true
 ---
 Altyapı Kız Voleybol Milli Takımları İçin Sporcu Taramaları Devam Ediyor
 
