@@ -4,7 +4,6 @@ date: 2026-11-16T10:35:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-16-file-00000000eaf882108f3a31a2c399d451-3d038d.jpg
 lig: sultanlar-ligi
 bolum: takimlar
-sabit: true
 ---
 VODAFONE SULTANLAR LİGİ'NDE 9. HAFTA TAMAMLANDI! ZİRVE YARIŞINDA HEYECAN ARTIYOR
 
