@@ -3,7 +3,6 @@ title: "İlker Alkan’dan Mağlubiyet Sonrası Açıklama: “Bu Mağlubiyet Bi
 date: 2026-11-16T10:02:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-16-ilker-alkan-dan-maglubiyet-sonrasi-aciklama-bu-maglubiyet-bizim-icin-o-d78f24.jpg
 lig: kadinlar-1-ligi
-sabit: true
 ---
 İlker Alkan’dan Mağlubiyet Sonrası Açıklama: “Bu Mağlubiyet Bizim İçin Önemli Bir Ders Oldu” 
 
