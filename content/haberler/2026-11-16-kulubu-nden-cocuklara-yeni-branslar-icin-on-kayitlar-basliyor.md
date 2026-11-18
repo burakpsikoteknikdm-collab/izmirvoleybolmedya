@@ -3,7 +3,6 @@ title: "URLA GENÇLİK SPOR KULÜBÜ'NDEN ÇOCUKLARA YENİ BRANŞLAR İÇİN ÖN
 date: 2026-11-16T11:25:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-16-gemini-generated-image-8596r18596r18596-a74969.jpg
 bolum: spor
-sabit: true
 ---
 URLA GENÇLİK SPOR KULÜBÜ'NDEN ÇOCUKLARA YENİ BRANŞLAR İÇİN ÖN KAYITLAR BAŞLIYOR!
 
