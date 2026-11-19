@@ -3,6 +3,7 @@ title: "GENÇ KIZLAR SÜPER LİG YARI FİNALİNDE ROTA KOLEJİ KAZANDI!"
 date: 2026-11-19T22:11:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-19-genc-kizlar-super-lig-yari-finalinde-rota-koleji-kazandi-c21282.jpg
 bolum: altyapi
+sabit: true
 ---
 GENÇ KIZLAR SÜPER LİG YARI FİNALİNDE ROTA KOLEJİ KAZANDI! 
 
