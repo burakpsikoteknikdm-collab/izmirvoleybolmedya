@@ -1,5 +1,5 @@
 ---
-title: "ARAS KARGO'DA SAĞLIK SORUNLARI! FENERBAHÇE MEDICANA KARŞILAŞMASI ERTELENDİ  Aras Kargo Spor Kulübü, sporcuları ve teknik ekibinde yaşanan sağlık sorunları nedeniyle 21 Kasım'da sahasında oynanması pla"
+title: "ARAS KARGO'DA SAĞLIK SORUNLARI! FENERBAHÇE MEDICANA KARŞILAŞMASI ERTELENDİ"
 date: 2026-11-19T22:45:00.000+03:00
 image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-19-aras-kargo-da-saglik-sorunlari-fenerbahce-medicana-karsilasmasi-ertele-10817d.jpg
 lig: sultanlar-ligi
