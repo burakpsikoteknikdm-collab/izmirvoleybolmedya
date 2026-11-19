@@ -28,7 +28,8 @@ BİLETLER HAKKINDA ÖNEMLİ BİLGİLENDİRME
 Aras Kargo Spor Kulübü, karşılaşma için bilet alan taraftarları da bilgilendirdi.
 
  ⚫️ Kulüpten yapılan açıklamaya göre:
- ⚫️ Mevcut biletler, karşılaşmanın yeni tarihinde de geçerli olacak.
+ 
+⚫️ Mevcut biletler, karşılaşmanın yeni tarihinde de geçerli olacak.
 
  ⚫️ Dileyen taraftarlar biletlerini iade edebilecek.
 
