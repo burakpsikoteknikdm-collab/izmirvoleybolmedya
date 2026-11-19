@@ -1,7 +1,7 @@
 ---
 title: "UZMAN POSTA ERKEKLER 2. LİGİ 1. GRUP'TA 12. HAFTA HEYECANI!"
 date: 2026-11-19T13:50:00.000+03:00
-image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-19-1-grup-20261119-135019-0000-a114b6.jpg
+image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-19-uzman-posta-erkekler-2-ligi-1-grup-ta-12-6f8642.jpg
 lig: erkekler-2-ligi
 bolum: takimlar
 sabit: true
