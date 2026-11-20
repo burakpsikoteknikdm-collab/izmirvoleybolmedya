@@ -1,10 +1,8 @@
 ---
 title: "ALTYAPI KIZ VOLEYBOL MİLLİ TAKIMLARI SPORCU TARAMALARI DEVAM EDİYOR!"
 date: 2026-11-20T11:51:00.000+03:00
-image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-20-file-00000000ee2082109b32e9f2ded7d594-ba2db7.jpg
+image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-20-altyapi-kiz-voleybol-milli-takimlari-sporcu-taramalari-devam-ediyor-d7c7a9.jpg
 bolum: milli
-galeri:
-  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-20-altyapi-kiz-voleybol-milli-takimlari-sporcu-taramalari-devam-ediyor-d7c7a9.jpg
 sabit: true
 ---
 ALTYAPI KIZ VOLEYBOL MİLLİ TAKIMLARI SPORCU TARAMALARI DEVAM EDİYOR!
