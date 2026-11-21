@@ -1,11 +1,11 @@
 ---
 title: "GÜÇ SPOR'DAN MUHTEŞEM GERİ DÖNÜŞ! GELİŞİM KOLEJİ'NE 3-2'LİK ŞOK"
 date: 2026-11-21T23:41:00.000+03:00
-image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-21-guc-spor-dan-muhtesem-geri-donus-gelisim-koleji-ne-3-2-lik-sok-c9c19c.jpg
+image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-21-guc-spor-dan-muhtesem-geri-donus-gelisim-koleji-ne-3-2-lik-sok-313b6a.jpg
 lig: kadinlar-2-ligi
 bolum: takimlar
 galeri:
-  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-21-guc-spor-dan-muhtesem-geri-donus-gelisim-koleji-ne-3-2-lik-sok-313b6a.jpg
+  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-21-guc-spor-dan-muhtesem-geri-donus-gelisim-koleji-ne-3-2-lik-sok-c9c19c.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-21-guc-spor-dan-muhtesem-geri-donus-gelisim-koleji-ne-3-2-lik-sok-9e6b27.jpg
   - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-21-guc-spor-dan-muhtesem-geri-donus-gelisim-koleji-ne-3-2-lik-sok-57c350.jpg
 sabit: true
