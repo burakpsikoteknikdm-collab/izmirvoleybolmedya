@@ -1,7 +1,7 @@
 ---
 title: "İZMİR KÜÇÜK KIZLAR SÜPER LİG YARI FİNAL MAÇLARI CANLI YAYINLA İZMİR VOLEYBOL MEDYA'DA!"
 date: 2026-11-22T09:59:00.000+03:00
-image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-22-izmir-kucuk-kizlar-super-lig-yari-final-maclari-canli-yayinla-izmir-vo-26cd2b.jpg
+image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-22-izmir-kucuk-kizlar-super-lig-yari-final-maclari-canli-yayinla-izmir-vo-e9d36e.jpg
 bolum: altyapi
 sabit: true
 ---
