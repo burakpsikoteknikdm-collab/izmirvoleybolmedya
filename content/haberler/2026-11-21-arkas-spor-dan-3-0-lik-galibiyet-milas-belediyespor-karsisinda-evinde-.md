@@ -1,7 +1,7 @@
 ---
 title: "ARKAS SPOR'DAN 3-0'LIK GALİBİYET! MİLAS BELEDİYESPOR KARŞISINDA EVİNDE KAZANDI"
 date: 2026-11-21T17:52:00.000+03:00
-image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-21-arkas-spor-dan-3-0-lik-galibiyet-milas-belediyespor-karsisinda-evinde--d13f2d.jpg
+image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-23-arkas-spor-dan-3-0-lik-galibiyet-milas-belediyespor-karsisinda-evinde--8112fe.jpg
 lig: erkekler-2-ligi
 bolum: takimlar
 galeri:
