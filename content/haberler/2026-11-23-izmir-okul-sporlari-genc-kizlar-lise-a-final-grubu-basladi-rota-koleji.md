@@ -1,7 +1,7 @@
 ---
 title: "İzmir Okul Sporları Genç Kızlar Lise A Final Grubu Başladı! Rota Koleji İlk Maçında Kazandı"
 date: 2026-11-23T22:13:00.000+03:00
-image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-23-izmir-okul-sporlari-genc-kizlar-lise-a-final-grubu-basladi-rota-koleji-65bed2.jpg
+image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-23-izmir-okul-sporlari-genc-kizlar-lise-a-final-grubu-basladi-rota-koleji-c922f1.jpg
 bolum: altyapi
 sabit: true
 ---
