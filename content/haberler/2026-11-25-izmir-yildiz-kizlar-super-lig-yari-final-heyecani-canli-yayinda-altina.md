@@ -1,10 +1,8 @@
 ---
 title: "İzmir Yıldız Kızlar Süper Lig Yarı Final Heyecanı Canlı Yayında! Altınay SK – Rota Koleji"
 date: 2026-11-25T09:35:00.000+03:00
-image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-25-izmir-yildiz-kizlar-super-lig-yari-final-heyecani-canli-yayinda-altina-7ed498.jpg
+image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-25-izmir-yildiz-kizlar-super-lig-yari-final-heyecani-canli-yayinda-altina-7903ec.jpg
 bolum: altyapi
-galeri:
-  - https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-25-izmir-yildiz-kizlar-super-lig-yari-final-heyecani-canli-yayinda-altina-7903ec.jpg
 sabit: true
 ---
 İzmir Yıldız Kızlar Süper Lig Yarı Final Heyecanı Canlı Yayında! Altınay SK – Rota Koleji
