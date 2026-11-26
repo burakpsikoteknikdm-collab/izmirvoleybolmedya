@@ -1,7 +1,9 @@
 ---
 title: "İzmir Küçük Kızlar Süper Lig Yarı Finalinde Güzelyalı, Karşıyaka’yı 3-2 Mağlup Etti"
 date: 2026-11-26T23:15:00.000+03:00
+image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-26-izmir-kucuk-kizlar-super-lig-yari-finalinde-guzelyali-karsiyaka-yi-3-2-93ad70.jpg
 bolum: altyapi
+sabit: true
 ---
 İzmir Küçük Kızlar Süper Lig Yarı Finalinde Güzelyalı, Karşıyaka’yı 3-2 Mağlup Etti
 
