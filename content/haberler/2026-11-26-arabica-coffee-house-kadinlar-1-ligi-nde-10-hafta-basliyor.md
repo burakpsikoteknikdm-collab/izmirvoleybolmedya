@@ -18,13 +18,16 @@ Kadınlar 1. Ligi’nde 10. hafta karşılaşmaları A ve B gruplarında oynanac
 
 A Grubu
 28 Kasım Cumartesi
+
  ● 13.00 Eczacıbaşı – İzmir DSİ
 Eczacıbaşı Spor Kulübü HDI Sigorta
 
  ● 16.00 Karşıyaka – Denizli Büyükşehir Belediye Spor
 Mustafa Kemal Atatürk Karşıyaka
+
  ● 16.00 Altınordu – Bahçelievler Belediye Spor
 TVF Atatürk – TVF Voleybol TV
+
  ● 16.00 Bodrum Belediyesi Bodrumspor – Ateş Wind Power Bergama Belediyesi Spor
 Binnaz Karakaya
 
@@ -41,10 +44,15 @@ A Grubu
 
  28 Kasım Cumartesi
 ● 13.00 Eczacıbaşı – İzmir DSİ (Eczacıbaşı Spor Kulübü HDI Sigorta)
+
  ● 16.00 Karşıyaka – Denizli Büyükşehir Belediye Spor (Mustafa Kemal Atatürk Karşıyaka)
+
  ● 16.00 Altınordu – Bahçelievler Belediye Spor (TVF Atatürk – TVF Voleybol TV)
+
  ● 17.30 Yeşilyurt – Aydın Büyükşehir Belediye Spor (Yeşilyurt)
+
  ● 18.00 Akhisar Belediyespor – VakıfBank (Akhisar)
+
  ● 16.00 Bodrum Belediyesi Bodrumspor – Ateş Wind Power Bergama Belediyesi Spor (Binnaz Karakaya)
 
 B Grubu
@@ -55,8 +63,11 @@ B Grubu
 
 28 Kasım Cumartesi
 ● 13.00 Büyükşehir Belediyesi Ankara Spor – Nilüfer Belediyespor (TVF Selim Sırrı Tarcan Zeren – TVF Voleybol TV)
+
 ● 13.00 Merinos Voleybol – Sakarya Voleybol (Kamil Ocak)
+
 ● 16.00 İBA Kimya TED Ankara Kolejliler – Alfemo Zeren Spor (TVF Selim Sırrı Tarcan Zeren – TVF Voleybol TV)
+
 ● 16.00 07 Mega Spor – Muratpaşa Bld. Açı Koleji (Süleyman Evcilmen)
 ● 19.00 Karayolları – PTT (TVF Selim Sırrı Tarcan Zeren – TVF Voleybol TV)
 
