@@ -17,6 +17,7 @@ Kadınlar 1. Ligi’nde 10. hafta karşılaşmaları A ve B gruplarında oynanac
 İZMİR TAKIMLARININ 10. HAFTA MAÇ PROGRAMI
 
 A Grubu
+
 28 Kasım Cumartesi
 
  ● 13.00 Eczacıbaşı – İzmir DSİ
@@ -40,9 +41,11 @@ ARABICA COFFEE HOUSE KADINLAR 1. LİGİ 10. HAFTA MAÇ PROGRAMI
 A Grubu
 
 27 Kasım Cuma
+
  ● 19.00 Fenerbahçe Medicana – İBB Spor Kulübü (TVF Burhan Felek Vestel – TVF Voleybol TV)
 
  28 Kasım Cumartesi
+
 ● 13.00 Eczacıbaşı – İzmir DSİ (Eczacıbaşı Spor Kulübü HDI Sigorta)
 
  ● 16.00 Karşıyaka – Denizli Büyükşehir Belediye Spor (Mustafa Kemal Atatürk Karşıyaka)
@@ -62,6 +65,7 @@ B Grubu
  ● 14.00 Kuzeyboru Maxipipe Spor – Trendy Hotels Manavgat Belediye Spor (Aksaray)
 
 28 Kasım Cumartesi
+
 ● 13.00 Büyükşehir Belediyesi Ankara Spor – Nilüfer Belediyespor (TVF Selim Sırrı Tarcan Zeren – TVF Voleybol TV)
 
 ● 13.00 Merinos Voleybol – Sakarya Voleybol (Kamil Ocak)
