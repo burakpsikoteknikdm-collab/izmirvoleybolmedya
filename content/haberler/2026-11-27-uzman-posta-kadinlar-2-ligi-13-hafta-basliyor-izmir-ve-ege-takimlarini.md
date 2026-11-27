@@ -1,8 +1,10 @@
 ---
 title: "Uzman Posta Kadınlar 2. Ligi 13. Hafta Başlıyor! İzmir ve Ege Takımlarının Maç Programı Uzman Posta Kadınlar 2. Ligi’nde 13. hafta heyecanı, 28 Kasım Cumartesi günü başlıyor. İzmir ve Ege Bölgesi takı"
 date: 2026-11-27T12:53:00.000+03:00
+image: https://syugifngkyxwkfgklcrd.supabase.co/storage/v1/object/public/gorseller/2026-11-27-uzman-posta-kadinlar-2-ligi-13-hafta-basliyor-izmir-ve-ege-takimlarini-c8401c.jpg
 lig: kadinlar-2-ligi
 bolum: takimlar
+sabit: true
 ---
 Uzman Posta Kadınlar 2. Ligi 9. Hafta Başlıyor! İzmir ve Ege Takımlarının Maç Programı
 
