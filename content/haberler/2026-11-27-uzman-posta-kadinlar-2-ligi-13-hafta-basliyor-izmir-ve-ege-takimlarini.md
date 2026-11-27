@@ -8,6 +8,7 @@ sabit: true
 ---
 Uzman Posta Kadınlar 2. Ligi 9. Hafta Başlıyor! İzmir ve Ege Takımlarının Maç Programı
 
+
 Uzman Posta Kadınlar 2. Ligi’nde 9. hafta heyecanı, 28 Kasım Cumartesi günü başlıyor. İzmir ve Ege Bölgesi takımlarının mücadele ettiği 6. Grup karşılaşmalarında voleybolseverleri hafta sonu boyunca birbirinden çekişmeli maçlar bekliyor.
 
 28-29 Kasım 2026 tarihlerinde oynanacak karşılaşmalarda takımlar, ligdeki hedefleri doğrultusunda sahaya çıkarken, İzmir ve Ege Bölgesi’nde voleybol heyecanı salonlara taşınacak.
